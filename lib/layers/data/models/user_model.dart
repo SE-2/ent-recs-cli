@@ -4,6 +4,13 @@ class UserModel {
 
   UserModel({required this.email, required this.password});
 
+  Map<String, dynamic> toJson() {
+    return {
+      'email': email,
+      'password': password,
+    };
+  }
+
   static UserModel fromJson(Map<String, dynamic> json) {
     final email = json['email'];
     final password = json['password'];

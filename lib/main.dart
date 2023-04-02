@@ -1,13 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:supermedia/layers/common/app_theme/app_theme.dart';
 import 'package:supermedia/layers/common/app_theme/app_theme_bloc.dart';
+import 'package:supermedia/layers/data/data_sources/local_user_data_source.dart';
 import 'package:supermedia/layers/di/app_module.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  final sharedPreferences = await SharedPreferences.getInstance();
+  final localUserDataSource = LocalUserDataSourceImpl(
+    sharedPreferences: sharedPreferences,
+  );
+
   runApp(
     BlocProvider<AppThemeBloc>(
-      create: (context) => AppThemeBloc(),
+      create: (context) => AppThemeBloc(localUserDataSource: localUserDataSource),
       child: MyApp(),
     ),
   );
