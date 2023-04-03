@@ -4,12 +4,14 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get_it/get_it.dart';
 import 'package:supermedia/common/app_theme/app_theme.dart';
 import 'package:supermedia/common/app_theme/app_theme_bloc.dart';
+import 'package:supermedia/common/utils/app_localization.dart';
 import 'package:supermedia/di/app_module.dart';
 import 'package:supermedia/layers/presentation/auth/signup/screens/signup_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   setupAppModule();
+  AppLocalization.init();
   runApp(
     BlocProvider<AppThemeBloc>(
       create: (context) => AppThemeBloc(),

@@ -1,5 +1,6 @@
 import 'package:get_it/get_it.dart';
 import 'package:supermedia/common/app_exceptions.dart';
+import 'package:supermedia/common/utils/app_localization.dart';
 import 'package:supermedia/layers/data/http_client/http_client.dart';
 import 'package:supermedia/layers/data/models/user_model.dart';
 
@@ -23,7 +24,8 @@ class RemoteUserDataSourceImpl implements RemoteUserDataSource {
     if (response.statusCode == 200) {
       return UserModel.fromJson(response.body);
     } else {
-      throw SignupException('Failed to sign up user: ${response.statusCode}');
+      throw SignupException(
+          AppLocalization.instance.errorCode(response.statusCode));
     }
   }
 }

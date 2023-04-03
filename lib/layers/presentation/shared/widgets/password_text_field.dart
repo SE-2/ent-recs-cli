@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:supermedia/common/utils/app_localization.dart';
 import 'package:supermedia/common/utils/validators.dart';
 
 class PasswordTextField extends StatelessWidget {
@@ -15,7 +15,7 @@ class PasswordTextField extends StatelessWidget {
     return TextFormField(
       controller: controller,
       decoration: InputDecoration(
-        labelText: AppLocalizations.of(context)!.password,
+        labelText: AppLocalization.of(context)!.password,
       ),
       validator: Validators.validatePassword,
       autovalidateMode: AutovalidateMode.onUserInteraction,

@@ -4,5 +4,12 @@
   "password": "رمز عبور",
   "signUp": "ثبت نام",
   "invalidInputsMsg" : "لطفا خطاها را اصلاح کنید.",
-  "userRegistered": "{email} ثبت نام شد."
+  "userRegistered": "{email} ثبت نام شد.",
+  "registrationFailed": "ثبت نام موفقیت آمیز نبود. {reason}",
+  "unknownErrorOccurred": "خطای ناشناخته رخ داد.",
+  "errorCode": "خطای {code}",
+  "requiredEmail": "ایمیل ضروری است",
+  "invalidEmail": "ایمیل نامعتبر است",
+  "requiredPassword": "رمز عبور ضروری است",
+  "weakPassword": "رمز عبور باید حداقل 8 کاراکتر باشد."
 }

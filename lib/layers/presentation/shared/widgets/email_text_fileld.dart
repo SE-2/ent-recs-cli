@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:supermedia/common/utils/app_localization.dart';
 import 'package:supermedia/common/utils/validators.dart';
 
 class EmailTextField extends StatelessWidget {
@@ -15,7 +15,7 @@ class EmailTextField extends StatelessWidget {
     return TextFormField(
       controller: controller,
       decoration: InputDecoration(
-        labelText: AppLocalizations.of(context)!.email,
+        labelText: AppLocalization.of(context)!.email,
       ),
       validator: Validators.validateEmail,
       autovalidateMode: AutovalidateMode.onUserInteraction,

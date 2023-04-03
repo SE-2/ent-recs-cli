@@ -4,5 +4,5 @@ class SignupException implements Exception {
   SignupException(this.message);
 
   @override
-  String toString() => 'SignupException: $message';
+  String toString() => message;
 }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get_it/get_it.dart';
+import 'package:supermedia/common/utils/app_localization.dart';
 import 'package:supermedia/layers/domain/use_cases/signup_use_case.dart';
 import 'package:supermedia/layers/presentation/auth/signup/bloc/signup_bloc.dart';
 import 'package:supermedia/layers/presentation/auth/signup/widgets/signup_button.dart';
@@ -19,7 +19,7 @@ class SignupScreen extends StatelessWidget {
       create: (_) => SignupBloc(),
       child: Scaffold(
         appBar: AppBar(
-          title: Text(AppLocalizations.of(context)!.signUp),
+          title: Text(AppLocalization.of(context)!.signUp),
         ),
         body: _SignupForm(),
       ),
@@ -51,7 +51,7 @@ class _SignupFormState extends State<_SignupForm> {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
               content: Text(
-                AppLocalizations.of(context)!.userRegistered(state.user.email),
+                AppLocalization.of(context)!.userRegistered(state.user.email),
               ),
             ),
           );
