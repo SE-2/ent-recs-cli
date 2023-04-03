@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:get_it/get_it.dart';
 import 'package:supermedia/layers/domain/use_cases/signup_use_case.dart';
 import 'package:supermedia/layers/presentation/auth/signup/bloc/signup_bloc.dart';
 import 'package:supermedia/layers/presentation/auth/signup/widgets/signup_button.dart';
@@ -8,14 +9,14 @@ import 'package:supermedia/layers/presentation/shared/widgets/email_text_fileld.
 import 'package:supermedia/layers/presentation/shared/widgets/password_text_field.dart';
 
 class SignupScreen extends StatelessWidget {
-  final SignUpUseCase signupUseCase;
+  final SignUpUseCase signupUseCase = GetIt.I<SignUpUseCase>();
 
-  const SignupScreen({Key? key, required this.signupUseCase}) : super(key: key);
+  SignupScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider<SignupBloc>(
-      create: (_) => SignupBloc(signupUseCase: signupUseCase),
+      create: (_) => SignupBloc(),
       child: Scaffold(
         appBar: AppBar(
           title: Text(AppLocalizations.of(context)!.signUp),

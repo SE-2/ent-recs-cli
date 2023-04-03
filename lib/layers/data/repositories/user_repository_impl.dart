@@ -1,12 +1,10 @@
+import 'package:get_it/get_it.dart';
 import 'package:supermedia/layers/data/data_sources/remote/remote_user_data_source.dart';
 import 'package:supermedia/layers/domain/entities/user.dart';
 import 'package:supermedia/layers/domain/repositories/user_repository.dart';
 
 class UserRepositoryImpl implements UserRepository {
-  final RemoteUserDataSource _remoteDataSource;
-
-  UserRepositoryImpl({required RemoteUserDataSource remoteDataSource})
-      : _remoteDataSource = remoteDataSource;
+  final RemoteUserDataSource _remoteDataSource = GetIt.I<RemoteUserDataSource>();
 
   @override
   Future<User> signUp(String email, String password) async {

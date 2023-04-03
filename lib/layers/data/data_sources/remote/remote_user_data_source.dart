@@ -1,3 +1,4 @@
+import 'package:get_it/get_it.dart';
 import 'package:supermedia/common/app_exceptions.dart';
 import 'package:supermedia/layers/data/http_client/http_client.dart';
 import 'package:supermedia/layers/data/models/user_model.dart';
@@ -7,10 +8,7 @@ abstract class RemoteUserDataSource {
 }
 
 class RemoteUserDataSourceImpl implements RemoteUserDataSource {
-  final IHttpClient _httpClient;
-
-  RemoteUserDataSourceImpl({required IHttpClient httpClient})
-      : _httpClient = httpClient;
+  final IHttpClient _httpClient = GetIt.I<IHttpClient>();
 
   @override
   Future<UserModel> signUp(String email, String password) async {
