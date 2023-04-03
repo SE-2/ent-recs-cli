@@ -10,8 +10,8 @@ import 'package:supermedia/layers/presentation/auth/signup/screens/signup_screen
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  setupAppModule();
-  AppLocalization.init();
+  await setupAppModule();
+  await AppLocalization.init();
   runApp(
     BlocProvider<AppThemeBloc>(
       create: (context) => AppThemeBloc(),

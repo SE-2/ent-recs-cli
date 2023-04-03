@@ -34,20 +34,22 @@ void _setupUseCases() {
 }
 
 void _setupScreens() {
-  getIt.registerLazySingleton<SignupScreen>(() => SignupScreen());
+  getIt.registerLazySingleton(() => SignupScreen());
 }
 
-void _setupSharedPreferences() async {
-  final sharedPreferences = await SharedPreferences.getInstance();
-  getIt.registerSingleton<SharedPreferences>(sharedPreferences);
+void _setupSharedPreferences() {
+  getIt.registerSingletonAsync(
+      () async => await SharedPreferences.getInstance());
 }
 
-void setupAppModule() {
+Future<void> setupAppModule() async {
+  _setupSharedPreferences();
   _setupHttpClient();
   _setupLocalDataSources();
   _setupRemoteDataSources();
   _setupRepositories();
   _setupUseCases();
   _setupScreens();
-  _setupSharedPreferences();
+
+  await getIt.allReady();
 }
