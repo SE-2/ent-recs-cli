@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:supermedia/layers/common/app_exceptions.dart';
 import 'package:supermedia/layers/common/utils/validators.dart';
 import 'package:supermedia/layers/domain/entities/user.dart';
@@ -23,6 +25,7 @@ class SignupUseCase {
     try {
       return await _userRepository.signUp(email, password);
     } catch (e) {
+      // todo get context from di and uses localization
       throw SignupException('An unexpected error occurred: ${e.toString()}');
     }
   }

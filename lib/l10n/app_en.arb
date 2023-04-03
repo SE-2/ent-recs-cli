@@ -1,0 +1,8 @@
+{
+  "title": "Super Media",
+  "email": "Email",
+  "password": "Password",
+  "signUp": "Sign up",
+  "invalidInputsMsg" : "Please correct the errors.",
+  "userRegistered": "{email} registered."
+}

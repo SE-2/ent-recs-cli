@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:supermedia/layers/common/app_theme/app_theme.dart';
 import 'package:supermedia/layers/common/app_theme/app_theme_bloc.dart';
@@ -32,6 +33,8 @@ class MyApp extends StatelessWidget {
       builder: (context, themeState) {
         return MaterialApp(
           title: 'SuperMedia',
+          localizationsDelegates: AppLocalizations.localizationsDelegates,
+          supportedLocales: AppLocalizations.supportedLocales,
           theme: AppTheme.lightTheme,
           darkTheme: AppTheme.darkTheme,
           themeMode: themeState,

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:supermedia/layers/domain/use_cases/signup_use_case.dart';
 import 'package:supermedia/layers/presentation/auth/signup/bloc/signup_bloc.dart';
 import 'package:supermedia/layers/presentation/auth/signup/widgets/signup_button.dart';
@@ -17,7 +18,7 @@ class SignupScreen extends StatelessWidget {
       create: (_) => SignupBloc(signupUseCase: signupUseCase),
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('Signup'),
+          title: Text(AppLocalizations.of(context)!.signUp),
         ),
         body: _SignupForm(),
       ),
@@ -48,7 +49,9 @@ class _SignupFormState extends State<_SignupForm> {
         } else if (state is SignupSuccess) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-              content: Text("${state.user.email} registered."),
+              content: Text(
+                AppLocalizations.of(context)!.userRegistered(state.user.email),
+              ),
             ),
           );
         }

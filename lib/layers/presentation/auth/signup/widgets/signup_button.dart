@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:supermedia/layers/presentation/auth/signup/bloc/signup_bloc.dart';
 
 class SignUpButton extends StatelessWidget {
@@ -24,7 +25,7 @@ class SignUpButton extends StatelessWidget {
           );
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Please correct the errors.')),
+        SnackBar(content: Text(AppLocalizations.of(context)!.invalidInputsMsg)),
       );
     }
   }
@@ -33,7 +34,7 @@ class SignUpButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
       onPressed: () => _submitForm(context),
-      child: const Text('Sign up'),
+      child: Text(AppLocalizations.of(context)!.signUp),
     );
   }
 }

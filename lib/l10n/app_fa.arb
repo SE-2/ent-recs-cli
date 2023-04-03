@@ -1,0 +1,8 @@
+{
+  "title": "سوپر مدیا",
+  "email": "ایمیل",
+  "password": "رمز عبور",
+  "signUp": "ثبت نام",
+  "invalidInputsMsg" : "لطفا خطاها را اصلاح کنید.",
+  "userRegistered": "{email} ثبت نام شد."
+}
