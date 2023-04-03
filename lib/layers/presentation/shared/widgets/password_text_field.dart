@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:supermedia/layers/common/utils/validators.dart';
+import 'package:supermedia/common/utils/validators.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class PasswordTextField extends StatelessWidget {

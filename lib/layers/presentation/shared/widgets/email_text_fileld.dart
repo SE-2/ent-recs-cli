@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:supermedia/layers/common/utils/validators.dart';
+import 'package:supermedia/common/utils/validators.dart';
 
 class EmailTextField extends StatelessWidget {
   const EmailTextField({

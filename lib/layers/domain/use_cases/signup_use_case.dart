@@ -1,17 +1,20 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:supermedia/layers/common/app_exceptions.dart';
-import 'package:supermedia/layers/common/utils/validators.dart';
+import 'package:supermedia/common/app_exceptions.dart';
+import 'package:supermedia/common/utils/validators.dart';
 import 'package:supermedia/layers/domain/entities/user.dart';
 import 'package:supermedia/layers/domain/repositories/user_repository.dart';
 
-class SignupUseCase {
+abstract class SignUpUseCase {
+  Future<User> signUp(String email, String password);
+}
+
+class SignUpUseCaseImpl implements SignUpUseCase {
   final UserRepository _userRepository;
 
-  SignupUseCase({required UserRepository userRepository})
+  SignUpUseCaseImpl({required UserRepository userRepository})
       : _userRepository = userRepository;
 
-  Future<User> execute(String email, String password) async {
+  @override
+  Future<User> signUp(String email, String password) async {
     final emailError = Validators.validateEmail(email);
     if (emailError != null) {
       throw ArgumentError(emailError);

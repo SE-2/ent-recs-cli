@@ -1,9 +1,9 @@
-import 'package:supermedia/layers/common/app_exceptions.dart';
+import 'package:supermedia/common/app_exceptions.dart';
 import 'package:supermedia/layers/data/http_client/http_client.dart';
 import 'package:supermedia/layers/data/models/user_model.dart';
 
 abstract class RemoteUserDataSource {
-  Future<UserModel> signup(String email, String password);
+  Future<UserModel> signUp(String email, String password);
 }
 
 class RemoteUserDataSourceImpl implements RemoteUserDataSource {
@@ -13,7 +13,7 @@ class RemoteUserDataSourceImpl implements RemoteUserDataSource {
       : _httpClient = httpClient;
 
   @override
-  Future<UserModel> signup(String email, String password) async {
+  Future<UserModel> signUp(String email, String password) async {
     final request = HttpRequest(
       '/signup',
       headers: {'Content-Type': 'application/json'},

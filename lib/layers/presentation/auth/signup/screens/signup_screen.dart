@@ -8,7 +8,7 @@ import 'package:supermedia/layers/presentation/shared/widgets/email_text_fileld.
 import 'package:supermedia/layers/presentation/shared/widgets/password_text_field.dart';
 
 class SignupScreen extends StatelessWidget {
-  final SignupUseCase signupUseCase;
+  final SignUpUseCase signupUseCase;
 
   const SignupScreen({Key? key, required this.signupUseCase}) : super(key: key);
 

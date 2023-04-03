@@ -7,9 +7,9 @@ part 'signup_event.dart';
 part 'signup_state.dart';
 
 class SignupBloc extends Bloc<SignupEvent, SignupState> {
-  final SignupUseCase _signupUseCase;
+  final SignUpUseCase _signupUseCase;
 
-  SignupBloc({required SignupUseCase signupUseCase})
+  SignupBloc({required SignUpUseCase signupUseCase})
       : _signupUseCase = signupUseCase,
         super(SignupInitial()) {
     on<SignupEvent>((event, emit) async {
@@ -17,7 +17,7 @@ class SignupBloc extends Bloc<SignupEvent, SignupState> {
         emit(SignupLoading());
         try {
           final user =
-              await _signupUseCase.execute(event.email, event.password);
+              await _signupUseCase.signUp(event.email, event.password);
           emit(SignupSuccess(user: user));
         } catch (e) {
           emit(SignupFailure(error: e.toString()));

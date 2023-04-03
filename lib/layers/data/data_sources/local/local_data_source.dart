@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-abstract class LocalUserDataSource {
+abstract class LocalDataSource {
   ThemeMode getThemeMode();
 
   Future<void> setThemeMode(ThemeMode themeMode);
 }
 
-class LocalUserDataSourceImpl implements LocalUserDataSource {
+class LocalDataSourceImpl implements LocalDataSource {
   final SharedPreferences sharedPreferences;
   static const String _themeModeKey = 'theme_mode';
 
-  LocalUserDataSourceImpl({required this.sharedPreferences});
+  LocalDataSourceImpl({required this.sharedPreferences});
 
   @override
   ThemeMode getThemeMode() {

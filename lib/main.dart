@@ -2,15 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:supermedia/layers/common/app_theme/app_theme.dart';
-import 'package:supermedia/layers/common/app_theme/app_theme_bloc.dart';
-import 'package:supermedia/layers/data/data_sources/local_user_data_source.dart';
-import 'package:supermedia/layers/di/app_module.dart';
+import 'package:supermedia/common/app_theme/app_theme.dart';
+import 'package:supermedia/common/app_theme/app_theme_bloc.dart';
+import 'package:supermedia/layers/data/data_sources/local/local_data_source.dart';
+import 'package:supermedia/di/app_module.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   final sharedPreferences = await SharedPreferences.getInstance();
-  final localUserDataSource = LocalUserDataSourceImpl(
+  final localUserDataSource = LocalDataSourceImpl(
     sharedPreferences: sharedPreferences,
   );
 
