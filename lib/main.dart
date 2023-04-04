@@ -1,20 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:get_it/get_it.dart';
-import 'package:supermedia/common/app_theme/app_theme.dart';
-import 'package:supermedia/common/app_theme/app_theme_bloc.dart';
+import 'package:supermedia/common/theme/app_theme.dart';
+import 'package:supermedia/common/theme/app_theme_bloc.dart';
 import 'package:supermedia/common/utils/app_localization.dart';
 import 'package:supermedia/di/app_module.dart';
 import 'package:supermedia/layers/presentation/auth/signup/screens/signup_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await setupAppModule();
+  await setupLocator();
   await AppLocalization.init();
   runApp(
     BlocProvider<AppThemeBloc>(
-      create: (context) => AppThemeBloc(),
+      create: (context) => locator<AppThemeBloc>(),
       child: const MyApp(),
     ),
   );
@@ -34,7 +33,7 @@ class MyApp extends StatelessWidget {
           theme: AppTheme.lightTheme,
           darkTheme: AppTheme.darkTheme,
           themeMode: themeState,
-          home: GetIt.I<SignupScreen>(),
+          home: locator<SignupScreen>(),
         );
       },
     );

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:supermedia/di/app_module.dart';
 
 abstract class LocalDataSource {
   ThemeMode getThemeMode();
@@ -9,7 +9,7 @@ abstract class LocalDataSource {
 }
 
 class LocalDataSourceImpl implements LocalDataSource {
-  final SharedPreferences sharedPreferences = GetIt.I<SharedPreferences>();
+  final SharedPreferences sharedPreferences = locator<SharedPreferences>();
   static const String _themeModeKey = 'theme_mode';
 
   @override

@@ -1,6 +1,6 @@
-import 'package:get_it/get_it.dart';
-import 'package:supermedia/common/app_exceptions.dart';
+import 'package:supermedia/common/exceptions/signup_exception.dart';
 import 'package:supermedia/common/utils/app_localization.dart';
+import 'package:supermedia/di/app_module.dart';
 import 'package:supermedia/layers/data/http_client/http_client.dart';
 import 'package:supermedia/layers/data/models/user_model.dart';
 
@@ -9,7 +9,7 @@ abstract class RemoteUserDataSource {
 }
 
 class RemoteUserDataSourceImpl implements RemoteUserDataSource {
-  final IHttpClient _httpClient = GetIt.I<IHttpClient>();
+  final IHttpClient _httpClient = locator<IHttpClient>();
 
   @override
   Future<UserModel> signUp(String email, String password) async {

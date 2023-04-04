@@ -1,25 +1,43 @@
 import 'package:flutter/material.dart';
-import 'package:supermedia/common/utils/app_localization.dart';
-import 'package:supermedia/common/utils/validators.dart';
 
-class PasswordTextField extends StatelessWidget {
-  const PasswordTextField({
-    super.key,
-    required this.controller,
-  });
-
+@immutable
+class PasswordTextField extends StatefulWidget {
   final TextEditingController controller;
+  final String labelText;
+  final String? Function(String?)? validator;
+
+  const PasswordTextField({
+    Key? key,
+    required this.controller,
+    required this.labelText,
+    this.validator,
+  }) : super(key: key);
+
+  @override
+  State createState() => _PasswordTextFieldState();
+}
+
+class _PasswordTextFieldState extends State<PasswordTextField> {
+  bool _obscureText = true;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      controller: controller,
+      controller: widget.controller,
+      obscureText: _obscureText,
       decoration: InputDecoration(
-        labelText: AppLocalization.of(context)!.password,
+        labelText: widget.labelText,
+        suffixIcon: IconButton(
+          icon: Icon(_obscureText ? Icons.visibility : Icons.visibility_off),
+          onPressed: () {
+            setState(() {
+              _obscureText = !_obscureText;
+            });
+          },
+        ),
       ),
-      validator: Validators.validatePassword,
+      validator: widget.validator,
       autovalidateMode: AutovalidateMode.onUserInteraction,
-      obscureText: true,
     );
   }
 }

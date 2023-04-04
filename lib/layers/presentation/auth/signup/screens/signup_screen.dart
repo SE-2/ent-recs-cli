@@ -1,22 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get_it/get_it.dart';
 import 'package:supermedia/common/utils/app_localization.dart';
-import 'package:supermedia/layers/domain/use_cases/signup_use_case.dart';
+import 'package:supermedia/di/app_module.dart';
 import 'package:supermedia/layers/presentation/auth/signup/bloc/signup_bloc.dart';
 import 'package:supermedia/layers/presentation/auth/signup/widgets/signup_button.dart';
 import 'package:supermedia/layers/presentation/shared/widgets/email_text_fileld.dart';
 import 'package:supermedia/layers/presentation/shared/widgets/password_text_field.dart';
+import 'package:supermedia/layers/presentation/validators/email_validator.dart';
+import 'package:supermedia/layers/presentation/validators/password_validator.dart';
 
 class SignupScreen extends StatelessWidget {
-  final SignUpUseCase signupUseCase = GetIt.I<SignUpUseCase>();
-
-  SignupScreen({Key? key}) : super(key: key);
+  const SignupScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider<SignupBloc>(
-      create: (_) => SignupBloc(),
+      create: (_) => locator<SignupBloc>(),
       child: Scaffold(
         appBar: AppBar(
           title: Text(AppLocalization.of(context)!.signUp),
@@ -64,8 +63,16 @@ class _SignupFormState extends State<_SignupForm> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              EmailTextField(controller: _emailController),
-              PasswordTextField(controller: _passwordController),
+              EmailTextField(
+                controller: _emailController,
+                labelText: AppLocalization.of(context)!.email,
+                validator: EmailValidator.of(context).validate,
+              ),
+              PasswordTextField(
+                controller: _passwordController,
+                labelText: AppLocalization.of(context)!.password,
+                validator: PasswordValidator.of(context).validate,
+              ),
               const SizedBox(height: 16),
               BlocBuilder<SignupBloc, SignupState>(
                 builder: (context, state) {

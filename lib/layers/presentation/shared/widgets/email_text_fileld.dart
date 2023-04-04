@@ -1,23 +1,27 @@
 import 'package:flutter/material.dart';
-import 'package:supermedia/common/utils/app_localization.dart';
-import 'package:supermedia/common/utils/validators.dart';
 
+@immutable
 class EmailTextField extends StatelessWidget {
-  const EmailTextField({
-    super.key,
-    required this.controller,
-  });
-
   final TextEditingController controller;
+  final String labelText;
+  final String? Function(String?)? validator;
+
+  const EmailTextField({
+    Key? key,
+    required this.controller,
+    required this.labelText,
+    this.validator,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       controller: controller,
+      keyboardType: TextInputType.emailAddress,
       decoration: InputDecoration(
-        labelText: AppLocalization.of(context)!.email,
+        labelText: labelText,
       ),
-      validator: Validators.validateEmail,
+      validator: validator,
       autovalidateMode: AutovalidateMode.onUserInteraction,
     );
   }
