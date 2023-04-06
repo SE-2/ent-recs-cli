@@ -4,7 +4,7 @@ import 'package:supermedia/common/locale/app_locale_bloc.dart';
 import 'package:supermedia/common/theme/app_theme_bloc.dart';
 import 'package:supermedia/common/utils/app_localization.dart';
 import 'package:supermedia/di/app_module.dart';
-import 'package:supermedia/layers/data/data_sources/local/local_data_source.dart';
+import 'package:supermedia/layers/data/data_sources/abstractions/local_data_source.dart';
 
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({Key? key}) : super(key: key);

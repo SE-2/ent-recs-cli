@@ -1,5 +1,5 @@
 import 'package:supermedia/di/app_module.dart';
-import 'package:supermedia/layers/data/data_sources/remote/remote_user_data_source.dart';
+import 'package:supermedia/layers/data/data_sources/abstractions/remote_user_data_source.dart';
 import 'package:supermedia/layers/domain/entities/user.dart';
 import 'package:supermedia/layers/domain/repositories/user_repository.dart';
 

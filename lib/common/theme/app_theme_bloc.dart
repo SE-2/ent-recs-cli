@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:supermedia/di/app_module.dart';
-import 'package:supermedia/layers/data/data_sources/local/local_data_source.dart';
+import 'package:supermedia/layers/data/data_sources/abstractions/local_data_source.dart';
 
 class AppThemeBloc extends Cubit<ThemeMode> {
   AppThemeBloc() : super(locator<LocalDataSource>().getThemeMode());
