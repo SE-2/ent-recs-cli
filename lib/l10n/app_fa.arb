@@ -11,5 +11,13 @@
   "requiredEmail": "ایمیل ضروری است",
   "invalidEmail": "ایمیل نامعتبر است",
   "requiredPassword": "رمز عبور ضروری است",
-  "weakPassword": "رمز عبور باید حداقل 8 کاراکتر باشد."
+  "weakPassword": "رمز عبور باید حداقل 8 کاراکتر باشد.",
+  "settings": "تنظیمات",
+  "themeMode": "حالت تم",
+  "system": "سیستم",
+  "light": "روز",
+  "dark": "شب",
+  "language": "زبان",
+  "english": "انگلیسی",
+  "persian": "فارسی"
 }

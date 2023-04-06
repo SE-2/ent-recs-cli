@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-@immutable
 class EmailTextField extends StatelessWidget {
   final TextEditingController controller;
   final String labelText;

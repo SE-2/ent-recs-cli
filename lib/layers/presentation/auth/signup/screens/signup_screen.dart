@@ -38,8 +38,6 @@ class _SignupFormState extends State<_SignupForm> {
 
   @override
   Widget build(BuildContext context) {
-    ThemeData themeData = Theme.of(context);
-
     return BlocListener<SignupBloc, SignupState>(
       listener: (context, state) {
         if (state is SignupFailure) {
@@ -59,7 +57,7 @@ class _SignupFormState extends State<_SignupForm> {
       child: Form(
         key: _formKey,
         child: Padding(
-          padding: const EdgeInsets.all(16.0),
+          padding: const EdgeInsets.all(32),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[

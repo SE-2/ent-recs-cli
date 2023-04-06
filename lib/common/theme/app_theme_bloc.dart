@@ -4,19 +4,10 @@ import 'package:supermedia/di/app_module.dart';
 import 'package:supermedia/layers/data/data_sources/local/local_data_source.dart';
 
 class AppThemeBloc extends Cubit<ThemeMode> {
-  final LocalDataSource localUserDataSource = locator<LocalDataSource>();
+  AppThemeBloc() : super(locator<LocalDataSource>().getThemeMode());
 
-  AppThemeBloc() : super(ThemeMode.system) {
-    _initThemeMode();
-  }
-
-  Future<void> _initThemeMode() async {
-    final themeMode = localUserDataSource.getThemeMode();
+  void setThemeMode(ThemeMode themeMode) {
     emit(themeMode);
-  }
-
-  void toggleTheme() {
-    emit(state == ThemeMode.light ? ThemeMode.dark : ThemeMode.light);
-    localUserDataSource.setThemeMode(state);
+    locator<LocalDataSource>().setThemeMode(state);
   }
 }
