@@ -1,0 +1,23 @@
+{
+  "title": "Super Media",
+  "email": "Email",
+  "password": "Password",
+  "signUp": "Sign up",
+  "invalidInputsMsg": "Please correct the errors.",
+  "userRegistered": "{email} registered.",
+  "registrationFailed": "Registration failed. {reason}",
+  "unknownErrorOccurred": "Unknown error occurred.",
+  "errorCode": "Error {code}",
+  "requiredEmail": "Email is required",
+  "invalidEmail": "Invalid email format",
+  "requiredPassword": "Password is required",
+  "weakPassword": "Password must be at least 8 characters",
+  "settings": "Settings",
+  "themeMode": "Theme Mode",
+  "system": "System",
+  "light": "Light",
+  "dark": "Dark",
+  "language": "Language",
+  "english": "English",
+  "persian": "Persian"
+}
