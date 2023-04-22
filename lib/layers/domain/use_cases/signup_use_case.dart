@@ -21,3 +21,15 @@ class SignUpUseCaseImpl implements SignUpUseCase {
     }
   }
 }
+
+/*
+class SignInWithGoogleUseCase {
+  final AuthRepository _authRepository;
+
+  SignInWithGoogleUseCase(this._authRepository);
+
+  Future<User?> execute() async {
+    return _authRepository.signInWithGoogle();
+  }
+}
+*/

@@ -17,9 +17,6 @@ class SignupScreen extends StatelessWidget {
     return BlocProvider<SignupBloc>(
       create: (_) => locator<SignupBloc>(),
       child: Scaffold(
-        appBar: AppBar(
-          title: Text(AppLocalization.of(context)!.signUp),
-        ),
         body: _SignupForm(),
       ),
     );
@@ -54,39 +51,81 @@ class _SignupFormState extends State<_SignupForm> {
           );
         }
       },
-      child: Form(
-        key: _formKey,
-        child: Padding(
-          padding: const EdgeInsets.all(32),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              EmailTextField(
-                controller: _emailController,
-                labelText: AppLocalization.of(context)!.email,
-                validator: EmailValidator.of(context).validate,
+      child: Container(
+        color: const Color(0xFF514EB6),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            const SizedBox(height: 42),
+            const Text(
+              'Create Account',
+              style: TextStyle(
+                fontSize: 24,
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
               ),
-              PasswordTextField(
-                controller: _passwordController,
-                labelText: AppLocalization.of(context)!.password,
-                validator: PasswordValidator.of(context).validate,
+            ),
+            const SizedBox(height: 8),
+            const Text(
+              'Welcome to super media!',
+              style: TextStyle(
+                fontSize: 16,
+                color: Colors.white,
               ),
-              const SizedBox(height: 16),
-              BlocBuilder<SignupBloc, SignupState>(
-                builder: (context, state) {
-                  if (state is SignupLoading) {
-                    return const Center(child: CircularProgressIndicator());
-                  } else {
-                    return SignUpButton(
-                      formKey: _formKey,
-                      emailController: _emailController,
-                      passwordController: _passwordController,
-                    );
-                  }
-                },
+            ),
+            const SizedBox(height: 48),
+            Expanded(
+              child: Container(
+                decoration: const BoxDecoration(
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(30),
+                    topRight: Radius.circular(30),
+                  ),
+                  color: Colors.white
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(24.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      const SizedBox(height: 24),
+                      const Text(
+                        "Email",
+                        style: TextStyle(
+                          fontSize: 14,
+                          color: Color(0xFF78828a),
+                        ),
+                      ),
+                      EmailTextField(
+                        controller: _emailController,
+                        labelText: AppLocalization.of(context)!.email,
+                        validator: EmailValidator.of(context).validate,
+                      ),
+                      PasswordTextField(
+                        controller: _passwordController,
+                        labelText: AppLocalization.of(context)!.password,
+                        validator: PasswordValidator.of(context).validate,
+                      ),
+                      const SizedBox(height: 16),
+                      BlocBuilder<SignupBloc, SignupState>(
+                        builder: (context, state) {
+                          if (state is SignupLoading) {
+                            return const Center(child: CircularProgressIndicator());
+                          } else {
+                            return SignUpButton(
+                              formKey: _formKey,
+                              emailController: _emailController,
+                              passwordController: _passwordController,
+                            );
+                          }
+                        },
+                      ),
+                    ],
+                  ),
+                ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

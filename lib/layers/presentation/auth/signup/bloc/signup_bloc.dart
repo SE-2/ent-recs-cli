@@ -24,3 +24,29 @@ class SignupBloc extends Bloc<SignupEvent, SignupState> {
     });
   }
 }
+
+/*
+class GoogleSignInBloc {
+  final _currentUserController = StreamController<User?>();
+
+  void _init() async {
+    final currentUser = await _authRepository.getCurrentUser();
+    _currentUserController.add(currentUser);
+  }
+
+  Stream<User?> get currentUser => _currentUserController.stream;
+
+  void signInWithGoogle() async {
+    final user = await _authRepository.signInWithGoogle();
+    _currentUserController.add(user);
+  }
+
+  void signOut() async {
+    await _authRepository.signOut();
+    _currentUserController.add(null);
+  }
+
+  void dispose() {
+    _currentUserController.close();
+  }
+}*/
