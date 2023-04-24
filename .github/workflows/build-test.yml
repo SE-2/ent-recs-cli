@@ -20,6 +20,7 @@ jobs:
       with:
         flutter-version: '3.7.7'
     - run: flutter pub get
+    - run: flutter test
     - run: flutter build apk
     - run: flutter build appbundle
     
@@ -32,6 +33,7 @@ jobs:
         channel: 'stable'
         architecture: x64
     - run: flutter pub get
+    - run: flutter test
     - run: flutter build ios --release --no-codesign
       
   web-build:
@@ -42,6 +44,7 @@ jobs:
       with:
         channel: 'stable'
     - run: flutter pub get
+    - run: flutter test
     - run: flutter build web
       
   windows-build:
