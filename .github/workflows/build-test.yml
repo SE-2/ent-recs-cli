@@ -8,7 +8,7 @@ on:
 
 jobs:
 
-  android-build:
+  android-build-test:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
@@ -23,7 +23,7 @@ jobs:
     - run: flutter build apk
     - run: flutter build appbundle
     
-  ios-build:
+  ios-build-test:
     runs-on: macos-latest
     steps:
     - uses: actions/checkout@v3
@@ -34,7 +34,7 @@ jobs:
     - run: flutter pub get
     - run: flutter build ios --release --no-codesign
       
-  web-build:
+  web-build-test:
     runs-on: windows-latest
     steps:
     - uses: actions/checkout@v3
