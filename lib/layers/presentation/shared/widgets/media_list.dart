@@ -15,13 +15,13 @@ class MediaList extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
+        backgroundColor: Theme.of(context).colorScheme.background,
         elevation: 0,
         title: Text(
           title,
           style: Theme.of(context).textTheme.displayMedium!.copyWith(
             color: Colors.black,
-            backgroundColor: Colors.transparent,
+            backgroundColor: Theme.of(context).colorScheme.background,
           ),
         ),
         centerTitle: true,
