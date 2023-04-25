@@ -23,7 +23,7 @@ class AppTheme {
       headlineSmall: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
       titleLarge: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
       titleMedium: TextStyle(fontSize: 16.0, color: Colors.black87),
-      titleSmall: TextStyle(fontSize: 14.0, color: Colors.black87),
+      titleSmall: TextStyle(fontSize: 14.0, color: Colors.black54),
     ),
   );
 

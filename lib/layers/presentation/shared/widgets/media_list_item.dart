@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 class MediaListItem extends StatelessWidget {
   final String mediaType;
@@ -20,10 +21,17 @@ class MediaListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final Map<String, Color> mediaTypeColors = {
+      'Book': const Color(0xff514EB6),
+      'Movie': const Color(0xffF50057),
+      'Music': const Color(0xff00C853),
+      'Podcast': const Color(0xffFF9800),
+    };
+
     return Container(
-      margin: const EdgeInsets.symmetric(vertical: 8),
+      margin: const EdgeInsets.symmetric(vertical: 10),
       child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Container(
             width: 119.52,
@@ -41,11 +49,24 @@ class MediaListItem extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  mediaType,
-                  style: const TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 16,
+                Container(
+                  width: 65,
+                  height: 27,
+                  decoration: BoxDecoration(
+                    color: mediaTypeColors[mediaType],
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                  child: Center(
+                    child: Text(
+                      mediaType.toUpperCase(),
+                      style: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 10,
+                        color: Colors.white,
+                      ),
+                    ),
                   ),
                 ),
                 const SizedBox(height: 4),
@@ -53,32 +74,41 @@ class MediaListItem extends StatelessWidget {
                   title,
                   style: const TextStyle(
                     fontWeight: FontWeight.bold,
-                    fontSize: 20,
+                    fontSize: 18,
                   ),
                 ),
-                const SizedBox(height: 16),
+                const SizedBox(height: 12),
                 if (pages != null)
                   Row(
                     children: [
                       const Icon(CupertinoIcons.book),
                       const SizedBox(width: 8),
-                      Text(pages!),
+                      Text(
+                        pages!,
+                        style: Theme.of(context).textTheme.titleSmall,
+                      ),
                     ],
                   ),
-                if (publishDate != null) const SizedBox(height: 8),
+                if (publishDate != null) const SizedBox(height: 4),
                 Row(
                   children: [
                     const Icon(CupertinoIcons.calendar),
                     const SizedBox(width: 8),
-                    Text(publishDate!),
+                    Text(
+                      publishDate!,
+                      style: Theme.of(context).textTheme.titleSmall,
+                    ),
                   ],
                 ),
-                if (genre != null) const SizedBox(height: 8),
+                if (genre != null) const SizedBox(height: 4),
                 Row(
                   children: [
                     const Icon(CupertinoIcons.tag),
                     const SizedBox(width: 8),
-                    Text(genre!),
+                    Text(
+                      genre!,
+                      style: Theme.of(context).textTheme.titleSmall,
+                    ),
                   ],
                 ),
               ],
