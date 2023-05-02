@@ -1,5 +1,8 @@
 import 'package:custom_sliding_segmented_control/custom_sliding_segmented_control.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:supermedia/layers/presentation/home/bloc/home_bloc.dart';
+import 'package:supermedia/layers/presentation/home/bloc/home_event.dart';
 import 'package:supermedia/layers/presentation/home/widgets/story_list.dart';
 import 'package:supermedia/layers/presentation/home/widgets/data.dart';
 
@@ -82,6 +85,11 @@ class _HomeScreenState extends State<HomeScreen> {
                       }
                     });
                   },
+                  // onValueChanged: (value) {
+                  //   context.read<HomeBloc>().add(
+                  //         DateFilterChanged(index: value),
+                  //       );
+                  // },
                   decoration: BoxDecoration(
                       color: const Color.fromARGB(255, 236, 241, 246),
                       borderRadius: BorderRadius.circular(24)),
@@ -94,7 +102,9 @@ class _HomeScreenState extends State<HomeScreen> {
               )
             ],
           ),
-          StoryList(stories: stories,),
+          StoryList(
+            stories: stories,
+          ),
           const Text(
             'See what’s good for you!',
             style: TextStyle(
