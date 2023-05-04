@@ -47,6 +47,7 @@ dependencies:
   get_it: ^7.2.0
   custom_sliding_segmented_control: ^1.7.4
   dotted_border: ^2.0.0+3
+  carousel_indicator: ^1.0.6
 
 dev_dependencies:
   flutter_test:

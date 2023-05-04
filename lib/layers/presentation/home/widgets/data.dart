@@ -19,10 +19,26 @@ class Story {
 }
 
 enum Category {
-  music(id: 0, color: Color(0xffA8D4B5), title: 'Music', imageFileName: ''),
-  movie(id: 1, color: Color(0xffDBA506), title: 'Movie', imageFileName: ''),
-  book(id: 2, color: Color(0xff6C9EFC), title: 'eBook', imageFileName: ''),
-  podcast(id: 3, color: Color(0xffFC4604), title: 'Podcast', imageFileName: '');
+  music(
+      id: 0,
+      color: Color(0xffA8D4B5),
+      title: 'Music',
+      imageFileName: 'musicCategory.png'),
+  movie(
+      id: 1,
+      color: Color(0xffDBA506),
+      title: 'Movie',
+      imageFileName: 'movieCategory.png'),
+  book(
+      id: 2,
+      color: Color(0xff6C9EFC),
+      title: 'eBook',
+      imageFileName: 'ebookCategory.png'),
+  podcast(
+      id: 3,
+      color: Color(0xffFC4604),
+      title: 'Podcast',
+      imageFileName: 'podcastCategory.png');
 
   final int id;
   final Color color;
