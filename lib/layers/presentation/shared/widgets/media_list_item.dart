@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:supermedia/gen/assets.gen.dart';
 
 class MediaListItem extends StatelessWidget {
   final String mediaType;
@@ -51,7 +52,7 @@ class MediaListItem extends StatelessWidget {
               children: [
                 Container(
                   width: 65,
-                  height: 27,
+                  height: 24,
                   decoration: BoxDecoration(
                     color: mediaTypeColors[mediaType],
                     borderRadius: BorderRadius.circular(8),
@@ -69,19 +70,16 @@ class MediaListItem extends StatelessWidget {
                     ),
                   ),
                 ),
-                const SizedBox(height: 4),
+                const SizedBox(height: 10),
                 Text(
                   title,
-                  style: const TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 18,
-                  ),
+                  style: Theme.of(context).textTheme.headlineSmall,
                 ),
-                const SizedBox(height: 12),
+                const SizedBox(height: 14),
                 if (pages != null)
                   Row(
                     children: [
-                      const Icon(CupertinoIcons.book),
+                      Assets.icons.paper.svg(height: 16, width: 16),
                       const SizedBox(width: 8),
                       Text(
                         pages!,
@@ -89,10 +87,11 @@ class MediaListItem extends StatelessWidget {
                       ),
                     ],
                   ),
-                if (publishDate != null) const SizedBox(height: 4),
+                if (publishDate != null) const SizedBox(height: 10),
                 Row(
                   children: [
-                    const Icon(CupertinoIcons.calendar),
+                    Assets.icons.calendar.svg(height: 16, width: 16),
+
                     const SizedBox(width: 8),
                     Text(
                       publishDate!,
@@ -100,10 +99,10 @@ class MediaListItem extends StatelessWidget {
                     ),
                   ],
                 ),
-                if (genre != null) const SizedBox(height: 4),
+                if (genre != null) const SizedBox(height: 10),
                 Row(
                   children: [
-                    const Icon(CupertinoIcons.tag),
+                    Assets.icons.film.svg(height: 16, width: 16),
                     const SizedBox(width: 8),
                     Text(
                       genre!,

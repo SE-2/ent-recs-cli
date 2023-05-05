@@ -6,8 +6,6 @@ import 'package:supermedia/common/theme/app_theme.dart';
 import 'package:supermedia/common/theme/app_theme_bloc.dart';
 import 'package:supermedia/common/utils/app_localization.dart';
 import 'package:supermedia/di/app_module.dart';
-import 'package:supermedia/layers/presentation/auth/signup/screens/signup_screen.dart';
-import 'package:supermedia/layers/presentation/settings/screens/settings_screen.dart';
 import 'package:supermedia/layers/presentation/shared/widgets/media_list.dart';
 import 'package:supermedia/layers/presentation/shared/widgets/media_list_item.dart';
 
@@ -41,16 +39,20 @@ class MyApp extends StatelessWidget {
                 darkTheme: AppTheme.darkTheme,
                 themeMode: themeMode,
                 home: MediaList(
-                  title: 'My Media List',
+                  showFilter: true,
+                  showSearchBar: true,
+                  showSort: true,
+                  title: 'Search Among all media',
                   mediaList: List.generate(
                     10,
-                        (index) => MediaListItem(
+                    (index) => MediaListItem(
                       mediaType: 'Book',
                       title: 'Book Title ${index + 1}',
                       pages: '100 Pages',
                       publishDate: '2020',
                       genre: 'Fiction',
-                      imageUrl: 'https://www.iranketab.ir/Images/ProductImages/ca03ef61c7654a0a910846e5dc4afd09.jpg',
+                      imageUrl:
+                          'https://www.iranketab.ir/Images/ProductImages/ca03ef61c7654a0a910846e5dc4afd09.jpg',
                     ),
                   ),
                 ),

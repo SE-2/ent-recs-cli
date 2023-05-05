@@ -7,13 +7,23 @@ import 'media_list_item.dart';
 class MediaList extends StatelessWidget {
   final String title;
   final List<MediaListItem> mediaList;
+  final bool showSearchBar;
+  final bool showFilter;
+  final bool showSort;
 
-  const MediaList({Key? key, required this.title, required this.mediaList})
-      : super(key: key);
+  const MediaList({
+    Key? key,
+    required this.title,
+    required this.mediaList,
+    this.showSearchBar = true,
+    this.showFilter = true,
+    this.showSort = true,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Theme.of(context).colorScheme.background,
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.background,
         elevation: 0,
@@ -21,7 +31,6 @@ class MediaList extends StatelessWidget {
           title,
           style: Theme.of(context).textTheme.displayMedium!.copyWith(
             color: Colors.black,
-            backgroundColor: Theme.of(context).colorScheme.background,
           ),
         ),
         centerTitle: true,
@@ -31,28 +40,48 @@ class MediaList extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const SearchBar(),
-            const SizedBox(height: 16),
-            Row(
-              children: [
-                Row(
-                  children: const [
-                    Icon(CupertinoIcons.sort_down),
-                    SizedBox(width: 4),
-                    Text('Sort'),
+            if (showSearchBar) ...[
+              const SearchBar(),
+              const SizedBox(height: 16),
+            ],
+            if (showFilter || showSort) ...[
+              Row(
+                children: [
+                  if (showSort) ...[
+                    Row(
+                      children: [
+                        const Icon(
+                          CupertinoIcons.sort_down,
+                          size: 24,
+                        ),
+                        const SizedBox(width: 4),
+                        Text(
+                          'Sort',
+                          style: Theme.of(context).textTheme.titleMedium,
+                        ),
+                      ],
+                    ),
+                    const SizedBox(width: 16),
                   ],
-                ),
-                const SizedBox(width: 16),
-                Row(
-                  children: const [
-                    Icon(CupertinoIcons.slider_horizontal_3),
-                    SizedBox(width: 4),
-                    Text('Filter'),
+                  if (showFilter) ...[
+                    Row(
+                      children: [
+                        const Icon(
+                          CupertinoIcons.slider_horizontal_3,
+                          size: 20,
+                        ),
+                        const SizedBox(width: 4),
+                        Text(
+                          'Filter',
+                          style: Theme.of(context).textTheme.titleMedium,
+                        ),
+                      ],
+                    ),
                   ],
-                ),
-              ],
-            ),
-            const SizedBox(height: 16),
+                ],
+              ),
+              const SizedBox(height: 16),
+            ],
             Expanded(
               child: ListView.builder(
                 itemCount: mediaList.length,

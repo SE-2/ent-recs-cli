@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 
 class AppTheme {
+  static const defaultFontFamily = 'Plus Jakarta Sans';
+
   static ThemeData lightTheme = ThemeData.light().copyWith(
     colorScheme: const ColorScheme.light(
-      primary: Colors.blue,
+      primary: Color(0xff514EB6),
       onPrimary: Colors.white,
       secondary: Colors.orange,
       onSecondary: Colors.black,
@@ -12,18 +14,69 @@ class AppTheme {
       error: Colors.red,
     ),
     textTheme: const TextTheme(
-      displayLarge: TextStyle(fontSize: 32.0, fontWeight: FontWeight.bold),
-      displayMedium: TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold),
-      displaySmall: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
-      bodyLarge: TextStyle(fontSize: 18.0, color: Colors.black54),
-      bodyMedium: TextStyle(fontSize: 16.0, color: Colors.black),
-      bodySmall: TextStyle(fontSize: 14.0, color: Colors.grey),
-      headlineLarge: TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold),
-      headlineMedium: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
-      headlineSmall: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
-      titleLarge: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
-      titleMedium: TextStyle(fontSize: 16.0, color: Colors.black87),
-      titleSmall: TextStyle(fontSize: 14.0, color: Colors.black54),
+      displayLarge: TextStyle(
+        fontFamily: defaultFontFamily,
+        fontSize: 32.0,
+        fontWeight: FontWeight.bold,
+      ),
+      displayMedium: TextStyle(
+        fontFamily: defaultFontFamily,
+        fontSize: 24.0,
+        fontWeight: FontWeight.bold,
+      ),
+      displaySmall: TextStyle(
+        fontFamily: defaultFontFamily,
+        fontSize: 20.0,
+        fontWeight: FontWeight.bold,
+      ),
+      bodyLarge: TextStyle(
+        fontFamily: defaultFontFamily,
+        fontSize: 18.0,
+        color: Colors.black54,
+      ),
+      bodyMedium: TextStyle(
+        fontFamily: defaultFontFamily,
+        fontSize: 16.0,
+        color: Colors.black,
+      ),
+      bodySmall: TextStyle(
+        fontFamily: defaultFontFamily,
+        fontSize: 14.0,
+        color: Colors.grey,
+      ),
+      headlineLarge: TextStyle(
+        fontFamily: defaultFontFamily,
+        fontSize: 24.0,
+        fontWeight: FontWeight.bold,
+        color: Colors.black,
+      ),
+      headlineMedium: TextStyle(
+        fontFamily: defaultFontFamily,
+        fontSize: 20.0,
+        fontWeight: FontWeight.bold,
+        color: Colors.black,
+      ),
+      headlineSmall: TextStyle(
+        fontFamily: defaultFontFamily,
+        fontSize: 16.0,
+        fontWeight: FontWeight.bold,
+        color: Colors.black,
+      ),
+      titleLarge: TextStyle(
+        fontFamily: defaultFontFamily,
+        fontSize: 16.0,
+        fontWeight: FontWeight.bold,
+      ),
+      titleMedium: TextStyle(
+        fontFamily: defaultFontFamily,
+        fontSize: 14.0,
+        color: Colors.black87,
+      ),
+      titleSmall: TextStyle(
+          fontFamily: defaultFontFamily,
+          fontSize: 12.0,
+          color: Colors.black54,
+          fontWeight: FontWeight.w500),
     ),
   );
 
@@ -38,18 +91,66 @@ class AppTheme {
       error: Colors.red,
     ),
     textTheme: const TextTheme(
-      displayLarge: TextStyle(fontSize: 32.0, fontWeight: FontWeight.bold),
-      displayMedium: TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold),
-      displaySmall: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
-      bodyLarge: TextStyle(fontSize: 18.0, color: Colors.white70),
-      bodyMedium: TextStyle(fontSize: 16.0, color: Colors.white),
-      bodySmall: TextStyle(fontSize: 14.0, color: Colors.grey),
-      headlineLarge: TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold),
-      headlineMedium: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
-      headlineSmall: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
-      titleLarge: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
-      titleMedium: TextStyle(fontSize: 16.0, color: Colors.white70),
-      titleSmall: TextStyle(fontSize: 14.0, color: Colors.white70),
+      displayLarge: TextStyle(
+        fontFamily: defaultFontFamily,
+        fontSize: 32.0,
+        fontWeight: FontWeight.bold,
+      ),
+      displayMedium: TextStyle(
+        fontFamily: defaultFontFamily,
+        fontSize: 24.0,
+        fontWeight: FontWeight.bold,
+      ),
+      displaySmall: TextStyle(
+        fontFamily: defaultFontFamily,
+        fontSize: 20.0,
+        fontWeight: FontWeight.bold,
+      ),
+      bodyLarge: TextStyle(
+        fontFamily: defaultFontFamily,
+        fontSize: 18.0,
+        color: Colors.white70,
+      ),
+      bodyMedium: TextStyle(
+        fontFamily: defaultFontFamily,
+        fontSize: 16.0,
+        color: Colors.white,
+      ),
+      bodySmall: TextStyle(
+        fontFamily: defaultFontFamily,
+        fontSize: 14.0,
+        color: Colors.grey,
+      ),
+      headlineLarge: TextStyle(
+        fontFamily: defaultFontFamily,
+        fontSize: 24.0,
+        fontWeight: FontWeight.bold,
+      ),
+      headlineMedium: TextStyle(
+        fontFamily: defaultFontFamily,
+        fontSize: 20.0,
+        fontWeight: FontWeight.bold,
+      ),
+      headlineSmall: TextStyle(
+        fontFamily: defaultFontFamily,
+        fontSize: 16.0,
+        fontWeight: FontWeight.bold,
+      ),
+      titleLarge: TextStyle(
+        fontFamily: defaultFontFamily,
+        fontSize: 18.0,
+        fontWeight: FontWeight.bold,
+      ),
+      titleMedium: TextStyle(
+        fontFamily: defaultFontFamily,
+        fontSize: 16.0,
+        color: Colors.white70,
+      ),
+      titleSmall: TextStyle(
+        fontFamily: defaultFontFamily,
+        fontSize: 14.0,
+        color: Colors.white70,
+      ),
     ),
   );
 }
