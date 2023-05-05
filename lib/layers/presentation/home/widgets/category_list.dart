@@ -1,50 +1,64 @@
-import 'package:carousel_indicator/carousel_indicator.dart';
+import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/cupertino.dart';
 
 import 'carousel/carousel_slider.dart';
 import 'category_item.dart';
 import 'data.dart';
 
-class CategoryList extends StatelessWidget {
+class CategoryList extends StatefulWidget {
   const CategoryList({super.key});
 
   @override
+  State<CategoryList> createState() => _CategoryListState();
+}
+
+class _CategoryListState extends State<CategoryList> {
+  int currentIndex = 0;
+  @override
   Widget build(BuildContext context) {
     final categories = AppDatabase.categories;
-    int currentIndex = 0;
 
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Padding(
-          padding: const EdgeInsets.fromLTRB(12, 12, 0, 0),
-          child: CarouselSlider.builder(
-              itemCount: categories.length,
-              itemBuilder: (context, index, realIndex) {
-                return CategoryItem(
-                  category: categories[realIndex],
-                );
-              },
-              options: CarouselOptions(
-                  scrollDirection: Axis.horizontal,
-                  viewportFraction: 0.75,
-                  aspectRatio: 1.2,
-                  initialPage: 0,
-                  disableCenter: false,
-                  enableInfiniteScroll: false,
-                  onPageChanged: (index, reason) => currentIndex = index,
-                  enlargeCenterPage: true,
-                  enlargeStrategy: CenterPageEnlargeStrategy.height,
-                  scrollPhysics: const BouncingScrollPhysics())),
+        CarouselSlider.builder(
+          itemCount: categories.length,
+          itemBuilder: (context, index, realIndex) {
+            return CategoryItem(
+              category: categories[realIndex],
+              realIndex: realIndex,
+              currentIndex: currentIndex,
+            );
+          },
+          options: CarouselOptions(
+            scrollDirection: Axis.horizontal,
+            height: 150,
+            viewportFraction: 0.6,
+            aspectRatio: 0.9,
+            initialPage: currentIndex,
+            disableCenter: false,
+            enableInfiniteScroll: false,
+            scrollPhysics: const BouncingScrollPhysics(),
+            onPageChanged: (index, reason) {
+              setState(() {
+                currentIndex = index;
+              });
+            },
+          ),
         ),
-        const SizedBox(height: 30,),
-       
-        CarouselIndicator(
-          count: 4,
-          color: const Color(0xffBFC6CC),
-          activeColor: const Color(0xff514EB6),
-          width: 20,
-          index: currentIndex,
+        DotsIndicator(
+          dotsCount: 3,
+          position: currentIndex.toDouble(),
+          decorator: DotsDecorator(
+            color: const Color(0xffBFC6CC),
+            activeColor: const Color(0xff514EB6),
+            size: const Size.square(8.0),
+            activeSize: const Size(22.0, 8.0),
+            activeShape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(5),
+            ),
+            spacing: const EdgeInsets.all(2)
+          ),
         ),
       ],
     );

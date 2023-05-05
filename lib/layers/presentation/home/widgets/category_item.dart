@@ -1,50 +1,46 @@
 import 'package:flutter/cupertino.dart';
-
 import 'data.dart';
 
-class CategoryItem extends StatelessWidget {
+class CategoryItem extends StatefulWidget {
   final Category category;
+  final int realIndex;
+  final int currentIndex;
 
   const CategoryItem({
     super.key,
     required this.category,
+    required this.realIndex,
+    required this.currentIndex,
   });
 
   @override
+  State<CategoryItem> createState() => _CategoryItemState();
+}
+
+class _CategoryItemState extends State<CategoryItem> {
+  @override
   Widget build(BuildContext context) {
     return Positioned.fill(
-      child: Stack(
-        children: [
-          Container(
-            width: 188.94,
-            height: 250,
-            margin: const EdgeInsets.all(5),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(32),
-            ),
+      child: Transform.scale(
+        scale: widget.realIndex == widget.currentIndex ? 1 : 0.8,
+        child: Container(
+          width: 112.89,
+          height: 150,
+          // margin: const EdgeInsets.all(3),
+          decoration: BoxDecoration(
+            color: const Color(0xff000000),
+            borderRadius: BorderRadius.circular(32),
+          ),
+          child: FittedBox(
+            fit: BoxFit.fill,
             child: ClipRRect(
               borderRadius: BorderRadius.circular(32),
               child: Image.asset(
-                'assets/images/categories/${category.imageFileName}',
-                width: 188.94,
-                height: 250,
+                'assets/images/categories/${widget.category.imageFileName}',
               ),
             ),
           ),
-          // Positioned.fill(
-          //   top: 100,
-          //   right: 100,
-          //   left: 100,
-          //   bottom: 10,
-          //   child: Container(
-          //     decoration: BoxDecoration(boxShadow: [
-          //       BoxShadow(
-          //           color: const Color(0xff0D253C).withOpacity(0.4),
-          //           blurRadius: 20,)
-          //     ]),
-          //   ),
-          // )
-        ],
+        ),
       ),
     );
   }

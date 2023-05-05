@@ -115,6 +115,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 color: Color(0xff0D253C)),
           ),
           const CategoryList(),
+          
+          Row(children: [Container(color: Colors.blue,)],)
         ]),
       ),
     );

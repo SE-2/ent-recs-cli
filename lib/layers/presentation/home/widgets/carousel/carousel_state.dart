@@ -15,7 +15,7 @@ class CarouselState {
   /// This value can be ignored unless you know the carousel will be scrolled
   /// backwards more then 10000 pages.
   /// Defaults to 10000 to simulate infinite backwards scrolling.
-  int realPage = 4;
+  int realPage = 10000;
 
   /// The initial index of the [PageView] on [CarouselSlider] init.
   ///
