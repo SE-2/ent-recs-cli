@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'data.dart';
 
 class CategoryItem extends StatefulWidget {
@@ -24,11 +25,10 @@ class _CategoryItemState extends State<CategoryItem> {
       child: Transform.scale(
         scale: widget.realIndex == widget.currentIndex ? 1 : 0.8,
         child: Container(
-          width: 112.89,
-          height: 150,
+          // width: 221.94,
+          // height: 250,
           // margin: const EdgeInsets.all(3),
           decoration: BoxDecoration(
-            color: const Color(0xff000000),
             borderRadius: BorderRadius.circular(32),
           ),
           child: FittedBox(

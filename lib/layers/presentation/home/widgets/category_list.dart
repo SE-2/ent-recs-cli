@@ -1,5 +1,6 @@
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 import 'carousel/carousel_slider.dart';
 import 'category_item.dart';
@@ -24,17 +25,20 @@ class _CategoryListState extends State<CategoryList> {
         CarouselSlider.builder(
           itemCount: categories.length,
           itemBuilder: (context, index, realIndex) {
-            return CategoryItem(
-              category: categories[realIndex],
-              realIndex: realIndex,
-              currentIndex: currentIndex,
+            return AspectRatio(
+              aspectRatio: 221.94 / 250,
+              child: CategoryItem(
+                category: categories[realIndex],
+                realIndex: realIndex,
+                currentIndex: currentIndex,
+              ),
             );
           },
           options: CarouselOptions(
             scrollDirection: Axis.horizontal,
-            height: 150,
-            viewportFraction: 0.6,
-            aspectRatio: 0.9,
+            // height: 250,
+            viewportFraction: 0.45,
+            // aspectRatio: 0.9,
             initialPage: currentIndex,
             disableCenter: false,
             enableInfiniteScroll: false,
@@ -47,7 +51,7 @@ class _CategoryListState extends State<CategoryList> {
           ),
         ),
         DotsIndicator(
-          dotsCount: 3,
+          dotsCount: categories.length,
           position: currentIndex.toDouble(),
           decorator: DotsDecorator(
             color: const Color(0xffBFC6CC),
@@ -57,7 +61,7 @@ class _CategoryListState extends State<CategoryList> {
             activeShape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(5),
             ),
-            spacing: const EdgeInsets.all(2)
+            spacing: const EdgeInsets.all(2),
           ),
         ),
       ],
