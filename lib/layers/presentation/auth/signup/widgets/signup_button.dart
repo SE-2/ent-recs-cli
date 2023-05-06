@@ -16,18 +16,7 @@ class SignUpButton extends StatelessWidget {
   });
 
   void _submitForm(BuildContext context) {
-    if (formKey.currentState!.validate()) {
-      context.read<SignupBloc>().add(
-            SignupButtonPressed(
-              email: emailController.text,
-              password: passwordController.text,
-            ),
-          );
-    } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(AppLocalization.of(context)!.invalidInputsMsg)),
-      );
-    }
+      context.read<SignupBloc>().add(const SignupButtonPressed());
   }
 
   @override

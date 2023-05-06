@@ -41,14 +41,6 @@ class _SignupFormState extends State<_SignupForm> {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: Text(state.error)),
           );
-        } else if (state is SignupSuccess) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text(
-                AppLocalization.of(context)!.userRegistered(state.user.email),
-              ),
-            ),
-          );
         }
       },
       child: Container(

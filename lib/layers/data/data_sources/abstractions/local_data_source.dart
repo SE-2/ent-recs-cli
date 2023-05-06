@@ -8,4 +8,8 @@ abstract class LocalDataSource {
   Locale getLocale();
 
   Future<void> setLocale(Locale locale);
+
+  Future<void> storeToken(String token);
+
+  String? getToken();
 }

@@ -1,4 +1,5 @@
 import 'package:get_it/get_it.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:supermedia/common/locale/app_locale_bloc.dart';
 import 'package:supermedia/common/theme/app_theme_bloc.dart';
@@ -30,6 +31,11 @@ void _setupLocalDataSources() {
 void _setupRemoteDataSources() {
   locator.registerLazySingleton<RemoteUserDataSource>(
       () => RemoteUserDataSourceImpl());
+}
+
+void _setupThirdPartyLibraries() {
+  locator.registerLazySingleton<GoogleSignIn>(
+      () => GoogleSignIn());
 }
 
 void _setupRepositories() {
@@ -65,6 +71,7 @@ Future<void> setupLocator() async {
   _setupUseCases();
   _setupBlocs();
   _setupScreens();
+  _setupThirdPartyLibraries();
 
   await locator.allReady();
 }
