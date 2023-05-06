@@ -14,7 +14,7 @@ class CategoryList extends StatefulWidget {
 }
 
 class _CategoryListState extends State<CategoryList> {
-  int currentIndex = 0;
+  int currentIndex = 1;
   @override
   Widget build(BuildContext context) {
     final categories = AppDatabase.categories;
@@ -36,12 +36,12 @@ class _CategoryListState extends State<CategoryList> {
           },
           options: CarouselOptions(
             scrollDirection: Axis.horizontal,
-            // height: 250,
             viewportFraction: 0.45,
-            // aspectRatio: 0.9,
-            initialPage: currentIndex,
+            initialPage: 1,
             disableCenter: false,
             enableInfiniteScroll: false,
+            enlargeCenterPage: true,
+            enlargeStrategy: CenterPageEnlargeStrategy.height,
             scrollPhysics: const BouncingScrollPhysics(),
             onPageChanged: (index, reason) {
               setState(() {
@@ -49,6 +49,9 @@ class _CategoryListState extends State<CategoryList> {
               });
             },
           ),
+        ),
+        const SizedBox(
+          height: 20,
         ),
         DotsIndicator(
           dotsCount: categories.length,

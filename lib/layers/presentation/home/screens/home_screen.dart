@@ -28,7 +28,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
-        child: Column(children: [
+        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           Row(
             children: [
               Padding(
@@ -107,16 +107,29 @@ class _HomeScreenState extends State<HomeScreen> {
           StoryList(
             stories: stories,
           ),
-          const Text(
-            'See what’s good for you!',
-            style: TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-                color: Color(0xff0D253C)),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(0, 0, 0, 20),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: const [
+                Text(
+                  'See what’s good for you!',
+                  style: TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                      color: Color(0xff0D253C)),
+                ),
+              ],
+            ),
           ),
           const CategoryList(),
-          
-          Row(children: [Container(color: Colors.blue,)],)
+          const Padding(
+            padding: EdgeInsets.fromLTRB(24, 22, 0, 0),
+            child: Text(
+              'Recent watched',
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+            ),
+          )
         ]),
       ),
     );
