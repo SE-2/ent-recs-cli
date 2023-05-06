@@ -82,13 +82,9 @@ class _SearchFormState extends State<_SearchForm> {
                   items: List.generate(
                     result.length,
                     (index) {
-                      var media = result[index];
-
+                      var mediaMetadata = result[index];
                       return MediaListItem(
-                        mediaType: media.type,
-                        title: media.title,
-                        imageUrl: media.imageUrl,
-                        properties: media.properties,
+                        mediaMetadata: mediaMetadata,
                       );
                     },
                   ),

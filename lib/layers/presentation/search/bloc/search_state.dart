@@ -12,7 +12,7 @@ class SearchInitial extends SearchState {}
 class SearchLoading extends SearchState {}
 
 class SearchSuccess extends SearchState {
-  final List<MediaListItemModel> result;
+  final List<MediaMetadata> result;
 
   const SearchSuccess({required this.result});
 

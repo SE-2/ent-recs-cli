@@ -1,27 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:supermedia/layers/domain/entities/media_metadata.dart';
 import 'package:supermedia/layers/presentation/shared/widgets/media_list_item_property.dart';
 
 class MediaListItem extends StatelessWidget {
-  final String mediaType;
-  final String title;
-  final String imageUrl;
-  final Map<String, String> properties;
+  final MediaMetadata mediaMetadata;
 
   const MediaListItem({
     Key? key,
-    required this.mediaType,
-    required this.title,
-    required this.imageUrl,
-    required this.properties,
+    required this.mediaMetadata,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final Map<String, Color> mediaTypeColors = {
-      'Book': const Color(0xff514EB6),
-      'Movie': const Color(0xffF50057),
-      'Music': const Color(0xff00C853),
-      'Podcast': const Color(0xffFF9800),
+    final Map<MediaType, Color> mediaTypeColors = {
+      MediaType.book: const Color(0xff514EB6),
+      MediaType.movie: const Color(0xffF50057),
+      MediaType.music: const Color(0xff00C853),
+      MediaType.podcast: const Color(0xffFF9800),
     };
 
     return Container(
@@ -38,7 +33,7 @@ class MediaListItem extends StatelessWidget {
                 _buildMediaTypeBadge(mediaTypeColors),
                 const SizedBox(height: 10),
                 Text(
-                  title,
+                  mediaMetadata.title,
                   style: Theme.of(context).textTheme.headlineSmall,
                 ),
                 const SizedBox(height: 14),
@@ -58,25 +53,25 @@ class MediaListItem extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(16),
         image: DecorationImage(
-          image: NetworkImage(imageUrl),
+          image: NetworkImage(mediaMetadata.imageUrl),
           fit: BoxFit.cover,
         ),
       ),
     );
   }
 
-  Widget _buildMediaTypeBadge(Map<String, Color> mediaTypeColors) {
+  Widget _buildMediaTypeBadge(Map<MediaType, Color> mediaTypeColors) {
     return Container(
       width: 75,
       height: 24,
       decoration: BoxDecoration(
-        color: mediaTypeColors[mediaType],
+        color: mediaTypeColors[mediaMetadata.type],
         borderRadius: BorderRadius.circular(8),
       ),
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
       child: Center(
         child: Text(
-          mediaType.toUpperCase(),
+          mediaMetadata.type.name.toUpperCase(),
           style: const TextStyle(
             fontWeight: FontWeight.bold,
             fontSize: 10,
@@ -88,7 +83,7 @@ class MediaListItem extends StatelessWidget {
   }
 
   List<Widget> _buildMediaProperties() {
-    return properties.entries.map((entry) {
+    return mediaMetadata.properties.entries.map((entry) {
       return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -102,30 +97,28 @@ class MediaListItem extends StatelessWidget {
     }).toList();
   }
 
-  IconData _getIconForProperty(String propertyKey) {
-    switch (propertyKey) {
-      case 'pages':
+  static IconData _getIconForProperty(MediaProperty property) {
+    switch (property) {
+      case MediaProperty.pages:
         return Icons.menu_book;
-      case 'publishDate':
+      case MediaProperty.publishDate:
         return Icons.calendar_today;
-      case 'genre':
+      case MediaProperty.genre:
         return Icons.category;
-      case 'director':
+      case MediaProperty.director:
         return Icons.movie_filter;
-      case 'productionYear':
+      case MediaProperty.productionYear:
         return Icons.date_range;
-      case 'writer':
+      case MediaProperty.writer:
         return Icons.create;
-      case 'duration':
+      case MediaProperty.duration:
         return Icons.timer;
-      case 'style':
+      case MediaProperty.style:
         return Icons.music_note;
-      case 'singer':
+      case MediaProperty.singer:
         return Icons.mic;
-      case 'producer':
+      case MediaProperty.producer:
         return Icons.mic_none;
-      default:
-        throw UnimplementedError('invalid property key.');
     }
   }
 }
