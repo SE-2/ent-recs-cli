@@ -2,19 +2,19 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:supermedia/common/utils/app_localization.dart';
 
-class SearchBar extends StatefulWidget {
+class AppSearchBar extends StatefulWidget {
   final void Function(String) onSearchIconTapped;
 
-  const SearchBar({
+  const AppSearchBar({
     Key? key,
     required this.onSearchIconTapped,
   }) : super(key: key);
 
   @override
-  _SearchBarState createState() => _SearchBarState();
+  AppSearchBarState createState() => AppSearchBarState();
 }
 
-class _SearchBarState extends State<SearchBar> {
+class AppSearchBarState extends State<AppSearchBar> {
   bool _isFocused = false;
   final TextEditingController _textController = TextEditingController();
 

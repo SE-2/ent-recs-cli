@@ -5,7 +5,6 @@ import 'package:supermedia/layers/data/models/media_list_item_model.dart';
 import 'package:supermedia/layers/domain/use_cases/abstractoins/search_use_case.dart';
 
 part 'search_event.dart';
-
 part 'search_state.dart';
 
 class SearchBloc extends Bloc<SearchEvent, SearchState> {

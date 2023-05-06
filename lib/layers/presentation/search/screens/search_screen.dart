@@ -3,10 +3,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:supermedia/common/utils/app_localization.dart';
 import 'package:supermedia/di/app_module.dart';
 import 'package:supermedia/layers/presentation/search/bloc/search_bloc.dart';
+import 'package:supermedia/layers/presentation/shared/widgets/app_search_bar.dart';
 import 'package:supermedia/layers/presentation/shared/widgets/filter_option.dart';
 import 'package:supermedia/layers/presentation/shared/widgets/media_list.dart';
 import 'package:supermedia/layers/presentation/shared/widgets/media_list_item.dart';
-import 'package:supermedia/layers/presentation/shared/widgets/search_bar.dart';
 import 'package:supermedia/layers/presentation/shared/widgets/sort_option.dart';
 
 class SearchScreen extends StatelessWidget {
@@ -17,22 +17,13 @@ class SearchScreen extends StatelessWidget {
     return BlocProvider<SearchBloc>(
       create: (_) => locator<SearchBloc>(),
       child: Scaffold(
-        backgroundColor: Theme
-            .of(context)
-            .colorScheme
-            .background,
+        backgroundColor: Theme.of(context).colorScheme.background,
         appBar: AppBar(
-          backgroundColor: Theme
-              .of(context)
-              .colorScheme
-              .background,
+          backgroundColor: Theme.of(context).colorScheme.background,
           elevation: 0,
           title: Text(
             AppLocalization.of(context)!.searchScreenTitle,
-            style: Theme
-                .of(context)
-                .textTheme
-                .headlineLarge,
+            style: Theme.of(context).textTheme.headlineLarge,
           ),
           centerTitle: true,
         ),
@@ -54,7 +45,7 @@ class _SearchFormState extends State<_SearchForm> {
       padding: const EdgeInsets.fromLTRB(32, 16, 32, 32),
       child: Column(
         children: [
-          SearchBar(
+          AppSearchBar(
             onSearchIconTapped: handleSearchIconTapped,
           ),
           const SizedBox(height: 12),
@@ -82,15 +73,15 @@ class _SearchFormState extends State<_SearchForm> {
               } else if (state is SearchLoading) {
                 return const Expanded(
                     child: Center(
-                      child: CircularProgressIndicator(),
-                    ));
+                  child: CircularProgressIndicator(),
+                ));
               } else if (state is SearchSuccess) {
                 var result = state.result;
 
                 return MediaList(
                   items: List.generate(
                     result.length,
-                        (index) {
+                    (index) {
                       var media = result[index];
 
                       return MediaListItem(

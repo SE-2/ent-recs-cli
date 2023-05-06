@@ -13,8 +13,6 @@ class MediaList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: ListView(children: items)
-    );
+    return Expanded(child: ListView(children: items));
   }
 }
