@@ -12,6 +12,7 @@ import 'package:supermedia/layers/data/repositories/user_repository_impl.dart';
 import 'package:supermedia/layers/domain/repositories/user_repository.dart';
 import 'package:supermedia/layers/domain/use_cases/abstractoins/signup_use_case.dart';
 import 'package:supermedia/layers/domain/use_cases/signup_use_case.dart';
+import 'package:supermedia/layers/presentation/media/screens/show_media_screen.dart';
 import 'package:supermedia/layers/presentation/auth/signup/bloc/signup_bloc.dart';
 import 'package:supermedia/layers/presentation/auth/signup/screens/signup_screen.dart';
 import 'package:supermedia/layers/presentation/settings/screens/settings_screen.dart';
@@ -43,6 +44,7 @@ void _setupUseCases() {
 void _setupScreens() {
   locator.registerLazySingleton<SignupScreen>(() => const SignupScreen());
   locator.registerLazySingleton<SettingsScreen>(() => const SettingsScreen());
+  locator.registerLazySingleton<ShowMediaScreen>(( )=>const ShowMediaScreen());
 }
 
 void _setupBlocs() {
