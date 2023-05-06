@@ -2,7 +2,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class SearchBar extends StatefulWidget {
-  const SearchBar({Key? key}) : super(key: key);
+  final VoidCallback? onSearchIconTapped;
+
+  const SearchBar({
+    Key? key,
+    this.onSearchIconTapped,
+  }) : super(key: key);
 
   @override
   _SearchBarState createState() => _SearchBarState();
@@ -10,6 +15,13 @@ class SearchBar extends StatefulWidget {
 
 class _SearchBarState extends State<SearchBar> {
   bool _isFocused = false;
+  final _textController = TextEditingController();
+
+  @override
+  void dispose() {
+    _textController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +40,7 @@ class _SearchBarState extends State<SearchBar> {
         padding: const EdgeInsets.symmetric(horizontal: 16),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(24),
-          color: Colors.white,
+          color: Theme.of(context).colorScheme.secondary,
           border: Border.all(
             color: _isFocused
                 ? Theme.of(context).colorScheme.primary
@@ -37,29 +49,40 @@ class _SearchBarState extends State<SearchBar> {
         ),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
-          children: const [
-            Icon(
-              CupertinoIcons.search,
-              size: 20,
+          children: [
+            InkWell(
+              onTap: widget.onSearchIconTapped,
+              child: const Icon(
+                CupertinoIcons.search,
+                size: 20,
+              ),
             ),
-            SizedBox(width: 8),
+            const SizedBox(width: 8),
             Expanded(
               child: TextField(
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   border: InputBorder.none,
                   hintText: 'Search',
                 ),
-                style: TextStyle(fontSize: 16),
+                style: const TextStyle(fontSize: 16),
+                controller: _textController,
               ),
             ),
-            SizedBox(width: 8),
-            Icon(
-              CupertinoIcons.clear_thick,
-              size: 20,
+            const SizedBox(width: 8),
+            InkWell(
+              onTap: handleDeleteIconTapped,
+              child: const Icon(
+                CupertinoIcons.clear_thick,
+                size: 20,
+              ),
             ),
           ],
         ),
       ),
     );
+  }
+
+  void handleDeleteIconTapped() {
+    _textController.clear();
   }
 }

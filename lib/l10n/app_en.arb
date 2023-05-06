@@ -19,5 +19,8 @@
   "dark": "Dark",
   "language": "Language",
   "english": "English",
-  "persian": "Persian"
+  "persian": "Persian",
+  "searchScreenTitle": "Search Among all media",
+  "sort": "Sort",
+  "filter": "Filter"
 }

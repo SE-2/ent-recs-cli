@@ -19,5 +19,8 @@
   "dark": "شب",
   "language": "زبان",
   "english": "انگلیسی",
-  "persian": "فارسی"
+  "persian": "فارسی",
+  "searchScreenTitle": "جستجو در رسانه ها",
+  "sort": "مرتب سازی",
+  "filter": "فیلتر"
 }

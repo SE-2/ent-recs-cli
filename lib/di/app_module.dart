@@ -10,10 +10,14 @@ import 'package:supermedia/layers/data/http_client/dio_http_client.dart';
 import 'package:supermedia/layers/data/http_client/http_client.dart';
 import 'package:supermedia/layers/data/repositories/user_repository_impl.dart';
 import 'package:supermedia/layers/domain/repositories/user_repository.dart';
+import 'package:supermedia/layers/domain/use_cases/abstractoins/search_use_case.dart';
 import 'package:supermedia/layers/domain/use_cases/abstractoins/signup_use_case.dart';
+import 'package:supermedia/layers/domain/use_cases/implementations/search_use_case_impl.dart';
 import 'package:supermedia/layers/domain/use_cases/signup_use_case.dart';
 import 'package:supermedia/layers/presentation/auth/signup/bloc/signup_bloc.dart';
 import 'package:supermedia/layers/presentation/auth/signup/screens/signup_screen.dart';
+import 'package:supermedia/layers/presentation/search/bloc/search_bloc.dart';
+import 'package:supermedia/layers/presentation/search/screens/search_screen.dart';
 import 'package:supermedia/layers/presentation/settings/screens/settings_screen.dart';
 
 final locator = GetIt.instance;
@@ -38,17 +42,20 @@ void _setupRepositories() {
 
 void _setupUseCases() {
   locator.registerLazySingleton<SignUpUseCase>(() => SignUpUseCaseImpl());
+  locator.registerLazySingleton<SearchUseCase>(() => SearchUseCaseImpl());
 }
 
 void _setupScreens() {
   locator.registerLazySingleton<SignupScreen>(() => const SignupScreen());
   locator.registerLazySingleton<SettingsScreen>(() => const SettingsScreen());
+  locator.registerLazySingleton<SearchScreen>(() => const SearchScreen());
 }
 
 void _setupBlocs() {
-  locator.registerFactory<SignupBloc>(() => SignupBloc());
   locator.registerFactory<AppThemeBloc>(() => AppThemeBloc());
   locator.registerFactory<AppLocaleBloc>(() => AppLocaleBloc());
+  locator.registerFactory<SignupBloc>(() => SignupBloc());
+  locator.registerFactory<SearchBloc>(() => SearchBloc());
 }
 
 void _setupSharedPreferences() {
