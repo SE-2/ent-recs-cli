@@ -7,9 +7,9 @@ class AppTheme {
     colorScheme: const ColorScheme.light(
       primary: Color(0xff514EB6),
       onPrimary: Colors.white,
-      secondary: Colors.orange,
-      onSecondary: Colors.black,
-      background: Colors.white,
+      secondary: Color(0xFFf6f8fe),
+      onSecondary: Color(0xFFf6f8fe),
+      background: Color(0xFFFEFEFE),
       surface: Colors.grey,
       error: Colors.red,
     ),
@@ -82,11 +82,11 @@ class AppTheme {
 
   static ThemeData darkTheme = ThemeData.dark().copyWith(
     colorScheme: const ColorScheme.dark(
-      primary: Colors.blue,
+      primary: Color(0xFF514EB6),
       onPrimary: Colors.white,
-      secondary: Colors.orange,
-      onSecondary: Colors.black,
-      background: Colors.black,
+      secondary: Color(0xFF171725),
+      onSecondary: Color(0xFF282837),
+      background: Color(0xFF171725),
       surface: Colors.grey,
       error: Colors.red,
     ),
@@ -125,6 +125,7 @@ class AppTheme {
         fontFamily: defaultFontFamily,
         fontSize: 24.0,
         fontWeight: FontWeight.bold,
+        color: Colors.white
       ),
       headlineMedium: TextStyle(
         fontFamily: defaultFontFamily,
