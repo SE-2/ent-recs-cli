@@ -1,23 +1,25 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:supermedia/gen/assets.gen.dart';
+import 'package:supermedia/layers/presentation/shared/widgets/media_list_item_property.dart';
+
+enum MediaListItemPropertyKey {
+  pages,
+  publishDate,
+  genre,
+}
 
 class MediaListItem extends StatelessWidget {
   final String mediaType;
   final String title;
-  final String? pages;
-  final String? publishDate;
-  final String? genre;
   final String imageUrl;
+  final Map<MediaListItemPropertyKey, String> properties;
 
   const MediaListItem({
     Key? key,
     required this.mediaType,
     required this.title,
-    this.pages,
-    this.publishDate,
-    this.genre,
     required this.imageUrl,
+    required this.properties,
   }) : super(key: key);
 
   @override
@@ -34,87 +36,87 @@ class MediaListItem extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Container(
-            width: 119.52,
-            height: 160,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(16),
-              image: DecorationImage(
-                image: NetworkImage(imageUrl),
-                fit: BoxFit.cover,
-              ),
-            ),
-          ),
+          _buildMediaImage(),
           const SizedBox(width: 16),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Container(
-                  width: 65,
-                  height: 24,
-                  decoration: BoxDecoration(
-                    color: mediaTypeColors[mediaType],
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
-                  child: Center(
-                    child: Text(
-                      mediaType.toUpperCase(),
-                      style: const TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 10,
-                        color: Colors.white,
-                      ),
-                    ),
-                  ),
-                ),
+                _buildMediaTypeBadge(mediaTypeColors),
                 const SizedBox(height: 10),
                 Text(
                   title,
                   style: Theme.of(context).textTheme.headlineSmall,
                 ),
                 const SizedBox(height: 14),
-                if (pages != null)
-                  Row(
-                    children: [
-                      Assets.icons.paper.svg(height: 16, width: 16),
-                      const SizedBox(width: 8),
-                      Text(
-                        pages!,
-                        style: Theme.of(context).textTheme.titleSmall,
-                      ),
-                    ],
-                  ),
-                if (publishDate != null) const SizedBox(height: 10),
-                Row(
-                  children: [
-                    Assets.icons.calendar.svg(height: 16, width: 16),
-
-                    const SizedBox(width: 8),
-                    Text(
-                      publishDate!,
-                      style: Theme.of(context).textTheme.titleSmall,
-                    ),
-                  ],
-                ),
-                if (genre != null) const SizedBox(height: 10),
-                Row(
-                  children: [
-                    Assets.icons.film.svg(height: 16, width: 16),
-                    const SizedBox(width: 8),
-                    Text(
-                      genre!,
-                      style: Theme.of(context).textTheme.titleSmall,
-                    ),
-                  ],
-                ),
+                ..._buildMediaProperties(),
               ],
             ),
           ),
         ],
       ),
     );
+  }
+
+  Widget _buildMediaImage() {
+    return Container(
+      width: 119.52,
+      height: 160,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(16),
+        image: DecorationImage(
+          image: NetworkImage(imageUrl),
+          fit: BoxFit.cover,
+        ),
+      ),
+    );
+  }
+
+  Widget _buildMediaTypeBadge(Map<String, Color> mediaTypeColors) {
+    return Container(
+      width: 65,
+      height: 24,
+      decoration: BoxDecoration(
+        color: mediaTypeColors[mediaType],
+        borderRadius: BorderRadius.circular(8),
+      ),
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+      child: Center(
+        child: Text(
+          mediaType.toUpperCase(),
+          style: const TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 10,
+            color: Colors.white,
+          ),
+        ),
+      ),
+    );
+  }
+
+  List<Widget> _buildMediaProperties() {
+    return properties.entries.map((entry) {
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          MediaListItemProperty(
+            iconGen: _getIconForProperty(entry.key),
+            value: entry.value,
+          ),
+          const SizedBox(height: 10),
+        ],
+      );
+    }).toList();
+  }
+
+  SvgGenImage _getIconForProperty(MediaListItemPropertyKey property) {
+    switch (property) {
+      case MediaListItemPropertyKey.pages:
+        return Assets.icons.paper;
+      case MediaListItemPropertyKey.publishDate:
+        return Assets.icons.calendar;
+      case MediaListItemPropertyKey.genre:
+        return Assets.icons.film;
+    }
   }
 }
