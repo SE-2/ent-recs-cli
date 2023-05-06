@@ -17,13 +17,22 @@ class SearchScreen extends StatelessWidget {
     return BlocProvider<SearchBloc>(
       create: (_) => locator<SearchBloc>(),
       child: Scaffold(
-        backgroundColor: Theme.of(context).colorScheme.background,
+        backgroundColor: Theme
+            .of(context)
+            .colorScheme
+            .background,
         appBar: AppBar(
-          backgroundColor: Theme.of(context).colorScheme.background,
+          backgroundColor: Theme
+              .of(context)
+              .colorScheme
+              .background,
           elevation: 0,
           title: Text(
             AppLocalization.of(context)!.searchScreenTitle,
-            style: Theme.of(context).textTheme.headlineLarge,
+            style: Theme
+                .of(context)
+                .textTheme
+                .headlineLarge,
           ),
           centerTitle: true,
         ),
@@ -73,23 +82,24 @@ class _SearchFormState extends State<_SearchForm> {
               } else if (state is SearchLoading) {
                 return const Expanded(
                     child: Center(
-                  child: CircularProgressIndicator(),
-                ));
+                      child: CircularProgressIndicator(),
+                    ));
               } else if (state is SearchSuccess) {
+                var result = state.result;
+
                 return MediaList(
                   items: List.generate(
-                    10,
-                    (index) => MediaListItem(
-                      mediaType: 'Book',
-                      title: 'Book Title ${index + 1}',
-                      imageUrl:
-                          'https://www.iranketab.ir/Images/ProductImages/ca03ef61c7654a0a910846e5dc4afd09.jpg',
-                      properties: const {
-                        MediaListItemPropertyKey.pages: '100 Pages',
-                        MediaListItemPropertyKey.publishDate: '2020',
-                        MediaListItemPropertyKey.genre: 'Fiction',
-                      },
-                    ),
+                    result.length,
+                        (index) {
+                      var media = result[index];
+
+                      return MediaListItem(
+                        mediaType: media.type,
+                        title: media.title,
+                        imageUrl: media.imageUrl,
+                        properties: media.properties,
+                      );
+                    },
                   ),
                 );
               } else {
@@ -110,7 +120,7 @@ class _SearchFormState extends State<_SearchForm> {
     // TODO: Implement filtering logic
   }
 
-  void handleSearchIconTapped() {
-    context.read<SearchBloc>().add(const SearchButtonPressed(query: ''));
+  void handleSearchIconTapped(String query) {
+    context.read<SearchBloc>().add(SearchButtonPressed(query: query));
   }
 }

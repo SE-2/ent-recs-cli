@@ -1,18 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:supermedia/gen/assets.gen.dart';
 import 'package:supermedia/layers/presentation/shared/widgets/media_list_item_property.dart';
-
-enum MediaListItemPropertyKey {
-  pages,
-  publishDate,
-  genre,
-}
 
 class MediaListItem extends StatelessWidget {
   final String mediaType;
   final String title;
   final String imageUrl;
-  final Map<MediaListItemPropertyKey, String> properties;
+  final Map<String, String> properties;
 
   const MediaListItem({
     Key? key,
@@ -74,7 +67,7 @@ class MediaListItem extends StatelessWidget {
 
   Widget _buildMediaTypeBadge(Map<String, Color> mediaTypeColors) {
     return Container(
-      width: 65,
+      width: 75,
       height: 24,
       decoration: BoxDecoration(
         color: mediaTypeColors[mediaType],
@@ -109,14 +102,30 @@ class MediaListItem extends StatelessWidget {
     }).toList();
   }
 
-  SvgGenImage _getIconForProperty(MediaListItemPropertyKey property) {
-    switch (property) {
-      case MediaListItemPropertyKey.pages:
-        return Assets.icons.paper;
-      case MediaListItemPropertyKey.publishDate:
-        return Assets.icons.calendar;
-      case MediaListItemPropertyKey.genre:
-        return Assets.icons.film;
+  IconData _getIconForProperty(String propertyKey) {
+    switch (propertyKey) {
+      case 'pages':
+        return Icons.menu_book;
+      case 'publishDate':
+        return Icons.calendar_today;
+      case 'genre':
+        return Icons.category;
+      case 'director':
+        return Icons.movie_filter;
+      case 'productionYear':
+        return Icons.date_range;
+      case 'writer':
+        return Icons.create;
+      case 'duration':
+        return Icons.timer;
+      case 'style':
+        return Icons.music_note;
+      case 'singer':
+        return Icons.mic;
+      case 'producer':
+        return Icons.mic_none;
+      default:
+        throw UnimplementedError('invalid property key.');
     }
   }
 }

@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:supermedia/gen/assets.gen.dart';
 
 class MediaListItemProperty extends StatelessWidget {
-  final SvgGenImage iconGen;
+  final IconData iconGen;
   final String value;
 
   const MediaListItemProperty(
@@ -12,7 +11,10 @@ class MediaListItemProperty extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        iconGen.svg(height: 16, width: 16),
+        Icon(
+          iconGen,
+          size: 16,
+        ),
         const SizedBox(width: 8),
         Text(
           value,

@@ -1,12 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:supermedia/common/utils/app_localization.dart';
 
 class SearchBar extends StatefulWidget {
-  final VoidCallback? onSearchIconTapped;
+  final void Function(String) onSearchIconTapped;
 
   const SearchBar({
     Key? key,
-    this.onSearchIconTapped,
+    required this.onSearchIconTapped,
   }) : super(key: key);
 
   @override
@@ -15,7 +16,7 @@ class SearchBar extends StatefulWidget {
 
 class _SearchBarState extends State<SearchBar> {
   bool _isFocused = false;
-  final _textController = TextEditingController();
+  final TextEditingController _textController = TextEditingController();
 
   @override
   void dispose() {
@@ -28,61 +29,72 @@ class _SearchBarState extends State<SearchBar> {
     final screenWidth = MediaQuery.of(context).size.width;
     final double containerWidth = screenWidth;
 
-    return Focus(
-      onFocusChange: (isFocused) {
-        setState(() {
-          _isFocused = isFocused;
-        });
-      },
-      child: Container(
-        height: 52,
-        width: containerWidth,
-        padding: const EdgeInsets.symmetric(horizontal: 16),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(24),
-          color: Theme.of(context).colorScheme.secondary,
-          border: Border.all(
-            color: _isFocused
-                ? Theme.of(context).colorScheme.primary
-                : Theme.of(context).colorScheme.onSecondary,
-          ),
-        ),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            InkWell(
-              onTap: widget.onSearchIconTapped,
-              child: const Icon(
-                CupertinoIcons.search,
-                size: 20,
-              ),
-            ),
-            const SizedBox(width: 8),
-            Expanded(
-              child: TextField(
-                decoration: const InputDecoration(
-                  border: InputBorder.none,
-                  hintText: 'Search',
-                ),
-                style: const TextStyle(fontSize: 16),
-                controller: _textController,
-              ),
-            ),
-            const SizedBox(width: 8),
-            InkWell(
-              onTap: handleDeleteIconTapped,
-              child: const Icon(
-                CupertinoIcons.clear_thick,
-                size: 20,
-              ),
-            ),
-          ],
+    return Container(
+      height: 52,
+      width: containerWidth,
+      padding: const EdgeInsets.symmetric(horizontal: 16),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(24),
+        color: Theme.of(context).colorScheme.secondary,
+        border: Border.all(
+          color: _isFocused
+              ? Theme.of(context).colorScheme.primary
+              : Theme.of(context).colorScheme.onSecondary,
         ),
       ),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          InkWell(
+            onTap: () {
+              widget.onSearchIconTapped(_textController.text);
+            },
+            child: const Icon(
+              CupertinoIcons.search,
+              size: 20,
+            ),
+          ),
+          const SizedBox(width: 8),
+          Expanded(
+            child: TextField(
+              decoration: InputDecoration(
+                border: InputBorder.none,
+                hintText: AppLocalization.of(context)!.search,
+              ),
+              style: const TextStyle(fontSize: 16),
+              controller: _textController,
+              onChanged: (value) {
+                setState(() {
+                  _isFocused = value.isNotEmpty;
+                });
+              },
+              onTap: () {
+                setState(() {
+                  _isFocused = true;
+                });
+              },
+              onSubmitted: (value) {
+                setState(() {
+                  _isFocused = false;
+                });
+              },
+            ),
+          ),
+          const SizedBox(width: 8),
+          InkWell(
+            onTap: () {
+              _textController.clear();
+              setState(() {
+                _isFocused = false;
+              });
+            },
+            child: const Icon(
+              CupertinoIcons.clear_thick,
+              size: 20,
+            ),
+          ),
+        ],
+      ),
     );
-  }
-
-  void handleDeleteIconTapped() {
-    _textController.clear();
   }
 }

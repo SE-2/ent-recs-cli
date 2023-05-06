@@ -1,6 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:supermedia/di/app_module.dart';
+import 'package:supermedia/layers/data/models/media_list_item_model.dart';
 import 'package:supermedia/layers/domain/use_cases/abstractoins/search_use_case.dart';
 
 part 'search_event.dart';
