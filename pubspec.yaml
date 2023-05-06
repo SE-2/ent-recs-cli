@@ -49,6 +49,7 @@ dependencies:
   dotted_border: ^2.0.0+3
   carousel_indicator: ^1.0.6
   dots_indicator: ^2.1.0
+  google_fonts: ^4.0.4
 
 dev_dependencies:
   flutter_test:
@@ -82,6 +83,8 @@ flutter:
     - assets/images/icons/
     - assets/images/stories/
     - assets/images/categories/
+    - assets/images/item/
+    - assets/images/posts/
 
 
 

@@ -1,8 +1,3 @@
-import 'package:flutter_bloc/flutter_bloc.dart';
-
-import '../../auth/signup/bloc/signup_bloc.dart';
-import 'home_event.dart';
-
 // class HomeBloc extends Bloc<HomeEvent, SignupState> {
 //   // final UseCase _signupUseCase = locator<SignUpUseCase>();
 

@@ -1,9 +1,5 @@
-import 'package:carousel_indicator/carousel_indicator.dart';
 import 'package:custom_sliding_segmented_control/custom_sliding_segmented_control.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:supermedia/layers/presentation/home/bloc/home_bloc.dart';
-import 'package:supermedia/layers/presentation/home/bloc/home_event.dart';
 import 'package:supermedia/layers/presentation/home/widgets/category_list.dart';
 import 'package:supermedia/layers/presentation/home/widgets/story_list.dart';
 import 'package:supermedia/layers/presentation/home/widgets/data.dart';

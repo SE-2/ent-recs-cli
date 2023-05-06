@@ -63,6 +63,7 @@ class CarouselSlider extends StatefulWidget {
         super(key: key);
 
   @override
+  // ignore: no_logic_in_create_state
   CarouselSliderState createState() => CarouselSliderState(_carouselController);
 }
 
@@ -82,8 +83,8 @@ class CarouselSliderState extends State<CarouselSlider>
 
   CarouselSliderState(this.carouselController);
 
-  void changeMode(CarouselPageChangedReason _mode) {
-    mode = _mode;
+  void changeMode(CarouselPageChangedReason mode) {
+    mode = mode;
   }
 
   @override
@@ -108,7 +109,7 @@ class CarouselSliderState extends State<CarouselSlider>
   void initState() {
     super.initState();
     carouselState =
-        CarouselState(this.options, clearTimer, resumeTimer, this.changeMode);
+        CarouselState(options, clearTimer, resumeTimer, changeMode);
 
     carouselState!.itemCount = widget.itemCount;
     carouselController.state = carouselState;
@@ -170,9 +171,7 @@ class CarouselSliderState extends State<CarouselSlider>
   }
 
   void resumeTimer() {
-    if (timer == null) {
-      timer = getTimer();
-    }
+    timer ??= getTimer();
   }
 
   void handleAutoPlay() {
@@ -189,7 +188,7 @@ class CarouselSliderState extends State<CarouselSlider>
   Widget getGestureWrapper(Widget child) {
     Widget wrapper;
     if (widget.options.height != null) {
-      wrapper = Container(height: widget.options.height, child: child);
+      wrapper = SizedBox(height: widget.options.height, child: child);
     } else {
       wrapper =
           AspectRatio(aspectRatio: widget.options.aspectRatio, child: child);
@@ -258,7 +257,7 @@ class CarouselSliderState extends State<CarouselSlider>
       double? scale,
       required double itemOffset}) {
     if (widget.options.enlargeStrategy == CenterPageEnlargeStrategy.height) {
-      return SizedBox(child: child, width: width, height: height);
+      return SizedBox(width: width, height: height, child: child);
     }
     if (widget.options.enlargeStrategy == CenterPageEnlargeStrategy.zoom) {
       late Alignment alignment;
@@ -268,11 +267,11 @@ class CarouselSliderState extends State<CarouselSlider>
       } else {
         alignment = horizontal ? Alignment.centerLeft : Alignment.topCenter;
       }
-      return Transform.scale(child: child, scale: scale!, alignment: alignment);
+      return Transform.scale(scale: scale!, alignment: alignment, child: child);
     }
     return Transform.scale(
         scale: scale!,
-        child: Container(child: child, width: width, height: height));
+        child: SizedBox(width: width, height: height, child: child));
   }
 
   void onStart() {
@@ -332,7 +331,7 @@ class CarouselSliderState extends State<CarouselSlider>
         return AnimatedBuilder(
           animation: carouselState!.pageController!,
           child: (widget.items != null)
-              ? (widget.items!.length > 0 ? widget.items![index] : Container())
+              ? (widget.items!.isNotEmpty ? widget.items![index] : Container())
               : widget.itemBuilder!(context, index, idx),
           builder: (BuildContext context, child) {
             double distortionValue = 1.0;
@@ -347,15 +346,15 @@ class CarouselSliderState extends State<CarouselSlider>
               if (position != null &&
                   position.hasPixels &&
                   position.hasContentDimensions) {
-                var _page = carouselState?.pageController?.page;
-                if (_page != null) {
-                  itemOffset = _page - idx;
+                var page = carouselState?.pageController?.page;
+                if (page != null) {
+                  itemOffset = page - idx;
                 }
               } else {
                 BuildContext storageContext = carouselState!
                     .pageController!.position.context.storageContext;
                 final double? previousSavedPosition =
-                    PageStorage.of(storageContext)?.readState(storageContext)
+                    PageStorage.of(storageContext).readState(storageContext)
                         as double?;
                 if (previousSavedPosition != null) {
                   itemOffset = previousSavedPosition - idx.toDouble();

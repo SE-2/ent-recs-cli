@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'data.dart';
 
@@ -21,19 +20,18 @@ class CategoryItem extends StatefulWidget {
 class _CategoryItemState extends State<CategoryItem> {
   @override
   Widget build(BuildContext context) {
-    return Positioned.fill(
-      child: Container(
-        margin: const EdgeInsets.all(8),
-        decoration: BoxDecoration(
+    return Container(
+      margin: const EdgeInsets.all(8),
+      decoration: BoxDecoration(
+        color: Colors.black,
+        borderRadius: BorderRadius.circular(32),
+      ),
+      child: FittedBox(
+        fit: BoxFit.fill,
+        child: ClipRRect(
           borderRadius: BorderRadius.circular(32),
-        ),
-        child: FittedBox(
-          fit: BoxFit.fill,
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(32),
-            child: Image.asset(
-              'assets/images/categories/${widget.category.imageFileName}',
-            ),
+          child: Image.asset(
+            'assets/images/categories/${widget.category.imageFileName}',
           ),
         ),
       ),
