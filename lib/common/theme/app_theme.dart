@@ -64,7 +64,7 @@ class AppTheme {
       ),
       titleLarge: TextStyle(
         fontFamily: defaultFontFamily,
-        fontSize: 16.0,
+        fontSize: 14.0,
         fontWeight: FontWeight.bold,
       ),
       titleMedium: TextStyle(
@@ -139,17 +139,17 @@ class AppTheme {
       ),
       titleLarge: TextStyle(
         fontFamily: defaultFontFamily,
-        fontSize: 18.0,
+        fontSize: 14.0,
         fontWeight: FontWeight.bold,
       ),
       titleMedium: TextStyle(
         fontFamily: defaultFontFamily,
-        fontSize: 16.0,
+        fontSize: 14.0,
         color: Colors.white70,
       ),
       titleSmall: TextStyle(
         fontFamily: defaultFontFamily,
-        fontSize: 14.0,
+        fontSize: 12.0,
         color: Colors.white70,
       ),
     ),
