@@ -5,7 +5,8 @@ class MediaListItemProperty extends StatelessWidget {
   final String value;
 
   const MediaListItemProperty(
-      {super.key, required this.iconGen, required this.value});
+      {Key? key, required this.iconGen, required this.value})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -16,9 +17,13 @@ class MediaListItemProperty extends StatelessWidget {
           size: 16,
         ),
         const SizedBox(width: 8),
-        Text(
-          value,
-          style: Theme.of(context).textTheme.titleSmall,
+        Flexible(
+          flex: 1,
+          child: Text(
+            value,
+            overflow: TextOverflow.ellipsis,
+            style: Theme.of(context).textTheme.labelMedium,
+          ),
         ),
       ],
     );

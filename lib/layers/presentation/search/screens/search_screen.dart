@@ -21,9 +21,12 @@ class SearchScreen extends StatelessWidget {
         appBar: AppBar(
           backgroundColor: Theme.of(context).colorScheme.background,
           elevation: 0,
-          title: Text(
-            AppLocalization.of(context)!.searchScreenTitle,
-            style: Theme.of(context).textTheme.headlineLarge,
+          title: Padding(
+            padding: const EdgeInsets.fromLTRB(0, 12, 0, 0),
+            child: Text(
+              AppLocalization.of(context)!.searchScreenTitle,
+              style: Theme.of(context).textTheme.headlineSmall,
+            ),
           ),
           centerTitle: true,
         ),

@@ -37,7 +37,7 @@ class MyApp extends StatelessWidget {
                 theme: AppTheme.lightTheme,
                 darkTheme: AppTheme.darkTheme,
                 themeMode: themeMode,
-                home: const SearchScreen(),
+                home: locator<SearchScreen>(),
               );
             },
           );

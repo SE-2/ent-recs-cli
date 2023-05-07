@@ -15,15 +15,16 @@ class SortOption extends StatelessWidget {
     return GestureDetector(
       onTap: onSortOptionTapped,
       child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Icon(
+           const Icon(
             CupertinoIcons.sort_down,
-            size: 24,
+            size: 20,
           ),
-          const SizedBox(width: 4),
+          const SizedBox(width: 2),
           Text(
             AppLocalization.of(context)!.sort,
-            style: Theme.of(context).textTheme.titleMedium,
+            style: Theme.of(context).textTheme.titleSmall,
           ),
         ],
       ),

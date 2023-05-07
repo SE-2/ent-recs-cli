@@ -10,6 +10,7 @@ class FilterOption extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const Icon(
           CupertinoIcons.slider_horizontal_3,
@@ -18,7 +19,7 @@ class FilterOption extends StatelessWidget {
         const SizedBox(width: 4),
         Text(
           AppLocalization.of(context)!.filter,
-          style: Theme.of(context).textTheme.titleMedium,
+          style: Theme.of(context).textTheme.titleSmall,
         ),
       ],
     );

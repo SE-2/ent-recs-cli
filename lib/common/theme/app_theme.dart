@@ -16,67 +16,65 @@ class AppTheme {
     textTheme: const TextTheme(
       displayLarge: TextStyle(
         fontFamily: defaultFontFamily,
-        fontSize: 32.0,
-        fontWeight: FontWeight.bold,
       ),
       displayMedium: TextStyle(
         fontFamily: defaultFontFamily,
-        fontSize: 24.0,
-        fontWeight: FontWeight.bold,
       ),
       displaySmall: TextStyle(
         fontFamily: defaultFontFamily,
-        fontSize: 20.0,
-        fontWeight: FontWeight.bold,
       ),
       bodyLarge: TextStyle(
         fontFamily: defaultFontFamily,
-        fontSize: 18.0,
         color: Colors.black54,
       ),
       bodyMedium: TextStyle(
         fontFamily: defaultFontFamily,
-        fontSize: 16.0,
         color: Colors.black,
       ),
       bodySmall: TextStyle(
         fontFamily: defaultFontFamily,
-        fontSize: 14.0,
         color: Colors.grey,
       ),
       headlineLarge: TextStyle(
         fontFamily: defaultFontFamily,
-        fontSize: 24.0,
-        fontWeight: FontWeight.bold,
         color: Colors.black,
       ),
       headlineMedium: TextStyle(
         fontFamily: defaultFontFamily,
-        fontSize: 20.0,
-        fontWeight: FontWeight.bold,
         color: Colors.black,
       ),
       headlineSmall: TextStyle(
         fontFamily: defaultFontFamily,
-        fontSize: 16.0,
+        fontSize: 18,
         fontWeight: FontWeight.bold,
         color: Colors.black,
       ),
       titleLarge: TextStyle(
         fontFamily: defaultFontFamily,
-        fontSize: 14.0,
-        fontWeight: FontWeight.bold,
       ),
       titleMedium: TextStyle(
         fontFamily: defaultFontFamily,
-        fontSize: 14.0,
+        fontSize: 16,
         color: Colors.black87,
       ),
       titleSmall: TextStyle(
-          fontFamily: defaultFontFamily,
-          fontSize: 12.0,
-          color: Colors.black54,
-          fontWeight: FontWeight.w500),
+        fontFamily: defaultFontFamily,
+        fontSize: 14,
+        color: Colors.black54,
+      ),
+      labelLarge: TextStyle(
+        fontFamily: defaultFontFamily,
+        color: Colors.white,
+      ),
+      labelMedium: TextStyle(
+        fontFamily: defaultFontFamily,
+        color: Colors.black54,
+      ),
+      labelSmall: TextStyle(
+        fontFamily: defaultFontFamily,
+        color: Colors.white,
+        fontSize: 10,
+      ),
     ),
   );
 
@@ -93,64 +91,61 @@ class AppTheme {
     textTheme: const TextTheme(
       displayLarge: TextStyle(
         fontFamily: defaultFontFamily,
-        fontSize: 32.0,
-        fontWeight: FontWeight.bold,
       ),
       displayMedium: TextStyle(
         fontFamily: defaultFontFamily,
-        fontSize: 24.0,
-        fontWeight: FontWeight.bold,
       ),
       displaySmall: TextStyle(
         fontFamily: defaultFontFamily,
-        fontSize: 20.0,
-        fontWeight: FontWeight.bold,
       ),
       bodyLarge: TextStyle(
         fontFamily: defaultFontFamily,
-        fontSize: 18.0,
         color: Colors.white70,
       ),
       bodyMedium: TextStyle(
         fontFamily: defaultFontFamily,
-        fontSize: 16.0,
         color: Colors.white,
       ),
       bodySmall: TextStyle(
         fontFamily: defaultFontFamily,
-        fontSize: 14.0,
         color: Colors.grey,
       ),
       headlineLarge: TextStyle(
         fontFamily: defaultFontFamily,
-        fontSize: 24.0,
-        fontWeight: FontWeight.bold,
-        color: Colors.white
+        color: Colors.white,
       ),
       headlineMedium: TextStyle(
         fontFamily: defaultFontFamily,
-        fontSize: 20.0,
-        fontWeight: FontWeight.bold,
       ),
       headlineSmall: TextStyle(
         fontFamily: defaultFontFamily,
-        fontSize: 16.0,
-        fontWeight: FontWeight.bold,
+        fontSize: 18,
       ),
       titleLarge: TextStyle(
         fontFamily: defaultFontFamily,
-        fontSize: 14.0,
-        fontWeight: FontWeight.bold,
       ),
       titleMedium: TextStyle(
         fontFamily: defaultFontFamily,
-        fontSize: 14.0,
-        color: Colors.white70,
+        color: Colors.white,
+        fontSize: 16,
       ),
       titleSmall: TextStyle(
         fontFamily: defaultFontFamily,
-        fontSize: 12.0,
+        fontSize: 14,
+        color: Colors.white70
+      ),
+      labelLarge: TextStyle(
+        fontFamily: defaultFontFamily,
+        color: Colors.white,
+      ),
+      labelMedium: TextStyle(
+        fontFamily: defaultFontFamily,
         color: Colors.white70,
+      ),
+      labelSmall: TextStyle(
+        fontFamily: defaultFontFamily,
+        color: Colors.white,
+        fontSize: 10,
       ),
     ),
   );

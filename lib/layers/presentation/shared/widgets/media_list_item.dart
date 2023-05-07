@@ -30,11 +30,13 @@ class MediaListItem extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                _buildMediaTypeBadge(mediaTypeColors),
+                _buildMediaTypeBadge(mediaTypeColors, context),
                 const SizedBox(height: 10),
                 Text(
                   mediaMetadata.title,
-                  style: Theme.of(context).textTheme.headlineSmall,
+                  style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                        fontWeight: FontWeight.bold,
+                      ),
                 ),
                 const SizedBox(height: 14),
                 ..._buildMediaProperties(),
@@ -60,7 +62,8 @@ class MediaListItem extends StatelessWidget {
     );
   }
 
-  Widget _buildMediaTypeBadge(Map<MediaType, Color> mediaTypeColors) {
+  Widget _buildMediaTypeBadge(
+      Map<MediaType, Color> mediaTypeColors, BuildContext context) {
     return Container(
       width: 75,
       height: 24,
@@ -68,33 +71,37 @@ class MediaListItem extends StatelessWidget {
         color: mediaTypeColors[mediaMetadata.type],
         borderRadius: BorderRadius.circular(8),
       ),
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+      // padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
       child: Center(
         child: Text(
           mediaMetadata.type.name.toUpperCase(),
-          style: const TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: 10,
-            color: Colors.white,
-          ),
+          style: Theme.of(context)
+              .textTheme
+              .labelSmall!
+              .copyWith(fontWeight: FontWeight.bold),
         ),
       ),
     );
   }
 
   List<Widget> _buildMediaProperties() {
-    return mediaMetadata.properties.entries.map((entry) {
-      return Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          MediaListItemProperty(
-            iconGen: _getIconForProperty(entry.key),
-            value: entry.value,
-          ),
-          const SizedBox(height: 10),
-        ],
-      );
-    }).toList();
+    return List.generate(
+      mediaMetadata.properties.entries.length,
+          (index) {
+        final entry = mediaMetadata.properties.entries.elementAt(index);
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            MediaListItemProperty(
+              iconGen: _getIconForProperty(entry.key),
+              value: entry.value,
+            ),
+            if (index != mediaMetadata.properties.entries.length - 1)
+              const SizedBox(height: 8),
+          ],
+        );
+      },
+    );
   }
 
   static IconData _getIconForProperty(MediaProperty property) {
