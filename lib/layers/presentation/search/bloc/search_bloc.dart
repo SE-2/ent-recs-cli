@@ -17,6 +17,9 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
         await Future.delayed(const Duration(seconds: 1));
         try {
           final result = await _searchUseCase.search(event.query);
+
+          // TODO: handle empty result
+
           emit(SearchSuccess(result: result));
         } catch (e) {
           emit(SearchFailure(error: e.toString()));
