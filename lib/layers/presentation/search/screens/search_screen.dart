@@ -4,6 +4,7 @@ import 'package:supermedia/common/utils/app_localization.dart';
 import 'package:supermedia/di/app_module.dart';
 import 'package:supermedia/layers/presentation/search/bloc/search_bloc.dart';
 import 'package:supermedia/layers/presentation/shared/widgets/app_search_bar.dart';
+import 'package:supermedia/layers/presentation/shared/widgets/custom_app_bar.dart';
 import 'package:supermedia/layers/presentation/shared/widgets/filter_option.dart';
 import 'package:supermedia/layers/presentation/shared/widgets/media_list.dart';
 import 'package:supermedia/layers/presentation/shared/widgets/media_list_item.dart';
@@ -18,17 +19,8 @@ class SearchScreen extends StatelessWidget {
       create: (_) => locator<SearchBloc>(),
       child: Scaffold(
         backgroundColor: Theme.of(context).colorScheme.background,
-        appBar: AppBar(
-          backgroundColor: Theme.of(context).colorScheme.background,
-          elevation: 0,
-          title: Padding(
-            padding: const EdgeInsets.fromLTRB(0, 12, 0, 0),
-            child: Text(
-              AppLocalization.of(context)!.searchScreenTitle,
-              style: Theme.of(context).textTheme.headlineSmall,
-            ),
-          ),
-          centerTitle: true,
+        appBar: CustomAppBar(
+          title: AppLocalization.of(context)!.searchScreenTitle,
         ),
         body: _SearchForm(),
       ),
