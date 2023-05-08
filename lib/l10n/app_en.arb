@@ -23,5 +23,15 @@
   "searchScreenTitle": "Search Among all media",
   "search": "Search",
   "sort": "Sort",
-  "filter": "Filter"
+  "filter": "Filter",
+  "enterYourEmail": "Enter your email",
+  "createAccount": "Create account",
+  "welcomeToApp": "Welcome to super media!",
+  "continueWithEmail": "Continue with email",
+  "continueWithGoogle": "Continue with google",
+  "continueWithFacebook": "Continue with facebook",
+  "continueWithTwitter": "Continue with twitter",
+  "alreadyHaveAnAccount": "Already have an account?",
+  "login": "Login",
+  "orContinueWith": "-----  Or continue with  -----"
 }
