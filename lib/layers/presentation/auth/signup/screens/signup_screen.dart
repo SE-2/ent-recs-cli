@@ -89,9 +89,26 @@ class _SignupFormState extends State<_SignupForm> {
                         ],
                       ),
                       const SizedBox(height: 24),
-                      SocialMediaButton(
-                        text: AppLocalization.of(context)!.continueWithGoogle,
-                        onPressed: _doOnContinueWithEmailPressed,
+                      BlocBuilder<SignupBloc, SignupState>(
+                        builder: (context, state) {
+                          if (state is SignupLoading) {
+                            return Stack(
+                              alignment: Alignment.center,
+                              children: [
+                                SocialMediaButton(
+                                  text: '',
+                                  onPressed: _doOnContinueWithEmailPressed,
+                                ),
+                                const CircularProgressIndicator(),
+                              ],
+                            );
+                          } else {
+                            return SocialMediaButton(
+                              text: AppLocalization.of(context)!.continueWithGoogle,
+                              onPressed: _doOnContinueWithEmailPressed,
+                            );
+                          }
+                        },
                       ),
                       const SizedBox(height: 12),
                       SocialMediaButton(
