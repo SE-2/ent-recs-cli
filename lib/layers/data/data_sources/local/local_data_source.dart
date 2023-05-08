@@ -3,7 +3,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:supermedia/di/app_module.dart';
 import 'package:supermedia/layers/data/data_sources/abstractions/local_data_source.dart';
 
-
 class LocalDataSourceImpl implements LocalDataSource {
   static const String _themeModeKey = 'theme_mode';
   static const String _localeKey = 'locale';

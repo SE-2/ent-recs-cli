@@ -45,11 +45,12 @@ dependencies:
     sdk: flutter
   intl: any
   get_it: ^7.2.0
-  custom_sliding_segmented_control: ^1.7.4
   dotted_border: ^2.0.0+3
   carousel_indicator: ^1.0.6
   dots_indicator: ^2.1.0
   google_fonts: ^4.0.4
+  flutter_svg: ^2.0.5
+  custom_sliding_segmented_control: ^1.7.4
 
 dev_dependencies:
   flutter_test:
@@ -68,6 +69,10 @@ dev_dependencies:
 # following page: https://dart.dev/tools/pub/pubspec
 
 # The following section is specific to Flutter packages.
+flutter_gen:
+  integrations:
+    flutter_svg: true
+
 flutter:
 
   # The following line ensures that the Material Icons font is
@@ -87,6 +92,13 @@ flutter:
     - assets/images/posts/
 
 
+    - assets/icons/
+
+  fonts:
+    - family: Plus Jakarta Sans
+      fonts:
+        - asset: assets/fonts/PlusJakartaSans-Regular.ttf
+        - asset: assets/fonts/PlusJakartaSans-Bold.ttf
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
