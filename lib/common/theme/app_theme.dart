@@ -8,7 +8,7 @@ class AppTheme {
       primary: Color(0xff514EB6),
       onPrimary: Colors.white,
       secondary: Color(0xFFf6f8fe),
-      onSecondary: Color(0xFFf6f8fe),
+      onSecondary: Color(0xFF9CA4AB),
       background: Color(0xFFFEFEFE),
       surface: Colors.grey,
       error: Colors.red,
