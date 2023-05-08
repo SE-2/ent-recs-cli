@@ -39,9 +39,9 @@ class SocialMediaButton extends StatelessWidget {
             const SizedBox(width: 12),
             Text(
               text,
-              style: Theme.of(context).textTheme.labelLarge?.copyWith(
+              style: Theme.of(context).textTheme.titleMedium?.copyWith(
                 fontWeight: FontWeight.w600,
-                color: Theme.of(context).colorScheme.onPrimary,
+                color: Theme.of(context).colorScheme.outline,
               ),
             ),
           ],

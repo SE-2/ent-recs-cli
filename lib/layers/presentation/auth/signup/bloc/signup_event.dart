@@ -7,12 +7,12 @@ abstract class SignupEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class SignupButtonPressed extends SignupEvent {
-  const SignupButtonPressed();
+class SignupWithGoogleButtonPressed extends SignupEvent {
+  const SignupWithGoogleButtonPressed();
 
   @override
   List<Object> get props => [];
 
   @override
-  String toString() => 'SignupButtonPressed';
+  String toString() => 'SignupWithGoogleButtonPressed';
 }

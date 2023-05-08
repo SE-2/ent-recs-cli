@@ -12,7 +12,7 @@ class SignupBloc extends Bloc<SignupEvent, SignupState> {
 
   SignupBloc() : super(SignupInitial()) {
     on<SignupEvent>((event, emit) async {
-      if (event is SignupButtonPressed) {
+      if (event is SignupWithGoogleButtonPressed) {
         emit(SignupLoading());
         try {
           await _signupUseCase.signUpWithGoogle();
