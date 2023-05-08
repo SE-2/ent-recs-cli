@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 
 class AppTextField extends StatefulWidget {
   final String label;
+  final String hint;
 
   const AppTextField({
     Key? key,
     required this.label,
+    required this.hint,
   }) : super(key: key);
 
   @override
@@ -34,9 +36,8 @@ class AppTextFieldState extends State<AppTextField> {
       children: [
         Text(
           widget.label,
-          style: const TextStyle(
-            fontSize: 14,
-            color: Color(0xFF78828a),
+          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+              color: Colors.grey[600]
           ),
         ),
         const SizedBox(height: 8),
@@ -50,14 +51,17 @@ class AppTextFieldState extends State<AppTextField> {
             border: Border.all(
               color: _isFocused
                   ? Theme.of(context).colorScheme.primary
-                  : Theme.of(context).colorScheme.onSecondary,
+                  : Colors.transparent,
             ),
           ),
           child: Expanded(
             child: TextField(
               showCursor: _isFocused,
-              decoration: const InputDecoration(
+              decoration: InputDecoration(
                 border: InputBorder.none,
+                hintText: widget.hint,
+                hintStyle: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                    color: Theme.of(context).colorScheme.onSecondary),
               ),
               style: const TextStyle(fontSize: 16),
               controller: _textController,
