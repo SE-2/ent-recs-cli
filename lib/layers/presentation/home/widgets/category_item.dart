@@ -23,16 +23,14 @@ class _CategoryItemState extends State<CategoryItem> {
     return Container(
       margin: const EdgeInsets.all(8),
       decoration: BoxDecoration(
-        color: Colors.black,
-        borderRadius: BorderRadius.circular(32),
+       
+        borderRadius: BorderRadius.circular(22),
       ),
-      child: FittedBox(
-        fit: BoxFit.fill,
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(32),
-          child: Image.asset(
-            'assets/images/categories/${widget.category.imageFileName}',
-          ),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(22),
+        child: Image.asset(
+          'assets/images/categories/${widget.category.imageFileName}',
+          fit: BoxFit.cover,
         ),
       ),
     );
