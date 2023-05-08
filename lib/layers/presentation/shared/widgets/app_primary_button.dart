@@ -30,9 +30,9 @@ class AppPrimaryButton extends StatelessWidget {
         child: Text(
           text,
           style: Theme.of(context).textTheme.labelLarge?.copyWith(
-            fontWeight: FontWeight.w600,
-            color: Theme.of(context).colorScheme.onPrimary,
-          ),
+                fontWeight: FontWeight.w600,
+                color: Theme.of(context).colorScheme.onPrimary,
+              ),
         ),
       ),
     );
