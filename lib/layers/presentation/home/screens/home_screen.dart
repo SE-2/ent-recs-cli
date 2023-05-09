@@ -49,6 +49,7 @@ class _HomeFormState extends State<_HomeForm> {
     context.read<RecentItemsBloc>().add(LoadRecentItems());
 
     return SingleChildScrollView(
+      physics: const BouncingScrollPhysics(),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

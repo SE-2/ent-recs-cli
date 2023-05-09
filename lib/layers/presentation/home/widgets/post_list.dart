@@ -4,7 +4,6 @@ import 'package:supermedia/layers/presentation/home/widgets/post_item.dart';
 
 class PostList extends StatelessWidget {
   final List<MediaMetadata> items;
-
   const PostList({super.key, required this.items});
 
   @override
