@@ -48,18 +48,19 @@ class _SignupFormState extends State<_SignupForm> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
-              const SizedBox(height: 42),
+              const SizedBox(height: 32),
               Text(AppLocalization.of(context)!.createAccount,
                   style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                       fontWeight: FontWeight.bold,
+                      fontSize: 26,
                       color: Theme.of(context).colorScheme.onPrimary)),
               const SizedBox(height: 8),
               Text(AppLocalization.of(context)!.welcomeToApp,
                   style: Theme.of(context)
                       .textTheme
-                      .titleMedium
+                      .titleSmall
                       ?.copyWith(color: Theme.of(context).colorScheme.onPrimary)),
-              const SizedBox(height: 48),
+              const SizedBox(height: 40),
               Expanded(
                 child: Container(
                   decoration: BoxDecoration(
@@ -73,7 +74,7 @@ class _SignupFormState extends State<_SignupForm> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                        const SizedBox(height: 24),
+                        const SizedBox(height: 16),
                         AppTextField(
                           key: const Key('signupEmailTextFiled'),
                           label: AppLocalization.of(context)!.email,
@@ -89,7 +90,7 @@ class _SignupFormState extends State<_SignupForm> {
                           children: [
                             Assets.icons.line.svg(),
                             const SizedBox(width: 12),
-                            Text(AppLocalization.of(context)!.orContinueWith),
+                            Text(AppLocalization.of(context)!.or),
                             const SizedBox(width: 12),
                             Assets.icons.line.svg()
                           ],
@@ -136,8 +137,7 @@ class _SignupFormState extends State<_SignupForm> {
                           children: <Widget>[
                             Text(
                               AppLocalization.of(context)!.alreadyHaveAnAccount,
-                              style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                                fontWeight: FontWeight.w600,
+                              style: Theme.of(context).textTheme.titleSmall?.copyWith(
                                 color: Theme.of(context).colorScheme.surface,
                               ),
                             ),
@@ -145,8 +145,7 @@ class _SignupFormState extends State<_SignupForm> {
                               onPressed: () {},
                               child: Text(
                                 AppLocalization.of(context)!.login,
-                                style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                                  fontWeight: FontWeight.w600,
+                                style: Theme.of(context).textTheme.titleSmall?.copyWith(
                                   color: Theme.of(context).colorScheme.primary,
                                 )
                               ),
