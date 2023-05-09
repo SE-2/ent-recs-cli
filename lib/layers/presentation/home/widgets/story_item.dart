@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:supermedia/layers/presentation/home/widgets/data.dart';
 
 class StoryItem extends StatelessWidget {
-
-  const StoryItem({super.key, required this.story,
+  const StoryItem({
+    super.key,
+    required this.story,
   });
 
   final Story story;
@@ -35,12 +36,12 @@ class StoryItem extends StatelessWidget {
           ),
           SizedBox(
             width: 68,
-            child: Text(
-              story.name,
-              style: const TextStyle(fontSize: 12, color: Color(0xff2D4379)),
-              textAlign: TextAlign.center,
-              textWidthBasis: TextWidthBasis.longestLine,
-            ),
+            child: Text(story.name,
+                style: const TextStyle(fontSize: 12, color: Color(0xff2D4379)),
+                textAlign: TextAlign.center,
+                textWidthBasis: TextWidthBasis.longestLine,
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis),
           )
         ],
       ),
