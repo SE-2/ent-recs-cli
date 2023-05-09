@@ -3,11 +3,13 @@ import 'package:flutter/material.dart';
 class SocialMediaButton extends StatelessWidget {
   final void Function() onPressed;
   final String text;
+  final Widget? icon;
 
   const SocialMediaButton({
     Key? key,
     required this.text,
     required this.onPressed,
+    required this.icon,
   }) : super(key: key);
 
   @override
@@ -36,6 +38,7 @@ class SocialMediaButton extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            if (icon != null) icon!,
             const SizedBox(width: 12),
             Text(
               text,
