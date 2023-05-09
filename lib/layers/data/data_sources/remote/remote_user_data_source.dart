@@ -5,7 +5,6 @@ import 'package:supermedia/layers/data/data_sources/abstractions/remote_user_dat
 import 'package:supermedia/layers/data/http_client/http_client.dart';
 import 'package:supermedia/layers/data/models/user_model.dart';
 
-
 class RemoteUserDataSourceImpl implements RemoteUserDataSource {
   final IHttpClient _httpClient = locator<IHttpClient>();
 
