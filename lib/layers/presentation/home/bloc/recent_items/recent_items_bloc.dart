@@ -12,9 +12,18 @@ class RecentItemsBloc extends Bloc<RecentItemsEvent, RecentItemsState> {
       (event, emit) async {
         if (event is LoadRecentItems) {
           emit(RecentItemsLoading());
+
+          // todo remove after mvp
+          // Future.delayed(const Duration(seconds: 1));
+
           try {
             final result = await _recentItemsUseCase.getRecentWatchedMedia();
-            emit(RecentItemsSuccess(result: result));
+
+            if (result.isEmpty) {
+              emit(RecentItemsInitial());
+            } else {
+              emit(RecentItemsSuccess(result: result));
+            }
           } catch (e) {
             emit(RecentItemsFailure(error: e.toString()));
           }

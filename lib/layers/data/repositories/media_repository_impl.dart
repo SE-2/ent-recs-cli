@@ -22,22 +22,19 @@ class MediaRepositoryImp implements MediaRepository {
   
   @override
   Future<List<MediaMetadata>> getAllTimesTrendMedia() async {
-    // TODO: implement getAllTimesTrendMedia
-    // throw UnimplementedError();
-    return List<MediaMetadata>.empty();
+    List<MediaMetadataModel> models = await _remoteDataSource.getAllTimesTrendMedia();
+    return models.map((e) => MediaMetadata.fromModel(e)).toList();
   }
   
   @override
   Future<List<MediaMetadata>> getRecentWatchedMedia() async {
-    // TODO: implement getRecentWatchedMedia
-    // throw UnimplementedError();
-    return List<MediaMetadata>.empty();
+    List<MediaMetadataModel> models = await _remoteDataSource.getRecentWatchedMedia();
+    return models.map((e) => MediaMetadata.fromModel(e)).toList();
   }
   
   @override
   Future<List<MediaMetadata>> getTodayTrendMedia() async {
-    // TODO: implement getTodayTrendMedia
-    // throw UnimplementedError();
-    return List<MediaMetadata>.empty();
+    List<MediaMetadataModel> models = await _remoteDataSource.getTodayTrendMedia();
+    return models.map((e) => MediaMetadata.fromModel(e)).toList();
   }
 }

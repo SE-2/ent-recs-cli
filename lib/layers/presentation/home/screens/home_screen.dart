@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:supermedia/di/app_module.dart';
 import 'package:supermedia/layers/presentation/home/bloc/recent_items/recent_items_bloc.dart';
+import 'package:supermedia/layers/presentation/home/bloc/recent_items/recent_items_event.dart';
 import 'package:supermedia/layers/presentation/home/bloc/recent_items/recent_items_state.dart';
 import 'package:supermedia/layers/presentation/home/bloc/trend_items/trend_items_bloc.dart';
 import 'package:supermedia/layers/presentation/home/bloc/trend_items/trend_items_event.dart';
@@ -14,14 +15,9 @@ import 'package:supermedia/layers/presentation/home/widgets/story_list.dart';
 
 enum DateFilter { all, today }
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+class HomeScreen extends StatelessWidget {
+  const HomeScreen({Key? key}) : super(key: key);
 
-  @override
-  State<HomeScreen> createState() => _HomeScreenState();
-}
-
-class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
@@ -32,9 +28,7 @@ class _HomeScreenState extends State<HomeScreen> {
       ],
       child: Scaffold(
         backgroundColor: Theme.of(context).colorScheme.background,
-        body: SingleChildScrollView(
-          child: _HomeForm(),
-        ),
+        body: _HomeForm(),
       ),
     );
   }
@@ -53,6 +47,9 @@ class _HomeFormState extends State<_HomeForm> {
 
   @override
   Widget build(BuildContext context) {
+
+    context.read<RecentItemsBloc>().add(LoadRecentItems());
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [

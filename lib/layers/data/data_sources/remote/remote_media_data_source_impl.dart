@@ -25,12 +25,29 @@ class RemoteMediaDataSourceImpl implements RemoteMediaDataSource {
 
     return mediaList;
   }
+
+  @override
+  Future<List<MediaMetadataModel>> recommend() async {
+    return mediaList;
+  }
+
+  @override
+  Future<List<MediaMetadataModel>> getAllTimesTrendMedia() async {
+    return mediaList;
+  }
+
+  @override
+  Future<List<MediaMetadataModel>> getRecentWatchedMedia() async {
+    return mediaList;
+  }
+
+  @override
+  Future<List<MediaMetadataModel>> getTodayTrendMedia() async {
+    return mediaList;
+  }
 }
 
 List<MediaMetadataModel> mediaList = [
-
-
-  
   MediaMetadataModel(
     "m1",
     "Movie",
