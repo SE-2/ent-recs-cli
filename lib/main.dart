@@ -40,7 +40,7 @@ class MyApp extends StatelessWidget {
                 theme: AppTheme.lightTheme,
                 darkTheme: AppTheme.darkTheme,
                 themeMode: themeMode,
-                home: SelectionScreen(),
+                home: const SelectionScreen(),
               );
             },
           );

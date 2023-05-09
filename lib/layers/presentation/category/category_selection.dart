@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:supermedia/common/utils/app_localization.dart';
+import 'package:supermedia/layers/presentation/shared/widgets/custom_app_bar.dart';
 
 class Category {
   final String name;
@@ -13,10 +15,12 @@ class SelectionScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Selection screen"),
+      appBar: CustomAppBar(
+        title: AppLocalization.of(context)!.selectionScreenTitle,
+        showBackButton: true,
       ),
-      body: _SelectionForm(),
+      backgroundColor: Theme.of(context).colorScheme.background,
+      body: const _SelectionForm(),
     );
   }
 }
@@ -29,103 +33,124 @@ class _SelectionForm extends StatefulWidget {
 }
 
 class _SelectionFormState extends State<_SelectionForm> {
-  final List<Category> categories = [
-    Category('Category 1',
-        'https://img.freepik.com/free-psd/creative-film-poster-template_23-2149839039.jpg?size=626&ext=jpg&ga=GA1.1.548239202.1680728879&semt=robertav1_2_sidr'),
-    Category('Category 2',
-        'https://img.freepik.com/premium-psd/retro-print-crash-photo-effect_514605-461.jpg?w=740'),
-    Category('Category 3',
-        'https://img.freepik.com/free-psd/creative-film-poster-template_23-2149839039.jpg?size=626&ext=jpg&ga=GA1.1.548239202.1680728879&semt=robertav1_2_sidr'),
-    Category('Category 4',
-        'https://img.freepik.com/premium-psd/retro-print-crash-photo-effect_514605-461.jpg?w=740'),
-    Category('Category 5',
-        'https://img.freepik.com/free-psd/creative-film-poster-template_23-2149839039.jpg?size=626&ext=jpg&ga=GA1.1.548239202.1680728879&semt=robertav1_2_sidr'),
-    Category('Category 6',
-        'https://img.freepik.com/premium-psd/retro-print-crash-photo-effect_514605-461.jpg?w=740'),
-    Category('Category 7',
-        'https://img.freepik.com/free-psd/creative-film-poster-template_23-2149839039.jpg?size=626&ext=jpg&ga=GA1.1.548239202.1680728879&semt=robertav1_2_sidr'),
-    Category('Category 8',
-        'https://img.freepik.com/premium-psd/retro-print-crash-photo-effect_514605-461.jpg?w=740'),
-    Category('Category 9',
-        'https://img.freepik.com/free-psd/creative-film-poster-template_23-2149839039.jpg?size=626&ext=jpg&ga=GA1.1.548239202.1680728879&semt=robertav1_2_sidr'),
-  ];
+  final List<Category> categories = List.generate(20, (index) {
+    return Category('Category ${index + 1}',
+        'https://i.pinimg.com/400x/41/2d/b6/412db620d4fb0354df7ad175b132ff38.jpg');
+  });
+
   final selectedCategories = <Category>[];
 
   @override
   Widget build(BuildContext context) {
     final crossAxisCount = (MediaQuery.of(context).size.width / 120).floor();
 
-    return Scaffold(
-      appBar: AppBar(title: const Text("Pick topics you're interested in")),
-      body: Column(children: [
-        const SizedBox(height: 20),
-        const Text('Select at least 5 topics to personalize your experience.',
-            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
-        const SizedBox(height: 20),
-        Expanded(
-          child: GridView.count(
-            crossAxisCount: crossAxisCount,
-            crossAxisSpacing: 20,
-            mainAxisSpacing: 20,
-            padding: const EdgeInsets.all(20),
-            children: categories.map((category) {
-              final isSelected = selectedCategories.contains(category);
-              return GestureDetector(
-                onTap: () => setState(() => isSelected
-                    ? selectedCategories.remove(category)
-                    : selectedCategories.add(category)),
-                child: Stack(children: [
-                  Container(
-                    decoration: BoxDecoration(
-                      image: DecorationImage(
-                          image: NetworkImage(category.image),
-                          fit: BoxFit.cover),
-                      borderRadius: BorderRadius.circular(10),
-                      color: isSelected ? Colors.black.withOpacity(0.9) : null,
+    final aspectRatio =
+        (MediaQuery.of(context).size.width) / (crossAxisCount * 160);
+
+    return Column(children: [
+      Padding(
+        padding: const EdgeInsets.fromLTRB(32, 16, 32, 16),
+        child: Text(
+          AppLocalization.of(context)!.selectionScreenMessage,
+          style: Theme.of(context)
+              .textTheme
+              .titleMedium!
+              .copyWith(fontWeight: FontWeight.w600),
+        ),
+      ),
+      const SizedBox(height: 20),
+      Expanded(
+        child: GridView.count(
+          crossAxisCount: crossAxisCount,
+          crossAxisSpacing: 20,
+          mainAxisSpacing: 20,
+          padding: const EdgeInsets.fromLTRB(32, 0, 32, 64),
+          childAspectRatio: aspectRatio,
+          children: categories.map((category) {
+            final isSelected = selectedCategories.contains(category);
+            return GestureDetector(
+              onTap: () => setState(() => isSelected
+                  ? selectedCategories.remove(category)
+                  : selectedCategories.add(category)),
+              child: Stack(children: [
+                Container(
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: NetworkImage(category.image),
+                      fit: BoxFit.cover,
                     ),
+                    borderRadius: BorderRadius.circular(10),
                   ),
-                  if (isSelected)
-                    const Positioned.fill(
-                        child: Icon(Icons.check_circle,
-                            color: Colors.white, size: 40)),
+                ),
+                if (isSelected)
                   Positioned(
                     bottom: 0,
                     left: 0,
                     right: 0,
+                    top: 0,
                     child: Container(
                       decoration: BoxDecoration(
-                        borderRadius: const BorderRadius.only(
-                          bottomLeft: Radius.circular(10),
-                          bottomRight: Radius.circular(10),
+                        borderRadius: const BorderRadius.all(
+                          Radius.circular(10),
                         ),
-                        color: Colors.black.withOpacity(0.5),
+                        color: Colors.black.withOpacity(0.6),
                       ),
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 8, horizontal: 16),
-                      child: Text(category.name,
-                          style: const TextStyle(
-                              color: Colors.white,
-                              fontSize: 12,
-                              fontWeight: FontWeight.bold)),
                     ),
                   ),
-                ]),
-              );
-            }).toList(),
-          ),
+                Positioned(
+                  bottom: 0,
+                  left: 0,
+                  right: 0,
+                  child: Container(
+                    padding:
+                    const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
+                    child: Text(category.name,
+                        style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 12,
+                            fontWeight: FontWeight.bold)),
+                  ),
+                ),
+                if (isSelected)
+                  Positioned(
+                    top: 0,
+                    right: 0,
+                    child: Container(
+                      padding: const EdgeInsets.all(4),
+                      child: const Icon(
+                        Icons.check_circle_outlined,
+                        color: Colors.white70,
+                        size: 25,
+                      ),
+                    ),
+                  ),
+              ]),
+            );
+          }).toList(),
         ),
-      ]),
-      floatingActionButton: FloatingActionButton.extended(
+      ),
+      const SizedBox(height: 20),
+      ElevatedButton.icon(
         onPressed: selectedCategories.length >= 5
             ? () {
-                // Do something with the selected categories
-              }
+          // todo navigate to recommend screen
+        }
             : null,
-        label: const Text('Get started'),
-        icon: const Icon(Icons.arrow_forward),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
+        label: Text(
+          AppLocalization.of(context)!.getStarted,
+          style: Theme.of(context).textTheme.labelLarge,
+        ),
+        icon: const Icon(
+          Icons.arrow_forward,
+          size: 16,
+        ),
+        style: ElevatedButton.styleFrom(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(24),
+          ),
+        ),
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-    );
+      const SizedBox(height: 20),
+    ]);
   }
 }
