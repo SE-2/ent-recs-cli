@@ -22,7 +22,7 @@ import 'package:supermedia/layers/domain/use_cases/implementations/search_use_ca
 import 'package:supermedia/layers/domain/use_cases/signup_use_case.dart';
 import 'package:supermedia/layers/presentation/auth/signup/bloc/signup_bloc.dart';
 import 'package:supermedia/layers/presentation/auth/signup/screens/signup_screen.dart';
-import 'package:supermedia/layers/presentation/recommend/RecommendScreen.dart';
+import 'package:supermedia/layers/presentation/recommend/screens/recommend_screen.dart';
 import 'package:supermedia/layers/presentation/recommend/bloc/recommend_bloc.dart';
 import 'package:supermedia/layers/presentation/search/bloc/search_bloc.dart';
 import 'package:supermedia/layers/presentation/search/screens/search_screen.dart';

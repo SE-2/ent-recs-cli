@@ -9,19 +9,21 @@ part 'recommend_event.dart';
 part 'recommend_state.dart';
 
 class RecommendBloc extends Bloc<RecommendEvent, RecommendState> {
-  final RecommendUseCase _RecommendUseCase = locator<RecommendUseCase>();
+  final RecommendUseCase _recommendUseCase = locator<RecommendUseCase>();
 
   RecommendBloc() : super(RecommendInitial()) {
     on<RecommendEvent>((event, emit) async {
-      if (event is RecommendButtonPressed) {
+      if (event is RecommendLoadingStarted) {
         emit(RecommendLoading());
         await Future.delayed(const Duration(seconds: 1));
         try {
-          final result = await _RecommendUseCase.recommend();
+          final result = await _recommendUseCase.recommend();
 
-          // TODO: handle empty result
-
-          emit(RecommendSuccess(result: result));
+          if (result.isEmpty) {
+            emit(RecommendInitial());
+          } else {
+            emit(RecommendSuccess(result: result));
+          }
         } catch (e) {
           emit(RecommendFailure(error: e.toString()));
         }

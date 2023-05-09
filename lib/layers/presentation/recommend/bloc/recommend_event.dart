@@ -7,14 +7,13 @@ abstract class RecommendEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class RecommendButtonPressed extends RecommendEvent {
-  final String query;
+class RecommendLoadingStarted extends RecommendEvent {
 
-  const RecommendButtonPressed({required this.query});
-
-  @override
-  List<Object> get props => [query];
+  const RecommendLoadingStarted();
 
   @override
-  String toString() => 'RecommendButtonPressed { query: $query }';
+  List<Object> get props => [];
+
+  @override
+  String toString() => 'RecommendLoadingStarted { }';
 }

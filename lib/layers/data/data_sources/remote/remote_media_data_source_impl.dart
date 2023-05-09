@@ -25,6 +25,11 @@ class RemoteMediaDataSourceImpl implements RemoteMediaDataSource {
 
     return mediaList;
   }
+
+  @override
+  Future<List<MediaMetadataModel>> recommend() async {
+    return mediaList;
+  }
 }
 
 List<MediaMetadataModel> mediaList = [
