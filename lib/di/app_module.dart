@@ -66,7 +66,7 @@ void _setupUseCases() {
 void _setupScreens() {
   locator.registerLazySingleton<SignupScreen>(() => const SignupScreen());
   locator.registerLazySingleton<SettingsScreen>(() => const SettingsScreen());
-  locator.registerLazySingleton<SearchScreen>(() => const SearchScreen(string: null));
+  locator.registerLazySingleton<SearchScreen>(() => const SearchScreen());
 }
 
 void _setupBlocs() {
