@@ -14,13 +14,19 @@ import 'package:supermedia/layers/data/repositories/media_repository_impl.dart';
 import 'package:supermedia/layers/data/repositories/user_repository_impl.dart';
 import 'package:supermedia/layers/domain/repositories/media_repository.dart';
 import 'package:supermedia/layers/domain/repositories/user_repository.dart';
+import 'package:supermedia/layers/domain/use_cases/abstractoins/recent_items_use_case.dart';
 import 'package:supermedia/layers/domain/use_cases/abstractoins/search_use_case.dart';
 import 'package:supermedia/layers/domain/use_cases/abstractoins/signup_use_case.dart';
+import 'package:supermedia/layers/domain/use_cases/abstractoins/trend_items_use_case.dart';
+import 'package:supermedia/layers/domain/use_cases/implementations/recent_items_use_case_impl.dart';
 import 'package:supermedia/layers/domain/use_cases/implementations/search_use_case_impl.dart';
+import 'package:supermedia/layers/domain/use_cases/implementations/trend_items_use_case_impl.dart';
 import 'package:supermedia/layers/domain/use_cases/signup_use_case.dart';
-import 'package:supermedia/layers/presentation/Home/screens/home_screen.dart';
 import 'package:supermedia/layers/presentation/auth/signup/bloc/signup_bloc.dart';
 import 'package:supermedia/layers/presentation/auth/signup/screens/signup_screen.dart';
+import 'package:supermedia/layers/presentation/home/bloc/recent_items/recent_items_bloc.dart';
+import 'package:supermedia/layers/presentation/home/bloc/trend_items/trend_items_bloc.dart';
+import 'package:supermedia/layers/presentation/home/screens/home_screen.dart';
 import 'package:supermedia/layers/presentation/search/bloc/search_bloc.dart';
 import 'package:supermedia/layers/presentation/search/screens/search_screen.dart';
 import 'package:supermedia/layers/presentation/settings/screens/settings_screen.dart';
@@ -51,6 +57,8 @@ void _setupRepositories() {
 void _setupUseCases() {
   locator.registerLazySingleton<SignUpUseCase>(() => SignUpUseCaseImpl());
   locator.registerLazySingleton<SearchUseCase>(() => SearchUseCaseImpl());
+  locator.registerLazySingleton<RecentItemsUseCase>(() => RecentItemsUseCaseImpl());
+  locator.registerLazySingleton<TrendItemsUseCase>(() => TrendItemsUseCaseImpl());
 }
 
 void _setupScreens() {
@@ -65,6 +73,8 @@ void _setupBlocs() {
   locator.registerFactory<AppLocaleBloc>(() => AppLocaleBloc());
   locator.registerFactory<SignupBloc>(() => SignupBloc());
   locator.registerFactory<SearchBloc>(() => SearchBloc());
+  locator.registerFactory<TrendItemsBloc>(() => TrendItemsBloc());
+  locator.registerFactory<RecentItemsBloc>(() => RecentItemsBloc());
 }
 
 void _setupSharedPreferences() {

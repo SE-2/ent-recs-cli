@@ -23,5 +23,7 @@
   "searchScreenTitle": "Search Among all media",
   "search": "Search",
   "sort": "Sort",
-  "filter": "Filter"
+  "filter": "Filter",
+  "dateFilterToday":"Today",
+  "dateFilterAll":"All"
 }
