@@ -27,5 +27,7 @@
   "getStarted": "شروع کنید",
   "search": "جستجو",
   "sort": "مرتب سازی",
-  "filter": "فیلتر"
+  "filter": "فیلتر",
+  "dateFilterToday":"امروز",
+  "dateFilterAll":"همه"
 }

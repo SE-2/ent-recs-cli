@@ -27,5 +27,7 @@
   "getStarted": "Get started",
   "search": "Search",
   "sort": "Sort",
-  "filter": "Filter"
+  "filter": "Filter",
+  "dateFilterToday":"Today",
+  "dateFilterAll":"All"
 }
