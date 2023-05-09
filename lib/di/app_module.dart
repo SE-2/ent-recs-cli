@@ -19,6 +19,8 @@ import 'package:supermedia/layers/domain/use_cases/abstractoins/search_use_case.
 import 'package:supermedia/layers/domain/use_cases/abstractoins/signup_use_case.dart';
 import 'package:supermedia/layers/domain/use_cases/abstractoins/trend_items_use_case.dart';
 import 'package:supermedia/layers/domain/use_cases/implementations/recent_items_use_case_impl.dart';
+import 'package:supermedia/layers/domain/use_cases/abstractoins/recommend_use_case.dart';
+import 'package:supermedia/layers/domain/use_cases/implementations/recommend_use_case_impl.dart';
 import 'package:supermedia/layers/domain/use_cases/implementations/search_use_case_impl.dart';
 import 'package:supermedia/layers/domain/use_cases/implementations/trend_items_use_case_impl.dart';
 import 'package:supermedia/layers/domain/use_cases/signup_use_case.dart';
@@ -27,6 +29,8 @@ import 'package:supermedia/layers/presentation/auth/signup/screens/signup_screen
 import 'package:supermedia/layers/presentation/home/bloc/recent_items/recent_items_bloc.dart';
 import 'package:supermedia/layers/presentation/home/bloc/trend_items/trend_items_bloc.dart';
 import 'package:supermedia/layers/presentation/home/screens/home_screen.dart';
+import 'package:supermedia/layers/presentation/recommend/screens/recommend_screen.dart';
+import 'package:supermedia/layers/presentation/recommend/bloc/recommend_bloc.dart';
 import 'package:supermedia/layers/presentation/search/bloc/search_bloc.dart';
 import 'package:supermedia/layers/presentation/search/screens/search_screen.dart';
 import 'package:supermedia/layers/presentation/settings/screens/settings_screen.dart';
@@ -59,6 +63,7 @@ void _setupUseCases() {
   locator.registerLazySingleton<SearchUseCase>(() => SearchUseCaseImpl());
   locator.registerLazySingleton<RecentItemsUseCase>(() => RecentItemsUseCaseImpl());
   locator.registerLazySingleton<TrendItemsUseCase>(() => TrendItemsUseCaseImpl());
+  locator.registerLazySingleton<RecommendUseCase>(() => RecommendUseCaseImpl());
 }
 
 void _setupScreens() {
@@ -66,6 +71,7 @@ void _setupScreens() {
   locator.registerLazySingleton<SettingsScreen>(() => const SettingsScreen());
   locator.registerLazySingleton<HomeScreen>(() => const HomeScreen());
   locator.registerLazySingleton<SearchScreen>(() => const SearchScreen());
+  locator.registerLazySingleton<RecommendScreen>(() => const RecommendScreen());
 }
 
 void _setupBlocs() {
@@ -75,6 +81,7 @@ void _setupBlocs() {
   locator.registerFactory<SearchBloc>(() => SearchBloc());
   locator.registerFactory<TrendItemsBloc>(() => TrendItemsBloc());
   locator.registerFactory<RecentItemsBloc>(() => RecentItemsBloc());
+  locator.registerFactory<RecommendBloc>(() => RecommendBloc());
 }
 
 void _setupSharedPreferences() {

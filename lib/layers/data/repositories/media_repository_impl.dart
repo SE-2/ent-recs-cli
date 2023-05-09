@@ -9,9 +9,9 @@ class MediaRepositoryImp implements MediaRepository {
       locator<RemoteMediaDataSource>();
 
   @override
-  Future<List<MediaMetadata>> recommend() {
-    // TODO: implement recommend
-    throw UnimplementedError();
+  Future<List<MediaMetadata>> recommend() async {
+    List<MediaMetadataModel> models = await _remoteDataSource.recommend();
+    return models.map((e) => MediaMetadata.fromModel(e)).toList();
   }
 
   @override
