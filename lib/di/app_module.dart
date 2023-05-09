@@ -45,7 +45,12 @@ void _setupRemoteDataSources() {
 
 void _setupThirdPartyLibraries() {
   locator.registerLazySingleton<GoogleSignIn>(
-      () => GoogleSignIn());
+      () => GoogleSignIn(
+        scopes: [
+          'https://www.googleapis.com/auth/contacts.readonly',
+        ],
+        clientId: '355571272838-hj8sfomh23finum1nbbg2g35nqvh31tv.apps.googleusercontent.com',
+      ));
 }
 
 void _setupRepositories() {
@@ -61,7 +66,7 @@ void _setupUseCases() {
 void _setupScreens() {
   locator.registerLazySingleton<SignupScreen>(() => const SignupScreen());
   locator.registerLazySingleton<SettingsScreen>(() => const SettingsScreen());
-  locator.registerLazySingleton<SearchScreen>(() => const SearchScreen());
+  locator.registerLazySingleton<SearchScreen>(() => const SearchScreen(string: null));
 }
 
 void _setupBlocs() {
