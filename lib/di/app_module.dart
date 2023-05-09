@@ -14,12 +14,16 @@ import 'package:supermedia/layers/data/repositories/media_repository_impl.dart';
 import 'package:supermedia/layers/data/repositories/user_repository_impl.dart';
 import 'package:supermedia/layers/domain/repositories/media_repository.dart';
 import 'package:supermedia/layers/domain/repositories/user_repository.dart';
+import 'package:supermedia/layers/domain/use_cases/abstractoins/recommend_use_case.dart';
 import 'package:supermedia/layers/domain/use_cases/abstractoins/search_use_case.dart';
 import 'package:supermedia/layers/domain/use_cases/abstractoins/signup_use_case.dart';
+import 'package:supermedia/layers/domain/use_cases/implementations/recommend_use_case_impl.dart';
 import 'package:supermedia/layers/domain/use_cases/implementations/search_use_case_impl.dart';
 import 'package:supermedia/layers/domain/use_cases/signup_use_case.dart';
 import 'package:supermedia/layers/presentation/auth/signup/bloc/signup_bloc.dart';
 import 'package:supermedia/layers/presentation/auth/signup/screens/signup_screen.dart';
+import 'package:supermedia/layers/presentation/recommend/RecommendScreen.dart';
+import 'package:supermedia/layers/presentation/recommend/bloc/recommend_bloc.dart';
 import 'package:supermedia/layers/presentation/search/bloc/search_bloc.dart';
 import 'package:supermedia/layers/presentation/search/screens/search_screen.dart';
 import 'package:supermedia/layers/presentation/settings/screens/settings_screen.dart';
@@ -50,12 +54,14 @@ void _setupRepositories() {
 void _setupUseCases() {
   locator.registerLazySingleton<SignUpUseCase>(() => SignUpUseCaseImpl());
   locator.registerLazySingleton<SearchUseCase>(() => SearchUseCaseImpl());
+  locator.registerLazySingleton<RecommendUseCase>(() => RecommendUseCaseImpl());
 }
 
 void _setupScreens() {
   locator.registerLazySingleton<SignupScreen>(() => const SignupScreen());
   locator.registerLazySingleton<SettingsScreen>(() => const SettingsScreen());
   locator.registerLazySingleton<SearchScreen>(() => const SearchScreen());
+  locator.registerLazySingleton<RecommendScreen>(() => const RecommendScreen());
 }
 
 void _setupBlocs() {
@@ -63,6 +69,7 @@ void _setupBlocs() {
   locator.registerFactory<AppLocaleBloc>(() => AppLocaleBloc());
   locator.registerFactory<SignupBloc>(() => SignupBloc());
   locator.registerFactory<SearchBloc>(() => SearchBloc());
+  locator.registerFactory<RecommendBloc>(() => RecommendBloc());
 }
 
 void _setupSharedPreferences() {
