@@ -9,8 +9,11 @@ class AppTheme {
       onPrimary: Colors.white,
       secondary: Color(0xFFf6f8fe),
       onSecondary: Color(0xFFf6f8fe),
+      tertiary: Color(0xff0D253C),
+      onTertiary: Color(0xff2D4379),
+      tertiaryContainer: Colors.white,
       background: Color(0xFFFEFEFE),
-      surface: Colors.grey,
+      surface: Color(0xff9CA4AB),
       error: Colors.red,
     ),
     textTheme: const TextTheme(
@@ -41,6 +44,8 @@ class AppTheme {
       ),
       headlineMedium: TextStyle(
         fontFamily: defaultFontFamily,
+        fontWeight: FontWeight.w700,
+        fontSize: 24,
         color: Colors.black,
       ),
       headlineSmall: TextStyle(
@@ -84,8 +89,11 @@ class AppTheme {
       onPrimary: Colors.white,
       secondary: Color(0xFF171725),
       onSecondary: Color(0xFF282837),
+      tertiary: Colors.white,
+      onTertiary: Colors.white,
+      tertiaryContainer: Color(0xff9CA4AB),
       background: Color(0xFF171725),
-      surface: Colors.grey,
+      surface: Color(0xff9CA4AB),
       error: Colors.red,
     ),
     textTheme: const TextTheme(
@@ -116,11 +124,15 @@ class AppTheme {
       ),
       headlineMedium: TextStyle(
         fontFamily: defaultFontFamily,
+        fontWeight: FontWeight.w700,
+        fontSize: 24,
+        color: Colors.white,
       ),
       headlineSmall: TextStyle(
-        fontFamily: defaultFontFamily,
-        fontSize: 18,
-      ),
+          fontFamily: defaultFontFamily,
+          fontWeight: FontWeight.bold,
+          fontSize: 18,
+          color: Colors.white),
       titleLarge: TextStyle(
         fontFamily: defaultFontFamily,
       ),
@@ -130,10 +142,7 @@ class AppTheme {
         fontSize: 16,
       ),
       titleSmall: TextStyle(
-        fontFamily: defaultFontFamily,
-        fontSize: 14,
-        color: Colors.white70
-      ),
+          fontFamily: defaultFontFamily, fontSize: 14, color: Colors.white70),
       labelLarge: TextStyle(
         fontFamily: defaultFontFamily,
         color: Colors.white,

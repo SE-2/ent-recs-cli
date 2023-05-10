@@ -34,7 +34,7 @@ class MyApp extends StatelessWidget {
                 localizationsDelegates: AppLocalizations.localizationsDelegates,
                 supportedLocales: AppLocalizations.supportedLocales,
                 locale: locale,
-                theme: AppTheme.lightTheme,
+                theme: AppTheme.darkTheme,
                 darkTheme: AppTheme.darkTheme,
                 themeMode: themeMode,
                 home: locator<HomeScreen>(),

@@ -40,12 +40,16 @@ class _HomeForm extends StatefulWidget {
 
 class _HomeFormState extends State<_HomeForm> {
   DateFilter _selectedSegment = DateFilter.all;
-  TextStyle defaul = const TextStyle(color: Colors.black, fontSize: 8);
-  TextStyle selected = const TextStyle(color: Colors.white, fontSize: 10);
   final stories = AppDatabase.stories;
 
   @override
   Widget build(BuildContext context) {
+    TextStyle? defaul = Theme.of(context)
+        .textTheme
+        .labelMedium
+        ?.copyWith(fontSize: 8, color: Colors.black);
+    TextStyle? selected = Theme.of(context).textTheme.labelSmall;
+
     context.read<RecentItemsBloc>().add(LoadRecentItems());
 
     return SingleChildScrollView(
@@ -67,18 +71,16 @@ class _HomeFormState extends State<_HomeForm> {
                 padding: const EdgeInsets.fromLTRB(0, 52, 0, 0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: const [
-                    Text(
-                      'Hi, Mohammad',
-                      style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
-                    ),
-                    Text(
-                      'Explore today items',
-                      style: TextStyle(
-                          fontSize: 12,
-                          color: Color.fromARGB(255, 156, 164, 171)),
-                    )
+                  children: [
+                    Text('Hi, Mohammad',
+                        style: Theme.of(context)
+                            .textTheme
+                            .headlineMedium
+                            ?.copyWith(fontSize: 18)),
+                    Text('Explore today items',
+                        style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                            fontSize: 12,
+                            color: Theme.of(context).colorScheme.surface)),
                   ],
                 ),
               ),
@@ -100,7 +102,7 @@ class _HomeFormState extends State<_HomeForm> {
                             ? selected
                             : defaul)
                   },
-                  fixedWidth: 53,
+                  fixedWidth: 64,
                   height: 24,
                   onValueChanged: (value) {
                     setState(() {
@@ -136,24 +138,18 @@ class _HomeFormState extends State<_HomeForm> {
             padding: const EdgeInsets.fromLTRB(0, 0, 0, 20),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: const [
-                Text(
-                  'See what’s good for you!',
-                  style: TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                      color: Color(0xff0D253C)),
-                ),
+              children: [
+                Text('See what’s good for you!',
+                    style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                        color: Theme.of(context).colorScheme.tertiary)),
               ],
             ),
           ),
           const CategoryList(),
-          const Padding(
-            padding: EdgeInsets.fromLTRB(24, 22, 0, 16),
-            child: Text(
-              'Recent watched',
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
-            ),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(24, 22, 0, 16),
+            child: Text('Recent watched',
+                style: Theme.of(context).textTheme.titleMedium),
           ),
           BlocBuilder<RecentItemsBloc, RecentItemsState>(
             builder: (context, state) {

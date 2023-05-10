@@ -52,7 +52,7 @@ List<MediaMetadataModel> mediaList = [
     "m1",
     "Movie",
     "The Shawshank Redemption",
-    "https://images.pathe-thuis.nl/23470_450x640.jpg",
+    "https://images.flickdirect.com/cache/movies/shawshank-redemption/05000-shawshank-redemption-poster.jpg",
     {"director": "Frank Darabont", "genre": "Drama", "productionYear": "1994"},
   ),
   MediaMetadataModel(
@@ -73,7 +73,7 @@ List<MediaMetadataModel> mediaList = [
     "p1",
     "Podcast",
     "Serial",
-    "https://ww2.kqed.org/app/uploads/sites/23/2015/03/Serial-iPhone.jpg",
+    "https://m.media-amazon.com/images/M/MV5BMDRhNmUyOTAtNzZkMS00ZWZmLTkwMGQtZTc1NjI1ODIwYjQwXkEyXkFqcGdeQXVyMTU3MzMwNQ@@._V1_.jpg",
     {
       "duration": "30-60 minutes",
       "producer": "Sarah Koenig",
@@ -84,7 +84,7 @@ List<MediaMetadataModel> mediaList = [
     "m2",
     "Movie",
     "The Godfather",
-    "https://static.wikia.nocookie.net/godfather/images/4/47/The_Godfather.jpg/revision/latest?cb=20100520182354",
+    "https://m.media-amazon.com/images/I/714ZOEiVNtL._RI_.jpg",
     {
       "director": "Francis Ford Coppola",
       "genre": "Crime",
@@ -120,7 +120,7 @@ List<MediaMetadataModel> mediaList = [
     "m3",
     "Movie",
     "The Dark Knight",
-    "https://soundvapors.com/wp-content/uploads/2020/06/The-Dark-Knight-Rises-830x1245.jpg",
+    "https://m.media-amazon.com/images/M/MV5BMTMxNTMwODM0NF5BMl5BanBnXkFtZTcwODAyMTk2Mw@@._V1_FMjpg_UX1000_.jpg",
     {
       "director": "Christopher Nolan",
       "genre": "Action",
@@ -131,7 +131,7 @@ List<MediaMetadataModel> mediaList = [
     "b3",
     "Book",
     "The Catcher in the Rye",
-    "https://kbimages1-a.akamaihd.net/264004f8-0018-4ec9-a503-eb3a686cb26e/353/569/90/False/j-d-salinger-s-the-catcher-in-the-rye-4.jpg",
+    "https://m.media-amazon.com/images/I/91HPG31dTwL.jpg",
     {"writer": "J.D. Salinger", "genre": "Classic", "pages": "277"},
   )
 ];

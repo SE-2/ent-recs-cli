@@ -17,7 +17,10 @@ class StoryItem extends StatelessWidget {
       child: Column(
         children: [
           Stack(children: [
-            story.isViewed ? _viewedStory() : _nonViewedStory(),
+            story.isViewed
+                ? _viewedStory()
+                : _nonViewedStory(
+                    Theme.of(context).colorScheme.tertiaryContainer),
             Positioned(
               bottom: 0,
               right: 0,
@@ -37,18 +40,20 @@ class StoryItem extends StatelessWidget {
           SizedBox(
             width: 68,
             child: Text(story.name,
-                style: const TextStyle(fontSize: 12, color: Color(0xff2D4379)),
+                style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                    fontSize: 12,
+                    color: Theme.of(context).colorScheme.onTertiary),
                 textAlign: TextAlign.center,
                 textWidthBasis: TextWidthBasis.longestLine,
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis),
-          )
+          ),
         ],
       ),
     );
   }
 
-  Container _nonViewedStory() {
+  Container _nonViewedStory(Color color) {
     return Container(
       width: 68,
       height: 68,
@@ -57,7 +62,7 @@ class StoryItem extends StatelessWidget {
       child: Container(
         margin: const EdgeInsets.all(2),
         decoration: BoxDecoration(
-            color: Colors.white, borderRadius: BorderRadius.circular(22)),
+            color: color, borderRadius: BorderRadius.circular(22)),
         padding: const EdgeInsets.all(5),
         child: _storyImage(),
       ),

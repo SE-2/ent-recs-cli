@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:supermedia/layers/domain/entities/media_metadata.dart';
+import 'package:supermedia/layers/presentation/shared/widgets/media_list_item_property.dart';
 
-import '../../../domain/entities/media_metadata.dart';
-import '../../shared/widgets/media_list_item_property.dart';
 
 class PostItem extends StatelessWidget {
   final MediaMetadata mediaMetadata;
