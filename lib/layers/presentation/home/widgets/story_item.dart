@@ -1,6 +1,7 @@
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:supermedia/layers/presentation/home/widgets/data.dart';
+import 'package:supermedia/layers/presentation/media/screens/show_media_screen.dart';
 
 class StoryItem extends StatelessWidget {
   const StoryItem({
@@ -12,38 +13,43 @@ class StoryItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.fromLTRB(8, 0, 8, 0),
-      child: Column(
-        children: [
-          Stack(children: [
-            story.isViewed ? _viewedStory() : _nonViewedStory(),
-            Positioned(
-              bottom: 0,
-              right: 0,
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(18),
-                child: Image.asset(
-                  'assets/images/icons/${story.iconFileName}',
-                  width: 20,
-                  height: 20,
+    return GestureDetector(
+      onTap: () {
+        Navigator.pushNamed(context, ShowMediaScreen.route);
+      },
+      child: Container(
+        margin: const EdgeInsets.fromLTRB(8, 0, 8, 0),
+        child: Column(
+          children: [
+            Stack(children: [
+              story.isViewed ? _viewedStory() : _nonViewedStory(),
+              Positioned(
+                bottom: 0,
+                right: 0,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(18),
+                  child: Image.asset(
+                    'assets/images/icons/${story.iconFileName}',
+                    width: 20,
+                    height: 20,
+                  ),
                 ),
               ),
+            ]),
+            const SizedBox(
+              height: 8,
             ),
-          ]),
-          const SizedBox(
-            height: 8,
-          ),
-          SizedBox(
-            width: 68,
-            child: Text(story.name,
-                style: const TextStyle(fontSize: 12, color: Color(0xff2D4379)),
-                textAlign: TextAlign.center,
-                textWidthBasis: TextWidthBasis.longestLine,
-                maxLines: 2,
-                overflow: TextOverflow.ellipsis),
-          )
-        ],
+            SizedBox(
+              width: 68,
+              child: Text(story.name,
+                  style: const TextStyle(fontSize: 12, color: Color(0xff2D4379)),
+                  textAlign: TextAlign.center,
+                  textWidthBasis: TextWidthBasis.longestLine,
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis),
+            )
+          ],
+        ),
       ),
     );
   }

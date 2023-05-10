@@ -15,6 +15,8 @@ import 'package:supermedia/layers/presentation/home/widgets/story_list.dart';
 enum DateFilter { all, today }
 
 class HomeScreen extends StatelessWidget {
+  static const String route = '/home';
+
   const HomeScreen({Key? key}) : super(key: key);
 
   @override
@@ -160,7 +162,7 @@ class _HomeFormState extends State<_HomeForm> {
               if (state is RecentItemsInitial) {
                 // todo center vertically
                 return Container(
-                  color: Colors.red,
+                  height: 64,
                   child: const Center(
                     child: Text('Empty List.'),
                   ),

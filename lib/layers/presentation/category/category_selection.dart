@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:supermedia/common/utils/app_localization.dart';
+import 'package:supermedia/layers/presentation/media/screens/show_media_screen.dart';
 import 'package:supermedia/layers/presentation/shared/widgets/custom_app_bar.dart';
 
 class Category {
@@ -10,6 +11,8 @@ class Category {
 }
 
 class SelectionScreen extends StatelessWidget {
+  static const String route = '/selection';
+
   const SelectionScreen({super.key});
 
   @override
@@ -103,7 +106,7 @@ class _SelectionFormState extends State<_SelectionForm> {
                   right: 0,
                   child: Container(
                     padding:
-                    const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
+                        const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
                     child: Text(category.name,
                         style: const TextStyle(
                             color: Colors.white,
@@ -133,8 +136,8 @@ class _SelectionFormState extends State<_SelectionForm> {
       ElevatedButton.icon(
         onPressed: selectedCategories.length >= 5
             ? () {
-          // todo navigate to recommend screen
-        }
+                Navigator.pushNamed(context, ShowMediaScreen.route);
+              }
             : null,
         label: Text(
           AppLocalization.of(context)!.getStarted,

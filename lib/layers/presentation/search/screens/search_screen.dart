@@ -11,6 +11,8 @@ import 'package:supermedia/layers/presentation/shared/widgets/media_list_item.da
 import 'package:supermedia/layers/presentation/shared/widgets/sort_option.dart';
 
 class SearchScreen extends StatelessWidget {
+  static const String route = '/search';
+
   const SearchScreen({Key? key}) : super(key: key);
 
   @override

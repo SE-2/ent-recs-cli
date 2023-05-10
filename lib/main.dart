@@ -6,17 +6,19 @@ import 'package:supermedia/common/theme/app_theme.dart';
 import 'package:supermedia/common/theme/app_theme_bloc.dart';
 import 'package:supermedia/common/utils/app_localization.dart';
 import 'package:supermedia/di/app_module.dart';
-import 'layers/presentation/home/screens/home_screen.dart';
+import 'package:supermedia/layers/presentation/route/app_router.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await setupLocator();
   await AppLocalization.init();
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  final AppRouter _appRoute = AppRouter();
+
+  MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +39,7 @@ class MyApp extends StatelessWidget {
                 theme: AppTheme.lightTheme,
                 darkTheme: AppTheme.darkTheme,
                 themeMode: themeMode,
-                home: locator<HomeScreen>()
+                onGenerateRoute: _appRoute.onGenerateRoute,
               );
             },
           );

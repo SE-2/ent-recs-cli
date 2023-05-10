@@ -5,10 +5,13 @@ import 'package:supermedia/di/app_module.dart';
 import 'package:supermedia/gen/assets.gen.dart';
 import 'package:supermedia/layers/presentation/auth/signup/bloc/signup_bloc.dart';
 import 'package:supermedia/layers/presentation/auth/signup/widgets/social_media_button.dart';
+import 'package:supermedia/layers/presentation/home/screens/home_screen.dart';
 import 'package:supermedia/layers/presentation/shared/widgets/app_primary_button.dart';
 import 'package:supermedia/layers/presentation/shared/widgets/app_text_field.dart';
 
 class SignupScreen extends StatelessWidget {
+  static const String route = '/';
+
   const SignupScreen({Key? key}) : super(key: key);
 
   @override
@@ -98,7 +101,17 @@ class _SignupFormState extends State<_SignupForm> {
                         const SizedBox(height: 24),
                         BlocBuilder<SignupBloc, SignupState>(
                           builder: (context, state) {
-                            if (state is SignupLoading) {
+                            if (state is SignupSuccess) {
+                              Future.delayed(const Duration(seconds: 1), () {
+                                Navigator.pushReplacementNamed(context, HomeScreen.route);
+                              });
+                              return SocialMediaButton(
+                                text: AppLocalization.of(context)!.continueWithGoogle,
+                                onPressed: _doOnContinueWithEmailPressed,
+                                icon: Assets.icons.google.svg(width: 24, height: 24),
+                              );
+                            }
+                            else if (state is SignupLoading) {
                               return Stack(
                                 alignment: Alignment.center,
                                 children: [

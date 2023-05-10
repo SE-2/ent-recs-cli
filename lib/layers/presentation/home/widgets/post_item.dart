@@ -1,37 +1,44 @@
 import 'package:flutter/material.dart';
+import 'package:supermedia/layers/presentation/media/screens/show_media_screen.dart';
 
 import '../../../domain/entities/media_metadata.dart';
 import '../../shared/widgets/media_list_item_property.dart';
 
 class PostItem extends StatelessWidget {
   final MediaMetadata mediaMetadata;
+
   const PostItem({super.key, required this.mediaMetadata});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.symmetric(vertical: 10),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          _buildMediaImage(),
-          const SizedBox(width: 16),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  mediaMetadata.title,
-                  style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                        fontWeight: FontWeight.bold,
-                      ),
-                ),
-                const SizedBox(height: 14),
-                ..._buildMediaProperties(),
-              ],
+    return GestureDetector(
+      onTap: () {
+        Navigator.pushNamed(context, ShowMediaScreen.route);
+      },
+      child: Container(
+        margin: const EdgeInsets.symmetric(vertical: 10),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            _buildMediaImage(),
+            const SizedBox(width: 16),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    mediaMetadata.title,
+                    style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                          fontWeight: FontWeight.bold,
+                        ),
+                  ),
+                  const SizedBox(height: 14),
+                  ..._buildMediaProperties(),
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
