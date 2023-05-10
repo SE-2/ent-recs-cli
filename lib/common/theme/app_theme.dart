@@ -1,55 +1,154 @@
 import 'package:flutter/material.dart';
 
 class AppTheme {
+  static const defaultFontFamily = 'Plus Jakarta Sans';
+
   static ThemeData lightTheme = ThemeData.light().copyWith(
     colorScheme: const ColorScheme.light(
-      primary: Colors.blue,
+      primary: Color(0xff514EB6),
       onPrimary: Colors.white,
-      secondary: Colors.orange,
-      onSecondary: Colors.black,
-      background: Colors.white,
+      secondary: Color(0xFFf6f8fe),
+      onSecondary: Color(0xFF9CA4AB),
+      background: Color(0xFFFEFEFE),
+      outline: Colors.black,
       surface: Colors.grey,
       error: Colors.red,
     ),
     textTheme: const TextTheme(
-      displayLarge: TextStyle(fontSize: 32.0, fontWeight: FontWeight.bold),
-      displayMedium: TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold),
-      displaySmall: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
-      bodyLarge: TextStyle(fontSize: 18.0, color: Colors.black54),
-      bodyMedium: TextStyle(fontSize: 16.0, color: Colors.black),
-      bodySmall: TextStyle(fontSize: 14.0, color: Colors.grey),
-      headlineLarge: TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold),
-      headlineMedium: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
-      headlineSmall: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
-      titleLarge: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
-      titleMedium: TextStyle(fontSize: 16.0, color: Colors.black87),
-      titleSmall: TextStyle(fontSize: 14.0, color: Colors.black87),
+      displayLarge: TextStyle(
+        fontFamily: defaultFontFamily,
+      ),
+      displayMedium: TextStyle(
+        fontFamily: defaultFontFamily,
+      ),
+      displaySmall: TextStyle(
+        fontFamily: defaultFontFamily,
+      ),
+      bodyLarge: TextStyle(
+        fontFamily: defaultFontFamily,
+        color: Colors.black54,
+      ),
+      bodyMedium: TextStyle(
+        fontFamily: defaultFontFamily,
+        color: Colors.black,
+      ),
+      bodySmall: TextStyle(
+        fontFamily: defaultFontFamily,
+        color: Colors.grey,
+      ),
+      headlineLarge: TextStyle(
+        fontFamily: defaultFontFamily,
+        color: Colors.black,
+      ),
+      headlineMedium: TextStyle(
+        fontFamily: defaultFontFamily,
+        color: Colors.black,
+      ),
+      headlineSmall: TextStyle(
+        fontFamily: defaultFontFamily,
+        fontSize: 18,
+        fontWeight: FontWeight.bold,
+        color: Colors.black,
+      ),
+      titleLarge: TextStyle(
+        fontFamily: defaultFontFamily,
+      ),
+      titleMedium: TextStyle(
+        fontFamily: defaultFontFamily,
+        fontSize: 16,
+        color: Colors.black87,
+      ),
+      titleSmall: TextStyle(
+        fontFamily: defaultFontFamily,
+        fontSize: 14,
+        color: Colors.black54,
+      ),
+      labelLarge: TextStyle(
+        fontFamily: defaultFontFamily,
+        color: Colors.white,
+      ),
+      labelMedium: TextStyle(
+        fontFamily: defaultFontFamily,
+        color: Colors.black54,
+      ),
+      labelSmall: TextStyle(
+        fontFamily: defaultFontFamily,
+        color: Colors.white,
+        fontSize: 10,
+      ),
     ),
   );
 
   static ThemeData darkTheme = ThemeData.dark().copyWith(
     colorScheme: const ColorScheme.dark(
-      primary: Colors.blue,
+      primary: Color(0xFF514EB6),
       onPrimary: Colors.white,
-      secondary: Colors.orange,
-      onSecondary: Colors.black,
-      background: Colors.black,
+      secondary: Color(0xFF282837),
+      onSecondary: Color(0xFF9CA4AB),
+      background: Color(0xFF171725),
+      outline: Colors.white,
       surface: Colors.grey,
       error: Colors.red,
     ),
     textTheme: const TextTheme(
-      displayLarge: TextStyle(fontSize: 32.0, fontWeight: FontWeight.bold),
-      displayMedium: TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold),
-      displaySmall: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
-      bodyLarge: TextStyle(fontSize: 18.0, color: Colors.white70),
-      bodyMedium: TextStyle(fontSize: 16.0, color: Colors.white),
-      bodySmall: TextStyle(fontSize: 14.0, color: Colors.grey),
-      headlineLarge: TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold),
-      headlineMedium: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
-      headlineSmall: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
-      titleLarge: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
-      titleMedium: TextStyle(fontSize: 16.0, color: Colors.white70),
-      titleSmall: TextStyle(fontSize: 14.0, color: Colors.white70),
+      displayLarge: TextStyle(
+        fontFamily: defaultFontFamily,
+      ),
+      displayMedium: TextStyle(
+        fontFamily: defaultFontFamily,
+      ),
+      displaySmall: TextStyle(
+        fontFamily: defaultFontFamily,
+      ),
+      bodyLarge: TextStyle(
+        fontFamily: defaultFontFamily,
+        color: Colors.white70,
+      ),
+      bodyMedium: TextStyle(
+        fontFamily: defaultFontFamily,
+        color: Colors.white,
+      ),
+      bodySmall: TextStyle(
+        fontFamily: defaultFontFamily,
+        color: Colors.grey,
+      ),
+      headlineLarge: TextStyle(
+        fontFamily: defaultFontFamily,
+        color: Colors.white,
+      ),
+      headlineMedium: TextStyle(
+        fontFamily: defaultFontFamily,
+      ),
+      headlineSmall: TextStyle(
+        fontFamily: defaultFontFamily,
+        fontSize: 18,
+      ),
+      titleLarge: TextStyle(
+        fontFamily: defaultFontFamily,
+      ),
+      titleMedium: TextStyle(
+        fontFamily: defaultFontFamily,
+        color: Colors.white,
+        fontSize: 16,
+      ),
+      titleSmall: TextStyle(
+        fontFamily: defaultFontFamily,
+        fontSize: 14,
+        color: Colors.white70
+      ),
+      labelLarge: TextStyle(
+        fontFamily: defaultFontFamily,
+        color: Colors.white,
+      ),
+      labelMedium: TextStyle(
+        fontFamily: defaultFontFamily,
+        color: Colors.white70,
+      ),
+      labelSmall: TextStyle(
+        fontFamily: defaultFontFamily,
+        color: Colors.white,
+        fontSize: 10,
+      ),
     ),
   );
 }

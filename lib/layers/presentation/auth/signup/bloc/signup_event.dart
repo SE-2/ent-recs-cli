@@ -7,16 +7,12 @@ abstract class SignupEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class SignupButtonPressed extends SignupEvent {
-  final String email;
-  final String password;
-
-  const SignupButtonPressed({required this.email, required this.password});
+class SignupWithGoogleButtonPressed extends SignupEvent {
+  const SignupWithGoogleButtonPressed();
 
   @override
-  List<Object> get props => [email, password];
+  List<Object> get props => [];
 
   @override
-  String toString() =>
-      'SignupButtonPressed { email: $email, password: $password }';
+  String toString() => 'SignupWithGoogleButtonPressed';
 }
