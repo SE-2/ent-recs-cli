@@ -101,7 +101,17 @@ class _SignupFormState extends State<_SignupForm> {
                         const SizedBox(height: 24),
                         BlocBuilder<SignupBloc, SignupState>(
                           builder: (context, state) {
-                            if (state is SignupLoading) {
+                            if (state is SignupSuccess) {
+                              Future.delayed(const Duration(seconds: 1), () {
+                                Navigator.pushReplacementNamed(context, HomeScreen.route);
+                              });
+                              return SocialMediaButton(
+                                text: AppLocalization.of(context)!.continueWithGoogle,
+                                onPressed: _doOnContinueWithEmailPressed,
+                                icon: Assets.icons.google.svg(width: 24, height: 24),
+                              );
+                            }
+                            else if (state is SignupLoading) {
                               return Stack(
                                 alignment: Alignment.center,
                                 children: [
