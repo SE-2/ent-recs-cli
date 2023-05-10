@@ -102,13 +102,19 @@ class _SignupFormState extends State<_SignupForm> {
                         BlocBuilder<SignupBloc, SignupState>(
                           builder: (context, state) {
                             if (state is SignupSuccess) {
-                              Future.delayed(const Duration(seconds: 1), () {
+                              Future.delayed(const Duration(milliseconds: 200), () {
                                 Navigator.pushReplacementNamed(context, HomeScreen.route);
                               });
-                              return SocialMediaButton(
-                                text: AppLocalization.of(context)!.continueWithGoogle,
-                                onPressed: _doOnContinueWithEmailPressed,
-                                icon: Assets.icons.google.svg(width: 24, height: 24),
+                              return Stack(
+                                alignment: Alignment.center,
+                                children: [
+                                  SocialMediaButton(
+                                    text: '',
+                                    onPressed: _doOnContinueWithEmailPressed,
+                                    icon: null,
+                                  ),
+                                  const CircularProgressIndicator(),
+                                ],
                               );
                             }
                             else if (state is SignupLoading) {
