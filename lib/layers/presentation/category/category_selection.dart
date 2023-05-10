@@ -10,6 +10,8 @@ class Category {
 }
 
 class SelectionScreen extends StatelessWidget {
+  static const String route = '/selection';
+
   const SelectionScreen({super.key});
 
   @override

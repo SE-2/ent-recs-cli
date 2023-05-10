@@ -1,7 +1,7 @@
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
+import 'package:supermedia/layers/presentation/category/category_selection.dart';
 import 'carousel/carousel_slider.dart';
 import 'category_item.dart';
 import 'data.dart';
@@ -15,6 +15,7 @@ class CategoryList extends StatefulWidget {
 
 class _CategoryListState extends State<CategoryList> {
   int currentIndex = 1;
+
   @override
   Widget build(BuildContext context) {
     final categories = AppDatabase.categories;
@@ -22,32 +23,37 @@ class _CategoryListState extends State<CategoryList> {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        CarouselSlider.builder(
-          itemCount: categories.length,
-          itemBuilder: (context, index, realIndex) {
-            return AspectRatio(
-              aspectRatio: 221.94 / 250,
-              child: CategoryItem(
-                category: categories[realIndex],
-                realIndex: realIndex,
-                currentIndex: currentIndex,
-              ),
-            );
+        GestureDetector(
+          onTap: () {
+            Navigator.of(context).pushNamed(SelectionScreen.route);
           },
-          options: CarouselOptions(
-            scrollDirection: Axis.horizontal,
-            viewportFraction: 0.45,
-            initialPage: 1,
-            disableCenter: false,
-            enableInfiniteScroll: false,
-            enlargeCenterPage: true,
-            enlargeStrategy: CenterPageEnlargeStrategy.height,
-            scrollPhysics: const BouncingScrollPhysics(),
-            onPageChanged: (index, reason) {
-              setState(() {
-                currentIndex = index;
-              });
+          child: CarouselSlider.builder(
+            itemCount: categories.length,
+            itemBuilder: (context, index, realIndex) {
+              return AspectRatio(
+                aspectRatio: 221.94 / 250,
+                child: CategoryItem(
+                  category: categories[realIndex],
+                  realIndex: realIndex,
+                  currentIndex: currentIndex,
+                ),
+              );
             },
+            options: CarouselOptions(
+              scrollDirection: Axis.horizontal,
+              viewportFraction: 0.45,
+              initialPage: 1,
+              disableCenter: false,
+              enableInfiniteScroll: false,
+              enlargeCenterPage: true,
+              enlargeStrategy: CenterPageEnlargeStrategy.height,
+              scrollPhysics: const BouncingScrollPhysics(),
+              onPageChanged: (index, reason) {
+                setState(() {
+                  currentIndex = index;
+                });
+              },
+            ),
           ),
         ),
         const SizedBox(

@@ -162,7 +162,7 @@ class _HomeFormState extends State<_HomeForm> {
               if (state is RecentItemsInitial) {
                 // todo center vertically
                 return Container(
-                  color: Colors.red,
+                  height: 64,
                   child: const Center(
                     child: Text('Empty List.'),
                   ),
