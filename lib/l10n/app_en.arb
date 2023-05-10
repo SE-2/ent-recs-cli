@@ -24,7 +24,7 @@
   "recommendScreenTitle": "Recommended for You",
   "search": "Search",
   "sort": "Sort",
-  "filter": "Filter"
+  "filter": "Filter",
   "enterYourEmail": "Enter your email",
   "createAccount": "Create account",
   "welcomeToApp": "Welcome to super media!",
@@ -34,7 +34,7 @@
   "continueWithTwitter": "Continue with twitter",
   "alreadyHaveAnAccount": "Already have an account?",
   "login": "Login",
-  "or": "Or"
+  "or": "Or",
   "dateFilterToday":"Today",
   "dateFilterAll":"All"
 }
