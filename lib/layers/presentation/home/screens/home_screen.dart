@@ -2,6 +2,7 @@ import 'package:custom_sliding_segmented_control/custom_sliding_segmented_contro
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:supermedia/di/app_module.dart';
+import 'package:supermedia/layers/data/models/user_model.dart';
 import 'package:supermedia/layers/presentation/home/bloc/recent_items/recent_items_bloc.dart';
 import 'package:supermedia/layers/presentation/home/bloc/recent_items/recent_items_event.dart';
 import 'package:supermedia/layers/presentation/home/bloc/recent_items/recent_items_state.dart';
@@ -16,8 +17,9 @@ enum DateFilter { all, today }
 
 class HomeScreen extends StatelessWidget {
   static const String route = '/home';
+  final UserModel? userModel;
 
-  const HomeScreen({Key? key}) : super(key: key);
+  const HomeScreen({Key? key, required this.userModel}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -29,13 +31,17 @@ class HomeScreen extends StatelessWidget {
       ],
       child: Scaffold(
         backgroundColor: Theme.of(context).colorScheme.background,
-        body: _HomeForm(),
+        body: _HomeForm(userModel: userModel!),
       ),
     );
   }
 }
 
 class _HomeForm extends StatefulWidget {
+  final UserModel userModel;
+
+  const _HomeForm({super.key, required this.userModel});
+
   @override
   _HomeFormState createState() => _HomeFormState();
 }
@@ -59,23 +65,26 @@ class _HomeFormState extends State<_HomeForm> {
             children: [
               Padding(
                 padding: const EdgeInsets.fromLTRB(24, 55, 15, 0),
-                child: Image.asset(
-                  'assets/images/icons/profile_icon.png',
+                child: Container(
                   width: 40,
                   height: 40,
-                ),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(24),
+                    image: DecorationImage(image: NetworkImage(widget.userModel.photoUrl!),)
+                  ),
+                )
               ),
               Padding(
                 padding: const EdgeInsets.fromLTRB(0, 52, 0, 0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: const [
+                  children: [
                     Text(
-                      'Hi, Mohammad',
+                      'Hi, ${widget.userModel.name}',
                       style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                          const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
                     ),
-                    Text(
+                    const Text(
                       'Explore today items',
                       style: TextStyle(
                           fontSize: 12,
@@ -138,14 +147,13 @@ class _HomeFormState extends State<_HomeForm> {
             padding: const EdgeInsets.fromLTRB(0, 0, 0, 20),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: const [
+              children: [
                 Text(
                   'See what’s good for you!',
-                  style: TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                      color: Color(0xff0D253C)),
-                ),
+                  style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                    fontWeight: FontWeight.bold
+                  ),
+                )
               ],
             ),
           ),

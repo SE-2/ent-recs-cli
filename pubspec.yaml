@@ -99,6 +99,7 @@ flutter:
     - assets/images/posts/
     - assets/images/items/
     - assets/icons/
+    - assets/images/default_category.png
 
   fonts:
     - family: Plus Jakarta Sans

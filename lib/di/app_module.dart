@@ -82,7 +82,7 @@ void _setupScreens() {
   locator.registerLazySingleton<SignupScreen>(() => const SignupScreen());
   locator.registerLazySingleton<SettingsScreen>(() => const SettingsScreen());
   locator.registerLazySingleton<ShowMediaScreen>(( )=>const ShowMediaScreen());
-  locator.registerLazySingleton<HomeScreen>(() => const HomeScreen());
+  locator.registerLazySingleton<HomeScreen>(() => const HomeScreen(userModel: null));
   locator.registerLazySingleton<SearchScreen>(() => const SearchScreen());
   locator.registerLazySingleton<RecommendScreen>(() => const RecommendScreen());
 }

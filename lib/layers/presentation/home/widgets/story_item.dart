@@ -13,7 +13,7 @@ class StoryItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
+    return InkWell(
       onTap: () {
         Navigator.pushNamed(context, ShowMediaScreen.route);
       },
@@ -42,7 +42,9 @@ class StoryItem extends StatelessWidget {
             SizedBox(
               width: 68,
               child: Text(story.name,
-                  style: const TextStyle(fontSize: 12, color: Color(0xff2D4379)),
+                  style: Theme.of(context).textTheme.titleSmall!.copyWith(
+                    fontSize: 12
+                  ),
                   textAlign: TextAlign.center,
                   textWidthBasis: TextWidthBasis.longestLine,
                   maxLines: 2,

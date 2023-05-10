@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
+import 'package:supermedia/layers/data/models/user_model.dart';
 import 'package:supermedia/layers/presentation/auth/signup/screens/signup_screen.dart';
 import 'package:supermedia/layers/presentation/category/category_selection.dart';
 import 'package:supermedia/layers/presentation/home/screens/home_screen.dart';
@@ -20,9 +21,11 @@ class AppRouter {
         );
 
       case HomeScreen.route:
+        var userModel = routeSettings.arguments as UserModel;
+
         return MaterialPageRoute(
           builder: (_) {
-            return HomeScreen();
+            return HomeScreen(userModel: userModel);
           },
         );
 

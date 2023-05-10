@@ -1,3 +1,5 @@
+import 'package:supermedia/layers/data/models/user_model.dart';
+
 abstract class UserRepository {
-  Future<void> signUpWithGoogle();
+  Future<UserModel> signUpWithGoogle();
 }
