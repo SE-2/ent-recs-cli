@@ -20,22 +20,26 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       elevation: 0,
       leading: showBackButton
           ? Padding(
-            padding: const EdgeInsets.fromLTRB(16, 16, 0, 0),
-            child: IconButton(
-                icon: const Icon(Icons.arrow_back),
+              padding: const EdgeInsets.fromLTRB(16, 16, 0, 0),
+              child: IconButton(
+                icon: Icon(
+                  Icons.arrow_back,
+                  color: Theme.of(context).colorScheme.outline,
+                ),
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
               ),
-          )
+            )
           : null,
       title: Padding(
         padding: const EdgeInsets.fromLTRB(0, 12, 0, 0),
         child: Text(
           title,
-          style: Theme.of(context).textTheme.headlineSmall!.copyWith(
-            fontWeight: FontWeight.bold
-          ),
+          style: Theme.of(context)
+              .textTheme
+              .headlineSmall!
+              .copyWith(fontWeight: FontWeight.bold),
         ),
       ),
       centerTitle: true,

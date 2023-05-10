@@ -20,7 +20,7 @@ class ShowMediaScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     RawMaterialButton(
-                      onPressed: null,
+                      onPressed: () { Navigator.pop(context); },
                       elevation: 2.0,
                       hoverColor: const Color(0xffE3E9ED),
                       fillColor: const Color(0xffECF1F6).withOpacity(0.7),
