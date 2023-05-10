@@ -91,7 +91,7 @@ class AppTheme {
       onSecondary: Color(0xFF282837),
       tertiary: Colors.white,
       onTertiary: Colors.white,
-      tertiaryContainer: Color(0xff9CA4AB),
+      tertiaryContainer:Colors.white70,
       background: Color(0xFF171725),
       surface: Color(0xff9CA4AB),
       error: Colors.red,

@@ -52,7 +52,7 @@ List<MediaMetadataModel> mediaList = [
     "m1",
     "Movie",
     "The Shawshank Redemption",
-    "https://images.flickdirect.com/cache/movies/shawshank-redemption/05000-shawshank-redemption-poster.jpg",
+    "https://m.media-amazon.com/images/M/MV5BNDE3ODcxYzMtY2YzZC00NmNlLWJiNDMtZDViZWM2MzIxZDYwXkEyXkFqcGdeQXVyNjAwNDUxODI@._V1_.jpg",
     {"director": "Frank Darabont", "genre": "Drama", "productionYear": "1994"},
   ),
   MediaMetadataModel(
