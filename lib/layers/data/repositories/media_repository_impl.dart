@@ -9,14 +9,32 @@ class MediaRepositoryImp implements MediaRepository {
       locator<RemoteMediaDataSource>();
 
   @override
-  Future<List<MediaMetadata>> recommend() {
-    // TODO: implement recommend
-    throw UnimplementedError();
+  Future<List<MediaMetadata>> recommend() async {
+    List<MediaMetadataModel> models = await _remoteDataSource.recommend();
+    return models.map((e) => MediaMetadata.fromModel(e)).toList();
   }
 
   @override
   Future<List<MediaMetadata>> search(String query) async {
     List<MediaMetadataModel> models = await _remoteDataSource.search(query);
+    return models.map((e) => MediaMetadata.fromModel(e)).toList();
+  }
+  
+  @override
+  Future<List<MediaMetadata>> getAllTimesTrendMedia() async {
+    List<MediaMetadataModel> models = await _remoteDataSource.getAllTimesTrendMedia();
+    return models.map((e) => MediaMetadata.fromModel(e)).toList();
+  }
+  
+  @override
+  Future<List<MediaMetadata>> getRecentWatchedMedia() async {
+    List<MediaMetadataModel> models = await _remoteDataSource.getRecentWatchedMedia();
+    return models.map((e) => MediaMetadata.fromModel(e)).toList();
+  }
+  
+  @override
+  Future<List<MediaMetadata>> getTodayTrendMedia() async {
+    List<MediaMetadataModel> models = await _remoteDataSource.getTodayTrendMedia();
     return models.map((e) => MediaMetadata.fromModel(e)).toList();
   }
 }

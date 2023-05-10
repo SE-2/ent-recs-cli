@@ -34,4 +34,6 @@
   "alreadyHaveAnAccount": "حساب کاربری دارید؟",
   "login": "ورود",
   "or": "یا"
+  "dateFilterToday":"امروز",
+  "dateFilterAll":"همه"
 }

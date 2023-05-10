@@ -6,7 +6,7 @@ import 'package:supermedia/common/theme/app_theme.dart';
 import 'package:supermedia/common/theme/app_theme_bloc.dart';
 import 'package:supermedia/common/utils/app_localization.dart';
 import 'package:supermedia/di/app_module.dart';
-import 'package:supermedia/layers/presentation/auth/signup/screens/signup_screen.dart';
+import 'layers/presentation/home/screens/home_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -38,7 +38,7 @@ class MyApp extends StatelessWidget {
                 theme: AppTheme.lightTheme,
                 darkTheme: AppTheme.darkTheme,
                 themeMode: themeMode,
-                home: locator<SignupScreen>(),
+                home: locator<HomeScreen>()
               );
             },
           );
