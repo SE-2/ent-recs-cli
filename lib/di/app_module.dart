@@ -1,4 +1,5 @@
 import 'package:get_it/get_it.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:supermedia/common/locale/app_locale_bloc.dart';
 import 'package:supermedia/common/theme/app_theme_bloc.dart';
@@ -53,6 +54,16 @@ void _setupRemoteDataSources() {
       () => RemoteMediaDataSourceImpl());
 }
 
+void _setupThirdPartyLibraries() {
+  locator.registerLazySingleton<GoogleSignIn>(
+      () => GoogleSignIn(
+        scopes: [
+          'https://www.googleapis.com/auth/contacts.readonly',
+        ],
+        clientId: '355571272838-hj8sfomh23finum1nbbg2g35nqvh31tv.apps.googleusercontent.com',
+      ));
+}
+
 void _setupRepositories() {
   locator.registerLazySingleton<UserRepository>(() => UserRepositoryImpl());
   locator.registerLazySingleton<MediaRepository>(() => MediaRepositoryImp());
@@ -98,6 +109,7 @@ Future<void> setupLocator() async {
   _setupUseCases();
   _setupBlocs();
   _setupScreens();
+  _setupThirdPartyLibraries();
 
   await locator.allReady();
 }

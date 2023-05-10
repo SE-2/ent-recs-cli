@@ -6,6 +6,7 @@ import 'package:supermedia/layers/data/data_sources/abstractions/local_data_sour
 class LocalDataSourceImpl implements LocalDataSource {
   static const String _themeModeKey = 'theme_mode';
   static const String _localeKey = 'locale';
+  static const String _tokenKey = 'token';
 
   final _prefs = locator<SharedPreferences>();
 
@@ -36,5 +37,15 @@ class LocalDataSourceImpl implements LocalDataSource {
   Future<void> setLocale(Locale locale) {
     return _prefs.setString(
         _localeKey, '${locale.languageCode}_${locale.countryCode}');
+  }
+
+  @override
+  String? getToken() {
+    return _prefs.getString(_tokenKey);
+}
+
+  @override
+  Future<void> storeToken(String token) {
+    return _prefs.setString(_tokenKey, '$token');
   }
 }

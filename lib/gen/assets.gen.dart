@@ -17,14 +17,27 @@ class $AssetsIconsGen {
   /// File path: assets/icons/calendar.svg
   SvgGenImage get calendar => const SvgGenImage('assets/icons/calendar.svg');
 
+  /// File path: assets/icons/facebook.svg
+  SvgGenImage get facebook => const SvgGenImage('assets/icons/facebook.svg');
+
   /// File path: assets/icons/film.svg
   SvgGenImage get film => const SvgGenImage('assets/icons/film.svg');
+
+  /// File path: assets/icons/google.svg
+  SvgGenImage get google => const SvgGenImage('assets/icons/google.svg');
+
+  /// File path: assets/icons/line.svg
+  SvgGenImage get line => const SvgGenImage('assets/icons/line.svg');
 
   /// File path: assets/icons/paper.svg
   SvgGenImage get paper => const SvgGenImage('assets/icons/paper.svg');
 
+  /// File path: assets/icons/twitter.svg
+  SvgGenImage get twitter => const SvgGenImage('assets/icons/twitter.svg');
+
   /// List of all assets
-  List<SvgGenImage> get values => [calendar, film, paper];
+  List<SvgGenImage> get values =>
+      [calendar, facebook, film, google, line, paper, twitter];
 }
 
 class $AssetsImagesGen {

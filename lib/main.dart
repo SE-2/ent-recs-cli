@@ -12,6 +12,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await setupLocator();
   await AppLocalization.init();
+  // await Firebase.initializeApp();
   runApp(const MyApp());
 }
 
@@ -37,7 +38,7 @@ class MyApp extends StatelessWidget {
                 theme: AppTheme.lightTheme,
                 darkTheme: AppTheme.darkTheme,
                 themeMode: themeMode,
-                home: locator<HomeScreen>(),
+                home: locator<HomeScreen>()
               );
             },
           );

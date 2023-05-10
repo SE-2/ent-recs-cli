@@ -24,6 +24,16 @@
   "search": "جستجو",
   "sort": "مرتب سازی",
   "filter": "فیلتر",
+  "enterYourEmail": "ایمیل خود را وارد کنید",
+  "createAccount": "ساخت حساب کاربری",
+  "welcomeToApp": "به سوپرمدیا خوش آمدید!",
+  "continueWithEmail": "ادامه دادن با ایمیل",
+  "continueWithGoogle": "ادامه دادن با گوگل",
+  "continueWithFacebook": "ادامه دادن با فیسبوک",
+  "continueWithTwitter": "ادامه دادن با توییتر",
+  "alreadyHaveAnAccount": "حساب کاربری دارید؟",
+  "login": "ورود",
+  "or": "یا",
   "dateFilterToday":"امروز",
   "dateFilterAll":"همه"
 }
