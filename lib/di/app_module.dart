@@ -25,6 +25,7 @@ import 'package:supermedia/layers/domain/use_cases/implementations/recommend_use
 import 'package:supermedia/layers/domain/use_cases/implementations/search_use_case_impl.dart';
 import 'package:supermedia/layers/domain/use_cases/implementations/trend_items_use_case_impl.dart';
 import 'package:supermedia/layers/domain/use_cases/signup_use_case.dart';
+import 'package:supermedia/layers/presentation/media/screens/show_media_screen.dart';
 import 'package:supermedia/layers/presentation/auth/signup/bloc/signup_bloc.dart';
 import 'package:supermedia/layers/presentation/auth/signup/screens/signup_screen.dart';
 import 'package:supermedia/layers/presentation/home/bloc/recent_items/recent_items_bloc.dart';
@@ -80,6 +81,7 @@ void _setupUseCases() {
 void _setupScreens() {
   locator.registerLazySingleton<SignupScreen>(() => const SignupScreen());
   locator.registerLazySingleton<SettingsScreen>(() => const SettingsScreen());
+  locator.registerLazySingleton<ShowMediaScreen>(( )=>const ShowMediaScreen());
   locator.registerLazySingleton<HomeScreen>(() => const HomeScreen());
   locator.registerLazySingleton<SearchScreen>(() => const SearchScreen());
   locator.registerLazySingleton<RecommendScreen>(() => const RecommendScreen());

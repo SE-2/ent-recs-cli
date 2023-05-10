@@ -92,8 +92,7 @@ flutter:
     - assets/images/categories/
     - assets/images/item/
     - assets/images/posts/
-
-
+    - assets/images/items/
     - assets/icons/
 
   fonts:

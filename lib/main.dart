@@ -12,7 +12,6 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await setupLocator();
   await AppLocalization.init();
-  // await Firebase.initializeApp();
   runApp(const MyApp());
 }
 
