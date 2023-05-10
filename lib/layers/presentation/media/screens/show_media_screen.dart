@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class ShowMediaScreen extends StatelessWidget {
+  static const String route = '/show_media';
+
   const ShowMediaScreen({super.key});
 
   @override

@@ -5,10 +5,13 @@ import 'package:supermedia/di/app_module.dart';
 import 'package:supermedia/gen/assets.gen.dart';
 import 'package:supermedia/layers/presentation/auth/signup/bloc/signup_bloc.dart';
 import 'package:supermedia/layers/presentation/auth/signup/widgets/social_media_button.dart';
+import 'package:supermedia/layers/presentation/home/screens/home_screen.dart';
 import 'package:supermedia/layers/presentation/shared/widgets/app_primary_button.dart';
 import 'package:supermedia/layers/presentation/shared/widgets/app_text_field.dart';
 
 class SignupScreen extends StatelessWidget {
+  static const String route = '/';
+
   const SignupScreen({Key? key}) : super(key: key);
 
   @override

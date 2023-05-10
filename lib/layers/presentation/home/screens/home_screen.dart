@@ -15,6 +15,8 @@ import 'package:supermedia/layers/presentation/home/widgets/story_list.dart';
 enum DateFilter { all, today }
 
 class HomeScreen extends StatelessWidget {
+  static const String route = '/home';
+
   const HomeScreen({Key? key}) : super(key: key);
 
   @override

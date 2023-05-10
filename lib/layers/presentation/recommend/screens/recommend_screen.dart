@@ -9,6 +9,8 @@ import 'package:supermedia/layers/presentation/shared/widgets/media_list_item.da
 import 'package:supermedia/layers/presentation/shared/widgets/sort_option.dart';
 
 class RecommendScreen extends StatelessWidget {
+  static const String route = '/recommend';
+
   const RecommendScreen({Key? key}) : super(key: key);
 
   @override
