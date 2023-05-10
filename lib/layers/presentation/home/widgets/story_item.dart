@@ -1,7 +1,6 @@
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:supermedia/layers/presentation/home/widgets/data.dart';
-import 'package:supermedia/layers/presentation/media/screens/show_media_screen.dart';
 
 class StoryItem extends StatelessWidget {
   const StoryItem({
@@ -13,48 +12,48 @@ class StoryItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        Navigator.pushNamed(context, ShowMediaScreen.route);
-      },
-      child: Container(
-        margin: const EdgeInsets.fromLTRB(8, 0, 8, 0),
-        child: Column(
-          children: [
-            Stack(children: [
-              story.isViewed ? _viewedStory() : _nonViewedStory(),
-              Positioned(
-                bottom: 0,
-                right: 0,
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(18),
-                  child: Image.asset(
-                    'assets/images/icons/${story.iconFileName}',
-                    width: 20,
-                    height: 20,
-                  ),
+    return Container(
+      margin: const EdgeInsets.fromLTRB(8, 0, 8, 0),
+      child: Column(
+        children: [
+          Stack(children: [
+            story.isViewed
+                ? _viewedStory()
+                : _nonViewedStory(
+                    Theme.of(context).colorScheme.tertiaryContainer),
+            Positioned(
+              bottom: 0,
+              right: 0,
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(18),
+                child: Image.asset(
+                  'assets/images/icons/${story.iconFileName}',
+                  width: 20,
+                  height: 20,
                 ),
               ),
-            ]),
-            const SizedBox(
-              height: 8,
             ),
-            SizedBox(
-              width: 68,
-              child: Text(story.name,
-                  style: const TextStyle(fontSize: 12, color: Color(0xff2D4379)),
-                  textAlign: TextAlign.center,
-                  textWidthBasis: TextWidthBasis.longestLine,
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis),
-            )
-          ],
-        ),
+          ]),
+          const SizedBox(
+            height: 8,
+          ),
+          SizedBox(
+            width: 68,
+            child: Text(story.name,
+                style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                    fontSize: 12,
+                    color: Theme.of(context).colorScheme.onTertiary),
+                textAlign: TextAlign.center,
+                textWidthBasis: TextWidthBasis.longestLine,
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis),
+          ),
+        ],
       ),
     );
   }
 
-  Container _nonViewedStory() {
+  Container _nonViewedStory(Color color) {
     return Container(
       width: 68,
       height: 68,
@@ -63,7 +62,7 @@ class StoryItem extends StatelessWidget {
       child: Container(
         margin: const EdgeInsets.all(2),
         decoration: BoxDecoration(
-            color: Colors.white, borderRadius: BorderRadius.circular(22)),
+            color: color, borderRadius: BorderRadius.circular(22)),
         padding: const EdgeInsets.all(5),
         child: _storyImage(),
       ),
