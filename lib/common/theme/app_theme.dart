@@ -8,12 +8,11 @@ class AppTheme {
       primary: Color(0xff514EB6),
       onPrimary: Colors.white,
       secondary: Color(0xFFf6f8fe),
-      onSecondary: Color(0xFFf6f8fe),
-      tertiary: Color(0xff0D253C),
-      onTertiary: Color(0xff2D4379),
-      tertiaryContainer: Colors.white,
+      onSecondary: Color(0xFF9CA4AB),
+      tertiary: Color(0xff78828A),
       background: Color(0xFFFEFEFE),
-      surface: Color(0xff9CA4AB),
+      outline: Colors.black,
+      surface: Colors.grey,
       error: Colors.red,
     ),
     textTheme: const TextTheme(
@@ -54,6 +53,8 @@ class AppTheme {
       ),
       titleLarge: TextStyle(
         fontFamily: defaultFontFamily,
+        fontSize: 24,
+        color: Color(0xff0D253C),
       ),
       titleMedium: TextStyle(
         fontFamily: defaultFontFamily,
@@ -85,13 +86,12 @@ class AppTheme {
     colorScheme: const ColorScheme.dark(
       primary: Color(0xFF514EB6),
       onPrimary: Colors.white,
-      secondary: Color(0xFF171725),
-      onSecondary: Color(0xFF282837),
-      tertiary: Colors.white,
-      onTertiary: Colors.white,
-      tertiaryContainer: Colors.white70,
+      secondary: Color(0xFF282837),
+      onSecondary: Color(0xFF9CA4AB),
+      tertiary: Color(0xffF6F8FE),
       background: Color(0xFF171725),
-      surface: Color(0xff9CA4AB),
+      outline: Colors.white,
+      surface: Colors.grey,
       error: Colors.red,
     ),
     textTheme: const TextTheme(
@@ -125,10 +125,13 @@ class AppTheme {
       ),
       headlineSmall: TextStyle(
         fontFamily: defaultFontFamily,
+        color: Colors.white,
         fontSize: 18,
       ),
       titleLarge: TextStyle(
         fontFamily: defaultFontFamily,
+        fontSize: 24,
+        color: Colors.white,
       ),
       titleMedium: TextStyle(
         fontFamily: defaultFontFamily,
