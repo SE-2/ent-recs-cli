@@ -102,8 +102,9 @@ class _SignupFormState extends State<_SignupForm> {
                         BlocBuilder<SignupBloc, SignupState>(
                           builder: (context, state) {
                             if (state is SignupSuccess) {
+                              var userModel = state.userModel;
                               Future.delayed(const Duration(milliseconds: 200), () {
-                                Navigator.pushReplacementNamed(context, HomeScreen.route);
+                                Navigator.pushReplacementNamed(context, HomeScreen.route, arguments: userModel);
                               });
                               return Stack(
                                 alignment: Alignment.center,

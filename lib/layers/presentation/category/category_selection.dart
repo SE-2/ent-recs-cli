@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:supermedia/common/utils/app_localization.dart';
+import 'package:supermedia/gen/assets.gen.dart';
 import 'package:supermedia/layers/presentation/media/screens/show_media_screen.dart';
+import 'package:supermedia/layers/presentation/recommend/screens/recommend_screen.dart';
 import 'package:supermedia/layers/presentation/shared/widgets/custom_app_bar.dart';
 
 class Category {
@@ -78,8 +80,9 @@ class _SelectionFormState extends State<_SelectionForm> {
               child: Stack(children: [
                 Container(
                   decoration: BoxDecoration(
+
                     image: DecorationImage(
-                      image: NetworkImage(category.image),
+                      image: Image.asset('assets/images/default_category.png').image,
                       fit: BoxFit.cover,
                     ),
                     borderRadius: BorderRadius.circular(10),
@@ -136,7 +139,7 @@ class _SelectionFormState extends State<_SelectionForm> {
       ElevatedButton.icon(
         onPressed: selectedCategories.length >= 5
             ? () {
-                Navigator.pushNamed(context, ShowMediaScreen.route);
+                Navigator.pushNamed(context, RecommendScreen.route);
               }
             : null,
         label: Text(

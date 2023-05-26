@@ -54,6 +54,8 @@ class AppTheme {
       ),
       titleLarge: TextStyle(
         fontFamily: defaultFontFamily,
+        fontSize: 24,
+        color: Color(0xff0D253C),
       ),
       titleMedium: TextStyle(
         fontFamily: defaultFontFamily,
@@ -129,6 +131,8 @@ class AppTheme {
       ),
       titleLarge: TextStyle(
         fontFamily: defaultFontFamily,
+        fontSize: 24,
+        color: Colors.white,
       ),
       titleMedium: TextStyle(
         fontFamily: defaultFontFamily,
