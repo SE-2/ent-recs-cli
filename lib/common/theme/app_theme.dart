@@ -8,10 +8,12 @@ class AppTheme {
       primary: Color(0xff514EB6),
       onPrimary: Colors.white,
       secondary: Color(0xFFf6f8fe),
-      onSecondary: Color(0xFF9CA4AB),
+      onSecondary: Color(0xFFf6f8fe),
+      tertiary: Color(0xff0D253C),
+      onTertiary: Color(0xff2D4379),
+      tertiaryContainer: Colors.white,
       background: Color(0xFFFEFEFE),
-      outline: Colors.black,
-      surface: Colors.grey,
+      surface: Color(0xff9CA4AB),
       error: Colors.red,
     ),
     textTheme: const TextTheme(
@@ -85,11 +87,13 @@ class AppTheme {
     colorScheme: const ColorScheme.dark(
       primary: Color(0xFF514EB6),
       onPrimary: Colors.white,
-      secondary: Color(0xFF282837),
-      onSecondary: Color(0xFF9CA4AB),
+      secondary: Color(0xFF171725),
+      onSecondary: Color(0xFF282837),
+      tertiary: Colors.white,
+      onTertiary: Colors.white,
+      tertiaryContainer: Colors.white70,
       background: Color(0xFF171725),
-      outline: Colors.white,
-      surface: Colors.grey,
+      surface: Color(0xff9CA4AB),
       error: Colors.red,
     ),
     textTheme: const TextTheme(
@@ -136,10 +140,7 @@ class AppTheme {
         fontSize: 16,
       ),
       titleSmall: TextStyle(
-        fontFamily: defaultFontFamily,
-        fontSize: 14,
-        color: Colors.white70
-      ),
+          fontFamily: defaultFontFamily, fontSize: 14, color: Colors.white70),
       labelLarge: TextStyle(
         fontFamily: defaultFontFamily,
         color: Colors.white,
