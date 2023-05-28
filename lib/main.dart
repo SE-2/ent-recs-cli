@@ -7,6 +7,7 @@ import 'package:supermedia/common/theme/app_theme_bloc.dart';
 import 'package:supermedia/common/utils/app_localization.dart';
 import 'package:supermedia/di/app_module.dart';
 import 'package:supermedia/layers/presentation/route/app_router.dart';
+import 'package:supermedia/layers/presentation/setting/screens/settings_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -39,7 +40,8 @@ class MyApp extends StatelessWidget {
                 theme: AppTheme.lightTheme,
                 darkTheme: AppTheme.darkTheme,
                 themeMode: themeMode,
-                onGenerateRoute: _appRoute.onGenerateRoute,
+                // onGenerateRoute: _appRoute.onGenerateRoute,
+                home: locator<SettingsScreen>(),
               );
             },
           );

@@ -35,7 +35,7 @@ import 'package:supermedia/layers/presentation/recommend/screens/recommend_scree
 import 'package:supermedia/layers/presentation/recommend/bloc/recommend_bloc.dart';
 import 'package:supermedia/layers/presentation/search/bloc/search_bloc.dart';
 import 'package:supermedia/layers/presentation/search/screens/search_screen.dart';
-import 'package:supermedia/layers/presentation/settings/screens/settings_screen.dart';
+import 'package:supermedia/layers/presentation/setting/screens/settings_screen.dart';
 
 final locator = GetIt.instance;
 
