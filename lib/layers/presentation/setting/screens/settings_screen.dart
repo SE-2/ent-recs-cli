@@ -8,6 +8,7 @@ class SettingsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Color iconColor = Theme.of(context).colorScheme.onTertiaryContainer;
     return Scaffold(
       appBar: const CustomAppBar(
         title: 'Settings',
@@ -34,7 +35,10 @@ class SettingsScreen extends StatelessWidget {
                   children: [
                     Text(
                       'Andy Lexsian',
-                      style: Theme.of(context).textTheme.headlineSmall,
+                      style: Theme.of(context)
+                          .textTheme
+                          .headlineSmall
+                          ?.copyWith(fontWeight: FontWeight.bold),
                       textAlign: TextAlign.start,
                     ),
                     const SizedBox(
@@ -63,15 +67,21 @@ class SettingsScreen extends StatelessWidget {
                     title: 'Personal Info',
                     fields: [
                       Pair(
-                          title: 'Profile',
-                          icon: Assets.icons.person.svg(),
-                          showChevronRight: true,
-                          showToggleButton: false),
+                        title: 'Profile',
+                        icon: Assets.icons.person.svg(
+                          colorFilter:
+                              ColorFilter.mode(iconColor, BlendMode.srcIn),
+                        ),
+                        showChevronRight: true,
+                      ),
                       Pair(
-                          title: 'Wishlist',
-                          icon: Assets.icons.bookmark.svg(),
-                          showChevronRight: true,
-                          showToggleButton: false)
+                        title: 'Wishlist',
+                        icon: Assets.icons.bookmark.svg(
+                          colorFilter:
+                              ColorFilter.mode(iconColor, BlendMode.srcIn),
+                        ),
+                        showChevronRight: true,
+                      )
                     ],
                   ),
                   const SizedBox(
@@ -82,8 +92,10 @@ class SettingsScreen extends StatelessWidget {
                     fields: [
                       Pair(
                           title: 'Dark Mode',
-                          icon: Assets.icons.themeMode.svg(),
-                          showChevronRight: false,
+                          icon: Assets.icons.themeMode.svg(
+                            colorFilter:
+                                ColorFilter.mode(iconColor, BlendMode.srcIn),
+                          ),
                           showToggleButton: true),
                     ],
                   ),
@@ -94,15 +106,21 @@ class SettingsScreen extends StatelessWidget {
                     title: 'Security',
                     fields: [
                       Pair(
-                          title: 'Change Password',
-                          icon: Assets.icons.lock.svg(),
-                          showChevronRight: true,
-                          showToggleButton: false),
+                        title: 'Change Password',
+                        icon: Assets.icons.lock.svg(
+                          colorFilter:
+                              ColorFilter.mode(iconColor, BlendMode.srcIn),
+                        ),
+                        showChevronRight: true,
+                      ),
                       Pair(
-                          title: 'Forgot Password',
-                          icon: Assets.icons.unlock.svg(),
-                          showChevronRight: true,
-                          showToggleButton: false)
+                        title: 'Forgot Password',
+                        icon: Assets.icons.unlock.svg(
+                          colorFilter:
+                              ColorFilter.mode(iconColor, BlendMode.srcIn),
+                        ),
+                        showChevronRight: true,
+                      )
                     ],
                   ),
                   const SizedBox(
@@ -112,15 +130,21 @@ class SettingsScreen extends StatelessWidget {
                     title: 'General',
                     fields: [
                       Pair(
-                          title: 'Language',
-                          icon: Assets.icons.globe.svg(),
-                          showChevronRight: true,
-                          showToggleButton: false),
+                        title: 'Language',
+                        icon: Assets.icons.globe.svg(
+                          colorFilter:
+                              ColorFilter.mode(iconColor, BlendMode.srcIn),
+                        ),
+                        showChevronRight: true,
+                      ),
                       Pair(
-                          title: 'Clear Cache',
-                          icon: Assets.icons.trash.svg(),
-                          showChevronRight: true,
-                          showToggleButton: false)
+                        title: 'Clear Cache',
+                        icon: Assets.icons.trash.svg(
+                          colorFilter:
+                              ColorFilter.mode(iconColor, BlendMode.srcIn),
+                        ),
+                        showCacheBytes: true,
+                      )
                     ],
                   ),
                   const SizedBox(
@@ -130,15 +154,21 @@ class SettingsScreen extends StatelessWidget {
                     title: 'About',
                     fields: [
                       Pair(
-                          title: 'Legal and Policies',
-                          icon: Assets.icons.shield.svg(),
-                          showChevronRight: true,
-                          showToggleButton: false),
+                        title: 'Legal and Policies',
+                        icon: Assets.icons.shield.svg(
+                          colorFilter:
+                              ColorFilter.mode(iconColor, BlendMode.srcIn),
+                        ),
+                        showChevronRight: true,
+                      ),
                       Pair(
-                          title: 'Tell us',
-                          icon: Assets.icons.question.svg(),
-                          showChevronRight: true,
-                          showToggleButton: false)
+                        title: 'Tell us',
+                        icon: Assets.icons.question.svg(
+                          colorFilter:
+                              ColorFilter.mode(iconColor, BlendMode.srcIn),
+                        ),
+                        showChevronRight: true,
+                      )
                     ],
                   )
                 ],

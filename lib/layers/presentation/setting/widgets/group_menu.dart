@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:supermedia/layers/presentation/setting/widgets/toggle_switch_theme_mode.dart';
 
 class GroupMenu extends StatefulWidget {
   final String title;
@@ -18,10 +19,8 @@ class _GroupMenuState extends State<GroupMenu> {
       children: [
         Text(
           widget.title,
-          style: Theme.of(context)
-              .textTheme
-              .labelMedium
-              ?.copyWith(fontSize: 12, color: Colors.black),
+          style:
+              Theme.of(context).textTheme.headlineSmall?.copyWith(fontSize: 12),
         ),
         const SizedBox(
           height: 16,
@@ -52,7 +51,10 @@ Widget feildCreator(
       children: <Widget>[
         Row(
           children: [
-            IconButton(onPressed: null, icon: field.icon),
+            IconButton(
+              onPressed: null,
+              icon: field.icon,
+            ),
             const SizedBox(
               width: 12,
             ),
@@ -60,8 +62,8 @@ Widget feildCreator(
               field.title,
               style: Theme.of(context)
                   .textTheme
-                  .titleMedium
-                  ?.copyWith(color: Colors.black),
+                  .headlineSmall
+                  ?.copyWith(fontSize: 16),
             ),
           ],
         ),
@@ -72,10 +74,12 @@ Widget feildCreator(
             iconSize: 24,
           )
         else if (field.showToggleButton)
-          Switch(
-            value: true,
-            onChanged: (value) {},
-            activeColor: Colors.blue,
+          const ToggleSwitchThemeMode()
+        else if (field.showCacheBytes)
+          Text(
+            '88 MB',
+            style:
+                Theme.of(context).textTheme.titleSmall?.copyWith(fontSize: 12),
           )
       ],
     ),
@@ -87,10 +91,12 @@ class Pair {
   final SvgPicture icon;
   final bool showChevronRight;
   final bool showToggleButton;
+  final bool showCacheBytes;
 
   Pair(
       {required this.title,
       required this.icon,
-      required this.showChevronRight,
-      required this.showToggleButton});
+      this.showChevronRight = false,
+      this.showToggleButton = false,
+      this.showCacheBytes = false});
 }
