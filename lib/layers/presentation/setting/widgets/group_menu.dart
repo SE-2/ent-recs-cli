@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class GroupMenu extends StatefulWidget {
   final String title;
@@ -51,7 +52,7 @@ Widget feildCreator(
       children: <Widget>[
         Row(
           children: [
-            Icon(field.icon),
+            IconButton(onPressed: null, icon: field.icon),
             const SizedBox(
               width: 12,
             ),
@@ -83,7 +84,7 @@ Widget feildCreator(
 
 class Pair {
   final String title;
-  final IconData icon;
+  final SvgPicture icon;
   final bool showChevronRight;
   final bool showToggleButton;
 

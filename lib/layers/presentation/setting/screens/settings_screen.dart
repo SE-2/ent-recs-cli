@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:supermedia/gen/assets.gen.dart';
 import 'package:supermedia/layers/presentation/setting/widgets/group_menu.dart';
 import 'package:supermedia/layers/presentation/shared/widgets/custom_app_bar.dart';
 
@@ -29,19 +30,24 @@ class SettingsScreen extends StatelessWidget {
                   width: 12,
                 ),
                 Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
                       'Andy Lexsian',
                       style: Theme.of(context).textTheme.headlineSmall,
+                      textAlign: TextAlign.start,
                     ),
                     const SizedBox(
                       height: 2,
                     ),
-                    Text('@Andy1999',
-                        style: Theme.of(context)
-                            .textTheme
-                            .titleSmall
-                            ?.copyWith(color: const Color(0xff66707A))),
+                    Text(
+                      '@Andy1999',
+                      style: Theme.of(context)
+                          .textTheme
+                          .titleSmall
+                          ?.copyWith(color: const Color(0xff66707A)),
+                      textAlign: TextAlign.start,
+                    ),
                   ],
                 )
               ],
@@ -50,7 +56,6 @@ class SettingsScreen extends StatelessWidget {
               height: 32,
             ),
             SizedBox(
-              // height: MediaQuery.of(context).size.height,
               height: 1000,
               child: Column(
                 children: <Widget>[
@@ -59,12 +64,12 @@ class SettingsScreen extends StatelessWidget {
                     fields: [
                       Pair(
                           title: 'Profile',
-                          icon: Icons.person,
+                          icon: Assets.icons.person.svg(),
                           showChevronRight: true,
                           showToggleButton: false),
                       Pair(
                           title: 'Wishlist',
-                          icon: Icons.bookmark,
+                          icon: Assets.icons.bookmark.svg(),
                           showChevronRight: true,
                           showToggleButton: false)
                     ],
@@ -77,7 +82,7 @@ class SettingsScreen extends StatelessWidget {
                     fields: [
                       Pair(
                           title: 'Dark Mode',
-                          icon: Icons.dark_mode,
+                          icon: Assets.icons.themeMode.svg(),
                           showChevronRight: false,
                           showToggleButton: true),
                     ],
@@ -90,12 +95,12 @@ class SettingsScreen extends StatelessWidget {
                     fields: [
                       Pair(
                           title: 'Change Password',
-                          icon: Icons.password,
+                          icon: Assets.icons.lock.svg(),
                           showChevronRight: true,
                           showToggleButton: false),
                       Pair(
                           title: 'Forgot Password',
-                          icon: Icons.password,
+                          icon: Assets.icons.unlock.svg(),
                           showChevronRight: true,
                           showToggleButton: false)
                     ],
@@ -108,12 +113,12 @@ class SettingsScreen extends StatelessWidget {
                     fields: [
                       Pair(
                           title: 'Language',
-                          icon: Icons.language,
+                          icon: Assets.icons.globe.svg(),
                           showChevronRight: true,
                           showToggleButton: false),
                       Pair(
                           title: 'Clear Cache',
-                          icon: Icons.cases,
+                          icon: Assets.icons.trash.svg(),
                           showChevronRight: true,
                           showToggleButton: false)
                     ],
@@ -126,12 +131,12 @@ class SettingsScreen extends StatelessWidget {
                     fields: [
                       Pair(
                           title: 'Legal and Policies',
-                          icon: Icons.language,
+                          icon: Assets.icons.shield.svg(),
                           showChevronRight: true,
                           showToggleButton: false),
                       Pair(
                           title: 'Tell us',
-                          icon: Icons.cases,
+                          icon: Assets.icons.question.svg(),
                           showChevronRight: true,
                           showToggleButton: false)
                     ],
