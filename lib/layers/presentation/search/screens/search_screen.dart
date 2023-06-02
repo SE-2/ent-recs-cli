@@ -94,9 +94,9 @@ class _SearchFormState extends State<_SearchForm> {
               BlocBuilder<SearchBloc, SearchState>(
                 builder: (context, state) {
                   if (state is SearchInitial) {
-                    return const Expanded(
+                    return Expanded(
                       child: Center(
-                        child: Text('Empty List.'),
+                        child: Text(AppLocalization.of(context)!.emptyList),
                       ),
                     );
                   } else if (state is SearchLoading) {

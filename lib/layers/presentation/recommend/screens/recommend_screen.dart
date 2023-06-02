@@ -6,7 +6,6 @@ import 'package:supermedia/layers/presentation/recommend/bloc/recommend_bloc.dar
 import 'package:supermedia/layers/presentation/shared/widgets/custom_app_bar.dart';
 import 'package:supermedia/layers/presentation/shared/widgets/media_list.dart';
 import 'package:supermedia/layers/presentation/shared/widgets/media_list_item.dart';
-import 'package:supermedia/layers/presentation/shared/widgets/sort_option.dart';
 
 class RecommendScreen extends StatelessWidget {
   static const String route = '/recommend';
@@ -60,9 +59,9 @@ class _RecommendFormState extends State<_RecommendForm> {
           BlocBuilder<RecommendBloc, RecommendState>(
             builder: (context, state) {
               if (state is RecommendInitial) {
-                return const Expanded(
+                return Expanded(
                   child: Center(
-                    child: Text('Empty List.'),
+                    child: Text(AppLocalization.of(context)!.emptyList),
                   ),
                 );
               } else if (state is RecommendLoading) {

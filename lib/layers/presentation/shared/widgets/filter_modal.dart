@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:supermedia/common/utils/app_localization.dart';
 import 'package:supermedia/layers/domain/entities/media_metadata.dart';
 import 'package:supermedia/layers/presentation/shared/widgets/app_primary_button.dart';
 import 'package:supermedia/layers/presentation/shared/widgets/custom_app_bar.dart';
@@ -80,7 +81,7 @@ class FilterModalState extends State<FilterModal> {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.background,
       appBar: CustomAppBar(
-        title: 'Filter',
+        title: AppLocalization.of(context)!.filterTitle,
         showBackButton: true,
         action: TextButton(
           onPressed: () {
@@ -89,7 +90,7 @@ class FilterModalState extends State<FilterModal> {
             });
           },
           child: Text(
-            'Reset Filters',
+            AppLocalization.of(context)!.resetFiltersButton,
             style: Theme.of(context).textTheme.labelLarge!.copyWith(
                 color: Theme.of(context).colorScheme.primary,
                 fontWeight: FontWeight.bold),
@@ -102,7 +103,7 @@ class FilterModalState extends State<FilterModal> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Type',
+              AppLocalization.of(context)!.typeTitle,
               style: Theme.of(context)
                   .textTheme
                   .titleMedium!
@@ -120,7 +121,7 @@ class FilterModalState extends State<FilterModal> {
             ),
             const SizedBox(height: 16),
             Text(
-              'Categories',
+              AppLocalization.of(context)!.categoriesTitle,
               style: Theme.of(context)
                   .textTheme
                   .titleMedium!
@@ -142,7 +143,7 @@ class FilterModalState extends State<FilterModal> {
             const Spacer(),
             Center(
               child: AppPrimaryButton(
-                text: 'Apply Filters',
+                text: AppLocalization.of(context)!.applyFiltersButton,
                 onPressed: () {
                   widget.onApplyFiltersTapped(
                       _selectedType, _selectedCategories);
@@ -159,13 +160,13 @@ class FilterModalState extends State<FilterModal> {
   String getMediaTypeValue(MediaType selected) {
     switch (selected) {
       case MediaType.music:
-        return 'Music';
+        return AppLocalization.of(context)!.musicType;
       case MediaType.movie:
-        return 'Movie';
+        return AppLocalization.of(context)!.movieType;
       case MediaType.podcast:
-        return 'Podcast';
+        return AppLocalization.of(context)!.podcastType;
       case MediaType.book:
-        return 'EBook';
+        return AppLocalization.of(context)!.ebookType;
     }
   }
 }
