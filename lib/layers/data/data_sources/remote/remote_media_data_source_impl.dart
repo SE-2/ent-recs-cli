@@ -1,3 +1,5 @@
+import 'package:supermedia/common/exceptions/search_exception.dart';
+import 'package:supermedia/common/utils/app_localization.dart';
 import 'package:supermedia/di/app_module.dart';
 import 'package:supermedia/layers/data/data_sources/abstractions/remote_media_data_source.dart';
 import 'package:supermedia/layers/data/http_client/http_client.dart';
@@ -11,20 +13,19 @@ class RemoteMediaDataSourceImpl implements RemoteMediaDataSource {
 
   @override
   Future<List<MediaMetadataModel>> search(SearchQuery query) async {
-    // final request = HttpRequest(
-    //   '/search',
-    //   headers: {'Content-Type': 'application/json'},
-    //   body: {'query': query},
-    // );
-    //
-    // final response = await _httpClient.post(request);
-    //
-    // if (response.statusCode == 200) {
-    //   return MediaMetadataModel.fromJsonList(response.body);
-    // } else {
-    //   throw SearchException(
-    //       AppLocalization.instance.errorCode(response.statusCode));
-    // }
+    final request = HttpRequest(
+      '/search',
+      body: query.toJson(), token: '1',
+    );
+
+    final response = await _httpClient.post(request);
+
+    if (response.statusCode == 200) {
+      return MediaMetadataModel.fromJsonList(response.body);
+    } else {
+      throw SearchException(
+          AppLocalization.instance.errorCode(response.statusCode));
+    }
 
     return mediaList;
   }
@@ -56,10 +57,18 @@ class RemoteMediaDataSourceImpl implements RemoteMediaDataSource {
 }
 
 List<MediaFilter> mediaFilterList = [
-  MediaFilter(mediaType: MediaType.music, categories: ['Rock', 'Hip Hop', 'Jazz', 'Pop', 'Classical']),
-  MediaFilter(mediaType: MediaType.movie, categories: ['Action', 'Comedy', 'Drama', 'Horror', 'Romance']),
-  MediaFilter(mediaType: MediaType.book, categories: ['Fiction', 'Non-Fiction', 'Mystery', 'Thriller', 'Romance']),
-  MediaFilter(mediaType: MediaType.podcast, categories: ['News', 'Technology', 'Comedy', 'True Crime', 'Sports'])
+  MediaFilter(
+      mediaType: MediaType.music,
+      categories: ['Rock', 'Hip Hop', 'Jazz', 'Pop', 'Classical']),
+  MediaFilter(
+      mediaType: MediaType.movie,
+      categories: ['Action', 'Comedy', 'Drama', 'Horror', 'Romance']),
+  MediaFilter(
+      mediaType: MediaType.book,
+      categories: ['Fiction', 'Non-Fiction', 'Mystery', 'Thriller', 'Romance']),
+  MediaFilter(
+      mediaType: MediaType.podcast,
+      categories: ['News', 'Technology', 'Comedy', 'True Crime', 'Sports'])
 ];
 
 List<MediaMetadataModel> mediaList = [

@@ -14,10 +14,10 @@ abstract class IHttpClient {
 
 class HttpRequest {
   final String url;
-  final Map<String, dynamic>? headers;
   final dynamic body;
+  final String token;
 
-  HttpRequest(this.url, {this.headers, this.body});
+  HttpRequest(this.url, {required this.token, this.body});
 }
 
 class HttpResponse {

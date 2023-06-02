@@ -73,3 +73,16 @@ class SortOptionState extends State<SortOption> {
 }
 
 enum SortMethod { mostRelated, popularity }
+
+extension SortMethodExtension on SortMethod {
+  String toJson() {
+    switch (this) {
+      case SortMethod.mostRelated:
+        return 'MOST_RELATED';
+      case SortMethod.popularity:
+        return 'POPULARITY';
+      default:
+        throw ArgumentError('Unsupported sort method value: $this');
+    }
+  }
+}

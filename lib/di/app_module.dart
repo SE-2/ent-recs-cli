@@ -41,7 +41,7 @@ final locator = GetIt.instance;
 
 void _setupHttpClient() {
   locator.registerLazySingleton<IHttpClient>(
-      () => DioHttpClient(baseUrl: 'http://localhost:1000/'));
+      () => DioHttpClient(baseUrl: 'http://10.0.2.2:8080/'));
 }
 
 void _setupLocalDataSources() {
