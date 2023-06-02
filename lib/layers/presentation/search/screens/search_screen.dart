@@ -2,9 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:supermedia/common/utils/app_localization.dart';
 import 'package:supermedia/di/app_module.dart';
+import 'package:supermedia/layers/domain/entities/media_filter.dart';
+import 'package:supermedia/layers/domain/entities/media_metadata.dart';
+import 'package:supermedia/layers/domain/entities/search_query.dart';
 import 'package:supermedia/layers/presentation/search/bloc/search_bloc.dart';
 import 'package:supermedia/layers/presentation/shared/widgets/app_search_bar.dart';
 import 'package:supermedia/layers/presentation/shared/widgets/custom_app_bar.dart';
+import 'package:supermedia/layers/presentation/shared/widgets/filter_modal.dart';
 import 'package:supermedia/layers/presentation/shared/widgets/filter_option.dart';
 import 'package:supermedia/layers/presentation/shared/widgets/media_list.dart';
 import 'package:supermedia/layers/presentation/shared/widgets/media_list_item.dart';
@@ -36,75 +40,127 @@ class _SearchForm extends StatefulWidget {
 }
 
 class _SearchFormState extends State<_SearchForm> {
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(32, 16, 32, 32),
-      child: Column(
-        children: [
-          AppSearchBar(
-            onSearchIconTapped: handleSearchIconTapped,
-          ),
-          const SizedBox(height: 12),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(12, 0, 0, 0),
-            child: Row(
-              children: [
-                SortOption(
-                  onSortOptionTapped: handleSortOptionTapped,
-                ),
-                const SizedBox(width: 16),
-                const FilterOption(),
-              ],
-            ),
-          ),
-          const SizedBox(height: 16),
-          BlocBuilder<SearchBloc, SearchState>(
-            builder: (context, state) {
-              if (state is SearchInitial) {
-                return const Expanded(
-                  child: Center(
-                    child: Text('Empty List.'),
-                  ),
-                );
-              } else if (state is SearchLoading) {
-                return const Expanded(
-                    child: Center(
-                  child: CircularProgressIndicator(),
-                ));
-              } else if (state is SearchSuccess) {
-                var result = state.result;
+  late MediaType selectedMediaType = MediaType.music;
+  late List<String> selectedCategories = [];
+  late Map<MediaType, List<String>> defaultCategories = {};
+  late SortMethod selectedSortMethod = SortMethod.mostRelated;
+  String query = '';
 
-                return MediaList(
-                  items: List.generate(
-                    result.length,
-                    (index) {
-                      var mediaMetadata = result[index];
-                      return MediaListItem(
-                        mediaMetadata: mediaMetadata,
-                      );
-                    },
-                  ),
-                );
-              } else {
-                return Container();
-              }
-            },
-          ),
-        ],
-      ),
-    );
+  @override
+  void initState() {
+    context.read<SearchBloc>().add(FetchDefaultCategories(context: context));
+    super.initState();
   }
 
-  void handleSortOptionTapped() {
-    // TODO: Implement sorting logic
+  @override
+  Widget build(BuildContext context) {
+    int selectedCategoriesCount = selectedCategories.length;
+
+    return BlocListener<SearchBloc, SearchState>(
+        listener: (context, state) {
+          if (state is DefaultCategoriesFetched) {
+            for (MediaFilter filter in state.result) {
+              defaultCategories[filter.mediaType] = filter.categories;
+            }
+            handleFilterOptionTapped();
+          }
+        },
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(32, 16, 32, 32),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              AppSearchBar(
+                onSearchIconTapped: handleSearchIconTapped,
+              ),
+              const SizedBox(height: 12),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(12, 0, 0, 0),
+                child: Row(
+                  children: [
+                    FilterOption(
+                      onFilterOptionTapped: handleFilterOptionTapped,
+                      showCircle: selectedCategoriesCount > 0,
+                    ),
+                    const SizedBox(width: 16),
+                    SortOption(
+                      onSortMethodChanged: handleSortMethodChanged,
+                      initialSortMethod: SortMethod.mostRelated,
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 16),
+              BlocBuilder<SearchBloc, SearchState>(
+                builder: (context, state) {
+                  if (state is SearchInitial) {
+                    return const Expanded(
+                      child: Center(
+                        child: Text('Empty List.'),
+                      ),
+                    );
+                  } else if (state is SearchLoading) {
+                    return const Expanded(
+                        child: Center(
+                      child: CircularProgressIndicator(),
+                    ));
+                  } else if (state is SearchSuccess) {
+                    var result = state.result;
+
+                    return MediaList(
+                      items: List.generate(
+                        result.length,
+                        (index) {
+                          var mediaMetadata = result[index];
+                          return MediaListItem(
+                            mediaMetadata: mediaMetadata,
+                          );
+                        },
+                      ),
+                    );
+                  } else {
+                    return Container();
+                  }
+                },
+              ),
+            ],
+          ),
+        ));
+  }
+
+  void handleSortMethodChanged(SortMethod sortMethod) {
+    setState(() {
+      selectedSortMethod = sortMethod;
+    });
+    handleSearchIconTapped(query);
   }
 
   void handleFilterOptionTapped() {
-    // TODO: Implement filtering logic
+    FilterModal.show(
+      context: context,
+      defaultCategories: defaultCategories,
+      onApplyFiltersTapped: onApplyFiltersTapped,
+      initialSelectedType: selectedMediaType,
+      initialSelectedCategories: selectedCategories,
+    );
+  }
+
+  void onApplyFiltersTapped(MediaType mediaType, List<String>? categories) {
+    setState(() {
+      selectedMediaType = mediaType;
+      selectedCategories = categories ?? [];
+    });
+    handleSearchIconTapped(query);
   }
 
   void handleSearchIconTapped(String query) {
-    context.read<SearchBloc>().add(SearchButtonPressed(query: query));
+    this.query = query;
+    MediaFilter filter = MediaFilter(
+        mediaType: selectedMediaType, categories: selectedCategories);
+    SearchQuery searchQuery = SearchQuery(
+        query: query, filter: filter, sortMethod: selectedSortMethod);
+    context
+        .read<SearchBloc>()
+        .add(SearchButtonPressed(context: context, query: searchQuery));
   }
 }

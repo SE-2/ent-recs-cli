@@ -3,15 +3,17 @@ import 'package:flutter/material.dart';
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
   final bool showBackButton;
+  final Widget? action;
 
   const CustomAppBar({
     Key? key,
     required this.title,
     this.showBackButton = false,
+    this.action,
   }) : super(key: key);
 
   @override
-  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
+  Size get preferredSize => const Size.fromHeight(72);
 
   @override
   Widget build(BuildContext context) {
@@ -43,6 +45,12 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         ),
       ),
       centerTitle: true,
+      actions: [
+        Padding(
+          padding: const EdgeInsets.fromLTRB(0, 16, 12, 0),
+          child: action,
+        ),
+      ],
     );
   }
 }

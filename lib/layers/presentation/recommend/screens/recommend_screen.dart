@@ -43,18 +43,19 @@ class _RecommendFormState extends State<_RecommendForm> {
       padding: const EdgeInsets.fromLTRB(32, 12, 32, 32),
       child: Column(
         children: [
-          const SizedBox(height: 12),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(12, 0, 0, 0),
-            child: Row(
-              children: [
-                SortOption(
-                  onSortOptionTapped: handleSortOptionTapped,
-                ),
-                const SizedBox(width: 16),
-              ],
-            ),
-          ),
+          // const SizedBox(height: 12),
+          // Padding(
+          //   padding: const EdgeInsets.fromLTRB(12, 0, 0, 0),
+          //   child: Row(
+          //     children: [
+          //       SortOption(
+          //         onSortMethodChanged: handleSortOptionTapped,
+          //         initialSortMethod: SortMethod.mostRelated,
+          //       ),
+          //       const SizedBox(width: 16),
+          //     ],
+          //   ),
+          // ),
           const SizedBox(height: 16),
           BlocBuilder<RecommendBloc, RecommendState>(
             builder: (context, state) {
