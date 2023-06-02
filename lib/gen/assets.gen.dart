@@ -17,6 +17,14 @@ class $AssetsIconsGen {
   /// File path: assets/icons/calendar.svg
   SvgGenImage get calendar => const SvgGenImage('assets/icons/calendar.svg');
 
+  /// File path: assets/icons/categories_four.svg
+  SvgGenImage get categoriesFour =>
+      const SvgGenImage('assets/icons/categories_four.svg');
+
+  /// File path: assets/icons/edit_square.svg
+  SvgGenImage get editSquare =>
+      const SvgGenImage('assets/icons/edit_square.svg');
+
   /// File path: assets/icons/facebook.svg
   SvgGenImage get facebook => const SvgGenImage('assets/icons/facebook.svg');
 
@@ -36,8 +44,17 @@ class $AssetsIconsGen {
   SvgGenImage get twitter => const SvgGenImage('assets/icons/twitter.svg');
 
   /// List of all assets
-  List<SvgGenImage> get values =>
-      [calendar, facebook, film, google, line, paper, twitter];
+  List<SvgGenImage> get values => [
+        calendar,
+        categoriesFour,
+        editSquare,
+        facebook,
+        film,
+        google,
+        line,
+        paper,
+        twitter
+      ];
 }
 
 class $AssetsImagesGen {
@@ -49,6 +66,11 @@ class $AssetsImagesGen {
 
   $AssetsImagesCategoriesGen get categories =>
       const $AssetsImagesCategoriesGen();
+
+  /// File path: assets/images/default_category.png
+  AssetGenImage get defaultCategory =>
+      const AssetGenImage('assets/images/default_category.png');
+
   $AssetsImagesIconsGen get icons => const $AssetsImagesIconsGen();
   $AssetsImagesItemGen get item => const $AssetsImagesItemGen();
   $AssetsImagesItemsGen get items => const $AssetsImagesItemsGen();
@@ -56,7 +78,7 @@ class $AssetsImagesGen {
   $AssetsImagesStoriesGen get stories => const $AssetsImagesStoriesGen();
 
   /// List of all assets
-  List<AssetGenImage> get values => [appIcon];
+  List<AssetGenImage> get values => [appIcon, defaultCategory];
 }
 
 class $AssetsImagesCategoriesGen {

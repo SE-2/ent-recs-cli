@@ -39,5 +39,7 @@
   "login": "Login",
   "or": "Or",
   "dateFilterToday":"Today",
-  "dateFilterAll":"All"
+  "dateFilterAll":"All",
+  "bookmarkListScreenTitle": "Your Bookmark Lists",
+  "createNewList": "Create New List"
 }

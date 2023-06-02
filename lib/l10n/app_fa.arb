@@ -39,5 +39,7 @@
   "login": "ورود",
   "or": "یا",
   "dateFilterToday":"امروز",
-  "dateFilterAll":"همه"
+  "dateFilterAll":"همه",
+  "bookmarkListScreenTitle": "لیست\u200Cهای نشان\u200Cشده شما",
+  "createNewList": "ایجاد لیست جدید"
 }
