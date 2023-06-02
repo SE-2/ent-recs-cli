@@ -2,7 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:supermedia/di/app_module.dart';
+import 'package:supermedia/layers/domain/entities/media_metadata_detail.dart';
 import 'package:supermedia/layers/presentation/media/bloc/media_bloc.dart';
+import 'package:supermedia/layers/presentation/media/bloc/media_event.dart';
 import 'package:supermedia/layers/presentation/media/bloc/media_state.dart';
 import 'package:supermedia/layers/presentation/media/widgets/media_bottom_bar.dart';
 import 'package:supermedia/layers/presentation/media/widgets/media_image.dart';
@@ -11,7 +13,7 @@ import 'package:supermedia/layers/presentation/shared/widgets/custom_app_bar.dar
 
 class ShowMediaScreen extends StatefulWidget {
   static const String route = '/show_media';
-  final int? id;
+  final String? id;
 
   const ShowMediaScreen({super.key, required this.id});
 
@@ -24,13 +26,16 @@ class _ShowMediaScreenState extends State<ShowMediaScreen> {
   Widget build(BuildContext context) {
     return BlocProvider<MediaBloc>(
       create: (_) => locator<MediaBloc>(),
-      child: const MediaForm(),
+      child: MediaForm(
+        id: widget.id!,
+      ),
     );
   }
 }
 
 class MediaForm extends StatefulWidget {
-  const MediaForm({super.key});
+  final String id;
+  const MediaForm({super.key, required this.id});
 
   @override
   State<MediaForm> createState() => _MediaFormState();
@@ -62,18 +67,20 @@ class _MediaFormState extends State<MediaForm> {
 
   @override
   Widget build(BuildContext context) {
+    context.read<MediaBloc>().add(LoadMedia(widget.id));
+
     return BlocBuilder<MediaBloc, MediaState>(builder: (context, state) {
       if (state is MediaLoading) {
         return const CircularProgressIndicator();
       } else if (state is MediaSuccess) {
-        return showContent(context);
+        return showContent(context, state.result);
       } else {
-        return Container();
+        return const CircularProgressIndicator();
       }
     });
   }
 
-  SafeArea showContent(BuildContext context) {
+  SafeArea showContent(BuildContext context, MediaMetadataDetail media) {
     return SafeArea(
       child: Scaffold(
         backgroundColor: Theme.of(context).colorScheme.background,
@@ -89,15 +96,15 @@ class _MediaFormState extends State<MediaForm> {
                 const SizedBox(
                   height: 32,
                 ),
-                const MediaImage(
-                  imageUrl: 'assets/images/items/item.png',
+                MediaImage(
+                  imageUrl: media.data.imageUrl,
                 ),
                 const SizedBox(
                   height: 6,
                 ),
                 MediaBottomBar(
                   likes: _likes,
-                  isLiked: _isLiked,
+                  isLiked: media.isLiked,
                   onBookmarkPressed: _onBookmarkPressed,
                   onLikePressed: _onLikePressed,
                   onSharePressed: _onSharePressed,
@@ -107,7 +114,7 @@ class _MediaFormState extends State<MediaForm> {
                     Padding(
                       padding: const EdgeInsets.fromLTRB(0, 24, 0, 16),
                       child: Text(
-                        'Luck',
+                        media.data.title,
                         style: Theme.of(context).textTheme.titleLarge?.copyWith(
                             fontWeight: FontWeight.bold,
                             color: Theme.of(context).colorScheme.outline),
@@ -213,10 +220,8 @@ class _MediaFormState extends State<MediaForm> {
                           const SizedBox(
                             height: 12,
                           ),
-                          const ShowMoreText(
-                            text:
-                                'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry'
-                                's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.Show More',
+                          ShowMoreText(
+                            text: media.decoration,
                             maxLength: 100,
                           )
                         ],

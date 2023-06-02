@@ -15,16 +15,19 @@ import 'package:supermedia/layers/data/repositories/media_repository_impl.dart';
 import 'package:supermedia/layers/data/repositories/user_repository_impl.dart';
 import 'package:supermedia/layers/domain/repositories/media_repository.dart';
 import 'package:supermedia/layers/domain/repositories/user_repository.dart';
+import 'package:supermedia/layers/domain/use_cases/abstractoins/media_use_case.dart';
 import 'package:supermedia/layers/domain/use_cases/abstractoins/recent_items_use_case.dart';
 import 'package:supermedia/layers/domain/use_cases/abstractoins/search_use_case.dart';
 import 'package:supermedia/layers/domain/use_cases/abstractoins/signup_use_case.dart';
 import 'package:supermedia/layers/domain/use_cases/abstractoins/trend_items_use_case.dart';
+import 'package:supermedia/layers/domain/use_cases/implementations/media_use_case_impl.dart';
 import 'package:supermedia/layers/domain/use_cases/implementations/recent_items_use_case_impl.dart';
 import 'package:supermedia/layers/domain/use_cases/abstractoins/recommend_use_case.dart';
 import 'package:supermedia/layers/domain/use_cases/implementations/recommend_use_case_impl.dart';
 import 'package:supermedia/layers/domain/use_cases/implementations/search_use_case_impl.dart';
 import 'package:supermedia/layers/domain/use_cases/implementations/trend_items_use_case_impl.dart';
 import 'package:supermedia/layers/domain/use_cases/signup_use_case.dart';
+import 'package:supermedia/layers/presentation/media/bloc/media_bloc.dart';
 import 'package:supermedia/layers/presentation/media/screens/show_media_screen.dart';
 import 'package:supermedia/layers/presentation/auth/signup/bloc/signup_bloc.dart';
 import 'package:supermedia/layers/presentation/auth/signup/screens/signup_screen.dart';
@@ -78,6 +81,7 @@ void _setupUseCases() {
   locator
       .registerLazySingleton<TrendItemsUseCase>(() => TrendItemsUseCaseImpl());
   locator.registerLazySingleton<RecommendUseCase>(() => RecommendUseCaseImpl());
+  locator.registerLazySingleton<MediaUseCase>(() => MediaUseCaseImpl());
 }
 
 void _setupScreens() {
@@ -100,6 +104,7 @@ void _setupBlocs() {
   locator.registerFactory<TrendItemsBloc>(() => TrendItemsBloc());
   locator.registerFactory<RecentItemsBloc>(() => RecentItemsBloc());
   locator.registerFactory<RecommendBloc>(() => RecommendBloc());
+  locator.registerFactory<MediaBloc>(() => MediaBloc());
 }
 
 void _setupSharedPreferences() {

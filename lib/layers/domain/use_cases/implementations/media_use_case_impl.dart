@@ -5,12 +5,9 @@ import 'package:supermedia/layers/domain/use_cases/abstractoins/media_use_case.d
 
 class MediaUseCaseImpl implements MediaUseCase {
   final MediaRepository _mediaRepository = locator<MediaRepository>();
-  final String id;
-
-  MediaUseCaseImpl({required this.id});
 
  @override
-  Future<MediaMetadataDetail> getMediaById(id) async {
+  Future<MediaMetadataDetail> getMediaById(String id) async {
     return _mediaRepository.getMediaById(id);
   }
 }

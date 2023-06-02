@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 class MediaImage extends StatelessWidget {
   final String imageUrl;
   const MediaImage({
-    super.key, required this.imageUrl,
+    super.key,
+    required this.imageUrl,
   });
 
   @override
@@ -13,9 +14,8 @@ class MediaImage extends StatelessWidget {
         width: 224.1,
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20),
-            image:  DecorationImage(
-                image: AssetImage(imageUrl),
-                scale: 3),
+            image: DecorationImage(
+                image: NetworkImage(imageUrl), fit: BoxFit.cover, scale: 3),
             boxShadow: [
               BoxShadow(
                 color: const Color(0xff7B7B7B).withOpacity(0.25),

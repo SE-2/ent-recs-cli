@@ -16,7 +16,7 @@ import 'package:supermedia/layers/presentation/home/widgets/story_list.dart';
 enum DateFilter { all, today }
 
 class HomeScreen extends StatelessWidget {
-  static const String route = '/home';
+  static const String route ='/home';
   final UserModel? userModel;
 
   const HomeScreen({Key? key, required this.userModel}) : super(key: key);
@@ -31,7 +31,7 @@ class HomeScreen extends StatelessWidget {
       ],
       child: Scaffold(
         backgroundColor: Theme.of(context).colorScheme.background,
-        body: _HomeForm(userModel: userModel!),
+        body: _HomeForm(userModel: UserModel()),
       ),
     );
   }

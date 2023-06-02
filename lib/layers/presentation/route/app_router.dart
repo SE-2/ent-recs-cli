@@ -16,7 +16,7 @@ class AppRouter {
       case SignupScreen.route:
         return MaterialPageRoute(
           builder: (context) {
-            return const SignupScreen();
+            return const HomeScreen(userModel: null,);
           },
         );
 
@@ -30,7 +30,7 @@ class AppRouter {
         );
 
       case ShowMediaScreen.route:
-        var id = routeSettings.arguments as int;
+        var id = routeSettings.arguments as String;
 
         return MaterialPageRoute(
           builder: (_) {

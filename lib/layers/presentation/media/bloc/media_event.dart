@@ -3,7 +3,7 @@ import 'package:equatable/equatable.dart';
 abstract class MediaEvent extends Equatable {}
 
 class LoadMedia extends MediaEvent {
-  final int id;
+  final String id;
 
   LoadMedia(this.id);
 
