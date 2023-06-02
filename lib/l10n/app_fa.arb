@@ -39,5 +39,15 @@
   "login": "ورود",
   "or": "یا",
   "dateFilterToday":"امروز",
-  "dateFilterAll":"همه"
+  "dateFilterAll":"همه",
+  "emptyList": "چیزی نیست.",
+  "filterTitle": "فیلتر",
+  "resetFiltersButton": "بازنشانی فیلترها",
+  "typeTitle": "نوع",
+  "categoriesTitle": "دسته‌بندی‌ها",
+  "musicType": "موسیقی",
+  "movieType": "فیلم",
+  "podcastType": "پادکست",
+  "ebookType": "کتاب",
+  "applyFiltersButton": "اعمال فیلترها"
 }

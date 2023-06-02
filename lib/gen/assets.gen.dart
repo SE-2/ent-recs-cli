@@ -49,6 +49,11 @@ class $AssetsImagesGen {
 
   $AssetsImagesCategoriesGen get categories =>
       const $AssetsImagesCategoriesGen();
+
+  /// File path: assets/images/default_category.png
+  AssetGenImage get defaultCategory =>
+      const AssetGenImage('assets/images/default_category.png');
+
   $AssetsImagesIconsGen get icons => const $AssetsImagesIconsGen();
   $AssetsImagesItemGen get item => const $AssetsImagesItemGen();
   $AssetsImagesItemsGen get items => const $AssetsImagesItemsGen();
@@ -56,7 +61,7 @@ class $AssetsImagesGen {
   $AssetsImagesStoriesGen get stories => const $AssetsImagesStoriesGen();
 
   /// List of all assets
-  List<AssetGenImage> get values => [appIcon];
+  List<AssetGenImage> get values => [appIcon, defaultCategory];
 }
 
 class $AssetsImagesCategoriesGen {

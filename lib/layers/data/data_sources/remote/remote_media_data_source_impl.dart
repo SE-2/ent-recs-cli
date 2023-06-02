@@ -2,12 +2,15 @@ import 'package:supermedia/di/app_module.dart';
 import 'package:supermedia/layers/data/data_sources/abstractions/remote_media_data_source.dart';
 import 'package:supermedia/layers/data/http_client/http_client.dart';
 import 'package:supermedia/layers/data/models/media_metadata_model.dart';
+import 'package:supermedia/layers/domain/entities/media_filter.dart';
+import 'package:supermedia/layers/domain/entities/media_metadata.dart';
+import 'package:supermedia/layers/domain/entities/search_query.dart';
 
 class RemoteMediaDataSourceImpl implements RemoteMediaDataSource {
   final IHttpClient _httpClient = locator<IHttpClient>();
 
   @override
-  Future<List<MediaMetadataModel>> search(String query) async {
+  Future<List<MediaMetadataModel>> search(SearchQuery query) async {
     // final request = HttpRequest(
     //   '/search',
     //   headers: {'Content-Type': 'application/json'},
@@ -45,7 +48,19 @@ class RemoteMediaDataSourceImpl implements RemoteMediaDataSource {
   Future<List<MediaMetadataModel>> getTodayTrendMedia() async {
     return mediaList;
   }
+
+  @override
+  Future<List<MediaFilter>> getMediaFilters() async {
+    return mediaFilterList;
+  }
 }
+
+List<MediaFilter> mediaFilterList = [
+  MediaFilter(mediaType: MediaType.music, categories: ['Rock', 'Hip Hop', 'Jazz', 'Pop', 'Classical']),
+  MediaFilter(mediaType: MediaType.movie, categories: ['Action', 'Comedy', 'Drama', 'Horror', 'Romance']),
+  MediaFilter(mediaType: MediaType.book, categories: ['Fiction', 'Non-Fiction', 'Mystery', 'Thriller', 'Romance']),
+  MediaFilter(mediaType: MediaType.podcast, categories: ['News', 'Technology', 'Comedy', 'True Crime', 'Sports'])
+];
 
 List<MediaMetadataModel> mediaList = [
   MediaMetadataModel(
