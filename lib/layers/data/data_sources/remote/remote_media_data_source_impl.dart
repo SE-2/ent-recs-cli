@@ -178,7 +178,7 @@ List<MediaMetadataDetailsModel> mediaDetailList = [
         "https://upload.wikimedia.org/wikipedia/commons/4/4b/Stairway_to_Heaven_by_Led_Zeppelin_US_promotional_single.png",
         {"duration": "8:02", "style": "Rock", "singer": "Led Zeppelin"},
       ),
-      decoration: ""),
+      decoration: "Stairway to Heaven is a song by the British rock band Led Zeppelin, which was released in 1971 on their fourth studio album, Led Zeppelin IV. It is widely regarded as one of the greatest and most influential rock songs of all time, and has been covered by numerous artists."),
   MediaMetadataDetailsModel(
       model: MediaMetadataModel(
         "p1",
@@ -191,7 +191,7 @@ List<MediaMetadataDetailsModel> mediaDetailList = [
           "genre": "True Crime"
         },
       ),
-      decoration: ""),
+      decoration: "Serial is a podcast that presents investigative journalism in a serialized format. The podcast first aired in 2014 and is produced by Sarah Koenig and Julie Snyder of This American Life. Each season of the podcast focuses on a different true crime story, with Koenig serving as the narrator and reporter.The podcast has gained widespread critical acclaim for its in-depth reporting, compelling storytelling, and groundbreaking use of the podcast medium. The first season of Serial focused on the murder of a high school student in Baltimore, Maryland, and the subsequent trial and conviction of her ex-boyfriend. The podcast's investigation raised questions about the evidence used in the case and the reliability of witness testimony, and sparked widespread public discussion and debate.Subsequent seasons of the podcast have focused on a range of topics, including the case of an American soldier who deserted his post in Afghanistan, the criminal justice system in Cleveland, Ohio, and the impact of climate change on a small town in Alabama.Serial is widely regarded as one of the most influential and groundbreaking podcasts of all time, and has helped to popularize the true crime genre in podcasting."),
   MediaMetadataDetailsModel(
       model: MediaMetadataModel(
         "m2",

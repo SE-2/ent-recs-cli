@@ -184,25 +184,25 @@ class _MediaFormState extends State<MediaForm> {
                         ),
                       ),
                     ),
-                    SizedBox(
-                      height: 16,
-                      width: 104,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: const [
-                          Icon(CupertinoIcons.star_fill,
-                              size: 16, color: Color(0xffFACC15)),
-                          Icon(CupertinoIcons.star_fill,
-                              size: 16, color: Color(0xffFACC15)),
-                          Icon(CupertinoIcons.star_fill,
-                              size: 16, color: Color(0xffFACC15)),
-                          Icon(CupertinoIcons.star_fill,
-                              size: 16, color: Color(0xffFACC15)),
-                          Icon(CupertinoIcons.star_fill,
-                              size: 16, color: Color(0xff78828A)),
-                        ],
-                      ),
-                    ),
+                    // SizedBox(
+                    //   height: 16,
+                    //   width: 104,
+                    //   child: Row(
+                    //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    //     children: const [
+                    //       Icon(CupertinoIcons.star_fill,
+                    //           size: 16, color: Color(0xffFACC15)),
+                    //       Icon(CupertinoIcons.star_fill,
+                    //           size: 16, color: Color(0xffFACC15)),
+                    //       Icon(CupertinoIcons.star_fill,
+                    //           size: 16, color: Color(0xffFACC15)),
+                    //       Icon(CupertinoIcons.star_fill,
+                    //           size: 16, color: Color(0xffFACC15)),
+                    //       Icon(CupertinoIcons.star_fill,
+                    //           size: 16, color: Color(0xff78828A)),
+                    //     ],
+                    //   ),
+                    // ),
                     Padding(
                       padding: const EdgeInsets.fromLTRB(24, 24, 24, 0),
                       child: Column(
