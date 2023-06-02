@@ -41,5 +41,15 @@
   "dateFilterToday":"Today",
   "dateFilterAll":"All",
   "bookmarkListScreenTitle": "Your Bookmark Lists",
-  "createNewList": "Create New List"
+  "createNewList": "Create New List",
+  "emptyList": "Empty List.",
+  "filterTitle": "Filter",
+  "resetFiltersButton": "Reset Filters",
+  "typeTitle": "Type",
+  "categoriesTitle": "Categories",
+  "musicType": "Music",
+  "movieType": "Movie",
+  "podcastType": "Podcast",
+  "ebookType": "E-Book",
+  "applyFiltersButton": "Apply Filters"
 }

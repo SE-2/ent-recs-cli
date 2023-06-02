@@ -41,5 +41,15 @@
   "dateFilterToday":"امروز",
   "dateFilterAll":"همه",
   "bookmarkListScreenTitle": "لیست\u200Cهای نشان\u200Cشده شما",
-  "createNewList": "ایجاد لیست جدید"
+  "createNewList": "ایجاد لیست جدید",
+  "emptyList": "چیزی نیست.",
+  "filterTitle": "فیلتر",
+  "resetFiltersButton": "بازنشانی فیلترها",
+  "typeTitle": "نوع",
+  "categoriesTitle": "دسته‌بندی‌ها",
+  "musicType": "موسیقی",
+  "movieType": "فیلم",
+  "podcastType": "پادکست",
+  "ebookType": "کتاب",
+  "applyFiltersButton": "اعمال فیلترها"
 }
