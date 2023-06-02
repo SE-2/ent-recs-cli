@@ -1,5 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:supermedia/di/app_module.dart';
+import 'package:supermedia/layers/presentation/media/bloc/media_bloc.dart';
 import 'package:supermedia/layers/presentation/media/widgets/media_bottom_bar.dart';
 import 'package:supermedia/layers/presentation/media/widgets/media_image.dart';
 import 'package:supermedia/layers/presentation/media/widgets/show_more_text.dart';
@@ -7,14 +10,32 @@ import 'package:supermedia/layers/presentation/shared/widgets/custom_app_bar.dar
 
 class ShowMediaScreen extends StatefulWidget {
   static const String route = '/show_media';
+  final int? id;
 
-  const ShowMediaScreen({super.key});
+  const ShowMediaScreen({super.key, required this.id});
 
   @override
   State<ShowMediaScreen> createState() => _ShowMediaScreenState();
 }
 
 class _ShowMediaScreenState extends State<ShowMediaScreen> {
+  @override
+  Widget build(BuildContext context) {
+    return BlocProvider<MediaBloc>(
+      create: (_) => locator<MediaBloc>(),
+      child: const MediaForm(),
+    );
+  }
+}
+
+class MediaForm extends StatefulWidget {
+  const MediaForm({super.key});
+
+  @override
+  State<MediaForm> createState() => _MediaFormState();
+}
+
+class _MediaFormState extends State<MediaForm> {
   bool _isLiked = false;
   int _likes = 50;
 
@@ -172,7 +193,8 @@ class _ShowMediaScreenState extends State<ShowMediaScreen> {
                                 .textTheme
                                 .titleMedium
                                 ?.copyWith(
-                                    color: Theme.of(context).colorScheme.outline),
+                                    color:
+                                        Theme.of(context).colorScheme.outline),
                           ),
                           const SizedBox(
                             height: 12,

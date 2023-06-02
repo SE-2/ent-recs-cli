@@ -29,28 +29,32 @@ class AppRouter {
           },
         );
 
-        case ShowMediaScreen.route:
+      case ShowMediaScreen.route:
+        var id = routeSettings.arguments as int;
+
         return MaterialPageRoute(
           builder: (_) {
-            return ShowMediaScreen();
+            return ShowMediaScreen(
+              id: id,
+            );
           },
         );
 
-        case RecommendScreen.route:
+      case RecommendScreen.route:
         return MaterialPageRoute(
           builder: (_) {
             return RecommendScreen();
           },
         );
 
-        case SelectionScreen.route:
+      case SelectionScreen.route:
         return MaterialPageRoute(
           builder: (_) {
             return SelectionScreen();
           },
         );
 
-        case SearchScreen.route:
+      case SearchScreen.route:
         return MaterialPageRoute(
           builder: (_) {
             return SearchScreen();

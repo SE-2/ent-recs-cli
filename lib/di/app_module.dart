@@ -56,12 +56,12 @@ void _setupRemoteDataSources() {
 }
 
 void _setupThirdPartyLibraries() {
-  locator.registerLazySingleton<GoogleSignIn>(
-      () => GoogleSignIn(
+  locator.registerLazySingleton<GoogleSignIn>(() => GoogleSignIn(
         scopes: [
           'https://www.googleapis.com/auth/contacts.readonly',
         ],
-        clientId: '355571272838-hj8sfomh23finum1nbbg2g35nqvh31tv.apps.googleusercontent.com',
+        clientId:
+            '355571272838-hj8sfomh23finum1nbbg2g35nqvh31tv.apps.googleusercontent.com',
       ));
 }
 
@@ -73,16 +73,21 @@ void _setupRepositories() {
 void _setupUseCases() {
   locator.registerLazySingleton<SignUpUseCase>(() => SignUpUseCaseImpl());
   locator.registerLazySingleton<SearchUseCase>(() => SearchUseCaseImpl());
-  locator.registerLazySingleton<RecentItemsUseCase>(() => RecentItemsUseCaseImpl());
-  locator.registerLazySingleton<TrendItemsUseCase>(() => TrendItemsUseCaseImpl());
+  locator.registerLazySingleton<RecentItemsUseCase>(
+      () => RecentItemsUseCaseImpl());
+  locator
+      .registerLazySingleton<TrendItemsUseCase>(() => TrendItemsUseCaseImpl());
   locator.registerLazySingleton<RecommendUseCase>(() => RecommendUseCaseImpl());
 }
 
 void _setupScreens() {
   locator.registerLazySingleton<SignupScreen>(() => const SignupScreen());
   locator.registerLazySingleton<SettingsScreen>(() => const SettingsScreen());
-  locator.registerLazySingleton<ShowMediaScreen>(( )=>const ShowMediaScreen());
-  locator.registerLazySingleton<HomeScreen>(() => const HomeScreen(userModel: null));
+  locator.registerLazySingleton<ShowMediaScreen>(() => const ShowMediaScreen(
+        id: null,
+      ));
+  locator.registerLazySingleton<HomeScreen>(
+      () => const HomeScreen(userModel: null));
   locator.registerLazySingleton<SearchScreen>(() => const SearchScreen());
   locator.registerLazySingleton<RecommendScreen>(() => const RecommendScreen());
 }

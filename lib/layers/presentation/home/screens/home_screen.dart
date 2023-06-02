@@ -21,7 +21,6 @@ class HomeScreen extends StatelessWidget {
 
   const HomeScreen({Key? key, required this.userModel}) : super(key: key);
 
-  static const String route = '/home';
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
@@ -65,16 +64,16 @@ class _HomeFormState extends State<_HomeForm> {
           Row(
             children: [
               Padding(
-                padding: const EdgeInsets.fromLTRB(24, 55, 15, 0),
-                child: Container(
-                  width: 40,
-                  height: 40,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(24),
-                    image: DecorationImage(image: NetworkImage(widget.userModel.photoUrl!),)
-                  ),
-                )
-              ),
+                  padding: const EdgeInsets.fromLTRB(24, 55, 15, 0),
+                  child: Container(
+                    width: 40,
+                    height: 40,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(24),
+                        image: DecorationImage(
+                          image: NetworkImage(widget.userModel.photoUrl!),
+                        )),
+                  )),
               Padding(
                 padding: const EdgeInsets.fromLTRB(0, 52, 0, 0),
                 child: Column(
@@ -82,8 +81,8 @@ class _HomeFormState extends State<_HomeForm> {
                   children: [
                     Text(
                       'Hi, ${widget.userModel.name}',
-                      style:
-                          const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                      style: const TextStyle(
+                          fontWeight: FontWeight.bold, fontSize: 18),
                     ),
                     const Text(
                       'Explore today items',
@@ -151,9 +150,10 @@ class _HomeFormState extends State<_HomeForm> {
               children: [
                 Text(
                   'See what’s good for you!',
-                  style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                    fontWeight: FontWeight.bold
-                  ),
+                  style: Theme.of(context)
+                      .textTheme
+                      .titleLarge!
+                      .copyWith(fontWeight: FontWeight.bold),
                 )
               ],
             ),
