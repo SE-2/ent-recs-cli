@@ -52,5 +52,7 @@
   "movieType": "فیلم",
   "podcastType": "پادکست",
   "ebookType": "کتاب",
-  "applyFiltersButton": "اعمال فیلترها"
+  "applyFiltersButton": "اعمال فیلترها",
+  "selectListToAdd": "یک لیست را انتخاب کنید",
+  "itemAddedSuccessfully": "رسانه با موفقیت اضافه شد!"
 }

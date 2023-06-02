@@ -22,6 +22,8 @@ class BookmarkListsSuccess extends BookmarkListsState {
   List<Object> get props => [result];
 }
 
+class AddItemSuccess extends BookmarkListsState {}
+
 class BookmarkListsFailure extends BookmarkListsState {
   final String error;
 

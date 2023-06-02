@@ -52,5 +52,7 @@
   "movieType": "Movie",
   "podcastType": "Podcast",
   "ebookType": "E-Book",
-  "applyFiltersButton": "Apply Filters"
+  "applyFiltersButton": "Apply Filters",
+  "selectListToAdd": "Select A List",
+  "itemAddedSuccessfully": "Media added successfully!"
 }

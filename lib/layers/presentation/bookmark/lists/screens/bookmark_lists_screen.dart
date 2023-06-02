@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:supermedia/common/utils/app_localization.dart';
 import 'package:supermedia/di/app_module.dart';
+import 'package:supermedia/layers/data/models/bookmark_list_item_model.dart';
+import 'package:supermedia/layers/presentation/bookmark/listitems/screens/bookmark_list_items_screen.dart';
 import 'package:supermedia/layers/presentation/bookmark/lists/bloc/bookmark_lists_bloc.dart';
 import 'package:supermedia/layers/presentation/bookmark/lists/bloc/bookmark_lists_event.dart';
 import 'package:supermedia/layers/presentation/bookmark/lists/bloc/bookmark_lists_state.dart';
@@ -11,21 +13,27 @@ import 'package:supermedia/layers/presentation/shared/widgets/custom_app_bar.dar
 
 class BookmarkListsScreen extends StatelessWidget {
   static const String route = '/';
+  final String? itemIdToBookmark;
 
-  const BookmarkListsScreen({Key? key}) : super(key: key);
+  const BookmarkListsScreen({Key? key, this.itemIdToBookmark})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider<BookmarkListsBloc>(
       create: (_) => locator<BookmarkListsBloc>(),
       child: Scaffold(
-        body: _BookmarkListsForm(),
+        body: _BookmarkListsForm(itemIdToBookmark: itemIdToBookmark),
       ),
     );
   }
 }
 
 class _BookmarkListsForm extends StatefulWidget {
+  final String? itemIdToBookmark;
+
+  const _BookmarkListsForm({this.itemIdToBookmark});
+
   @override
   _BookmarkListsFormState createState() => _BookmarkListsFormState();
 }
@@ -59,20 +67,28 @@ class _BookmarkListsFormState extends State<_BookmarkListsForm> {
         builder: (context, state) {
           if (state is BookmarkListsLoading) {
             return _showLoading();
-          }
-          else if (state is BookmarkListsSuccess) {
-            return BookmarkListItems(items: state.result);
-          }
-          else if (state is BookmarkListsEmpty) {
+          } else if (state is BookmarkListsSuccess) {
+            return BookmarkListItems(items: state.result,
+              onItemClick: (bookmarkListItem) { handleItemClicked(context, bookmarkListItem); },
+            );
+          } else if (state is BookmarkListsEmpty) {
             return _showEmptyState();
-          }
-          else if (state is BookmarkListsFailure) {
-            Future.delayed(const Duration(milliseconds: 200), () {
+          } else if (state is BookmarkListsFailure || state is AddItemSuccess) {
+            Future.delayed(const Duration(milliseconds: 500), () {
               Navigator.of(context).pop();
             });
+            if (state is BookmarkListsFailure) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(content: Text(state.error)),
+              );
+            }
+            else if (state is AddItemSuccess) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(content: Text(AppLocalization.of(context)!.itemAddedSuccessfully)),
+              );
+            }
             return Container();
-          }
-          else {
+          } else {
             return Container();
           }
         },
@@ -80,19 +96,30 @@ class _BookmarkListsFormState extends State<_BookmarkListsForm> {
     );
   }
 
+  void handleItemClicked(BuildContext context, BookmarkListItem bookmarkListItem) {
+    if (widget.itemIdToBookmark == null) {
+      Navigator.pushNamed(context, BookmarkListItemsScreen.route, arguments: bookmarkListItem);
+    } else {
+      context.read<BookmarkListsBloc>().add(
+          AddItemToBookmarkList(
+              itemId: widget.itemIdToBookmark!,
+              bookmarkListId: bookmarkListItem.id
+          )
+      );
+    }
+  }
+
   Expanded _showEmptyState() {
     return Expanded(
-            child: Center(
-              child: Text(AppLocalization.of(context)!.emptyList),
-            ),
-          );
+      child: Center(
+        child: Text(AppLocalization.of(context)!.emptyList),
+      ),
+    );
   }
 
   Expanded _showLoading() {
     return const Expanded(
-              child: Center(
-            child: CircularProgressIndicator(),
-          ));
+        child: Center(child: CircularProgressIndicator()));
   }
 
   Widget _buildBottomButton(BuildContext context) {
@@ -107,9 +134,10 @@ class _BookmarkListsFormState extends State<_BookmarkListsForm> {
 
   CustomAppBar _buildAppBar(BuildContext context) {
     return CustomAppBar(
-      title: AppLocalization.of(context)!.bookmarkListScreenTitle,
-      showBackButton: true,
-    );
+        title: widget.itemIdToBookmark == null
+            ? AppLocalization.of(context)!.bookmarkListScreenTitle
+            : AppLocalization.of(context)!.selectListToAdd,
+        showBackButton: true);
   }
 
   @override

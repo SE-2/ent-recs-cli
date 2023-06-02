@@ -5,7 +5,7 @@ import 'package:supermedia/layers/presentation/bookmark/lists/bloc/bookmark_list
 import 'package:supermedia/layers/presentation/bookmark/lists/bloc/bookmark_lists_state.dart';
 
 class BookmarkListsBloc extends Bloc<BookmarkListsEvent, BookmarkListsState> {
-  final BookmarkListsUseCase _recommendUseCase = locator<BookmarkListsUseCase>();
+  final BookmarkListsUseCase _bookmarkListsUseCase = locator<BookmarkListsUseCase>();
 
   BookmarkListsBloc() : super(BookmarkListsLoading()) {
     on<BookmarkListsEvent>((event, emit) async {
@@ -13,12 +13,21 @@ class BookmarkListsBloc extends Bloc<BookmarkListsEvent, BookmarkListsState> {
         emit(BookmarkListsLoading());
         await Future.delayed(const Duration(seconds: 1));
         try {
-          final result = await _recommendUseCase.getBookmarkLists();
+          final result = await _bookmarkListsUseCase.getBookmarkLists();
           if (result.isEmpty) {
             emit(BookmarkListsEmpty());
           } else {
             emit(BookmarkListsSuccess(result: result));
           }
+        } catch (e) {
+          emit(BookmarkListsFailure(error: e.toString()));
+        }
+      }
+      else if (event is AddItemToBookmarkList) {
+        emit(BookmarkListsLoading());
+        try {
+          await _bookmarkListsUseCase.addItemToBookmarkList(event.itemId, event.bookmarkListId);
+            emit(AddItemSuccess());
         } catch (e) {
           emit(BookmarkListsFailure(error: e.toString()));
         }

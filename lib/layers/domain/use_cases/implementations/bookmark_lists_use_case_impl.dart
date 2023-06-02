@@ -9,4 +9,9 @@ class BookmarkListsUseCaseImpl implements BookmarkListsUseCase {
   Future<List<BookmarkListItem>> getBookmarkLists() async {
     return _bookmarkRepository.getBookmarkLists();
   }
+
+  @override
+  Future<void> addItemToBookmarkList(String itemId, int bookmarkListId) async{
+    return _bookmarkRepository.addItemToBookmarkList(itemId, bookmarkListId);
+  }
 }

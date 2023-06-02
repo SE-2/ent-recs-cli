@@ -1,5 +1,6 @@
 
 import 'package:supermedia/layers/data/data_sources/abstractions/remote_bookmarek_data_source.dart';
+import 'package:supermedia/layers/data/models/add_item_model.dart';
 import 'package:supermedia/layers/data/models/bookmark_list_item_model.dart';
 import 'package:supermedia/layers/data/models/media_metadata_model.dart';
 
@@ -39,6 +40,24 @@ class RemoteBookmarkDataSourceImpl implements RemoteBookmarkDataSource {
     //       AppLocalization.instance.errorCode(response.statusCode));
     // }
     return mediaList;
+  }
+
+  @override
+  Future<void> addItemToBookmarkList(AddItemModel addItemModel) async {
+    // final request = HttpRequest(
+    //   '/bookmarks/{id}/add',
+    //   headers: {'Content-Type': 'application/json'},
+    //   body: {'query': query},
+    // );
+    //
+    // final response = await _httpClient.post(request);
+    //
+    // if (response.statusCode == 200) {
+    //   return BookmarkListItem.fromJsonList(response.body);
+    // } else {
+    //   throw SearchException(
+    //       AppLocalization.instance.errorCode(response.statusCode));
+    // }
   }
 }
 
