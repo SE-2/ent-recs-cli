@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:supermedia/gen/assets.gen.dart';
-import 'package:supermedia/layers/data/models/bookmark_list_item.dart';
+import 'package:supermedia/layers/data/models/bookmark_list_item_model.dart';
 
 class BookmarkListItems extends StatelessWidget {
   final List<BookmarkListItem> items;

@@ -19,11 +19,13 @@ import 'package:supermedia/layers/data/repositories/user_repository_impl.dart';
 import 'package:supermedia/layers/domain/repositories/bookmark_repository.dart';
 import 'package:supermedia/layers/domain/repositories/media_repository.dart';
 import 'package:supermedia/layers/domain/repositories/user_repository.dart';
+import 'package:supermedia/layers/domain/use_cases/abstractoins/bookmark_list_items_use_case.dart';
 import 'package:supermedia/layers/domain/use_cases/abstractoins/bookmark_lists_use_case.dart';
 import 'package:supermedia/layers/domain/use_cases/abstractoins/recent_items_use_case.dart';
 import 'package:supermedia/layers/domain/use_cases/abstractoins/search_use_case.dart';
 import 'package:supermedia/layers/domain/use_cases/abstractoins/signup_use_case.dart';
 import 'package:supermedia/layers/domain/use_cases/abstractoins/trend_items_use_case.dart';
+import 'package:supermedia/layers/domain/use_cases/implementations/bookmark_list_items_use_case_impl.dart';
 import 'package:supermedia/layers/domain/use_cases/implementations/bookmark_lists_use_case_impl.dart';
 import 'package:supermedia/layers/domain/use_cases/implementations/recent_items_use_case_impl.dart';
 import 'package:supermedia/layers/domain/use_cases/abstractoins/recommend_use_case.dart';
@@ -31,6 +33,8 @@ import 'package:supermedia/layers/domain/use_cases/implementations/recommend_use
 import 'package:supermedia/layers/domain/use_cases/implementations/search_use_case_impl.dart';
 import 'package:supermedia/layers/domain/use_cases/implementations/trend_items_use_case_impl.dart';
 import 'package:supermedia/layers/domain/use_cases/signup_use_case.dart';
+import 'package:supermedia/layers/presentation/bookmark/listitems/bloc/bookmark_list_items_bloc.dart';
+import 'package:supermedia/layers/presentation/bookmark/listitems/screens/bookmark_list_items_screen.dart';
 import 'package:supermedia/layers/presentation/bookmark/lists/bloc/bookmark_lists_bloc.dart';
 import 'package:supermedia/layers/presentation/bookmark/lists/screens/bookmark_lists_screen.dart';
 import 'package:supermedia/layers/presentation/media/screens/show_media_screen.dart';
@@ -88,6 +92,7 @@ void _setupUseCases() {
   locator.registerLazySingleton<TrendItemsUseCase>(() => TrendItemsUseCaseImpl());
   locator.registerLazySingleton<RecommendUseCase>(() => RecommendUseCaseImpl());
   locator.registerLazySingleton<BookmarkListsUseCase>(() => BookmarkListsUseCaseImpl());
+  locator.registerLazySingleton<BookmarkListItemsUseCase>(() => BookmarkListItemsUseCaseImpl());
 }
 
 void _setupScreens() {
@@ -98,6 +103,7 @@ void _setupScreens() {
   locator.registerLazySingleton<SearchScreen>(() => const SearchScreen());
   locator.registerLazySingleton<RecommendScreen>(() => const RecommendScreen());
   locator.registerLazySingleton<BookmarkListsScreen>(() => const BookmarkListsScreen());
+  locator.registerLazySingleton<BookmarkListItemsScreen>(() => const BookmarkListItemsScreen());
 }
 
 void _setupBlocs() {
@@ -109,6 +115,7 @@ void _setupBlocs() {
   locator.registerFactory<RecentItemsBloc>(() => RecentItemsBloc());
   locator.registerFactory<RecommendBloc>(() => RecommendBloc());
   locator.registerFactory<BookmarkListsBloc>(() => BookmarkListsBloc());
+  locator.registerFactory<BookmarkListItemsBloc>(() => BookmarkListItemsBloc());
 }
 
 void _setupSharedPreferences() {
