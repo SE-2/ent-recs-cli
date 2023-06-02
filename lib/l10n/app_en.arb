@@ -47,6 +47,7 @@
   "resetFiltersButton": "Reset Filters",
   "typeTitle": "Type",
   "categoriesTitle": "Categories",
+  "allType": "All",
   "musicType": "Music",
   "movieType": "Movie",
   "podcastType": "Podcast",

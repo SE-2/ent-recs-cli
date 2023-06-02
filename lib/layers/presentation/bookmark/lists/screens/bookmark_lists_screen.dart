@@ -81,9 +81,9 @@ class _BookmarkListsFormState extends State<_BookmarkListsForm> {
   }
 
   Expanded _showEmptyState() {
-    return const Expanded(
+    return Expanded(
             child: Center(
-              child: Text('Empty List.'),
+              child: Text(AppLocalization.of(context)!.emptyList),
             ),
           );
   }

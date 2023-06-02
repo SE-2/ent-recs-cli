@@ -20,7 +20,7 @@ class FetchBookmarkListItems extends BookmarkListItemsEvent {
 class FilterBookmarkListItems extends BookmarkListItemsEvent {
   final MediaType? mediaType;
 
-  const FilterBookmarkListItems(this.mediaType);
+  const FilterBookmarkListItems({required this.mediaType});
 
   @override
   String toString() => 'FilterAllBookmarkListItems { }';

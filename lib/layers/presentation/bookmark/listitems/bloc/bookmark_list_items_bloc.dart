@@ -12,15 +12,15 @@ class BookmarkListItemsBloc extends Bloc<BookmarkListItemsEvent, BookmarkListIte
   BookmarkListItemsBloc() : super(BookmarkListItemsLoading()) {
     on<BookmarkListItemsEvent>((event, emit) async {
       if (event is FetchBookmarkListItems) {
-        _fetchBookmarkListItems(emit, event.bookmarkListId);
+        await _fetchBookmarkListItems(emit, event.bookmarkListId);
       }
       if (event is FilterBookmarkListItems) {
-        _filterList(emit, event.mediaType);
+        await _filterList(emit, event.mediaType);
       }
     });
   }
 
-  void _filterList(Emitter<BookmarkListItemsState> emit, MediaType? mediaType) {
+  Future<void> _filterList(Emitter<BookmarkListItemsState> emit, MediaType? mediaType) async {
      emit(BookmarkListItemsLoading());
     var result = List<MediaMetadata>.from(_bookmarkListItems!);
     try {

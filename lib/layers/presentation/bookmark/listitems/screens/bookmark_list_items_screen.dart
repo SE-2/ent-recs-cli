@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:supermedia/common/utils/app_localization.dart';
 import 'package:supermedia/di/app_module.dart';
 import 'package:supermedia/gen/assets.gen.dart';
 import 'package:supermedia/layers/data/models/bookmark_list_item_model.dart';
@@ -8,6 +9,7 @@ import 'package:supermedia/layers/presentation/bookmark/listitems/bloc/bookmark_
 import 'package:supermedia/layers/presentation/bookmark/listitems/bloc/bookmark_list_items_event.dart';
 import 'package:supermedia/layers/presentation/bookmark/listitems/bloc/bookmark_list_items_state.dart';
 import 'package:supermedia/layers/presentation/shared/widgets/custom_app_bar.dart';
+import 'package:supermedia/layers/presentation/shared/widgets/custom_choice_chip_group2.dart';
 import 'package:supermedia/layers/presentation/shared/widgets/media_list.dart';
 import 'package:supermedia/layers/presentation/shared/widgets/media_list_item.dart';
 
@@ -15,14 +17,17 @@ class BookmarkListItemsScreen extends StatelessWidget {
   static const String route = '/';
   final BookmarkListItem? bookmarkListItem;
 
-  const BookmarkListItemsScreen({Key? key, this.bookmarkListItem}) : super(key: key);
+  const BookmarkListItemsScreen({Key? key, this.bookmarkListItem})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider<BookmarkListItemsBloc>(
       create: (_) => locator<BookmarkListItemsBloc>(),
       child: Scaffold(
-        body: _BookmarkListItemsForm(bookmarkListItem: bookmarkListItem,),
+        body: _BookmarkListItemsForm(
+          bookmarkListItem:   BookmarkListItem(id: 0, title: "Happiness", types: [MediaType.movie, MediaType.music, MediaType.book, MediaType.podcast]),
+        ),
       ),
     );
   }
@@ -41,9 +46,15 @@ class _BookmarkListItemsFormState extends State<_BookmarkListItemsForm> {
   MediaType? _selectedType;
 
   @override
-  Widget build(BuildContext context) {
-    context.read<BookmarkListItemsBloc>().add(const FetchBookmarkListItems(bookmarkListId: 10));
+  void initState() {
+    context
+        .read<BookmarkListItemsBloc>()
+        .add(const FetchBookmarkListItems(bookmarkListId: 10));
+    super.initState();
+  }
 
+  @override
+  Widget build(BuildContext context) {
     return BlocListener<BookmarkListItemsBloc, BookmarkListItemsState>(
       listener: (context, state) {
         if (state is BookmarkListItemsFailure) {
@@ -70,20 +81,16 @@ class _BookmarkListItemsFormState extends State<_BookmarkListItemsForm> {
             builder: (context, state) {
               if (state is BookmarkListItemsLoading) {
                 return _showLoading();
-              }
-              else if (state is BookmarkListItemsSuccess) {
+              } else if (state is BookmarkListItemsSuccess) {
                 return _showMediaList(state.result);
-              }
-              else if (state is BookmarkListItemsEmpty) {
+              } else if (state is BookmarkListItemsEmpty) {
                 return _showEmptyState();
-              }
-              else if (state is BookmarkListItemsFailure) {
+              } else if (state is BookmarkListItemsFailure) {
                 Future.delayed(const Duration(milliseconds: 200), () {
                   Navigator.of(context).pop();
                 });
                 return Container();
-              }
-              else {
+              } else {
                 return Container();
               }
             },
@@ -96,21 +103,20 @@ class _BookmarkListItemsFormState extends State<_BookmarkListItemsForm> {
   MediaList _showMediaList(List<MediaMetadata> result) {
     return MediaList(
         items: List.generate(
-          result.length,
-              (index) {
-            var mediaMetadata = result[index];
-            return MediaListItem(
-              mediaMetadata: mediaMetadata,
-            );
-          },
-        )
-    );
+      result.length,
+      (index) {
+        var mediaMetadata = result[index];
+        return MediaListItem(
+          mediaMetadata: mediaMetadata,
+        );
+      },
+    ));
   }
 
   Expanded _showEmptyState() {
-    return const Expanded(
+    return Expanded(
       child: Center(
-        child: Text('Empty List.'),
+        child: Text(AppLocalization.of(context)!.emptyList),
       ),
     );
   }
@@ -118,8 +124,8 @@ class _BookmarkListItemsFormState extends State<_BookmarkListItemsForm> {
   Expanded _showLoading() {
     return const Expanded(
         child: Center(
-          child: CircularProgressIndicator(),
-        ));
+      child: CircularProgressIndicator(),
+    ));
   }
 
   CustomAppBar _buildAppBar(BuildContext context) {
@@ -138,25 +144,22 @@ class _BookmarkListItemsFormState extends State<_BookmarkListItemsForm> {
     List<MediaType?> types = [null, ...widget.bookmarkListItem!.types.toList()];
 
     return SizedBox(
-      height: 50, // Adjust the height as needed
-      child: ListView.builder(
-        scrollDirection: Axis.horizontal,
-        itemCount: types.length,
-        itemBuilder: (BuildContext context, int index) {
-          MediaType? type = types[index];
-          return Padding(
+      height: 48,
+      child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8),
-            child: ChoiceChip(
-              label: Text(type == null ? 'All' : getMediaTypeValue(type)),
-              selected: _selectedType == type,
-              onSelected: (bool selected) {
-                setState(() {
-                  _selectedType = selected ? type : MediaType.movie;
-                });
+            child: CustomChoiceChipGroup2<MediaType?>(
+              items: types,
+              selectedItem: _selectedType,
+              itemLabel: getMediaTypeValue,
+              onItemSelected: (MediaType? selected) {
+                  context
+                      .read<BookmarkListItemsBloc>()
+                      .add(FilterBookmarkListItems(mediaType: selected));
+                  setState(() {
+                    _selectedType = selected;
+                  });
               },
             ),
-          );
-        },
       ),
     );
   }
@@ -164,15 +167,15 @@ class _BookmarkListItemsFormState extends State<_BookmarkListItemsForm> {
   String getMediaTypeValue(MediaType? selected) {
     switch (selected) {
       case null:
-        return 'All';
+        return AppLocalization.of(context)!.allType;
       case MediaType.music:
-        return 'Music';
+        return AppLocalization.of(context)!.musicType;
       case MediaType.movie:
-        return 'Movie';
+        return AppLocalization.of(context)!.movieType;
       case MediaType.podcast:
-        return 'Podcast';
+        return AppLocalization.of(context)!.podcastType;
       case MediaType.book:
-        return 'EBook';
+        return AppLocalization.of(context)!.ebookType;
     }
   }
 
