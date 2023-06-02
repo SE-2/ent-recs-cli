@@ -39,5 +39,15 @@
   "login": "Login",
   "or": "Or",
   "dateFilterToday":"Today",
-  "dateFilterAll":"All"
+  "dateFilterAll":"All",
+  "emptyList": "Empty List.",
+  "filterTitle": "Filter",
+  "resetFiltersButton": "Reset Filters",
+  "typeTitle": "Type",
+  "categoriesTitle": "Categories",
+  "musicType": "Music",
+  "movieType": "Movie",
+  "podcastType": "Podcast",
+  "ebookType": "E-Book",
+  "applyFiltersButton": "Apply Filters"
 }
