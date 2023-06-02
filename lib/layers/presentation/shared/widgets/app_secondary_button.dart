@@ -1,22 +1,22 @@
 import 'package:flutter/material.dart';
 
-class AppPrimaryButton extends StatelessWidget {
+class AppSecondaryButton extends StatelessWidget {
   final void Function()? onPressed;
   final String? text;
   final Widget? icon;
   final bool _isLoading;
   final double width;
 
-  const AppPrimaryButton({
+  const AppSecondaryButton({
     Key? key,
     required this.text,
     required this.onPressed,
-    this.icon,
+    required this.icon,
     this.width = double.infinity,
   })  : _isLoading = false,
         super(key: key);
 
-  const AppPrimaryButton.loading({
+  const AppSecondaryButton.loading({
     Key? key,
     this.width = double.infinity,
   })  : text = null,
@@ -31,11 +31,11 @@ class AppPrimaryButton extends StatelessWidget {
       width: width,
       height: 56,
       child: ElevatedButton(
-        onPressed: onPressed,
-        style: _buttonStyle(context),
+          onPressed: onPressed,
+          style: _buttonStyle(context),
           child: _isLoading
-          ? CircularProgressIndicator(color: Theme.of(context).colorScheme.onPrimary)
-            : _buildButtonContent(context)),
+              ? const CircularProgressIndicator()
+              : _buildButtonContent(context)),
     );
   }
 
@@ -53,20 +53,22 @@ class AppPrimaryButton extends StatelessWidget {
   ButtonStyle _buttonStyle(BuildContext context) {
     return ButtonStyle(
       backgroundColor: MaterialStateProperty.all<Color>(
-        Theme.of(context).colorScheme.primary,
+        Theme.of(context).colorScheme.background,
       ),
       shape: MaterialStateProperty.all<RoundedRectangleBorder>(
         RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(24),
+          side: BorderSide(
+            color: Theme.of(context).colorScheme.outline,
+          ),
         ),
       ),
     );
   }
 
-  TextStyle _textStyle(BuildContext context) {
+  TextStyle? _textStyle(BuildContext context) {
     return Theme.of(context).textTheme.titleMedium!.copyWith(
-      fontWeight: FontWeight.w600,
-      color: Theme.of(context).colorScheme.onPrimary,
+        color: Theme.of(context).colorScheme.outline
     );
   }
 }

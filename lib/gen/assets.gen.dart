@@ -8,8 +8,8 @@
 // ignore_for_file: directives_ordering,unnecessary_import,implicit_dynamic_list_literal,deprecated_member_use
 
 import 'package:flutter/widgets.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter/services.dart';
 
 class $AssetsIconsGen {
   const $AssetsIconsGen();
@@ -47,8 +47,130 @@ class $AssetsImagesGen {
   AssetGenImage get appIcon =>
       const AssetGenImage('assets/images/app_icon.png');
 
+  $AssetsImagesCategoriesGen get categories =>
+      const $AssetsImagesCategoriesGen();
+  $AssetsImagesIconsGen get icons => const $AssetsImagesIconsGen();
+  $AssetsImagesItemGen get item => const $AssetsImagesItemGen();
+  $AssetsImagesItemsGen get items => const $AssetsImagesItemsGen();
+  $AssetsImagesPostsGen get posts => const $AssetsImagesPostsGen();
+  $AssetsImagesStoriesGen get stories => const $AssetsImagesStoriesGen();
+
   /// List of all assets
   List<AssetGenImage> get values => [appIcon];
+}
+
+class $AssetsImagesCategoriesGen {
+  const $AssetsImagesCategoriesGen();
+
+  /// File path: assets/images/categories/ebookCategory.png
+  AssetGenImage get ebookCategory =>
+      const AssetGenImage('assets/images/categories/ebookCategory.png');
+
+  /// File path: assets/images/categories/movieCategory.png
+  AssetGenImage get movieCategory =>
+      const AssetGenImage('assets/images/categories/movieCategory.png');
+
+  /// File path: assets/images/categories/musicCategory.png
+  AssetGenImage get musicCategory =>
+      const AssetGenImage('assets/images/categories/musicCategory.png');
+
+  /// File path: assets/images/categories/podcastCategory.png
+  AssetGenImage get podcastCategory =>
+      const AssetGenImage('assets/images/categories/podcastCategory.png');
+
+  /// List of all assets
+  List<AssetGenImage> get values =>
+      [ebookCategory, movieCategory, musicCategory, podcastCategory];
+}
+
+class $AssetsImagesIconsGen {
+  const $AssetsImagesIconsGen();
+
+  /// File path: assets/images/icons/book_icon.png
+  AssetGenImage get bookIcon =>
+      const AssetGenImage('assets/images/icons/book_icon.png');
+
+  /// File path: assets/images/icons/movie_icon.png
+  AssetGenImage get movieIcon =>
+      const AssetGenImage('assets/images/icons/movie_icon.png');
+
+  /// File path: assets/images/icons/music_icon.png
+  AssetGenImage get musicIcon =>
+      const AssetGenImage('assets/images/icons/music_icon.png');
+
+  /// File path: assets/images/icons/podcast_icon.png
+  AssetGenImage get podcastIcon =>
+      const AssetGenImage('assets/images/icons/podcast_icon.png');
+
+  /// File path: assets/images/icons/profile_icon.png
+  AssetGenImage get profileIcon =>
+      const AssetGenImage('assets/images/icons/profile_icon.png');
+
+  /// List of all assets
+  List<AssetGenImage> get values =>
+      [bookIcon, movieIcon, musicIcon, podcastIcon, profileIcon];
+}
+
+class $AssetsImagesItemGen {
+  const $AssetsImagesItemGen();
+
+  /// File path: assets/images/item/item.png
+  AssetGenImage get item => const AssetGenImage('assets/images/item/item.png');
+
+  /// List of all assets
+  List<AssetGenImage> get values => [item];
+}
+
+class $AssetsImagesItemsGen {
+  const $AssetsImagesItemsGen();
+
+  /// File path: assets/images/items/item.png
+  AssetGenImage get item => const AssetGenImage('assets/images/items/item.png');
+
+  /// List of all assets
+  List<AssetGenImage> get values => [item];
+}
+
+class $AssetsImagesPostsGen {
+  const $AssetsImagesPostsGen();
+
+  /// File path: assets/images/posts/post_1.png
+  AssetGenImage get post1 =>
+      const AssetGenImage('assets/images/posts/post_1.png');
+
+  /// File path: assets/images/posts/post_2.png
+  AssetGenImage get post2 =>
+      const AssetGenImage('assets/images/posts/post_2.png');
+
+  /// List of all assets
+  List<AssetGenImage> get values => [post1, post2];
+}
+
+class $AssetsImagesStoriesGen {
+  const $AssetsImagesStoriesGen();
+
+  /// File path: assets/images/stories/story_1.jpg
+  AssetGenImage get story1 =>
+      const AssetGenImage('assets/images/stories/story_1.jpg');
+
+  /// File path: assets/images/stories/story_2.jpg
+  AssetGenImage get story2 =>
+      const AssetGenImage('assets/images/stories/story_2.jpg');
+
+  /// File path: assets/images/stories/story_3.jpg
+  AssetGenImage get story3 =>
+      const AssetGenImage('assets/images/stories/story_3.jpg');
+
+  /// File path: assets/images/stories/story_4.jpg
+  AssetGenImage get story4 =>
+      const AssetGenImage('assets/images/stories/story_4.jpg');
+
+  /// File path: assets/images/stories/story_5.jpg
+  AssetGenImage get story5 =>
+      const AssetGenImage('assets/images/stories/story_5.jpg');
+
+  /// List of all assets
+  List<AssetGenImage> get values => [story1, story2, story3, story4, story5];
 }
 
 class Assets {
