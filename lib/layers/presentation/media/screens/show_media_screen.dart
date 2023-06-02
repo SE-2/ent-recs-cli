@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:supermedia/di/app_module.dart';
 import 'package:supermedia/layers/presentation/media/bloc/media_bloc.dart';
+import 'package:supermedia/layers/presentation/media/bloc/media_state.dart';
 import 'package:supermedia/layers/presentation/media/widgets/media_bottom_bar.dart';
 import 'package:supermedia/layers/presentation/media/widgets/media_image.dart';
 import 'package:supermedia/layers/presentation/media/widgets/show_more_text.dart';
@@ -37,6 +38,7 @@ class MediaForm extends StatefulWidget {
 
 class _MediaFormState extends State<MediaForm> {
   bool _isLiked = false;
+
   int _likes = 50;
 
   void _onLikePressed() {
@@ -60,6 +62,18 @@ class _MediaFormState extends State<MediaForm> {
 
   @override
   Widget build(BuildContext context) {
+    return BlocBuilder<MediaBloc, MediaState>(builder: (context, state) {
+      if (state is MediaLoading) {
+        return const CircularProgressIndicator();
+      } else if (state is MediaSuccess) {
+        return showContent(context);
+      } else {
+        return Container();
+      }
+    });
+  }
+
+  SafeArea showContent(BuildContext context) {
     return SafeArea(
       child: Scaffold(
         backgroundColor: Theme.of(context).colorScheme.background,
