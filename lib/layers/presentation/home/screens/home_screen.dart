@@ -1,4 +1,5 @@
 import 'package:custom_sliding_segmented_control/custom_sliding_segmented_control.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:supermedia/di/app_module.dart';
@@ -12,6 +13,8 @@ import 'package:supermedia/layers/presentation/home/widgets/category_list.dart';
 import 'package:supermedia/layers/presentation/home/widgets/data.dart';
 import 'package:supermedia/layers/presentation/home/widgets/post_list.dart';
 import 'package:supermedia/layers/presentation/home/widgets/story_list.dart';
+import 'package:supermedia/layers/presentation/search/screens/search_screen.dart';
+import 'package:supermedia/layers/presentation/setting/screens/settings_screen.dart';
 
 enum DateFilter { all, today }
 
@@ -31,7 +34,7 @@ class HomeScreen extends StatelessWidget {
       ],
       child: Scaffold(
         backgroundColor: Theme.of(context).colorScheme.background,
-        body: _HomeForm(userModel: UserModel()),
+        body: _HomeForm(userModel: userModel!),
       ),
     );
   }

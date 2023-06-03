@@ -4,6 +4,8 @@ import 'package:supermedia/layers/presentation/setting/widgets/group_menu.dart';
 import 'package:supermedia/layers/presentation/shared/widgets/custom_app_bar.dart';
 
 class SettingsScreen extends StatelessWidget {
+  static const String route = '/settings';
+
   const SettingsScreen({super.key});
 
   @override

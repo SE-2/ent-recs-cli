@@ -7,6 +7,8 @@ import 'package:supermedia/di/app_module.dart';
 import 'package:supermedia/layers/data/data_sources/abstractions/local_data_source.dart';
 
 class SettingsScreen extends StatelessWidget {
+  static const String route = '/settings';
+
   const SettingsScreen({Key? key}) : super(key: key);
 
   @override
