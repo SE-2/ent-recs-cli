@@ -175,13 +175,13 @@ List<MediaFilter> mediaFilterList = [
       categories: ['Rock', 'Hip Hop', 'Jazz', 'Pop', 'Classical']),
   MediaFilter(
       mediaType: MediaType.movie,
-      categories: ['Action', 'Comedy', 'Drama', 'Horror', 'Romance']),
+      categories: ['Animation', 'Animation', 'History', 'War', 'Family']),
   MediaFilter(
       mediaType: MediaType.book,
-      categories: ['Fiction', 'Non-Fiction', 'Mystery', 'Thriller', 'Romance']),
+      categories: ['poetry', 'romance', 'fiction', 'comics, graphic']),
   MediaFilter(
       mediaType: MediaType.podcast,
-      categories: ['News', 'Technology', 'Comedy', 'True Crime', 'Sports'])
+      categories: ['Sports', 'Business', 'Government', 'History', 'Science'])
 ];
 
 List<MediaMetadataModel> mediaList = [
