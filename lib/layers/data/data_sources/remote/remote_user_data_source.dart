@@ -15,7 +15,7 @@ class RemoteUserDataSourceImpl implements RemoteUserDataSource {
         token: auth.accessToken!,
         email: account.email,
         name: account.displayName!,
-        photoUrl: account.photoUrl
+        photoUrl: account.photoUrl!
     );
     return userModel;
   }

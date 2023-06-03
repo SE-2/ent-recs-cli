@@ -22,7 +22,7 @@ class MediaListItem extends StatelessWidget {
 
     return InkWell(
       onTap: () {
-        Navigator.pushNamed(context, ShowMediaScreen.route);
+        Navigator.pushNamed(context, ShowMediaScreen.route, arguments: mediaMetadata.mediaId);
       },
       child: Container(
         margin: const EdgeInsets.symmetric(vertical: 10),
