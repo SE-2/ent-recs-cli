@@ -13,8 +13,8 @@ class MediaRepositoryImp implements MediaRepository {
       locator<RemoteMediaDataSource>();
 
   @override
-  Future<List<MediaMetadata>> recommend() async {
-    List<MediaMetadataModel> models = await _remoteDataSource.recommend();
+  Future<List<MediaMetadata>> recommend(MediaType mediaType) async {
+    List<MediaMetadataModel> models = await _remoteDataSource.recommend(mediaType);
     return models.map((e) => MediaMetadata.fromModel(e)).toList();
   }
 

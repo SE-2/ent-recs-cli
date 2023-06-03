@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:supermedia/common/utils/app_localization.dart';
 import 'package:supermedia/di/app_module.dart';
+import 'package:supermedia/layers/domain/entities/media_metadata.dart';
 import 'package:supermedia/layers/presentation/recommend/bloc/recommend_bloc.dart';
 import 'package:supermedia/layers/presentation/shared/widgets/custom_app_bar.dart';
 import 'package:supermedia/layers/presentation/shared/widgets/media_list.dart';
@@ -29,6 +30,8 @@ class RecommendScreen extends StatelessWidget {
 }
 
 class _RecommendForm extends StatefulWidget {
+  final MediaType mediaType = MediaType.movie;
+
   @override
   _RecommendFormState createState() => _RecommendFormState();
 }
@@ -36,7 +39,7 @@ class _RecommendForm extends StatefulWidget {
 class _RecommendFormState extends State<_RecommendForm> {
   @override
   Widget build(BuildContext context) {
-    context.read<RecommendBloc>().add(const RecommendLoadingStarted());
+    context.read<RecommendBloc>().add(RecommendLoadingStarted(mediaType: widget.mediaType));
 
     return Padding(
       padding: const EdgeInsets.fromLTRB(32, 12, 32, 32),

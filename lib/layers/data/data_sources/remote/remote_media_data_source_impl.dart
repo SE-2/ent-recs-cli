@@ -16,23 +16,43 @@ class RemoteMediaDataSourceImpl implements RemoteMediaDataSource {
   Future<List<MediaMetadataModel>> search(SearchQuery query) async {
     final request = HttpRequest(
       '/search',
-      body: query.toJson(), token: '1',
+      body: query.toJson(),
+      token: '1',
     );
 
     final response = await _httpClient.post(request);
 
-    if (response.statusCode == 200) {
-      return MediaMetadataModel.fromJsonList(response.body);
-    } else {
-      throw SearchException(
-          AppLocalization.instance.errorCode(response.statusCode));
-    }
+    try {
+      if (response.statusCode == 200) {
+        return MediaMetadataModel.fromJsonList(response.body);
+      } else {
+        // throw SearchException(
+        //     AppLocalization.instance.errorCode(response.statusCode));
+      }
+    } on Exception catch (e) {}
 
     return mediaList;
   }
 
   @override
-  Future<List<MediaMetadataModel>> recommend() async {
+  Future<List<MediaMetadataModel>> recommend(MediaType mediaType) async {
+    final request = HttpRequest(
+      '/recommend',
+      body: '"${mediaType.toJson()}"',
+      token: '1',
+    );
+
+    try {
+      final response = await _httpClient.post(request);
+
+      if (response.statusCode == 200) {
+        return MediaMetadataModel.fromJsonList(response.body);
+      } else {
+        throw SearchException(
+            AppLocalization.instance.errorCode(response.statusCode));
+      }
+    } on Exception catch (e) {}
+
     return mediaList;
   }
 
