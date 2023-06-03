@@ -95,6 +95,7 @@ class _HomeFormState extends State<_HomeForm> {
       physics: const BouncingScrollPhysics(),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
         children: [
           Row(
             children: [
@@ -212,7 +213,8 @@ class _HomeFormState extends State<_HomeForm> {
                   ),
                 );
               } else if (state is RecentItemsLoading) {
-                return const Expanded(
+                return const Flexible(
+                  fit: FlexFit.loose,
                     child: Center(
                   child: CircularProgressIndicator(),
                 ));

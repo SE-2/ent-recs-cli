@@ -54,33 +54,31 @@ class AppTextFieldState extends State<AppTextField> {
                   : Colors.transparent,
             ),
           ),
-          child: Expanded(
-            child: TextField(
-              showCursor: _isFocused,
-              decoration: InputDecoration(
-                border: InputBorder.none,
-                hintText: widget.hint,
-                hintStyle: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                    color: Theme.of(context).colorScheme.onSecondary),
-              ),
-              style: const TextStyle(fontSize: 16),
-              controller: _textController,
-              onTap: () {
-                setState(() {
-                  _isFocused = true;
-                });
-              },
-              onSubmitted: (value) {
-                setState(() {
-                  _isFocused = false;
-                });
-              },
-              onTapOutside: (value) {
-                setState(() {
-                  _isFocused = false;
-                });
-              },
+          child: TextField(
+            showCursor: _isFocused,
+            decoration: InputDecoration(
+              border: InputBorder.none,
+              hintText: widget.hint,
+              hintStyle: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                  color: Theme.of(context).colorScheme.onSecondary),
             ),
+            style: const TextStyle(fontSize: 16),
+            controller: _textController,
+            onTap: () {
+              setState(() {
+                _isFocused = true;
+              });
+            },
+            onSubmitted: (value) {
+              setState(() {
+                _isFocused = false;
+              });
+            },
+            onTapOutside: (value) {
+              setState(() {
+                _isFocused = false;
+              });
+            },
           ),
         ),
       ],
