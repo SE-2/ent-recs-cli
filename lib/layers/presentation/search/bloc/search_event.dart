@@ -1,20 +1,33 @@
 part of 'search_bloc.dart';
 
 abstract class SearchEvent extends Equatable {
-  const SearchEvent();
+  final BuildContext context;
+
+  const SearchEvent({
+    required this.context,
+  });
 
   @override
   List<Object> get props => [];
 }
 
 class SearchButtonPressed extends SearchEvent {
-  final String query;
+  final SearchQuery query;
 
-  const SearchButtonPressed({required this.query});
+  const SearchButtonPressed({required super.context, required this.query});
 
   @override
   List<Object> get props => [query];
 
   @override
   String toString() => 'SearchButtonPressed { query: $query }';
+}
+
+class FetchDefaultCategories extends SearchEvent {
+  const FetchDefaultCategories({required super.context});
+}
+
+
+class FilterOptionSelected extends SearchEvent {
+  const FilterOptionSelected({required super.context});
 }

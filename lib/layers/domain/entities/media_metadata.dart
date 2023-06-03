@@ -66,11 +66,23 @@ class MediaMetadata {
   }
 }
 
-enum MediaType {
-  movie,
-  music,
-  book,
-  podcast,
+enum MediaType { movie, music, book, podcast }
+
+extension MediaTypeExtension on MediaType {
+  String toJson() {
+    switch (this) {
+      case MediaType.movie:
+        return 'MOVIE';
+      case MediaType.music:
+        return 'MUSIC';
+      case MediaType.book:
+        return 'BOOK';
+      case MediaType.podcast:
+        return 'PODCAST';
+      default:
+        throw ArgumentError('Unsupported media type value: $this');
+    }
+  }
 }
 
 enum MediaProperty {

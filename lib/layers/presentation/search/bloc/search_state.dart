@@ -28,3 +28,17 @@ class SearchFailure extends SearchState {
   @override
   List<Object> get props => [error];
 }
+
+class FilterOptionLoading extends SearchState {}
+
+class FilterOptionsLoaded extends SearchState {
+  final Map<MediaType, List<String>> categories;
+
+  const FilterOptionsLoaded({required this.categories});
+}
+
+class DefaultCategoriesFetched extends SearchState {
+  final List<MediaFilter> result;
+
+  const DefaultCategoriesFetched({required this.result});
+}
