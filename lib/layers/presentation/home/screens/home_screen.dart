@@ -34,7 +34,39 @@ class HomeScreen extends StatelessWidget {
       ],
       child: Scaffold(
         backgroundColor: Theme.of(context).colorScheme.background,
-        body: _HomeForm(userModel: userModel!),
+        body: _HomeForm(userModel: UserModel()),
+        bottomNavigationBar: BottomNavigationBar(
+          items: const <BottomNavigationBarItem>[
+            BottomNavigationBarItem(
+              icon: Icon(CupertinoIcons.home),
+              label: 'Home',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(CupertinoIcons.search),
+              label: 'Search',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(CupertinoIcons.settings),
+              label: 'Settings',
+            ),
+          ],
+          currentIndex: 0,
+          onTap: (index) {
+            switch (index) {
+              case 0:
+                Navigator.pushNamed(context, HomeScreen.route);
+                break;
+
+              case 1:
+                Navigator.pushNamed(context, SearchScreen.route);
+                break;
+
+              case 2:
+                Navigator.pushNamed(context, SettingsScreen.route);
+                break;
+            }
+          },
+        ),
       ),
     );
   }
@@ -45,7 +77,7 @@ class _HomeForm extends StatefulWidget {
 
   const _HomeForm({super.key, required this.userModel});
 
-  @override
+   @override
   _HomeFormState createState() => _HomeFormState();
 }
 
