@@ -66,7 +66,7 @@ class MediaMetadata {
   }
 }
 
-enum MediaType { movie, music, book, podcast }
+enum MediaType { music, movie, book, podcast }
 
 extension MediaTypeExtension on MediaType {
   String toJson() {

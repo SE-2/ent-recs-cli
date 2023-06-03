@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:supermedia/common/utils/app_localization.dart';
-import 'package:supermedia/gen/assets.gen.dart';
-import 'package:supermedia/layers/presentation/media/screens/show_media_screen.dart';
+import 'package:supermedia/layers/domain/entities/media_metadata.dart';
 import 'package:supermedia/layers/presentation/recommend/screens/recommend_screen.dart';
 import 'package:supermedia/layers/presentation/shared/widgets/custom_app_bar.dart';
 
@@ -14,8 +13,9 @@ class Category {
 
 class SelectionScreen extends StatelessWidget {
   static const String route = '/selection';
+  final MediaType? mediaType;
 
-  const SelectionScreen({super.key});
+  const SelectionScreen({super.key, this.mediaType});
 
   @override
   Widget build(BuildContext context) {
@@ -25,13 +25,15 @@ class SelectionScreen extends StatelessWidget {
         showBackButton: true,
       ),
       backgroundColor: Theme.of(context).colorScheme.background,
-      body: const _SelectionForm(),
+      body: _SelectionForm(mediaType: mediaType),
     );
   }
 }
 
 class _SelectionForm extends StatefulWidget {
-  const _SelectionForm({Key? key}) : super(key: key);
+  final MediaType? mediaType;
+
+  const _SelectionForm({Key? key, this.mediaType}) : super(key: key);
 
   @override
   _SelectionFormState createState() => _SelectionFormState();
@@ -139,7 +141,7 @@ class _SelectionFormState extends State<_SelectionForm> {
       ElevatedButton.icon(
         onPressed: selectedCategories.length >= 5
             ? () {
-                Navigator.pushNamed(context, RecommendScreen.route);
+                Navigator.pushNamed(context, RecommendScreen.route, arguments: widget.mediaType);
               }
             : null,
         label: Text(
