@@ -10,8 +10,9 @@ import 'package:supermedia/layers/presentation/shared/widgets/media_list_item.da
 
 class RecommendScreen extends StatelessWidget {
   static const String route = '/recommend';
+  final MediaType? mediaType;
 
-  const RecommendScreen({Key? key}) : super(key: key);
+  const RecommendScreen({Key? key, this.mediaType}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -23,14 +24,16 @@ class RecommendScreen extends StatelessWidget {
           title: AppLocalization.of(context)!.recommendScreenTitle,
           showBackButton: true,
         ),
-        body: _RecommendForm(),
+        body: _RecommendForm(mediaType: mediaType!),
       ),
     );
   }
 }
 
 class _RecommendForm extends StatefulWidget {
-  final MediaType mediaType = MediaType.movie;
+  final MediaType mediaType;
+
+  const _RecommendForm({required this.mediaType});
 
   @override
   _RecommendFormState createState() => _RecommendFormState();
