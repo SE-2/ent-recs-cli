@@ -71,7 +71,7 @@ class _MediaFormState extends State<MediaForm> {
 
     return BlocBuilder<MediaBloc, MediaState>(builder: (context, state) {
       if (state is MediaLoading) {
-        return const CircularProgressIndicator();
+        return const Center(child: CircularProgressIndicator());
       } else if (state is MediaSuccess) {
         return showContent(context, state.result);
       } else {

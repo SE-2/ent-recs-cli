@@ -14,6 +14,22 @@ import 'package:flutter/services.dart';
 class $AssetsIconsGen {
   const $AssetsIconsGen();
 
+  /// File path: assets/icons/Bookmark.svg
+  SvgGenImage get bookmark => const SvgGenImage('assets/icons/Bookmark.svg');
+
+  /// File path: assets/icons/Lock.svg
+  SvgGenImage get lock => const SvgGenImage('assets/icons/Lock.svg');
+
+  /// File path: assets/icons/Shield Done.svg
+  SvgGenImage get shieldDone =>
+      const SvgGenImage('assets/icons/Shield Done.svg');
+
+  /// File path: assets/icons/ThemeMode.svg
+  SvgGenImage get themeMode => const SvgGenImage('assets/icons/ThemeMode.svg');
+
+  /// File path: assets/icons/Unlock.svg
+  SvgGenImage get unlock => const SvgGenImage('assets/icons/Unlock.svg');
+
   /// File path: assets/icons/calendar.svg
   SvgGenImage get calendar => const SvgGenImage('assets/icons/calendar.svg');
 
@@ -22,6 +38,9 @@ class $AssetsIconsGen {
 
   /// File path: assets/icons/film.svg
   SvgGenImage get film => const SvgGenImage('assets/icons/film.svg');
+
+  /// File path: assets/icons/globe.svg
+  SvgGenImage get globe => const SvgGenImage('assets/icons/globe.svg');
 
   /// File path: assets/icons/google.svg
   SvgGenImage get google => const SvgGenImage('assets/icons/google.svg');
@@ -32,12 +51,41 @@ class $AssetsIconsGen {
   /// File path: assets/icons/paper.svg
   SvgGenImage get paper => const SvgGenImage('assets/icons/paper.svg');
 
+  /// File path: assets/icons/person.svg
+  SvgGenImage get person => const SvgGenImage('assets/icons/person.svg');
+
+  /// File path: assets/icons/question.svg
+  SvgGenImage get question => const SvgGenImage('assets/icons/question.svg');
+
+  /// File path: assets/icons/shield.svg
+  SvgGenImage get shield => const SvgGenImage('assets/icons/shield.svg');
+
+  /// File path: assets/icons/trash.svg
+  SvgGenImage get trash => const SvgGenImage('assets/icons/trash.svg');
+
   /// File path: assets/icons/twitter.svg
   SvgGenImage get twitter => const SvgGenImage('assets/icons/twitter.svg');
 
   /// List of all assets
-  List<SvgGenImage> get values =>
-      [calendar, facebook, film, google, line, paper, twitter];
+  List<SvgGenImage> get values => [
+        bookmark,
+        lock,
+        shieldDone,
+        themeMode,
+        unlock,
+        calendar,
+        facebook,
+        film,
+        globe,
+        google,
+        line,
+        paper,
+        person,
+        question,
+        shield,
+        trash,
+        twitter
+      ];
 }
 
 class $AssetsImagesGen {
