@@ -127,11 +127,11 @@ class RemoteMediaDataSourceImpl implements RemoteMediaDataSource {
 
   String getMediaTypeById(String id) {
     if (id.startsWith('M')) {
-      return 'music';
+      return 'movie';
     } else if (id.startsWith('P')) {
       return 'podcast';
     } else if (id.startsWith('S')) {
-      return 'movie';
+      return 'music';
     } else if (id.startsWith('B')) {
       return 'book';
     } else {
@@ -146,7 +146,7 @@ class RemoteMediaDataSourceImpl implements RemoteMediaDataSource {
     );
 
     try {
-      final response = await _httpClient.post(request);
+      final response = await _httpClient.get(request);
 
       if (response.statusCode == 200) {
         return MediaMetadataDetailsModel.fromJson(response.body);
@@ -175,7 +175,7 @@ List<MediaFilter> mediaFilterList = [
       categories: ['Rock', 'Hip Hop', 'Jazz', 'Pop', 'Classical']),
   MediaFilter(
       mediaType: MediaType.movie,
-      categories: ['Animation', 'Animation', 'History', 'War', 'Family']),
+      categories: ['Animation', 'History', 'War', 'Family']),
   MediaFilter(
       mediaType: MediaType.book,
       categories: ['poetry', 'romance', 'fiction', 'comics, graphic']),
