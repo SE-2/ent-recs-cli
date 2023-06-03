@@ -33,6 +33,8 @@ import 'package:supermedia/layers/domain/use_cases/implementations/recommend_use
 import 'package:supermedia/layers/domain/use_cases/implementations/search_use_case_impl.dart';
 import 'package:supermedia/layers/domain/use_cases/implementations/trend_items_use_case_impl.dart';
 import 'package:supermedia/layers/domain/use_cases/signup_use_case.dart';
+import 'package:supermedia/layers/presentation/bookmark/editlist/bloc/edit_bookmark_list_item_bloc.dart';
+import 'package:supermedia/layers/presentation/bookmark/editlist/edit_bookmark_list_item_screen.dart';
 import 'package:supermedia/layers/presentation/bookmark/listitems/bloc/bookmark_list_items_bloc.dart';
 import 'package:supermedia/layers/presentation/bookmark/listitems/screens/bookmark_list_items_screen.dart';
 import 'package:supermedia/layers/presentation/bookmark/lists/bloc/bookmark_lists_bloc.dart';
@@ -104,6 +106,7 @@ void _setupScreens() {
   locator.registerLazySingleton<RecommendScreen>(() => const RecommendScreen());
   locator.registerLazySingleton<BookmarkListsScreen>(() => const BookmarkListsScreen());
   locator.registerLazySingleton<BookmarkListItemsScreen>(() => const BookmarkListItemsScreen());
+  locator.registerLazySingleton<EditBookmarkListItemScreen>(() => const EditBookmarkListItemScreen());
 }
 
 void _setupBlocs() {
@@ -116,6 +119,7 @@ void _setupBlocs() {
   locator.registerFactory<RecommendBloc>(() => RecommendBloc());
   locator.registerFactory<BookmarkListsBloc>(() => BookmarkListsBloc());
   locator.registerFactory<BookmarkListItemsBloc>(() => BookmarkListItemsBloc());
+  locator.registerFactory<EditBookmarkListItemBloc>(() => EditBookmarkListItemBloc());
 }
 
 void _setupSharedPreferences() {

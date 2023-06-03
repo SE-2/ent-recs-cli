@@ -47,9 +47,9 @@ class _BookmarkListItemsFormState extends State<_BookmarkListItemsForm> {
 
   @override
   void initState() {
-    context
-        .read<BookmarkListItemsBloc>()
-        .add(const FetchBookmarkListItems(bookmarkListId: 10));
+      context
+          .read<BookmarkListItemsBloc>()
+          .add(FetchBookmarkListItems(bookmarkListId: widget.bookmarkListItem!.id));
     super.initState();
   }
 

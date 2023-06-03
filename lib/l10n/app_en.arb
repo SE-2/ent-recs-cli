@@ -54,5 +54,10 @@
   "ebookType": "E-Book",
   "applyFiltersButton": "Apply Filters",
   "selectListToAdd": "Select A List",
-  "itemAddedSuccessfully": "Media added successfully!"
+  "itemAddedSuccessfully": "Media added successfully!",
+  "addNewList": "Add New List",
+  "editList": "Edit {listName}",
+  "apply": "Apply",
+  "listName": "List Name",
+  "enterListName": "Enter List Name"
 }

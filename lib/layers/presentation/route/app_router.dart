@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:supermedia/layers/data/models/user_model.dart';
+import 'package:supermedia/layers/presentation/bookmark/editlist/edit_bookmark_list_item_screen.dart';
 import 'package:supermedia/layers/presentation/bookmark/listitems/screens/bookmark_list_items_screen.dart';
 import 'package:supermedia/layers/presentation/category/category_selection.dart';
 import 'package:supermedia/layers/presentation/home/screens/home_screen.dart';
@@ -13,10 +14,10 @@ class AppRouter {
 
   Route onGenerateRoute(RouteSettings routeSettings) {
     switch (routeSettings.name) {
-      case BookmarkListItemsScreen.route:
+      case EditBookmarkListItemScreen.route:
         return MaterialPageRoute(
           builder: (context) {
-            return const BookmarkListItemsScreen();
+            return const EditBookmarkListItemScreen();
           },
         );
 

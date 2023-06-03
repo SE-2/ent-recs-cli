@@ -54,5 +54,10 @@
   "ebookType": "کتاب",
   "applyFiltersButton": "اعمال فیلترها",
   "selectListToAdd": "یک لیست را انتخاب کنید",
-  "itemAddedSuccessfully": "رسانه با موفقیت اضافه شد!"
+  "itemAddedSuccessfully": "رسانه با موفقیت اضافه شد!",
+  "addNewList": "اضافه کردن لیست جدید",
+  "editList": "Edit {listName}",
+  "apply": "اعمال ",
+  "listName": "نام لیست",
+  "enterListName": "نام لیست را وارد کنید"
 }
