@@ -4,10 +4,10 @@ import 'package:supermedia/di/app_module.dart';
 import 'package:supermedia/layers/data/data_sources/abstractions/remote_media_data_source.dart';
 import 'package:supermedia/layers/data/http_client/http_client.dart';
 import 'package:supermedia/layers/data/models/media_metadata_model.dart';
+import 'package:supermedia/layers/data/models/media_metadata_model_details.dart';
 import 'package:supermedia/layers/domain/entities/media_filter.dart';
 import 'package:supermedia/layers/domain/entities/media_metadata.dart';
 import 'package:supermedia/layers/domain/entities/search_query.dart';
-import 'package:supermedia/layers/data/models/media_metadata_model_details.dart';
 
 class RemoteMediaDataSourceImpl implements RemoteMediaDataSource {
   final IHttpClient _httpClient = locator<IHttpClient>();
@@ -58,21 +58,105 @@ class RemoteMediaDataSourceImpl implements RemoteMediaDataSource {
 
   @override
   Future<List<MediaMetadataModel>> getAllTimesTrendMedia() async {
+    final request = HttpRequest(
+      '/trends/all',
+      body: '',
+      token: '1',
+    );
+
+    try {
+      final response = await _httpClient.get(request);
+
+      if (response.statusCode == 200) {
+        var result = MediaMetadataModel.fromJsonList(response.body);
+        return result.isEmpty ? mediaList : result;
+      } else {
+        throw SearchException(
+            AppLocalization.instance.errorCode(response.statusCode));
+      }
+    } on Exception catch (e) {}
+
     return mediaList;
   }
 
   @override
   Future<List<MediaMetadataModel>> getRecentWatchedMedia() async {
+    final request = HttpRequest(
+      '/trends/today',
+      body: '',
+      token: '1',
+    );
+
+    try {
+      final response = await _httpClient.get(request);
+
+      if (response.statusCode == 200) {
+        var result = MediaMetadataModel.fromJsonList(response.body);
+        return result.isEmpty ? mediaList : result;
+      } else {
+        throw SearchException(
+            AppLocalization.instance.errorCode(response.statusCode));
+      }
+    } on Exception catch (e) {}
+
     return mediaList;
   }
 
   @override
   Future<List<MediaMetadataModel>> getTodayTrendMedia() async {
+    final request = HttpRequest(
+      '/trends/today',
+      body: '',
+      token: '1',
+    );
+
+    try {
+      final response = await _httpClient.get(request);
+
+      if (response.statusCode == 200) {
+        var result = MediaMetadataModel.fromJsonList(response.body);
+        return result.isEmpty ? mediaList : result;
+      } else {
+        throw SearchException(
+            AppLocalization.instance.errorCode(response.statusCode));
+      }
+    } on Exception catch (e) {}
+
     return mediaList;
   }
 
+  String getMediaTypeById(String id) {
+    if (id.startsWith('M')) {
+      return 'music';
+    } else if (id.startsWith('P')) {
+      return 'podcast';
+    } else if (id.startsWith('S')) {
+      return 'movie';
+    } else if (id.startsWith('B')) {
+      return 'book';
+    } else {
+      return 'book';
+    }
+  }
   @override
   Future<MediaMetadataDetailsModel> getMediaById(String id) async {
+    final request = HttpRequest(
+      '/${getMediaTypeById(id)}/{$id}',
+      token: '1',
+    );
+
+    try {
+      final response = await _httpClient.post(request);
+
+      if (response.statusCode == 200) {
+        return MediaMetadataDetailsModel.fromJson(response.body);
+      } else {
+        throw SearchException(
+            AppLocalization.instance.errorCode(response.statusCode));
+      }
+    } on Exception catch (e) {}
+
+
     for (var element in mediaDetailList) {
       if (element.model.mediaId == id) return element;
     }
@@ -222,7 +306,8 @@ List<MediaMetadataDetailsModel> mediaDetailList = [
         "https://upload.wikimedia.org/wikipedia/commons/4/4b/Stairway_to_Heaven_by_Led_Zeppelin_US_promotional_single.png",
         {"duration": "8:02", "style": "Rock", "singer": "Led Zeppelin"},
       ),
-      decoration: "Stairway to Heaven is a song by the British rock band Led Zeppelin, which was released in 1971 on their fourth studio album, Led Zeppelin IV. It is widely regarded as one of the greatest and most influential rock songs of all time, and has been covered by numerous artists."),
+      decoration:
+          "Stairway to Heaven is a song by the British rock band Led Zeppelin, which was released in 1971 on their fourth studio album, Led Zeppelin IV. It is widely regarded as one of the greatest and most influential rock songs of all time, and has been covered by numerous artists."),
   MediaMetadataDetailsModel(
       model: MediaMetadataModel(
         "p1",
@@ -235,7 +320,8 @@ List<MediaMetadataDetailsModel> mediaDetailList = [
           "genre": "True Crime"
         },
       ),
-      decoration: "Serial is a podcast that presents investigative journalism in a serialized format. The podcast first aired in 2014 and is produced by Sarah Koenig and Julie Snyder of This American Life. Each season of the podcast focuses on a different true crime story, with Koenig serving as the narrator and reporter.The podcast has gained widespread critical acclaim for its in-depth reporting, compelling storytelling, and groundbreaking use of the podcast medium. The first season of Serial focused on the murder of a high school student in Baltimore, Maryland, and the subsequent trial and conviction of her ex-boyfriend. The podcast's investigation raised questions about the evidence used in the case and the reliability of witness testimony, and sparked widespread public discussion and debate.Subsequent seasons of the podcast have focused on a range of topics, including the case of an American soldier who deserted his post in Afghanistan, the criminal justice system in Cleveland, Ohio, and the impact of climate change on a small town in Alabama.Serial is widely regarded as one of the most influential and groundbreaking podcasts of all time, and has helped to popularize the true crime genre in podcasting."),
+      decoration:
+          "Serial is a podcast that presents investigative journalism in a serialized format. The podcast first aired in 2014 and is produced by Sarah Koenig and Julie Snyder of This American Life. Each season of the podcast focuses on a different true crime story, with Koenig serving as the narrator and reporter.The podcast has gained widespread critical acclaim for its in-depth reporting, compelling storytelling, and groundbreaking use of the podcast medium. The first season of Serial focused on the murder of a high school student in Baltimore, Maryland, and the subsequent trial and conviction of her ex-boyfriend. The podcast's investigation raised questions about the evidence used in the case and the reliability of witness testimony, and sparked widespread public discussion and debate.Subsequent seasons of the podcast have focused on a range of topics, including the case of an American soldier who deserted his post in Afghanistan, the criminal justice system in Cleveland, Ohio, and the impact of climate change on a small town in Alabama.Serial is widely regarded as one of the most influential and groundbreaking podcasts of all time, and has helped to popularize the true crime genre in podcasting."),
   MediaMetadataDetailsModel(
       model: MediaMetadataModel(
         "m2",
