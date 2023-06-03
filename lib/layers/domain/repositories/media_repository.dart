@@ -4,7 +4,7 @@ import 'package:supermedia/layers/domain/entities/search_query.dart';
 
 abstract class MediaRepository {
   Future<List<MediaMetadata>> search(SearchQuery query);
-  Future<List<MediaMetadata>> recommend();
+  Future<List<MediaMetadata>> recommend(MediaType mediaType);
   Future<List<MediaMetadata>> getRecentWatchedMedia();
   Future<List<MediaMetadata>> getTodayTrendMedia();
   Future<List<MediaMetadata>> getAllTimesTrendMedia();

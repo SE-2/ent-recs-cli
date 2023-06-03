@@ -17,7 +17,7 @@ class RecommendBloc extends Bloc<RecommendEvent, RecommendState> {
         emit(RecommendLoading());
         await Future.delayed(const Duration(seconds: 1));
         try {
-          final result = await _recommendUseCase.recommend();
+          final result = await _recommendUseCase.recommend(event.mediaType);
 
           if (result.isEmpty) {
             emit(RecommendInitial());
