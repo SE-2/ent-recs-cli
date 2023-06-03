@@ -6,6 +6,8 @@ import 'package:supermedia/common/theme/app_theme.dart';
 import 'package:supermedia/common/theme/app_theme_bloc.dart';
 import 'package:supermedia/common/utils/app_localization.dart';
 import 'package:supermedia/di/app_module.dart';
+import 'package:supermedia/layers/presentation/home/screens/home_screen.dart';
+import 'package:supermedia/layers/presentation/media/screens/show_media_screen.dart';
 import 'package:supermedia/layers/presentation/route/app_router.dart';
 import 'package:supermedia/layers/presentation/setting/screens/settings_screen.dart';
 
@@ -37,8 +39,9 @@ class MyApp extends StatelessWidget {
                 debugShowCheckedModeBanner: false,
                 localizationsDelegates: AppLocalizations.localizationsDelegates,
                 supportedLocales: AppLocalizations.supportedLocales,
+                debugShowCheckedModeBanner: false,
                 locale: locale,
-                theme: AppTheme.lightTheme,
+                theme: AppTheme.darkTheme,
                 darkTheme: AppTheme.darkTheme,
                 themeMode: themeMode,
                 onGenerateRoute: _appRoute.onGenerateRoute,

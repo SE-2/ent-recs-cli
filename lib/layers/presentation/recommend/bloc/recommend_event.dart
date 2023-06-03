@@ -8,8 +8,9 @@ abstract class RecommendEvent extends Equatable {
 }
 
 class RecommendLoadingStarted extends RecommendEvent {
+  final MediaType mediaType;
 
-  const RecommendLoadingStarted();
+  const RecommendLoadingStarted({required this.mediaType});
 
   @override
   List<Object> get props => [];

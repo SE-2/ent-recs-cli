@@ -15,7 +15,7 @@ class StoryItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Navigator.pushNamed(context, ShowMediaScreen.route);
+        Navigator.pushNamed(context, ShowMediaScreen.route,arguments: story.id);
       },
       child: Container(
         margin: const EdgeInsets.fromLTRB(8, 0, 8, 0),

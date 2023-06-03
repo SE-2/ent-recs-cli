@@ -7,7 +7,7 @@ class RecommendUseCaseImpl implements RecommendUseCase {
   final MediaRepository _mediaRepository = locator<MediaRepository>();
 
   @override
-  Future<List<MediaMetadata>> recommend() async {
-    return _mediaRepository.recommend();
+  Future<List<MediaMetadata>> recommend(MediaType mediaType) async {
+    return _mediaRepository.recommend(mediaType);
   }
 }

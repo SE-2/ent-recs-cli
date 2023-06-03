@@ -2,16 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:supermedia/common/utils/app_localization.dart';
 import 'package:supermedia/di/app_module.dart';
+import 'package:supermedia/layers/domain/entities/media_metadata.dart';
 import 'package:supermedia/layers/presentation/recommend/bloc/recommend_bloc.dart';
 import 'package:supermedia/layers/presentation/shared/widgets/custom_app_bar.dart';
 import 'package:supermedia/layers/presentation/shared/widgets/media_list.dart';
 import 'package:supermedia/layers/presentation/shared/widgets/media_list_item.dart';
-import 'package:supermedia/layers/presentation/shared/widgets/sort_option.dart';
 
 class RecommendScreen extends StatelessWidget {
   static const String route = '/recommend';
+  final MediaType? mediaType;
 
-  const RecommendScreen({Key? key}) : super(key: key);
+  const RecommendScreen({Key? key, this.mediaType}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -23,13 +24,17 @@ class RecommendScreen extends StatelessWidget {
           title: AppLocalization.of(context)!.recommendScreenTitle,
           showBackButton: true,
         ),
-        body: _RecommendForm(),
+        body: _RecommendForm(mediaType: mediaType!),
       ),
     );
   }
 }
 
 class _RecommendForm extends StatefulWidget {
+  final MediaType mediaType;
+
+  const _RecommendForm({required this.mediaType});
+
   @override
   _RecommendFormState createState() => _RecommendFormState();
 }
@@ -37,31 +42,32 @@ class _RecommendForm extends StatefulWidget {
 class _RecommendFormState extends State<_RecommendForm> {
   @override
   Widget build(BuildContext context) {
-    context.read<RecommendBloc>().add(const RecommendLoadingStarted());
+    context.read<RecommendBloc>().add(RecommendLoadingStarted(mediaType: widget.mediaType));
 
     return Padding(
       padding: const EdgeInsets.fromLTRB(32, 12, 32, 32),
       child: Column(
         children: [
-          const SizedBox(height: 12),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(12, 0, 0, 0),
-            child: Row(
-              children: [
-                SortOption(
-                  onSortOptionTapped: handleSortOptionTapped,
-                ),
-                const SizedBox(width: 16),
-              ],
-            ),
-          ),
+          // const SizedBox(height: 12),
+          // Padding(
+          //   padding: const EdgeInsets.fromLTRB(12, 0, 0, 0),
+          //   child: Row(
+          //     children: [
+          //       SortOption(
+          //         onSortMethodChanged: handleSortOptionTapped,
+          //         initialSortMethod: SortMethod.mostRelated,
+          //       ),
+          //       const SizedBox(width: 16),
+          //     ],
+          //   ),
+          // ),
           const SizedBox(height: 16),
           BlocBuilder<RecommendBloc, RecommendState>(
             builder: (context, state) {
               if (state is RecommendInitial) {
-                return const Expanded(
+                return Expanded(
                   child: Center(
-                    child: Text('Empty List.'),
+                    child: Text(AppLocalization.of(context)!.emptyList),
                   ),
                 );
               } else if (state is RecommendLoading) {
