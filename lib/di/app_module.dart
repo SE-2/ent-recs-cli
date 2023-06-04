@@ -7,7 +7,6 @@ import 'package:supermedia/layers/data/data_sources/abstractions/local_data_sour
 import 'package:supermedia/layers/data/data_sources/abstractions/remote_media_data_source.dart';
 import 'package:supermedia/layers/data/data_sources/abstractions/remote_user_data_source.dart';
 import 'package:supermedia/layers/data/data_sources/local/local_data_source.dart';
-import 'package:supermedia/layers/data/data_sources/remote/remote_user_data_source.dart';
 import 'package:supermedia/layers/data/http_client/dio_http_client.dart';
 import 'package:supermedia/layers/data/http_client/http_client.dart';
 import 'package:supermedia/layers/data/data_sources/remote/remote_media_data_source_impl.dart';
@@ -39,6 +38,8 @@ import 'package:supermedia/layers/presentation/recommend/bloc/recommend_bloc.dar
 import 'package:supermedia/layers/presentation/search/bloc/search_bloc.dart';
 import 'package:supermedia/layers/presentation/search/screens/search_screen.dart';
 import 'package:supermedia/layers/presentation/setting/screens/settings_screen.dart';
+
+import '../layers/data/data_sources/remote/remote_user_data_source_impl.dart';
 
 final locator = GetIt.instance;
 
