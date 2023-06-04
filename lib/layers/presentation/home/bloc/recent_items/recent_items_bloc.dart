@@ -19,7 +19,7 @@ class RecentItemsBloc extends Bloc<RecentItemsEvent, RecentItemsState> {
             if (result.isEmpty) {
               emit(RecentItemsInitial());
             } else {
-              emit(RecentItemsSuccess(result: result));
+              emit(RecentItemsFetched(result: result));
             }
           } catch (e) {
             emit(RecentItemsFailure(error: e.toString()));

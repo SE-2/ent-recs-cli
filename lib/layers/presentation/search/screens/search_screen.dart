@@ -15,13 +15,23 @@ import 'package:supermedia/layers/presentation/shared/widgets/media_list.dart';
 import 'package:supermedia/layers/presentation/shared/widgets/media_list_item.dart';
 import 'package:supermedia/layers/presentation/shared/widgets/sort_option.dart';
 
-class SearchScreen extends StatelessWidget {
+class SearchScreen extends StatefulWidget {
   static const String route = '/search';
 
   const SearchScreen({Key? key}) : super(key: key);
 
   @override
+  State<SearchScreen> createState() => _SearchScreenState();
+}
+
+class _SearchScreenState extends State<SearchScreen>
+    with AutomaticKeepAliveClientMixin {
+  @override
+  bool get wantKeepAlive => true;
+
+  @override
   Widget build(BuildContext context) {
+    super.build(context);
     return BlocProvider<SearchBloc>(
       create: (_) => locator<SearchBloc>(),
       child: Scaffold(
