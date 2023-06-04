@@ -9,6 +9,7 @@ import 'package:supermedia/layers/presentation/media/screens/show_media_screen.d
 import 'package:supermedia/layers/presentation/recommend/screens/recommend_screen.dart';
 import 'package:supermedia/layers/presentation/search/screens/search_screen.dart';
 import 'package:supermedia/layers/presentation/setting/screens/settings_screen.dart';
+import 'package:supermedia/layers/presentation/shared/multi_screen_bottom_navigation.dart';
 
 class AppRouter {
   final GetIt locator = GetIt.instance;
@@ -18,7 +19,7 @@ class AppRouter {
       case SignupScreen.route:
         return MaterialPageRoute(
           builder: (context) {
-            return const SignupScreen();
+            return const MultiScreenBottomNavigation();
           },
         );
 
