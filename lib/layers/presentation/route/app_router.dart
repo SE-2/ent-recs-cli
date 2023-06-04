@@ -9,16 +9,24 @@ import 'package:supermedia/layers/presentation/recommend/screens/recommend_scree
 import 'package:supermedia/layers/presentation/search/screens/search_screen.dart';
 import 'package:supermedia/layers/presentation/setting/screens/settings_screen.dart';
 import 'package:supermedia/layers/presentation/shared/multi_screen_bottom_navigation.dart';
+import 'package:supermedia/layers/presentation/splash/screens/splashScreen.dart';
 
 class AppRouter {
   final GetIt locator = GetIt.instance;
 
   Route onGenerateRoute(RouteSettings routeSettings) {
     switch (routeSettings.name) {
+      case SplashScreen.route:
+        return MaterialPageRoute(
+          builder: (context) {
+            return const SplashScreen();
+          },
+        );
+
       case SignupScreen.route:
         return MaterialPageRoute(
           builder: (context) {
-            return const MultiScreenBottomNavigation();
+            return const SignupScreen();
           },
         );
 

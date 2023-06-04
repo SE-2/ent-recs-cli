@@ -28,4 +28,11 @@ class UserRepositoryImpl implements UserRepository {
     final userAbstract = await _remoteDataSource.getUserInfo();
     return UserModel(name: userAbstract.name, photoUrl: userAbstract.profileImgUrl!);
   }
+
+  @override
+  Future<bool> isLoggedIn() async {
+    var token = _localDataSource.getToken();
+    var isLoggedIn = token != null? token.isNotEmpty : false;
+    return isLoggedIn;
+  }
 }
