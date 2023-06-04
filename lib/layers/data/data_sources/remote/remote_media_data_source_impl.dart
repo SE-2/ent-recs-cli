@@ -137,7 +137,7 @@ class RemoteMediaDataSourceImpl implements RemoteMediaDataSource {
   @override
   Future<MediaMetadataDetailsModel> getMediaById(String id) async {
     final request = HttpRequest(
-      '/${getMediaTypeById(id)}/{$id}',
+      '/${getMediaTypeById(id)}s/$id',
     );
 
     try {

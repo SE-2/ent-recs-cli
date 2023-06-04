@@ -1,5 +1,4 @@
 import 'package:custom_sliding_segmented_control/custom_sliding_segmented_control.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:supermedia/di/app_module.dart';
@@ -13,19 +12,27 @@ import 'package:supermedia/layers/presentation/home/widgets/category_list.dart';
 import 'package:supermedia/layers/presentation/home/widgets/data.dart';
 import 'package:supermedia/layers/presentation/home/widgets/post_list.dart';
 import 'package:supermedia/layers/presentation/home/widgets/story_list.dart';
-import 'package:supermedia/layers/presentation/search/screens/search_screen.dart';
-import 'package:supermedia/layers/presentation/setting/screens/settings_screen.dart';
 
 enum DateFilter { all, today }
 
-class HomeScreen extends StatelessWidget {
-  static const String route ='/home';
+class HomeScreen extends StatefulWidget {
+  static const String route = '/home';
   final UserModel? userModel;
 
   const HomeScreen({Key? key, required this.userModel}) : super(key: key);
 
   @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen>
+    with AutomaticKeepAliveClientMixin {
+  @override
+  bool get wantKeepAlive => true;
+
+  @override
   Widget build(BuildContext context) {
+    super.build(context);
     return MultiBlocProvider(
       providers: [
         BlocProvider<TrendItemsBloc>(create: (_) => locator<TrendItemsBloc>()),
@@ -35,38 +42,6 @@ class HomeScreen extends StatelessWidget {
       child: Scaffold(
         backgroundColor: Theme.of(context).colorScheme.background,
         body: _HomeForm(userModel: UserModel()),
-        bottomNavigationBar: BottomNavigationBar(
-          items: const <BottomNavigationBarItem>[
-            BottomNavigationBarItem(
-              icon: Icon(CupertinoIcons.home),
-              label: 'Home',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(CupertinoIcons.search),
-              label: 'Search',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(CupertinoIcons.settings),
-              label: 'Settings',
-            ),
-          ],
-          currentIndex: 0,
-          onTap: (index) {
-            switch (index) {
-              case 0:
-                Navigator.pushNamed(context, HomeScreen.route);
-                break;
-
-              case 1:
-                Navigator.pushNamed(context, SearchScreen.route);
-                break;
-
-              case 2:
-                Navigator.pushNamed(context, SettingsScreen.route);
-                break;
-            }
-          },
-        ),
       ),
     );
   }
@@ -75,9 +50,9 @@ class HomeScreen extends StatelessWidget {
 class _HomeForm extends StatefulWidget {
   final UserModel userModel;
 
-  const _HomeForm({super.key, required this.userModel});
+  const _HomeForm({required this.userModel});
 
-   @override
+  @override
   _HomeFormState createState() => _HomeFormState();
 }
 
@@ -107,7 +82,7 @@ class _HomeFormState extends State<_HomeForm> {
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(24),
                         image: DecorationImage(
-                          image: NetworkImage(widget.userModel.photoUrl!),
+                          image: NetworkImage(widget.userModel.photoUrl),
                         )),
                   )),
               Padding(
@@ -206,19 +181,19 @@ class _HomeFormState extends State<_HomeForm> {
             builder: (context, state) {
               if (state is RecentItemsInitial) {
                 // todo center vertically
-                return Container(
+                return const SizedBox(
                   height: 64,
-                  child: const Center(
+                  child: Center(
                     child: Text('Empty List.'),
                   ),
                 );
               } else if (state is RecentItemsLoading) {
                 return const Flexible(
-                  fit: FlexFit.loose,
+                    fit: FlexFit.loose,
                     child: Center(
-                  child: CircularProgressIndicator(),
-                ));
-              } else if (state is RecentItemsSuccess) {
+                      child: CircularProgressIndicator(),
+                    ));
+              } else if (state is RecentItemsFetched) {
                 var result = state.result;
                 return PostList(
                   items: result,

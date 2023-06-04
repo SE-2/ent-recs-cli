@@ -3,13 +3,23 @@ import 'package:supermedia/gen/assets.gen.dart';
 import 'package:supermedia/layers/presentation/setting/widgets/group_menu.dart';
 import 'package:supermedia/layers/presentation/shared/widgets/custom_app_bar.dart';
 
-class SettingsScreen extends StatelessWidget {
+class SettingsScreen extends StatefulWidget {
   static const String route = '/settings';
 
   const SettingsScreen({super.key});
 
   @override
+  State<SettingsScreen> createState() => _SettingsScreenState();
+}
+
+class _SettingsScreenState extends State<SettingsScreen>
+    with AutomaticKeepAliveClientMixin {
+  @override
+  bool get wantKeepAlive => true;
+
+  @override
   Widget build(BuildContext context) {
+    super.build(context);
     Color iconColor = Theme.of(context).colorScheme.onTertiaryContainer;
     return Scaffold(
       appBar: const CustomAppBar(
