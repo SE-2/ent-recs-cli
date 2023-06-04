@@ -9,6 +9,6 @@ class TokenProviderImpl implements TokenProvider {
   @override
   String? getToken() {
     token ??= _localDataSource.getToken();
-    return "60";
+    return token;
   }
 }

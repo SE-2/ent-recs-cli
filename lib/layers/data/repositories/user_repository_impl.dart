@@ -14,7 +14,7 @@ class UserRepositoryImpl implements UserRepository {
     final userModel = await _remoteDataSource.signInWithGoogle();
     await _localDataSource.storeToken(userModel.token);
     await _remoteDataSource.createNewUser(NewUserModel(
-      token: "60",
+      token: userModel.token,
       name: userModel.name,
       email: userModel.email,
       birthDate: '',
