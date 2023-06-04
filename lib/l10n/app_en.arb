@@ -49,5 +49,11 @@
   "movieType": "Movie",
   "podcastType": "Podcast",
   "ebookType": "E-Book",
-  "applyFiltersButton": "Apply Filters"
+  "applyFiltersButton": "Apply Filters",
+  "trySearchSomething": "Try search something...",
+  "checkInternetConnection": "Check you internet connection.",
+  "unableToLoadRecommendations": "Unable to load recommendations.",
+  "retry": "Retry",
+  "mostPopular": "Most Popular",
+  "mostRelated": "Most Related"
 }

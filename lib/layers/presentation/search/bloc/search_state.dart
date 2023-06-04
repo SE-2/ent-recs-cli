@@ -20,6 +20,9 @@ class SearchSuccess extends SearchState {
   List<Object> get props => [result];
 }
 
+class SearchNoResult extends SearchState {
+}
+
 class SearchFailure extends SearchState {
   final String error;
 

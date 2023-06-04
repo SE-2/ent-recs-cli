@@ -41,7 +41,7 @@ class FilterModal extends StatefulWidget {
       ),
       builder: (BuildContext context) {
         return FractionallySizedBox(
-          heightFactor: 0.6,
+          heightFactor: 0.7,
           child: Container(
             decoration: BoxDecoration(
               color: Theme.of(context).colorScheme.background,
@@ -99,56 +99,82 @@ class FilterModalState extends State<FilterModal> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+        child: Stack(
           children: [
-            Text(
-              AppLocalization.of(context)!.typeTitle,
-              style: Theme.of(context)
-                  .textTheme
-                  .titleMedium!
-                  .copyWith(fontWeight: FontWeight.bold),
+            Align(
+              alignment: Alignment.topCenter,
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      AppLocalization.of(context)!.typeTitle,
+                      style: Theme.of(context)
+                          .textTheme
+                          .titleMedium!
+                          .copyWith(fontWeight: FontWeight.bold),
+                    ),
+                    const SizedBox(height: 8),
+                    CustomChoiceChipGroup<MediaType>(
+                      items: MediaType.values.toList(),
+                      selectedItem: _selectedType,
+                      onItemSelected: (type) => setState(() {
+                        _selectedType = type;
+                        _selectedCategories.clear();
+                      }),
+                      itemLabel: (type) => getMediaTypeValue(type),
+                    ),
+                    const SizedBox(height: 16),
+                    Text(
+                      AppLocalization.of(context)!.categoriesTitle,
+                      style: Theme.of(context)
+                          .textTheme
+                          .titleMedium!
+                          .copyWith(fontWeight: FontWeight.bold),
+                    ),
+                    const SizedBox(height: 8),
+                    CustomFilterChipGroup(
+                      items: widget.defaultCategories[_selectedType]!,
+                      selectedItems: _selectedCategories,
+                      onSelectionChanged: (category, selected) => setState(() {
+                        if (selected) {
+                          _selectedCategories.add(category);
+                        } else {
+                          _selectedCategories.remove(category);
+                        }
+                      }),
+                    ),
+                    const SizedBox(height: 80),
+                  ],
+                ),
+              ),
             ),
-            const SizedBox(height: 8),
-            CustomChoiceChipGroup<MediaType>(
-              items: MediaType.values.toList(),
-              selectedItem: _selectedType,
-              onItemSelected: (type) => setState(() {
-                _selectedType = type;
-                _selectedCategories.clear();
-              }),
-              itemLabel: (type) => getMediaTypeValue(type),
-            ),
-            const SizedBox(height: 16),
-            Text(
-              AppLocalization.of(context)!.categoriesTitle,
-              style: Theme.of(context)
-                  .textTheme
-                  .titleMedium!
-                  .copyWith(fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(height: 8),
-            CustomFilterChipGroup(
-              items: widget.defaultCategories[_selectedType]!,
-              selectedItems: _selectedCategories,
-              onSelectionChanged: (category, selected) => setState(() {
-                if (selected) {
-                  _selectedCategories.add(category);
-                } else {
-                  _selectedCategories.remove(category);
-                }
-              }),
-            ),
-            const SizedBox(height: 8),
-            const Spacer(),
-            Center(
-              child: AppPrimaryButton(
-                text: AppLocalization.of(context)!.applyFiltersButton,
-                onPressed: () {
-                  widget.onApplyFiltersTapped(
-                      _selectedType, _selectedCategories);
-                  Navigator.pop(context);
-                },
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: Container(
+                decoration: BoxDecoration(
+                  boxShadow: [
+                    BoxShadow(
+                      color: Theme.of(context).colorScheme.background,
+                      blurRadius: 20,
+                      spreadRadius: 20,
+                      offset: const Offset(0, 20),
+                    ),
+                  ],
+                ),
+                child: SizedBox(
+                  height: 80,
+                  child: Center(
+                    child: AppPrimaryButton(
+                      text: AppLocalization.of(context)!.applyFiltersButton,
+                      onPressed: () {
+                        widget.onApplyFiltersTapped(
+                            _selectedType, _selectedCategories);
+                        Navigator.pop(context);
+                      },
+                    ),
+                  ),
+                ),
               ),
             ),
           ],

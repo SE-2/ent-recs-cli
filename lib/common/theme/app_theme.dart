@@ -16,6 +16,7 @@ class AppTheme {
       background: Color(0xFFFEFEFE),
       outline: Colors.black,
       surface: Color(0xff9CA4AB),
+      surfaceVariant: Color(0xFFf6f8fe),
       error: Colors.red,
     ),
     textTheme: const TextTheme(
@@ -97,6 +98,7 @@ class AppTheme {
       background: Color(0xFF171725),
       outline: Colors.white,
       surface: Color(0xff9CA4AB),
+      surfaceVariant: Color(0xff282837),
       error: Colors.red,
     ),
     textTheme: const TextTheme(
