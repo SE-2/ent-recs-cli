@@ -10,6 +10,8 @@ import 'package:supermedia/layers/data/data_sources/local/local_data_source.dart
 import 'package:supermedia/layers/data/http_client/dio_http_client.dart';
 import 'package:supermedia/layers/data/http_client/http_client.dart';
 import 'package:supermedia/layers/data/data_sources/remote/remote_media_data_source_impl.dart';
+import 'package:supermedia/layers/data/http_client/token_provide_impl.dart';
+import 'package:supermedia/layers/data/http_client/token_provider.dart';
 import 'package:supermedia/layers/data/repositories/media_repository_impl.dart';
 import 'package:supermedia/layers/data/repositories/user_repository_impl.dart';
 import 'package:supermedia/layers/domain/repositories/media_repository.dart';
@@ -46,6 +48,9 @@ final locator = GetIt.instance;
 void _setupHttpClient() {
   locator.registerLazySingleton<IHttpClient>(
       () => DioHttpClient(baseUrl: 'http://5.34.201.62:8080/'));
+  locator.registerLazySingleton<TokenProvider>(
+      () => TokenProviderImpl()
+  );
 }
 
 void _setupLocalDataSources() {

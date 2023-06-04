@@ -31,7 +31,7 @@ class RemoteUserDataSourceImpl implements RemoteUserDataSource {
   Future<void> createNewUser(NewUserModel newUserModel) async {
     final request = HttpRequest(
       '/signup',
-      body: newUserModel.toJson(), token: '',
+      body: newUserModel.toJson(),
     );
 
     try {
@@ -47,11 +47,10 @@ class RemoteUserDataSourceImpl implements RemoteUserDataSource {
   Future<UserAbstractInfo> getUserInfo() async {
     final request = HttpRequest(
       '/getUser',
-      token: '0',
     );
 
     try {
-      var response = await _httpClient.post(request);
+      var response = await _httpClient.get(request);
       if (response.statusCode == 201) {
         return UserAbstractInfo.fromJson(response.body);
       }
