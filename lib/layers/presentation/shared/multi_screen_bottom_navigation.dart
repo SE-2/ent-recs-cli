@@ -5,6 +5,8 @@ import 'package:supermedia/layers/presentation/setting/screens/settings_screen.d
 import 'package:supermedia/layers/presentation/shared/widgets/app_bottom_navigation.dart';
 
 class MultiScreenBottomNavigation extends StatefulWidget {
+  static const String route = '/navigation';
+
   const MultiScreenBottomNavigation({super.key});
 
   @override
@@ -18,9 +20,7 @@ class MultiScreenBottomNavigationState
   final PageController _pageController = PageController();
 
   final List<Widget> _screens = [
-    const HomeScreen(
-      userModel: null,
-    ),
+    const HomeScreen(),
     const SearchScreen(),
     const SettingsScreen(),
   ];

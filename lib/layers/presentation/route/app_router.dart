@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
-import 'package:supermedia/layers/data/models/user_model.dart';
 import 'package:supermedia/layers/domain/entities/media_metadata.dart';
 import 'package:supermedia/layers/presentation/auth/signup/screens/signup_screen.dart';
 import 'package:supermedia/layers/presentation/category/category_selection.dart';
@@ -23,12 +22,17 @@ class AppRouter {
           },
         );
 
-      case HomeScreen.route:
-        var userModel = routeSettings.arguments as UserModel;
+      case MultiScreenBottomNavigation.route:
+        return MaterialPageRoute(
+          builder: (context) {
+            return const MultiScreenBottomNavigation();
+          },
+        );
 
+      case HomeScreen.route:
         return MaterialPageRoute(
           builder: (_) {
-            return HomeScreen(userModel: userModel);
+            return HomeScreen();
           },
         );
 

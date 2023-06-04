@@ -7,8 +7,8 @@ class TokenProviderImpl implements TokenProvider {
   String? token;
 
   @override
-  Future<String?> getToken() async {
+  String? getToken() {
     token ??= _localDataSource.getToken();
-    return token;
+    return "60";
   }
 }

@@ -2,13 +2,12 @@ import 'dart:async';
 
 import 'package:dio/dio.dart';
 import 'package:supermedia/di/app_module.dart';
-import 'package:supermedia/layers/data/http_client/token_provide_impl.dart';
 import 'package:supermedia/layers/data/http_client/token_provider.dart';
 
 import 'http_client.dart';
 
 class DioHttpClient implements IHttpClient {
-  final TokenProvider tokenProvider = locator<TokenProviderImpl>();
+  final TokenProvider tokenProvider = locator<TokenProvider>();
   final Dio _dio;
 
   DioHttpClient({required String baseUrl, Duration? timeout})

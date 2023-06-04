@@ -12,14 +12,14 @@ class UserRepositoryImpl implements UserRepository {
   @override
   Future<UserModel> signUpWithGoogle() async {
     final userModel = await _remoteDataSource.signInWithGoogle();
+    await _localDataSource.storeToken(userModel.token);
     await _remoteDataSource.createNewUser(NewUserModel(
-      token: "0",
+      token: "60",
       name: userModel.name,
       email: userModel.email,
       birthDate: '',
       profileImgUrl: userModel.photoUrl
     ));
-    await _localDataSource.storeToken(userModel.token);
     return userModel;
   }
 
