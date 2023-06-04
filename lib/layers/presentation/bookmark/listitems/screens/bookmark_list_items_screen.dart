@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:supermedia/common/utils/app_localization.dart';
 import 'package:supermedia/di/app_module.dart';
 import 'package:supermedia/gen/assets.gen.dart';
-import 'package:supermedia/layers/data/models/bookmark_list_item_model.dart';
+import 'package:supermedia/layers/domain/entities/bookmark_list_item.dart';
 import 'package:supermedia/layers/domain/entities/media_metadata.dart';
 import 'package:supermedia/layers/presentation/bookmark/listitems/bloc/bookmark_list_items_bloc.dart';
 import 'package:supermedia/layers/presentation/bookmark/listitems/bloc/bookmark_list_items_event.dart';
@@ -14,7 +14,7 @@ import 'package:supermedia/layers/presentation/shared/widgets/media_list.dart';
 import 'package:supermedia/layers/presentation/shared/widgets/media_list_item.dart';
 
 class BookmarkListItemsScreen extends StatelessWidget {
-  static const String route = '/';
+  static const String route = '/bookmark_items';
   final BookmarkListItem? bookmarkListItem;
 
   const BookmarkListItemsScreen({Key? key, this.bookmarkListItem})
@@ -26,7 +26,7 @@ class BookmarkListItemsScreen extends StatelessWidget {
       create: (_) => locator<BookmarkListItemsBloc>(),
       child: Scaffold(
         body: _BookmarkListItemsForm(
-          bookmarkListItem:   BookmarkListItem(id: 0, title: "Happiness", types: [MediaType.movie, MediaType.music, MediaType.book, MediaType.podcast]),
+          bookmarkListItem: BookmarkListItem(id: 0, title: "Happiness", types: [MediaType.movie, MediaType.music, MediaType.book, MediaType.podcast]),
         ),
       ),
     );
@@ -46,15 +46,11 @@ class _BookmarkListItemsFormState extends State<_BookmarkListItemsForm> {
   MediaType? _selectedType;
 
   @override
-  void initState() {
-      context
-          .read<BookmarkListItemsBloc>()
-          .add(FetchBookmarkListItems(bookmarkListId: widget.bookmarkListItem!.id));
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
+    context
+        .read<BookmarkListItemsBloc>()
+        .add(FetchBookmarkListItems(bookmarkListId: widget.bookmarkListItem!.id));
+
     return BlocListener<BookmarkListItemsBloc, BookmarkListItemsState>(
       listener: (context, state) {
         if (state is BookmarkListItemsFailure) {
@@ -73,7 +69,7 @@ class _BookmarkListItemsFormState extends State<_BookmarkListItemsForm> {
 
   Widget _buildBody(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.fromLTRB(12, 8, 4, 0),
       child: Column(
         children: [
           _buildTypeOptions(),

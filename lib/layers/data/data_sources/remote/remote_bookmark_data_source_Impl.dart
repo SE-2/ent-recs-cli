@@ -2,6 +2,7 @@
 import 'package:supermedia/layers/data/data_sources/abstractions/remote_bookmarek_data_source.dart';
 import 'package:supermedia/layers/data/models/add_item_model.dart';
 import 'package:supermedia/layers/data/models/bookmark_list_item_model.dart';
+import 'package:supermedia/layers/domain/entities/bookmark_list_item.dart';
 import 'package:supermedia/layers/data/models/media_metadata_model.dart';
 
 class RemoteBookmarkDataSourceImpl implements RemoteBookmarkDataSource {
@@ -58,6 +59,11 @@ class RemoteBookmarkDataSourceImpl implements RemoteBookmarkDataSource {
     //   throw SearchException(
     //       AppLocalization.instance.errorCode(response.statusCode));
     // }
+  }
+
+  @override
+  Future<void> addListToBookmarkLists(BookmarkListItemModel addItemModel) async {
+
   }
 }
 

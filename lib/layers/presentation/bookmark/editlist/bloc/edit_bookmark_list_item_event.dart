@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:supermedia/layers/data/models/bookmark_list_item_model.dart';
+import 'package:supermedia/layers/domain/entities/bookmark_list_item.dart';
 
 abstract class EditBookmarkListItemEvent extends Equatable {
   const EditBookmarkListItemEvent();
@@ -9,7 +10,7 @@ abstract class EditBookmarkListItemEvent extends Equatable {
 }
 
 class ApplyButtonClicked extends EditBookmarkListItemEvent {
-  final BookmarkListItem bookmarkListItem;
+  final BookmarkListItemModel bookmarkListItem;
 
   const ApplyButtonClicked({ required this.bookmarkListItem });
 

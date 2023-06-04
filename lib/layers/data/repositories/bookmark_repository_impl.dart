@@ -2,6 +2,7 @@ import 'package:supermedia/di/app_module.dart';
 import 'package:supermedia/layers/data/data_sources/abstractions/remote_bookmarek_data_source.dart';
 import 'package:supermedia/layers/data/models/add_item_model.dart';
 import 'package:supermedia/layers/data/models/bookmark_list_item_model.dart';
+import 'package:supermedia/layers/domain/entities/bookmark_list_item.dart';
 import 'package:supermedia/layers/domain/entities/media_metadata.dart';
 import 'package:supermedia/layers/domain/repositories/bookmark_repository.dart';
 
@@ -24,5 +25,10 @@ class BookmarkRepositoryImpl implements BookmarkRepository {
     _remoteDataSource.addItemToBookmarkList(AddItemModel(
         itemId: itemId, bookmarkListId: bookmarkListId
     ));
+  }
+
+  @override
+  Future<void> addListToBookmarkLists(BookmarkListItemModel bookmarkListItemModel) async {
+    _remoteDataSource.addListToBookmarkLists(bookmarkListItemModel);
   }
 }

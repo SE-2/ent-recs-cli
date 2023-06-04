@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:supermedia/common/utils/app_localization.dart';
 import 'package:supermedia/di/app_module.dart';
-import 'package:supermedia/layers/data/models/bookmark_list_item_model.dart';
+import 'package:supermedia/layers/domain/entities/bookmark_list_item.dart';
+import 'package:supermedia/layers/presentation/bookmark/editlist/edit_bookmark_list_item_screen.dart';
 import 'package:supermedia/layers/presentation/bookmark/listitems/screens/bookmark_list_items_screen.dart';
 import 'package:supermedia/layers/presentation/bookmark/lists/bloc/bookmark_lists_bloc.dart';
 import 'package:supermedia/layers/presentation/bookmark/lists/bloc/bookmark_lists_event.dart';
@@ -40,9 +41,13 @@ class _BookmarkListsForm extends StatefulWidget {
 
 class _BookmarkListsFormState extends State<_BookmarkListsForm> {
   @override
-  Widget build(BuildContext context) {
+  void initState() {
     context.read<BookmarkListsBloc>().add(const FetchBookmarkLists());
+    super.initState();
+  }
 
+  @override
+  Widget build(BuildContext context) {
     return BlocListener<BookmarkListsBloc, BookmarkListsState>(
       listener: (context, state) {
         if (state is BookmarkListsFailure) {
@@ -127,7 +132,9 @@ class _BookmarkListsFormState extends State<_BookmarkListsForm> {
       padding: const EdgeInsets.fromLTRB(24, 8, 24, 24),
       child: AppPrimaryButton(
         text: AppLocalization.of(context)!.createNewList,
-        onPressed: () {},
+        onPressed: () {
+          Navigator.pushNamed(context, EditBookmarkListItemScreen.route);
+        },
       ),
     );
   }

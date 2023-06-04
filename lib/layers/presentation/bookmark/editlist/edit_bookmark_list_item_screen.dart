@@ -2,26 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:supermedia/common/utils/app_localization.dart';
 import 'package:supermedia/di/app_module.dart';
-import 'package:supermedia/gen/assets.gen.dart';
 import 'package:supermedia/layers/data/models/bookmark_list_item_model.dart';
+import 'package:supermedia/layers/domain/entities/bookmark_list_item.dart';
 import 'package:supermedia/layers/domain/entities/media_metadata.dart';
 import 'package:supermedia/layers/presentation/bookmark/editlist/bloc/edit_bookmark_list_item_bloc.dart';
 import 'package:supermedia/layers/presentation/bookmark/editlist/bloc/edit_bookmark_list_item_event.dart';
 import 'package:supermedia/layers/presentation/bookmark/editlist/bloc/edit_bookmark_list_item_state.dart';
-import 'package:supermedia/layers/presentation/bookmark/listitems/bloc/bookmark_list_items_bloc.dart';
-import 'package:supermedia/layers/presentation/bookmark/listitems/bloc/bookmark_list_items_event.dart';
-import 'package:supermedia/layers/presentation/bookmark/listitems/bloc/bookmark_list_items_state.dart';
 import 'package:supermedia/layers/presentation/shared/widgets/app_primary_button.dart';
 import 'package:supermedia/layers/presentation/shared/widgets/app_text_field.dart';
 import 'package:supermedia/layers/presentation/shared/widgets/custom_app_bar.dart';
-import 'package:supermedia/layers/presentation/shared/widgets/custom_choice_chip_group.dart';
-import 'package:supermedia/layers/presentation/shared/widgets/custom_choice_chip_group2.dart';
 import 'package:supermedia/layers/presentation/shared/widgets/custom_filter_chip_group.dart';
-import 'package:supermedia/layers/presentation/shared/widgets/media_list.dart';
-import 'package:supermedia/layers/presentation/shared/widgets/media_list_item.dart';
 
 class EditBookmarkListItemScreen extends StatelessWidget {
-  static const String route = '/';
+  static const String route = '/edit_bookmark';
   final BookmarkListItem? bookmarkListItem;
 
   const EditBookmarkListItemScreen({Key? key, this.bookmarkListItem})
@@ -61,6 +54,11 @@ class _EditBookmarkListItemFormState extends State<_EditBookmarkListItemForm> {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: Text(state.error)),
           );
+        }
+        else if (state is EditBookmarkListItemSuccess) {
+          Future.delayed(const Duration(milliseconds: 500), () {
+            Navigator.pop(context);
+          });
         }
       },
       child: Scaffold(
@@ -103,17 +101,7 @@ class _EditBookmarkListItemFormState extends State<_EditBookmarkListItemForm> {
               } else {
                 return AppPrimaryButton(
                   text: AppLocalization.of(context)!.apply,
-                  onPressed: () {
-                    // context
-                    //     .read<EditBookmarkListItemBloc>()
-                    //     .add(ApplyButtonClicked(
-                    //   bookmarkListItem: BookmarkListItem(
-                    //     id: widget.bookmarkListItem!.id,
-                    //     title: (_appTextFieldKey.currentState as AppTextFieldState).text,
-                    //     types: _selectedCategories.map((e) => MediaType.)
-                    //   )
-                    // ));
-                  },
+                  onPressed: () { _onApplyButtonPressed(context); },
                 );
               }
             },
@@ -123,17 +111,24 @@ class _EditBookmarkListItemFormState extends State<_EditBookmarkListItemForm> {
     );
   }
 
+  void _onApplyButtonPressed(BuildContext context) {
+    context
+        .read<EditBookmarkListItemBloc>()
+        .add(ApplyButtonClicked(
+      bookmarkListItem: BookmarkListItemModel(
+        id: widget.bookmarkListItem!.id,
+        title: (_appTextFieldKey.currentState as AppTextFieldState).text,
+        types: _selectedCategories
+      )
+    ));
+  }
+
   CustomAppBar _buildAppBar(BuildContext context) {
     return CustomAppBar(
       title: widget.bookmarkListItem == null ?
       AppLocalization.of(context)!.addNewList :
       AppLocalization.of(context)!.editList(widget.bookmarkListItem!.title),
-      showBackButton: true,
-      action: IconButton(
-        splashRadius: 24,
-        icon: Assets.icons.editSquare.svg(width: 24, height: 24),
-        onPressed: () {},
-      ),
+      showBackButton: true
     );
   }
 
