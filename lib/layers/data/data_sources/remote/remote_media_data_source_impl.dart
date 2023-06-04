@@ -20,18 +20,18 @@ class RemoteMediaDataSourceImpl implements RemoteMediaDataSource {
       token: '1',
     );
 
-    final response = await _httpClient.post(request);
-
     try {
+      final response = await _httpClient.post(request);
+
       if (response.statusCode == 200) {
         return MediaMetadataModel.fromJsonList(response.body);
       } else {
-        // throw SearchException(
-        //     AppLocalization.instance.errorCode(response.statusCode));
+        throw SearchException(
+            AppLocalization.instance.errorCode(response.statusCode));
       }
-    } on Exception catch (e) {}
-
-    return mediaList;
+    } on Exception {
+      throw SearchException('Check your internet connection.');
+    }
   }
 
   @override
@@ -51,9 +51,9 @@ class RemoteMediaDataSourceImpl implements RemoteMediaDataSource {
         throw SearchException(
             AppLocalization.instance.errorCode(response.statusCode));
       }
-    } on Exception catch (e) {}
-
-    return mediaList;
+    } on Exception {
+      throw SearchException('Check your internet connection.');
+    }
   }
 
   @override
@@ -138,6 +138,7 @@ class RemoteMediaDataSourceImpl implements RemoteMediaDataSource {
       return 'book';
     }
   }
+
   @override
   Future<MediaMetadataDetailsModel> getMediaById(String id) async {
     final request = HttpRequest(
@@ -155,7 +156,6 @@ class RemoteMediaDataSourceImpl implements RemoteMediaDataSource {
             AppLocalization.instance.errorCode(response.statusCode));
       }
     } on Exception catch (e) {}
-
 
     for (var element in mediaDetailList) {
       if (element.model.mediaId == id) return element;
@@ -175,13 +175,19 @@ List<MediaFilter> mediaFilterList = [
       categories: ['Rock', 'Hip Hop', 'Jazz', 'Pop', 'Classical']),
   MediaFilter(
       mediaType: MediaType.movie,
-      categories: ['Animation', 'History', 'War', 'Family']),
+      categories: ['Animation', 'History', 'War', 'Family', 'Mystery',
+        'Action', 'Crime', 'Sport', 'Romance',
+        'Adventure', 'Fantasy', 'Horror', 'Drama', 'Comedy',  'Western']),
   MediaFilter(
       mediaType: MediaType.book,
-      categories: ['poetry', 'romance', 'fiction', 'comics, graphic']),
+      categories: ['young-adult', 'poetry', 'children', 'romance',
+        'comics, graphic', 'fiction']),
   MediaFilter(
       mediaType: MediaType.podcast,
-      categories: ['Sports', 'Business', 'Government', 'History', 'Science'])
+      categories: ['Sports', 'Business',
+        'Education', 'History', 'Science', 'Health & Fitness', 'News', 'Arts',
+        'Society & Culture',  'Comedy', 'True Crime',
+        'Fiction', 'Leisure', 'Technology'])
 ];
 
 List<MediaMetadataModel> mediaList = [

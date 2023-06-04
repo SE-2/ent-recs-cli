@@ -18,13 +18,14 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
     on<SearchEvent>((event, emit) async {
       if (event is SearchButtonPressed) {
         emit(SearchLoading());
-        await Future.delayed(const Duration(seconds: 1));
         try {
           final result = await _searchUseCase.search(event.query);
 
-          // TODO: handle empty result
-
-          emit(SearchSuccess(result: result));
+          if (result.isEmpty) {
+            emit(SearchNoResult());
+          } else {
+            emit(SearchSuccess(result: result));
+          }
         } catch (e) {
           emit(SearchFailure(error: e.toString()));
         }

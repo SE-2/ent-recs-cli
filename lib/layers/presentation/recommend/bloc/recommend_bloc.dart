@@ -13,14 +13,13 @@ class RecommendBloc extends Bloc<RecommendEvent, RecommendState> {
 
   RecommendBloc() : super(RecommendInitial()) {
     on<RecommendEvent>((event, emit) async {
-      if (event is RecommendLoadingStarted) {
+      if (event is FetchRecommendationList) {
         emit(RecommendLoading());
-        await Future.delayed(const Duration(seconds: 1));
         try {
           final result = await _recommendUseCase.recommend(event.mediaType);
 
           if (result.isEmpty) {
-            emit(RecommendInitial());
+            emit(RecommendNoResult());
           } else {
             emit(RecommendSuccess(result: result));
           }

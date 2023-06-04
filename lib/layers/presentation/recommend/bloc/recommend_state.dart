@@ -20,6 +20,8 @@ class RecommendSuccess extends RecommendState {
   List<Object> get props => [result];
 }
 
+class RecommendNoResult extends RecommendState {}
+
 class RecommendFailure extends RecommendState {
   final String error;
 

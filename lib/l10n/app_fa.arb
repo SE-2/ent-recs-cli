@@ -49,5 +49,11 @@
   "movieType": "فیلم",
   "podcastType": "پادکست",
   "ebookType": "کتاب",
-  "applyFiltersButton": "اعمال فیلترها"
+  "applyFiltersButton": "اعمال فیلترها",
+  "trySearchSomething": "جستجو کنید...",
+  "checkInternetConnection": "اتصال اینترنت خود را بررسی کنید.",
+  "unableToLoadRecommendations": "دریافت پیشنهادات ممکن نیست.",
+  "retry": "تلاش مجدد",
+  "mostPopular": "محبوب ترین",
+  "mostRelated": "مرتبط ترین"
 }
