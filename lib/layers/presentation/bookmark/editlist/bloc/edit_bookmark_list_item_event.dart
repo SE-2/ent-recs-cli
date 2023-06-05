@@ -1,5 +1,4 @@
 import 'package:equatable/equatable.dart';
-import 'package:supermedia/layers/data/models/bookmark_list_item_model.dart';
 import 'package:supermedia/layers/domain/entities/bookmark_list_item.dart';
 
 abstract class EditBookmarkListItemEvent extends Equatable {
@@ -10,10 +9,19 @@ abstract class EditBookmarkListItemEvent extends Equatable {
 }
 
 class ApplyButtonClicked extends EditBookmarkListItemEvent {
-  final BookmarkListItemModel bookmarkListItem;
+  final BookmarkListItem bookmarkListItem;
 
   const ApplyButtonClicked({ required this.bookmarkListItem });
 
   @override
   String toString() => 'ApplyButtonClicked { }';
+}
+
+class DeleteButtonClicked extends EditBookmarkListItemEvent {
+  final int bookmarkListId;
+
+  const DeleteButtonClicked({ required this.bookmarkListId });
+
+  @override
+  String toString() => 'DeleteButtonClicked { }';
 }

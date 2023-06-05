@@ -6,12 +6,13 @@ import 'package:supermedia/layers/domain/use_cases/abstractoins/bookmark_lists_u
 class BookmarkListsUseCaseImpl implements BookmarkListsUseCase {
   final BookmarkRepository _bookmarkRepository = locator<BookmarkRepository>();
 
+  @override
   Future<List<BookmarkListItem>> getBookmarkLists() async {
-    return _bookmarkRepository.getBookmarkLists();
+    return _bookmarkRepository.getLists();
   }
 
   @override
   Future<void> addItemToBookmarkList(String itemId, int bookmarkListId) async{
-    return _bookmarkRepository.addItemToBookmarkList(itemId, bookmarkListId);
+    return _bookmarkRepository.addItem(itemId, bookmarkListId);
   }
 }

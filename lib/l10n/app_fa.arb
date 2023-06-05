@@ -59,5 +59,8 @@
   "editList": "Edit {listName}",
   "apply": "اعمال ",
   "listName": "نام لیست",
-  "enterListName": "نام لیست را وارد کنید"
+  "enterListName": "نام لیست را وارد کنید",
+  "listCreated": "لیست ساخته شد",
+  "listEdited": "لیست ویرایش شد",
+  "listDeleted": "لیست حذف شد"
 }

@@ -26,7 +26,7 @@ class BookmarkListItemsScreen extends StatelessWidget {
       create: (_) => locator<BookmarkListItemsBloc>(),
       child: Scaffold(
         body: _BookmarkListItemsForm(
-          bookmarkListItem: BookmarkListItem(id: 0, title: "Happiness", types: [MediaType.movie, MediaType.music, MediaType.book, MediaType.podcast]),
+          bookmarkListItem: BookmarkListItem(id: 0, title: "Happiness", types: ["[MediaType.movie, MediaType.music, MediaType.book, MediaType.podcast]"]),
         ),
       ),
     );
@@ -49,7 +49,7 @@ class _BookmarkListItemsFormState extends State<_BookmarkListItemsForm> {
   Widget build(BuildContext context) {
     context
         .read<BookmarkListItemsBloc>()
-        .add(FetchBookmarkListItems(bookmarkListId: widget.bookmarkListItem!.id));
+        .add(FetchBookmarkListItems(bookmarkListId: widget.bookmarkListItem!.id!));
 
     return BlocListener<BookmarkListItemsBloc, BookmarkListItemsState>(
       listener: (context, state) {
@@ -137,7 +137,7 @@ class _BookmarkListItemsFormState extends State<_BookmarkListItemsForm> {
   }
 
   Widget _buildTypeOptions() {
-    List<MediaType?> types = [null, ...widget.bookmarkListItem!.types.toList()];
+    List<MediaType?> types = [null];
 
     return SizedBox(
       height: 48,

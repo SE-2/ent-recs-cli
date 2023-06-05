@@ -11,7 +11,11 @@ class EditBookmarkListItemInitial extends EditBookmarkListItemState {}
 
 class EditBookmarkListItemLoading extends EditBookmarkListItemState {}
 
-class EditBookmarkListItemSuccess extends EditBookmarkListItemState {}
+class EditBookmarkListItemSuccess extends EditBookmarkListItemState {
+  final String message;
+
+  const EditBookmarkListItemSuccess({ required this.message });
+}
 
 class EditBookmarkListItemFailure extends EditBookmarkListItemState {
   final String error;

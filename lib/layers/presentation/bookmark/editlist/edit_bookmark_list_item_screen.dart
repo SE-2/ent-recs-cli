@@ -1,8 +1,8 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:supermedia/common/utils/app_localization.dart';
 import 'package:supermedia/di/app_module.dart';
-import 'package:supermedia/layers/data/models/bookmark_list_item_model.dart';
 import 'package:supermedia/layers/domain/entities/bookmark_list_item.dart';
 import 'package:supermedia/layers/domain/entities/media_metadata.dart';
 import 'package:supermedia/layers/presentation/bookmark/editlist/bloc/edit_bookmark_list_item_bloc.dart';
@@ -56,6 +56,9 @@ class _EditBookmarkListItemFormState extends State<_EditBookmarkListItemForm> {
           );
         }
         else if (state is EditBookmarkListItemSuccess) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text(state.message)),
+          );
           Future.delayed(const Duration(milliseconds: 500), () {
             Navigator.pop(context);
           });
@@ -115,8 +118,8 @@ class _EditBookmarkListItemFormState extends State<_EditBookmarkListItemForm> {
     context
         .read<EditBookmarkListItemBloc>()
         .add(ApplyButtonClicked(
-      bookmarkListItem: BookmarkListItemModel(
-        id: widget.bookmarkListItem!.id,
+      bookmarkListItem: BookmarkListItem(
+        id: widget.bookmarkListItem?.id,
         title: (_appTextFieldKey.currentState as AppTextFieldState).text,
         types: _selectedCategories
       )
@@ -128,7 +131,12 @@ class _EditBookmarkListItemFormState extends State<_EditBookmarkListItemForm> {
       title: widget.bookmarkListItem == null ?
       AppLocalization.of(context)!.addNewList :
       AppLocalization.of(context)!.editList(widget.bookmarkListItem!.title),
-      showBackButton: true
+      showBackButton: true,
+        action: IconButton(
+          icon: const Icon(CupertinoIcons.trash_fill),
+          color: Colors.red,
+          onPressed: () {  },
+        ),
     );
   }
 

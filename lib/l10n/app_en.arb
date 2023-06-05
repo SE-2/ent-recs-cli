@@ -59,5 +59,8 @@
   "editList": "Edit {listName}",
   "apply": "Apply",
   "listName": "List Name",
-  "enterListName": "Enter List Name"
+  "enterListName": "Enter List Name",
+  "listCreated": "List Created",
+  "listEdited": "List Edited",
+  "listDeleted": "List Deleted"
 }

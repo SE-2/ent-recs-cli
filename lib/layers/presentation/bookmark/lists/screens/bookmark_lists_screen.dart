@@ -108,7 +108,7 @@ class _BookmarkListsFormState extends State<_BookmarkListsForm> {
       context.read<BookmarkListsBloc>().add(
           AddItemToBookmarkList(
               itemId: widget.itemIdToBookmark!,
-              bookmarkListId: bookmarkListItem.id
+              bookmarkListId: bookmarkListItem.id!
           )
       );
     }

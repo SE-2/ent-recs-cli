@@ -9,6 +9,6 @@ class BookmarkListItemsUseCaseImpl implements BookmarkListItemsUseCase {
 
   @override
   Future<List<MediaMetadata>> getBookmarkListItems(int bookmarkListId) {
-    return _bookmarkRepository.getBookmarkListItems(bookmarkListId);
+    return _bookmarkRepository.getItems(bookmarkListId);
   }
 }

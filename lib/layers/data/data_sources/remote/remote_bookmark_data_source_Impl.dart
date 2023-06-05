@@ -1,14 +1,18 @@
 
+import 'package:supermedia/di/app_module.dart';
 import 'package:supermedia/layers/data/data_sources/abstractions/remote_bookmarek_data_source.dart';
-import 'package:supermedia/layers/data/models/add_item_model.dart';
-import 'package:supermedia/layers/data/models/bookmark_list_item_model.dart';
+import 'package:supermedia/layers/data/http_client/http_client.dart';
+import 'package:supermedia/layers/data/models/add_bookmark_list_model.dart';
 import 'package:supermedia/layers/domain/entities/bookmark_list_item.dart';
 import 'package:supermedia/layers/data/models/media_metadata_model.dart';
 
 class RemoteBookmarkDataSourceImpl implements RemoteBookmarkDataSource {
-  Future<List<BookmarkListItem>> getBookmarkLists() async{
+  final IHttpClient _httpClient = locator<IHttpClient>();
+
+  @override
+  Future<List<BookmarkListItem>> getLists() async{
     // final request = HttpRequest(
-    //   '/bookmarks',
+    //   '/playlist  ',
     //   headers: {'Content-Type': 'application/json'},
     //   body: {'query': query},
     // );
@@ -25,7 +29,32 @@ class RemoteBookmarkDataSourceImpl implements RemoteBookmarkDataSource {
   }
 
   @override
-  Future<List<MediaMetadataModel>> getBookmarkListItems(int bookmarkListId) async {
+  Future<void> addList(AddBookmarkListModel addBookmarkListModel) async {
+    // final request = HttpRequest(
+    //   '/playlist/create',
+    //   headers: {'Content-Type': 'application/json'},
+    // );
+    //
+    // try {
+    //   final response = await _httpClient.post(request);
+    //
+    //   if (response.statusCode >= 300 || response.statusCode < 200) {
+    //     throw SearchException(
+    //         AppLocalization.instance.errorCode(response.statusCode));
+    //   }
+    // } on Exception catch(e) {
+    //   throw SearchException('Check your internet connection.');
+    // }
+  }
+
+  @override
+  Future<void> deleteList(int bookmarkListId) {
+    // TODO: implement deleteListFromBookmarkLists
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<List<MediaMetadataModel>> getItems(int bookmarkListId) async {
     // final request = HttpRequest(
       //   '/bookmarks/{id}',
     //   headers: {'Content-Type': 'application/json'},
@@ -44,11 +73,10 @@ class RemoteBookmarkDataSourceImpl implements RemoteBookmarkDataSource {
   }
 
   @override
-  Future<void> addItemToBookmarkList(AddItemModel addItemModel) async {
+  Future<void> addItem(String itemId, int bookmarkListId) async {
     // final request = HttpRequest(
-    //   '/bookmarks/{id}/add',
+    //   '/addItemToPlaylist/${addItemModel.bookmarkListId}/${addItemModel.itemId}',
     //   headers: {'Content-Type': 'application/json'},
-    //   body: {'query': query},
     // );
     //
     // final response = await _httpClient.post(request);
@@ -62,11 +90,24 @@ class RemoteBookmarkDataSourceImpl implements RemoteBookmarkDataSource {
   }
 
   @override
-  Future<void> addListToBookmarkLists(BookmarkListItemModel addItemModel) async {
-
+  Future<void> deleteItem(String itemId) async {
+    // final request = HttpRequest(
+    //   '/deleteItemFromPlaylist/${deleteItemModel.itemId}',
+    //   headers: {'Content-Type': 'application/json'},
+    // );
+    //
+    // try {
+    //   final response = await _httpClient.post(request);
+    //
+    //   if (response.statusCode >= 300 || response.statusCode < 200) {
+    //     throw SearchException(
+    //         AppLocalization.instance.errorCode(response.statusCode));
+    //   }
+    // } on Exception catch(e) {
+    //   throw SearchException('Check your internet connection.');
+    // }
   }
 }
-
 
 List<BookmarkListItem> bookmarkLists = [
   BookmarkListItem(id: 0, title: "Happiness", types: []),

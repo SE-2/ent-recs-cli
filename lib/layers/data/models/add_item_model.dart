@@ -1,8 +1,8 @@
-class AddItemModel {
+class AddBookmarkItemModel {
   final String itemId;
   final int bookmarkListId;
 
-  AddItemModel({
+  AddBookmarkItemModel({
     required this.itemId,
     required this.bookmarkListId,
   });
