@@ -59,7 +59,7 @@ class _SearchFormState extends State<_SearchForm> {
 
   @override
   void initState() {
-    context.read<SearchBloc>().add(FetchDefaultCategories(context: context));
+    context.read<SearchBloc>().add(FilterOptionSelected(context: context));
     super.initState();
   }
 
@@ -69,7 +69,7 @@ class _SearchFormState extends State<_SearchForm> {
 
     return BlocListener<SearchBloc, SearchState>(
         listener: (context, state) {
-          if (state is DefaultCategoriesFetched) {
+          if (state is MediaFiltersFetched) {
             for (MediaFilter filter in state.result) {
               defaultCategories[filter.mediaType] = filter.categories;
             }

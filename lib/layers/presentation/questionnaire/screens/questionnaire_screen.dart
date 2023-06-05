@@ -1,54 +1,89 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:supermedia/common/utils/app_localization.dart';
+import 'package:supermedia/di/app_module.dart';
 import 'package:supermedia/layers/domain/entities/media_metadata.dart';
+import 'package:supermedia/layers/presentation/questionnaire/bloc/questionnaire_bloc.dart';
 import 'package:supermedia/layers/presentation/recommend/screens/recommend_screen.dart';
+import 'package:supermedia/layers/presentation/shared/widgets/app_primary_button.dart';
 import 'package:supermedia/layers/presentation/shared/widgets/custom_app_bar.dart';
 
-class Category {
+class MediaCategory {
   final String name;
   final String image;
 
-  Category(this.name, this.image);
+  MediaCategory(this.name, this.image);
 }
 
-class SelectionScreen extends StatelessWidget {
-  static const String route = '/selection';
+class QuestionnaireScreen extends StatelessWidget {
+  static const String route = '/questionnaire';
   final MediaType? mediaType;
 
-  const SelectionScreen({super.key, this.mediaType});
+  const QuestionnaireScreen({super.key, this.mediaType});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: CustomAppBar(
-        title: AppLocalization.of(context)!.selectionScreenTitle,
-        showBackButton: true,
-      ),
-      backgroundColor: Theme.of(context).colorScheme.background,
-      body: _SelectionForm(mediaType: mediaType),
-    );
+    return BlocProvider<QuestionnaireBloc>(
+        create: (_) => locator<QuestionnaireBloc>(),
+        child: Scaffold(
+          appBar: CustomAppBar(
+            title: AppLocalization.of(context)!.questionnaireScreenTitle,
+            showBackButton: true,
+          ),
+          backgroundColor: Theme.of(context).colorScheme.background,
+          body: _QuestionnaireForm(mediaType: mediaType!),
+        ));
   }
 }
 
-class _SelectionForm extends StatefulWidget {
-  final MediaType? mediaType;
+class _QuestionnaireForm extends StatefulWidget {
+  final MediaType mediaType;
 
-  const _SelectionForm({Key? key, this.mediaType}) : super(key: key);
+  const _QuestionnaireForm({Key? key, required this.mediaType})
+      : super(key: key);
 
   @override
-  _SelectionFormState createState() => _SelectionFormState();
+  _QuestionnaireFormState createState() => _QuestionnaireFormState();
 }
 
-class _SelectionFormState extends State<_SelectionForm> {
-  final List<Category> categories = List.generate(20, (index) {
-    return Category('Category ${index + 1}',
-        'https://i.pinimg.com/400x/41/2d/b6/412db620d4fb0354df7ad175b132ff38.jpg');
-  });
+class _QuestionnaireFormState extends State<_QuestionnaireForm> {
+  final List<MediaCategory> selectedCategories = [];
 
-  final selectedCategories = <Category>[];
+  @override
+  void initState() {
+    context
+        .read<QuestionnaireBloc>()
+        .add(QuestionnaireRequested(mediaType: widget.mediaType));
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
+    return BlocListener<QuestionnaireBloc, QuestionnaireState>(
+        listener: (context, state) {
+          if (state is UserInterestsSubmitted) {
+            Navigator.pop(context);
+            Navigator.pushNamed(context, RecommendScreen.route,
+                arguments: widget.mediaType);
+          } else if (state is UserInterestsSubmitFailed) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(content: Text(state.error)),
+            );
+          }
+        },
+    child: BlocBuilder<QuestionnaireBloc, QuestionnaireState>(
+        builder: (context, state) {
+      if (state is MediaCategoriesFetched) {
+        return _buildMediaCategories(state.result);
+      } else {
+        return const Center(
+          child: CircularProgressIndicator(),
+        );
+      }
+    }));
+  }
+
+  Widget _buildMediaCategories(List<MediaCategory> categories) {
     final crossAxisCount = (MediaQuery.of(context).size.width / 120).floor();
 
     final aspectRatio =
@@ -58,7 +93,7 @@ class _SelectionFormState extends State<_SelectionForm> {
       Padding(
         padding: const EdgeInsets.fromLTRB(32, 16, 32, 16),
         child: Text(
-          AppLocalization.of(context)!.selectionScreenMessage,
+          AppLocalization.of(context)!.questionnaireScreenMessage,
           style: Theme.of(context)
               .textTheme
               .titleMedium!
@@ -82,9 +117,9 @@ class _SelectionFormState extends State<_SelectionForm> {
               child: Stack(children: [
                 Container(
                   decoration: BoxDecoration(
-
                     image: DecorationImage(
-                      image: Image.asset('assets/images/default_category.png').image,
+                      image: Image.asset('assets/images/default_category.png')
+                          .image,
                       fit: BoxFit.cover,
                     ),
                     borderRadius: BorderRadius.circular(10),
@@ -137,28 +172,30 @@ class _SelectionFormState extends State<_SelectionForm> {
           }).toList(),
         ),
       ),
-      const SizedBox(height: 20),
-      ElevatedButton.icon(
-        onPressed: selectedCategories.length >= 5
-            ? () {
-                Navigator.pushNamed(context, RecommendScreen.route, arguments: widget.mediaType);
-              }
-            : null,
-        label: Text(
-          AppLocalization.of(context)!.getStarted,
-          style: Theme.of(context).textTheme.labelLarge,
-        ),
-        icon: const Icon(
-          Icons.arrow_forward,
-          size: 16,
-        ),
-        style: ElevatedButton.styleFrom(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(24),
-          ),
-        ),
+      const SizedBox(height: 24),
+      SizedBox(
+        height: 50,
+        width: 170,
+        child: AppPrimaryButton(
+            text: AppLocalization.of(context)!.getStarted,
+            onPressed: () {
+              _onGetStartedButtonPressed(selectedCategories.length);
+            },
+            icon: const Icon(
+              Icons.arrow_forward,
+              size: 16,
+            ),
+            isEnabled: selectedCategories.length >= 5),
       ),
-      const SizedBox(height: 20),
+      const SizedBox(height: 24),
     ]);
+  }
+
+  void _onGetStartedButtonPressed(int selectedCategoriesLength) {
+    if (selectedCategoriesLength >= 5) {
+      context.read<QuestionnaireBloc>().add(GettingStartedButtonPressed(
+          mediaType: widget.mediaType,
+          categories: selectedCategories.map((e) => e.name).toList()));
+    }
   }
 }

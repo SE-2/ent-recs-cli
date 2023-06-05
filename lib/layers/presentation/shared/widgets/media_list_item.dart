@@ -15,9 +15,9 @@ class MediaListItem extends StatelessWidget {
   Widget build(BuildContext context) {
     final Map<MediaType, Color> mediaTypeColors = {
       MediaType.book: const Color(0xff514EB6),
-      MediaType.movie: const Color(0xffF50057),
+      MediaType.podcast: const Color(0xffF50057),
       MediaType.music: const Color(0xff00C853),
-      MediaType.podcast: const Color(0xffFF9800),
+      MediaType.movie: const Color(0xffFF9800),
     };
 
     return InkWell(
