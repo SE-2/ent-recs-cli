@@ -5,4 +5,11 @@ class MediaFilter {
   final List<String> categories;
 
   MediaFilter({required this.mediaType, required this.categories});
+
+  Map<String, dynamic> toJson() {
+    return {
+      'mediaType': mediaType.toJson(),
+      'categories': categories,
+    };
+  }
 }

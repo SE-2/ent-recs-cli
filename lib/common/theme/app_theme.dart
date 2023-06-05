@@ -12,9 +12,11 @@ class AppTheme {
       tertiary: Color(0xff0D253C),
       onTertiary: Color(0xff2D4379),
       tertiaryContainer: Color(0xffE3E7EC),
+      onTertiaryContainer: Colors.black,
       background: Color(0xFFFEFEFE),
       outline: Colors.black,
       surface: Color(0xff9CA4AB),
+      surfaceVariant: Color(0xFFf6f8fe),
       error: Colors.red,
     ),
     textTheme: const TextTheme(
@@ -50,7 +52,6 @@ class AppTheme {
       headlineSmall: TextStyle(
         fontFamily: defaultFontFamily,
         fontSize: 18,
-        fontWeight: FontWeight.bold,
         color: Colors.black,
       ),
       titleLarge: TextStyle(
@@ -92,10 +93,12 @@ class AppTheme {
       onSecondary: Color(0xFF9CA4AB),
       tertiary: Colors.white,
       onTertiary: Colors.white,
-      tertiaryContainer: Color(0xff282837),
+      tertiaryContainer: Colors.white70,
+      onTertiaryContainer: Colors.white,
       background: Color(0xFF171725),
       outline: Colors.white,
       surface: Color(0xff9CA4AB),
+      surfaceVariant: Color(0xff282837),
       error: Colors.red,
     ),
     textTheme: const TextTheme(
@@ -130,6 +133,7 @@ class AppTheme {
       headlineSmall: TextStyle(
         fontFamily: defaultFontFamily,
         fontSize: 18,
+        color: Colors.white,
       ),
       titleLarge: TextStyle(
         fontFamily: defaultFontFamily,

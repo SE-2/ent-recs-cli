@@ -1,6 +1,7 @@
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:supermedia/layers/domain/entities/media_metadata.dart';
 import 'package:supermedia/layers/presentation/category/category_selection.dart';
 import 'carousel/carousel_slider.dart';
 import 'category_item.dart';
@@ -25,7 +26,7 @@ class _CategoryListState extends State<CategoryList> {
       children: [
         GestureDetector(
           onTap: () {
-            Navigator.of(context).pushNamed(SelectionScreen.route);
+            Navigator.of(context).pushNamed(SelectionScreen.route, arguments: MediaType.values[currentIndex]);
           },
           child: CarouselSlider.builder(
             itemCount: categories.length,

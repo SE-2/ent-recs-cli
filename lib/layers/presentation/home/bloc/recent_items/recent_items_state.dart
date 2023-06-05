@@ -10,10 +10,10 @@ class RecentItemsInitial extends RecentItemsState {}
 
 class RecentItemsLoading extends RecentItemsState {}
 
-class RecentItemsSuccess extends RecentItemsState {
+class RecentItemsFetched extends RecentItemsState {
   final List<MediaMetadata> result;
 
-  RecentItemsSuccess({required this.result});
+  RecentItemsFetched({required this.result});
 
   @override
   List<Object> get props => [result];

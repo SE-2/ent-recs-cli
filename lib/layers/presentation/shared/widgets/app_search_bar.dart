@@ -74,10 +74,12 @@ class AppSearchBarState extends State<AppSearchBar> {
                 });
               },
               onSubmitted: (value) {
+                widget.onSearchIconTapped(_textController.text);
                 setState(() {
                   _isFocused = false;
                 });
               },
+              textInputAction: TextInputAction.search,
             ),
           ),
           const SizedBox(width: 8),
@@ -88,10 +90,12 @@ class AppSearchBarState extends State<AppSearchBar> {
                 _isFocused = false;
               });
             },
-            child: const Icon(
-              CupertinoIcons.clear_thick,
-              size: 20,
-            ),
+            child: _textController.text.isNotEmpty
+                ? const Icon(
+                    CupertinoIcons.clear_thick,
+                    size: 20,
+                  )
+                : Container(),
           ),
         ],
       ),

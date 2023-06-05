@@ -14,22 +14,33 @@ import 'package:flutter/services.dart';
 class $AssetsIconsGen {
   const $AssetsIconsGen();
 
+  /// File path: assets/icons/Bookmark.svg
+  SvgGenImage get bookmark => const SvgGenImage('assets/icons/Bookmark.svg');
+
+  /// File path: assets/icons/Lock.svg
+  SvgGenImage get lock => const SvgGenImage('assets/icons/Lock.svg');
+
+  /// File path: assets/icons/Shield Done.svg
+  SvgGenImage get shieldDone =>
+      const SvgGenImage('assets/icons/Shield Done.svg');
+
+  /// File path: assets/icons/ThemeMode.svg
+  SvgGenImage get themeMode => const SvgGenImage('assets/icons/ThemeMode.svg');
+
+  /// File path: assets/icons/Unlock.svg
+  SvgGenImage get unlock => const SvgGenImage('assets/icons/Unlock.svg');
+
   /// File path: assets/icons/calendar.svg
   SvgGenImage get calendar => const SvgGenImage('assets/icons/calendar.svg');
-
-  /// File path: assets/icons/categories_four.svg
-  SvgGenImage get categoriesFour =>
-      const SvgGenImage('assets/icons/categories_four.svg');
-
-  /// File path: assets/icons/edit_square.svg
-  SvgGenImage get editSquare =>
-      const SvgGenImage('assets/icons/edit_square.svg');
 
   /// File path: assets/icons/facebook.svg
   SvgGenImage get facebook => const SvgGenImage('assets/icons/facebook.svg');
 
   /// File path: assets/icons/film.svg
   SvgGenImage get film => const SvgGenImage('assets/icons/film.svg');
+
+  /// File path: assets/icons/globe.svg
+  SvgGenImage get globe => const SvgGenImage('assets/icons/globe.svg');
 
   /// File path: assets/icons/google.svg
   SvgGenImage get google => const SvgGenImage('assets/icons/google.svg');
@@ -40,19 +51,39 @@ class $AssetsIconsGen {
   /// File path: assets/icons/paper.svg
   SvgGenImage get paper => const SvgGenImage('assets/icons/paper.svg');
 
+  /// File path: assets/icons/person.svg
+  SvgGenImage get person => const SvgGenImage('assets/icons/person.svg');
+
+  /// File path: assets/icons/question.svg
+  SvgGenImage get question => const SvgGenImage('assets/icons/question.svg');
+
+  /// File path: assets/icons/shield.svg
+  SvgGenImage get shield => const SvgGenImage('assets/icons/shield.svg');
+
+  /// File path: assets/icons/trash.svg
+  SvgGenImage get trash => const SvgGenImage('assets/icons/trash.svg');
+
   /// File path: assets/icons/twitter.svg
   SvgGenImage get twitter => const SvgGenImage('assets/icons/twitter.svg');
 
   /// List of all assets
   List<SvgGenImage> get values => [
+        bookmark,
+        lock,
+        shieldDone,
+        themeMode,
+        unlock,
         calendar,
-        categoriesFour,
-        editSquare,
         facebook,
         film,
+        globe,
         google,
         line,
         paper,
+        person,
+        question,
+        shield,
+        trash,
         twitter
       ];
 }
@@ -74,11 +105,15 @@ class $AssetsImagesGen {
   $AssetsImagesIconsGen get icons => const $AssetsImagesIconsGen();
   $AssetsImagesItemGen get item => const $AssetsImagesItemGen();
   $AssetsImagesItemsGen get items => const $AssetsImagesItemsGen();
+
+  /// File path: assets/images/logo.png
+  AssetGenImage get logo => const AssetGenImage('assets/images/logo.png');
+
   $AssetsImagesPostsGen get posts => const $AssetsImagesPostsGen();
   $AssetsImagesStoriesGen get stories => const $AssetsImagesStoriesGen();
 
   /// List of all assets
-  List<AssetGenImage> get values => [appIcon, defaultCategory];
+  List<AssetGenImage> get values => [appIcon, defaultCategory, logo];
 }
 
 class $AssetsImagesCategoriesGen {

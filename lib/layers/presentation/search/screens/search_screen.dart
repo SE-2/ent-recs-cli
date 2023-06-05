@@ -6,6 +6,7 @@ import 'package:supermedia/layers/domain/entities/media_filter.dart';
 import 'package:supermedia/layers/domain/entities/media_metadata.dart';
 import 'package:supermedia/layers/domain/entities/search_query.dart';
 import 'package:supermedia/layers/presentation/search/bloc/search_bloc.dart';
+import 'package:supermedia/layers/presentation/shared/widgets/CenterScreenMessage.dart';
 import 'package:supermedia/layers/presentation/shared/widgets/app_search_bar.dart';
 import 'package:supermedia/layers/presentation/shared/widgets/custom_app_bar.dart';
 import 'package:supermedia/layers/presentation/shared/widgets/filter_modal.dart';
@@ -14,13 +15,23 @@ import 'package:supermedia/layers/presentation/shared/widgets/media_list.dart';
 import 'package:supermedia/layers/presentation/shared/widgets/media_list_item.dart';
 import 'package:supermedia/layers/presentation/shared/widgets/sort_option.dart';
 
-class SearchScreen extends StatelessWidget {
+class SearchScreen extends StatefulWidget {
   static const String route = '/search';
 
   const SearchScreen({Key? key}) : super(key: key);
 
   @override
+  State<SearchScreen> createState() => _SearchScreenState();
+}
+
+class _SearchScreenState extends State<SearchScreen>
+    with AutomaticKeepAliveClientMixin {
+  @override
+  bool get wantKeepAlive => true;
+
+  @override
   Widget build(BuildContext context) {
+    super.build(context);
     return BlocProvider<SearchBloc>(
       create: (_) => locator<SearchBloc>(),
       child: Scaffold(
@@ -63,10 +74,14 @@ class _SearchFormState extends State<_SearchForm> {
               defaultCategories[filter.mediaType] = filter.categories;
             }
             handleFilterOptionTapped();
+          } else if (state is SearchFailure) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(content: Text(state.error)),
+            );
           }
         },
         child: Padding(
-          padding: const EdgeInsets.fromLTRB(32, 16, 32, 32),
+          padding: const EdgeInsets.fromLTRB(32, 8, 32, 32),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -93,13 +108,7 @@ class _SearchFormState extends State<_SearchForm> {
               const SizedBox(height: 16),
               BlocBuilder<SearchBloc, SearchState>(
                 builder: (context, state) {
-                  if (state is SearchInitial) {
-                    return Expanded(
-                      child: Center(
-                        child: Text(AppLocalization.of(context)!.emptyList),
-                      ),
-                    );
-                  } else if (state is SearchLoading) {
+                  if (state is SearchLoading) {
                     return const Expanded(
                         child: Center(
                       child: CircularProgressIndicator(),
@@ -118,8 +127,14 @@ class _SearchFormState extends State<_SearchForm> {
                         },
                       ),
                     );
+                  } else if (state is SearchNoResult) {
+                    return const CenterScreenMessage(
+                      message: 'Search had no result...',
+                    );
                   } else {
-                    return Container();
+                    return const CenterScreenMessage(
+                      message: 'Try search something...',
+                    );
                   }
                 },
               ),
@@ -132,7 +147,9 @@ class _SearchFormState extends State<_SearchForm> {
     setState(() {
       selectedSortMethod = sortMethod;
     });
-    handleSearchIconTapped(query);
+    if (query != '') {
+      handleSearchIconTapped(query);
+    }
   }
 
   void handleFilterOptionTapped() {
@@ -150,7 +167,9 @@ class _SearchFormState extends State<_SearchForm> {
       selectedMediaType = mediaType;
       selectedCategories = categories ?? [];
     });
-    handleSearchIconTapped(query);
+    if (query != '') {
+      handleSearchIconTapped(query);
+    }
   }
 
   void handleSearchIconTapped(String query) {
@@ -158,7 +177,7 @@ class _SearchFormState extends State<_SearchForm> {
     MediaFilter filter = MediaFilter(
         mediaType: selectedMediaType, categories: selectedCategories);
     SearchQuery searchQuery = SearchQuery(
-        query: query, filter: filter, sortMethod: selectedSortMethod);
+        query: query.trim(), filter: filter, sortMethod: selectedSortMethod);
     context
         .read<SearchBloc>()
         .add(SearchButtonPressed(context: context, query: searchQuery));

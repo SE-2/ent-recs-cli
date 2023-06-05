@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:supermedia/layers/data/models/user_model.dart';
 import 'package:supermedia/layers/domain/entities/bookmark_list_item.dart';
+import 'package:supermedia/layers/domain/entities/media_metadata.dart';
 import 'package:supermedia/layers/presentation/auth/signup/screens/signup_screen.dart';
 import 'package:supermedia/layers/presentation/bookmark/editlist/edit_bookmark_list_item_screen.dart';
 import 'package:supermedia/layers/presentation/bookmark/listitems/screens/bookmark_list_items_screen.dart';
@@ -11,69 +12,100 @@ import 'package:supermedia/layers/presentation/home/screens/home_screen.dart';
 import 'package:supermedia/layers/presentation/media/screens/show_media_screen.dart';
 import 'package:supermedia/layers/presentation/recommend/screens/recommend_screen.dart';
 import 'package:supermedia/layers/presentation/search/screens/search_screen.dart';
+import 'package:supermedia/layers/presentation/setting/screens/settings_screen.dart';
+import 'package:supermedia/layers/presentation/shared/multi_screen_bottom_navigation.dart';
+import 'package:supermedia/layers/presentation/splash/screens/splashScreen.dart';
 
 class AppRouter {
   final GetIt locator = GetIt.instance;
 
   Route onGenerateRoute(RouteSettings routeSettings) {
     switch (routeSettings.name) {
+      case SplashScreen.route:
+        return MaterialPageRoute(
+          builder: (context) {
+            return const SplashScreen();
+          },
+        );
+
       case SignupScreen.route:
         return MaterialPageRoute(
           builder: (context) {
-            return const BookmarkListsScreen();
+            return const SignupScreen();
+          },
+        );
+
+      case MultiScreenBottomNavigation.route:
+        return MaterialPageRoute(
+          builder: (context) {
+            return const MultiScreenBottomNavigation();
           },
         );
 
       case HomeScreen.route:
-        var userModel = routeSettings.arguments as UserModel;
-
         return MaterialPageRoute(
           builder: (_) {
-            return HomeScreen(userModel: userModel);
+            return HomeScreen();
           },
         );
 
-        case ShowMediaScreen.route:
+      case ShowMediaScreen.route:
+        var id = routeSettings.arguments as String;
+
         return MaterialPageRoute(
           builder: (_) {
-            return const ShowMediaScreen();
+            return ShowMediaScreen(
+              id: id,
+            );
           },
         );
 
-        case RecommendScreen.route:
+      case RecommendScreen.route:
+        var mediaType = routeSettings.arguments as MediaType;
+
         return MaterialPageRoute(
           builder: (_) {
-            return const RecommendScreen();
+            return RecommendScreen(mediaType: mediaType);
           },
         );
 
-        case SelectionScreen.route:
+      case SelectionScreen.route:
+        var mediaType = routeSettings.arguments as MediaType;
+
         return MaterialPageRoute(
           builder: (_) {
-            return const SelectionScreen();
+            return SelectionScreen(mediaType: mediaType);
           },
         );
 
-        case SearchScreen.route:
+      case SearchScreen.route:
         return MaterialPageRoute(
           builder: (_) {
-            return const SearchScreen();
+            return SearchScreen();
           },
         );
 
-        case BookmarkListItemsScreen.route:
-          var bookmarkListItem = routeSettings.arguments as BookmarkListItem;
+      case SettingsScreen.route:
+        return MaterialPageRoute(
+          builder: (_) {
+            return const SettingsScreen();
+          },
+        );
 
-          return MaterialPageRoute(
+
+      case BookmarkListItemsScreen.route:
+        var bookmarkListItem = routeSettings.arguments as BookmarkListItem;
+
+        return MaterialPageRoute(
           builder: (_) {
             return BookmarkListItemsScreen(bookmarkListItem: bookmarkListItem);
           },
         );
 
-        case EditBookmarkListItemScreen.route:
-          var bookmarkListItem = routeSettings.arguments as BookmarkListItem?;
+      case EditBookmarkListItemScreen.route:
+        var bookmarkListItem = routeSettings.arguments as BookmarkListItem?;
 
-          return MaterialPageRoute(
+        return MaterialPageRoute(
           builder: (_) {
             return EditBookmarkListItemScreen(bookmarkListItem: bookmarkListItem);
           },

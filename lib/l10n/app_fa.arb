@@ -63,4 +63,11 @@
   "listCreated": "لیست ساخته شد",
   "listEdited": "لیست ویرایش شد",
   "listDeleted": "لیست حذف شد"
+  "applyFiltersButton": "اعمال فیلترها",
+  "trySearchSomething": "جستجو کنید...",
+  "checkInternetConnection": "اتصال اینترنت خود را بررسی کنید.",
+  "unableToLoadRecommendations": "دریافت پیشنهادات ممکن نیست.",
+  "retry": "تلاش مجدد",
+  "mostPopular": "محبوب ترین",
+  "mostRelated": "مرتبط ترین"
 }

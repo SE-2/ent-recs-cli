@@ -33,6 +33,7 @@ class MyApp extends StatelessWidget {
             builder: (context, themeMode) {
               return MaterialApp(
                 title: 'SuperMedia',
+                debugShowCheckedModeBanner: false,
                 localizationsDelegates: AppLocalizations.localizationsDelegates,
                 supportedLocales: AppLocalizations.supportedLocales,
                 locale: locale,

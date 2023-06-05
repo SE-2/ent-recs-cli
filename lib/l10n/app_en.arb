@@ -1,5 +1,6 @@
 {
   "title": "Super Media",
+  "entertainment": "Entertainment",
   "email": "Email",
   "password": "Password",
   "signUp": "Sign up",
@@ -63,4 +64,11 @@
   "listCreated": "List Created",
   "listEdited": "List Edited",
   "listDeleted": "List Deleted"
+  "applyFiltersButton": "Apply Filters",
+  "trySearchSomething": "Try search something...",
+  "checkInternetConnection": "Check you internet connection.",
+  "unableToLoadRecommendations": "Unable to load recommendations.",
+  "retry": "Retry",
+  "mostPopular": "Most Popular",
+  "mostRelated": "Most Related"
 }

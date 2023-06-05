@@ -35,7 +35,7 @@ class CustomFilterChipGroup extends StatelessWidget {
                 selectedColor: Theme.of(context).colorScheme.primary,
                 backgroundColor: Theme.of(context).colorScheme.background,
                 side: BorderSide(
-                    color: Theme.of(context).colorScheme.tertiaryContainer),
+                    color: Theme.of(context).colorScheme.surfaceVariant),
                 showCheckmark: false,
                 avatar: selectedItems.contains(item)
                     ? const Icon(
