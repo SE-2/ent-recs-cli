@@ -80,7 +80,7 @@ class _HomeFormState extends State<_HomeForm> {
                   if (state is AbstractProfileFetched) {
                     return _buildAbstractProfile(state.result);
                   } else {
-                    return SizedBox();
+                    return _buildAbstractProfile(UserModel(name: ""));
                   }
                 },
               ),
