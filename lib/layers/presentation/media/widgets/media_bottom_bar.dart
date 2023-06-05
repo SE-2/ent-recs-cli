@@ -46,7 +46,7 @@ class MediaBottomBarState extends State<MediaBottomBar> {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.fromLTRB(0, 17, 3, 0),
+            padding: const EdgeInsets.fromLTRB(0, 16, 3, 0),
             child: Text(
               '${widget.likes}',
               textAlign: TextAlign.left,
@@ -63,12 +63,15 @@ class MediaBottomBarState extends State<MediaBottomBar> {
           // Share Button
           Padding(
             padding: const EdgeInsets.fromLTRB(5, 13, 0, 0),
-            child: Transform.rotate(
-              angle: -45 * math.pi / 180,
-              child: Icon(
-                Icons.send_rounded,
-                color: Theme.of(context).colorScheme.outline,
-                size: 18,
+            child: InkWell(
+              onTap:  widget.onSharePressed,
+              child: Transform.rotate(
+                angle: -45 * math.pi / 180,
+                child: Icon(
+                  Icons.send_rounded,
+                  color: Theme.of(context).colorScheme.outline,
+                  size: 18,
+                ),
               ),
             ),
           ),

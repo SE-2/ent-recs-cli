@@ -10,4 +10,9 @@ class MediaUseCaseImpl implements MediaUseCase {
   Future<MediaMetadataDetail> getMediaById(String id) async {
     return _mediaRepository.getMediaById(id);
   }
+
+  @override
+  Future<int> like(String mediaId) {
+    return _mediaRepository.like(mediaId);
+  }
 }

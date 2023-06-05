@@ -14,10 +14,10 @@ class MediaMetadataDetailsModel {
 
   factory MediaMetadataDetailsModel.fromJson(Map<String, dynamic> json) {
     return MediaMetadataDetailsModel(
-      model: MediaMetadataModel.fromJson(json['model']),
+      model: MediaMetadataModel.fromJson(json['metadata']),
       decoration: json['decoration'],
-      isBookMarked: json['isBookMarked'] ?? false,
-      isLiked: json['isLiked'] ?? false,
+      isBookMarked: json['bookMarked'] ?? false,
+      isLiked: json['liked'] ?? false,
     );
   }
 }

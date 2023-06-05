@@ -15,4 +15,5 @@ abstract class MediaRepository {
   Future<List<MediaCategory>> getMediaCategories(MediaType mediaType);
   Future<void> submitUserInterests(MediaType mediaType, List<String> categories);
   Future<bool> isQuestionnaireFilled(MediaType mediaType);
+  Future<int> like(String mediaId);
 }

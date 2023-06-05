@@ -13,3 +13,12 @@ class LoadMedia extends MediaEvent {
   @override
   String toString() => 'LoadMedia { }';
 }
+
+class LikeButtonPressed extends MediaEvent {
+  final String mediaId;
+
+  LikeButtonPressed(this.mediaId);
+
+  @override
+  List<Object?> get props => [mediaId];
+}
