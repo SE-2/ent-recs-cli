@@ -7,26 +7,32 @@ import 'package:supermedia/layers/data/data_sources/abstractions/local_data_sour
 import 'package:supermedia/layers/data/data_sources/abstractions/remote_media_data_source.dart';
 import 'package:supermedia/layers/data/data_sources/abstractions/remote_user_data_source.dart';
 import 'package:supermedia/layers/data/data_sources/local/local_data_source.dart';
-import 'package:supermedia/layers/data/data_sources/remote/remote_user_data_source.dart';
 import 'package:supermedia/layers/data/http_client/dio_http_client.dart';
 import 'package:supermedia/layers/data/http_client/http_client.dart';
 import 'package:supermedia/layers/data/data_sources/remote/remote_media_data_source_impl.dart';
+import 'package:supermedia/layers/data/http_client/token_provide_impl.dart';
+import 'package:supermedia/layers/data/http_client/token_provider.dart';
 import 'package:supermedia/layers/data/repositories/media_repository_impl.dart';
 import 'package:supermedia/layers/data/repositories/user_repository_impl.dart';
 import 'package:supermedia/layers/domain/repositories/media_repository.dart';
 import 'package:supermedia/layers/domain/repositories/user_repository.dart';
+import 'package:supermedia/layers/domain/use_cases/abstractoins/abstract_profile_use_case.dart';
 import 'package:supermedia/layers/domain/use_cases/abstractoins/media_use_case.dart';
 import 'package:supermedia/layers/domain/use_cases/abstractoins/recent_items_use_case.dart';
 import 'package:supermedia/layers/domain/use_cases/abstractoins/search_use_case.dart';
 import 'package:supermedia/layers/domain/use_cases/abstractoins/signup_use_case.dart';
+import 'package:supermedia/layers/domain/use_cases/abstractoins/splash_use_case.dart';
 import 'package:supermedia/layers/domain/use_cases/abstractoins/trend_items_use_case.dart';
+import 'package:supermedia/layers/domain/use_cases/implementations/abstract_profile_use_case_impl.dart';
 import 'package:supermedia/layers/domain/use_cases/implementations/media_use_case_impl.dart';
 import 'package:supermedia/layers/domain/use_cases/implementations/recent_items_use_case_impl.dart';
 import 'package:supermedia/layers/domain/use_cases/abstractoins/recommend_use_case.dart';
 import 'package:supermedia/layers/domain/use_cases/implementations/recommend_use_case_impl.dart';
 import 'package:supermedia/layers/domain/use_cases/implementations/search_use_case_impl.dart';
+import 'package:supermedia/layers/domain/use_cases/implementations/splash_use_case_impl.dart';
 import 'package:supermedia/layers/domain/use_cases/implementations/trend_items_use_case_impl.dart';
 import 'package:supermedia/layers/domain/use_cases/signup_use_case.dart';
+import 'package:supermedia/layers/presentation/home/bloc/profile/abstract_profile_bloc.dart';
 import 'package:supermedia/layers/presentation/media/bloc/media_bloc.dart';
 import 'package:supermedia/layers/presentation/media/screens/show_media_screen.dart';
 import 'package:supermedia/layers/presentation/auth/signup/bloc/signup_bloc.dart';
@@ -39,12 +45,19 @@ import 'package:supermedia/layers/presentation/recommend/bloc/recommend_bloc.dar
 import 'package:supermedia/layers/presentation/search/bloc/search_bloc.dart';
 import 'package:supermedia/layers/presentation/search/screens/search_screen.dart';
 import 'package:supermedia/layers/presentation/setting/screens/settings_screen.dart';
+import 'package:supermedia/layers/presentation/splash/screens/splashScreen.dart';
+
+import '../layers/data/data_sources/remote/remote_user_data_source_impl.dart';
+import '../layers/presentation/splash/bloc/splash_bloc.dart';
 
 final locator = GetIt.instance;
 
 void _setupHttpClient() {
   locator.registerLazySingleton<IHttpClient>(
       () => DioHttpClient(baseUrl: 'http://5.34.201.62:8080/'));
+  locator.registerLazySingleton<TokenProvider>(
+      () => TokenProviderImpl()
+  );
 }
 
 void _setupLocalDataSources() {
@@ -82,6 +95,8 @@ void _setupUseCases() {
       .registerLazySingleton<TrendItemsUseCase>(() => TrendItemsUseCaseImpl());
   locator.registerLazySingleton<RecommendUseCase>(() => RecommendUseCaseImpl());
   locator.registerLazySingleton<MediaUseCase>(() => MediaUseCaseImpl());
+  locator.registerLazySingleton<AbstractProfileUseCase>(() => AbstractProfileUseCaseImpl());
+  locator.registerLazySingleton<SplashUseCase>(() => SplashUseCaseImpl());
 }
 
 void _setupScreens() {
@@ -90,10 +105,10 @@ void _setupScreens() {
   locator.registerLazySingleton<ShowMediaScreen>(() => const ShowMediaScreen(
         id: null,
       ));
-  locator.registerLazySingleton<HomeScreen>(
-      () => const HomeScreen(userModel: null));
+  locator.registerLazySingleton<HomeScreen>(() => const HomeScreen());
   locator.registerLazySingleton<SearchScreen>(() => const SearchScreen());
   locator.registerLazySingleton<RecommendScreen>(() => const RecommendScreen());
+  locator.registerLazySingleton<SplashScreen>(() => const SplashScreen());
 }
 
 void _setupBlocs() {
@@ -105,6 +120,8 @@ void _setupBlocs() {
   locator.registerFactory<RecentItemsBloc>(() => RecentItemsBloc());
   locator.registerFactory<RecommendBloc>(() => RecommendBloc());
   locator.registerFactory<MediaBloc>(() => MediaBloc());
+  locator.registerFactory<AbstractProfileBloc>(() => AbstractProfileBloc());
+  locator.registerFactory<SplashBloc>(() => SplashBloc());
 }
 
 void _setupSharedPreferences() {

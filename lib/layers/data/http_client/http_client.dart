@@ -15,9 +15,8 @@ abstract class IHttpClient {
 class HttpRequest {
   final String url;
   final dynamic body;
-  final String token;
 
-  HttpRequest(this.url, {required this.token, this.body});
+  HttpRequest(this.url, {this.body});
 }
 
 class HttpResponse {

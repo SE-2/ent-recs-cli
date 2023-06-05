@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
-import 'package:supermedia/layers/data/models/user_model.dart';
 import 'package:supermedia/layers/domain/entities/media_metadata.dart';
 import 'package:supermedia/layers/presentation/auth/signup/screens/signup_screen.dart';
 import 'package:supermedia/layers/presentation/category/category_selection.dart';
@@ -10,13 +9,28 @@ import 'package:supermedia/layers/presentation/recommend/screens/recommend_scree
 import 'package:supermedia/layers/presentation/search/screens/search_screen.dart';
 import 'package:supermedia/layers/presentation/setting/screens/settings_screen.dart';
 import 'package:supermedia/layers/presentation/shared/multi_screen_bottom_navigation.dart';
+import 'package:supermedia/layers/presentation/splash/screens/splashScreen.dart';
 
 class AppRouter {
   final GetIt locator = GetIt.instance;
 
   Route onGenerateRoute(RouteSettings routeSettings) {
     switch (routeSettings.name) {
+      case SplashScreen.route:
+        return MaterialPageRoute(
+          builder: (context) {
+            return const SplashScreen();
+          },
+        );
+
       case SignupScreen.route:
+        return MaterialPageRoute(
+          builder: (context) {
+            return const SignupScreen();
+          },
+        );
+
+      case MultiScreenBottomNavigation.route:
         return MaterialPageRoute(
           builder: (context) {
             return const MultiScreenBottomNavigation();
@@ -24,11 +38,9 @@ class AppRouter {
         );
 
       case HomeScreen.route:
-        var userModel = routeSettings.arguments as UserModel;
-
         return MaterialPageRoute(
           builder: (_) {
-            return HomeScreen(userModel: userModel);
+            return HomeScreen();
           },
         );
 

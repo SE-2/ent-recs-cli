@@ -17,7 +17,6 @@ class RemoteMediaDataSourceImpl implements RemoteMediaDataSource {
     final request = HttpRequest(
       '/search',
       body: query.toJson(),
-      token: '1',
     );
 
     try {
@@ -39,7 +38,6 @@ class RemoteMediaDataSourceImpl implements RemoteMediaDataSource {
     final request = HttpRequest(
       '/recommend',
       body: '"${mediaType.toJson()}"',
-      token: '1',
     );
 
     try {
@@ -61,7 +59,6 @@ class RemoteMediaDataSourceImpl implements RemoteMediaDataSource {
     final request = HttpRequest(
       '/trends/all',
       body: '',
-      token: '1',
     );
 
     try {
@@ -84,7 +81,6 @@ class RemoteMediaDataSourceImpl implements RemoteMediaDataSource {
     final request = HttpRequest(
       '/trends/today',
       body: '',
-      token: '1',
     );
 
     try {
@@ -107,7 +103,6 @@ class RemoteMediaDataSourceImpl implements RemoteMediaDataSource {
     final request = HttpRequest(
       '/trends/today',
       body: '',
-      token: '1',
     );
 
     try {
@@ -143,7 +138,6 @@ class RemoteMediaDataSourceImpl implements RemoteMediaDataSource {
   Future<MediaMetadataDetailsModel> getMediaById(String id) async {
     final request = HttpRequest(
       '/${getMediaTypeById(id)}s/$id',
-      token: '1',
     );
 
     try {

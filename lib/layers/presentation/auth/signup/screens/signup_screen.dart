@@ -10,7 +10,7 @@ import 'package:supermedia/layers/presentation/shared/widgets/app_primary_button
 import 'package:supermedia/layers/presentation/shared/widgets/app_text_field.dart';
 
 class SignupScreen extends StatelessWidget {
-  static const String route = '/';
+  static const String route = '/signup';
 
   const SignupScreen({Key? key}) : super(key: key);
 

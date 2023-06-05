@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:supermedia/di/app_module.dart';
 import 'package:supermedia/layers/data/models/user_model.dart';
+import 'package:supermedia/layers/presentation/home/bloc/profile/abstract_profile_bloc.dart';
+import 'package:supermedia/layers/presentation/home/bloc/profile/abstract_profile_event.dart';
+import 'package:supermedia/layers/presentation/home/bloc/profile/abstract_profile_state.dart';
 import 'package:supermedia/layers/presentation/home/bloc/recent_items/recent_items_bloc.dart';
 import 'package:supermedia/layers/presentation/home/bloc/recent_items/recent_items_event.dart';
 import 'package:supermedia/layers/presentation/home/bloc/recent_items/recent_items_state.dart';
@@ -17,9 +20,8 @@ enum DateFilter { all, today }
 
 class HomeScreen extends StatefulWidget {
   static const String route = '/home';
-  final UserModel? userModel;
 
-  const HomeScreen({Key? key, required this.userModel}) : super(key: key);
+  const HomeScreen({Key? key}) : super(key: key);
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -36,22 +38,20 @@ class _HomeScreenState extends State<HomeScreen>
     return MultiBlocProvider(
       providers: [
         BlocProvider<TrendItemsBloc>(create: (_) => locator<TrendItemsBloc>()),
+        BlocProvider<AbstractProfileBloc>(
+            create: (_) => locator<AbstractProfileBloc>()),
         BlocProvider<RecentItemsBloc>(
             create: (_) => locator<RecentItemsBloc>()),
       ],
       child: Scaffold(
         backgroundColor: Theme.of(context).colorScheme.background,
-        body: _HomeForm(userModel: UserModel()),
+        body: _HomeForm(),
       ),
     );
   }
 }
 
 class _HomeForm extends StatefulWidget {
-  final UserModel userModel;
-
-  const _HomeForm({required this.userModel});
-
   @override
   _HomeFormState createState() => _HomeFormState();
 }
@@ -64,6 +64,7 @@ class _HomeFormState extends State<_HomeForm> {
 
   @override
   Widget build(BuildContext context) {
+    context.read<AbstractProfileBloc>().add(LoadAbstractProfile());
     context.read<RecentItemsBloc>().add(LoadRecentItems());
 
     return SingleChildScrollView(
@@ -74,35 +75,14 @@ class _HomeFormState extends State<_HomeForm> {
         children: [
           Row(
             children: [
-              Padding(
-                  padding: const EdgeInsets.fromLTRB(24, 55, 15, 0),
-                  child: Container(
-                    width: 40,
-                    height: 40,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(24),
-                        image: DecorationImage(
-                          image: NetworkImage(widget.userModel.photoUrl),
-                        )),
-                  )),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(0, 52, 0, 0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Hi, ${widget.userModel.name}',
-                      style: const TextStyle(
-                          fontWeight: FontWeight.bold, fontSize: 18),
-                    ),
-                    const Text(
-                      'Explore today items',
-                      style: TextStyle(
-                          fontSize: 12,
-                          color: Color.fromARGB(255, 156, 164, 171)),
-                    )
-                  ],
-                ),
+              BlocBuilder<AbstractProfileBloc, AbstractProfileState>(
+                builder: (context, state) {
+                  if (state is AbstractProfileFetched) {
+                    return _buildAbstractProfile(state.result);
+                  } else {
+                    return _buildAbstractProfile(UserModel(name: ""));
+                  }
+                },
               ),
               Expanded(
                 child: Container(),
@@ -205,6 +185,42 @@ class _HomeFormState extends State<_HomeForm> {
           ),
         ],
       ),
+    );
+  }
+
+  Row _buildAbstractProfile(UserModel userModel) {
+    return Row(
+      children: [
+        Padding(
+            padding: const EdgeInsets.fromLTRB(24, 55, 15, 0),
+            child: Container(
+              width: 40,
+              height: 40,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(24),
+                  image: DecorationImage(
+                    image: NetworkImage(userModel.photoUrl),
+                  )),
+            )),
+        Padding(
+          padding: const EdgeInsets.fromLTRB(0, 52, 0, 0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Hi, ${userModel.name}',
+                style:
+                    const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+              ),
+              const Text(
+                'Explore today items',
+                style: TextStyle(
+                    fontSize: 12, color: Color.fromARGB(255, 156, 164, 171)),
+              )
+            ],
+          ),
+        ),
+      ],
     );
   }
 }
