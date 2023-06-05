@@ -23,11 +23,6 @@ class SearchButtonPressed extends SearchEvent {
   String toString() => 'SearchButtonPressed { query: $query }';
 }
 
-class FetchDefaultCategories extends SearchEvent {
-  const FetchDefaultCategories({required super.context});
-}
-
-
 class FilterOptionSelected extends SearchEvent {
   const FilterOptionSelected({required super.context});
 }

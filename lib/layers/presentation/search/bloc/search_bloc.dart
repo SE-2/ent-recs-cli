@@ -30,10 +30,9 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
           emit(SearchFailure(error: e.toString()));
         }
       } else if (event is FilterOptionSelected) {
-        emit(FilterOptionLoading());
-      } else if (event is FetchDefaultCategories) {
+        emit(MediaFiltersLoading());
         final result = await _searchUseCase.getMediaFilters();
-        emit(DefaultCategoriesFetched(result: result));
+        emit(MediaFiltersFetched(result: result));
       }
     });
   }

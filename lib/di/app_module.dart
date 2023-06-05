@@ -7,6 +7,7 @@ import 'package:supermedia/layers/data/data_sources/abstractions/local_data_sour
 import 'package:supermedia/layers/data/data_sources/abstractions/remote_media_data_source.dart';
 import 'package:supermedia/layers/data/data_sources/abstractions/remote_user_data_source.dart';
 import 'package:supermedia/layers/data/data_sources/local/local_data_source.dart';
+import 'package:supermedia/layers/data/data_sources/remote/remote_user_data_source_impl.dart';
 import 'package:supermedia/layers/data/http_client/dio_http_client.dart';
 import 'package:supermedia/layers/data/http_client/http_client.dart';
 import 'package:supermedia/layers/data/data_sources/remote/remote_media_data_source_impl.dart';
@@ -18,6 +19,7 @@ import 'package:supermedia/layers/domain/repositories/media_repository.dart';
 import 'package:supermedia/layers/domain/repositories/user_repository.dart';
 import 'package:supermedia/layers/domain/use_cases/abstractoins/abstract_profile_use_case.dart';
 import 'package:supermedia/layers/domain/use_cases/abstractoins/media_use_case.dart';
+import 'package:supermedia/layers/domain/use_cases/abstractoins/questionnaire_use_case.dart';
 import 'package:supermedia/layers/domain/use_cases/abstractoins/recent_items_use_case.dart';
 import 'package:supermedia/layers/domain/use_cases/abstractoins/search_use_case.dart';
 import 'package:supermedia/layers/domain/use_cases/abstractoins/signup_use_case.dart';
@@ -25,6 +27,7 @@ import 'package:supermedia/layers/domain/use_cases/abstractoins/splash_use_case.
 import 'package:supermedia/layers/domain/use_cases/abstractoins/trend_items_use_case.dart';
 import 'package:supermedia/layers/domain/use_cases/implementations/abstract_profile_use_case_impl.dart';
 import 'package:supermedia/layers/domain/use_cases/implementations/media_use_case_impl.dart';
+import 'package:supermedia/layers/domain/use_cases/implementations/questionnaire_use_case_impl.dart';
 import 'package:supermedia/layers/domain/use_cases/implementations/recent_items_use_case_impl.dart';
 import 'package:supermedia/layers/domain/use_cases/abstractoins/recommend_use_case.dart';
 import 'package:supermedia/layers/domain/use_cases/implementations/recommend_use_case_impl.dart';
@@ -33,6 +36,8 @@ import 'package:supermedia/layers/domain/use_cases/implementations/splash_use_ca
 import 'package:supermedia/layers/domain/use_cases/implementations/trend_items_use_case_impl.dart';
 import 'package:supermedia/layers/domain/use_cases/signup_use_case.dart';
 import 'package:supermedia/layers/presentation/home/bloc/profile/abstract_profile_bloc.dart';
+import 'package:supermedia/layers/presentation/home/bloc/explore/explore_bloc.dart';
+import 'package:supermedia/layers/presentation/questionnaire/bloc/questionnaire_bloc.dart';
 import 'package:supermedia/layers/presentation/media/bloc/media_bloc.dart';
 import 'package:supermedia/layers/presentation/media/screens/show_media_screen.dart';
 import 'package:supermedia/layers/presentation/auth/signup/bloc/signup_bloc.dart';
@@ -97,6 +102,7 @@ void _setupUseCases() {
   locator.registerLazySingleton<MediaUseCase>(() => MediaUseCaseImpl());
   locator.registerLazySingleton<AbstractProfileUseCase>(() => AbstractProfileUseCaseImpl());
   locator.registerLazySingleton<SplashUseCase>(() => SplashUseCaseImpl());
+  locator.registerLazySingleton<QuestionnaireUseCase>(() => QuestionnaireUseCaseImpl());
 }
 
 void _setupScreens() {
@@ -120,6 +126,8 @@ void _setupBlocs() {
   locator.registerFactory<RecentItemsBloc>(() => RecentItemsBloc());
   locator.registerFactory<RecommendBloc>(() => RecommendBloc());
   locator.registerFactory<MediaBloc>(() => MediaBloc());
+  locator.registerFactory<QuestionnaireBloc>(() => QuestionnaireBloc());
+  locator.registerFactory<ExploreBloc>(() => ExploreBloc());
   locator.registerFactory<AbstractProfileBloc>(() => AbstractProfileBloc());
   locator.registerFactory<SplashBloc>(() => SplashBloc());
 }

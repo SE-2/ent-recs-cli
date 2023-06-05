@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:supermedia/layers/domain/entities/media_metadata.dart';
 import 'package:supermedia/layers/presentation/auth/signup/screens/signup_screen.dart';
-import 'package:supermedia/layers/presentation/category/category_selection.dart';
 import 'package:supermedia/layers/presentation/home/screens/home_screen.dart';
 import 'package:supermedia/layers/presentation/media/screens/show_media_screen.dart';
+import 'package:supermedia/layers/presentation/questionnaire/screens/questionnaire_screen.dart';
 import 'package:supermedia/layers/presentation/recommend/screens/recommend_screen.dart';
 import 'package:supermedia/layers/presentation/search/screens/search_screen.dart';
 import 'package:supermedia/layers/presentation/setting/screens/settings_screen.dart';
@@ -64,19 +64,19 @@ class AppRouter {
           },
         );
 
-      case SelectionScreen.route:
+      case QuestionnaireScreen.route:
         var mediaType = routeSettings.arguments as MediaType;
 
         return MaterialPageRoute(
           builder: (_) {
-            return SelectionScreen(mediaType: mediaType);
+            return QuestionnaireScreen(mediaType: mediaType);
           },
         );
 
       case SearchScreen.route:
         return MaterialPageRoute(
           builder: (_) {
-            return SearchScreen();
+            return const SearchScreen();
           },
         );
 
