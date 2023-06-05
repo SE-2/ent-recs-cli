@@ -4,6 +4,7 @@ import 'package:share_plus/share_plus.dart';
 import 'package:supermedia/di/app_module.dart';
 import 'package:supermedia/layers/domain/entities/media_metadata.dart';
 import 'package:supermedia/layers/domain/entities/media_metadata_detail.dart';
+import 'package:supermedia/layers/presentation/bookmark/lists/screens/bookmark_lists_screen.dart';
 import 'package:supermedia/layers/presentation/media/bloc/media_bloc.dart';
 import 'package:supermedia/layers/presentation/media/bloc/media_event.dart';
 import 'package:supermedia/layers/presentation/media/bloc/media_state.dart';
@@ -62,7 +63,7 @@ class _MediaFormState extends State<MediaForm> {
   }
 
   void _onBookmarkPressed() {
-    // TODO: Implement bookmark button logic
+    Navigator.pushNamed(context, BookmarkListsScreen.route, arguments: widget.id);
   }
 
   void _onSharePressed() {

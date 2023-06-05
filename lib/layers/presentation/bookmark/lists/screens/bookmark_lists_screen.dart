@@ -13,7 +13,7 @@ import 'package:supermedia/layers/presentation/shared/widgets/app_primary_button
 import 'package:supermedia/layers/presentation/shared/widgets/custom_app_bar.dart';
 
 class BookmarkListsScreen extends StatelessWidget {
-  static const String route = '/';
+  static const String route = '/bookmarkList';
   final String? itemIdToBookmark;
 
   const BookmarkListsScreen({Key? key, this.itemIdToBookmark})

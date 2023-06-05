@@ -3,6 +3,7 @@ import 'package:get_it/get_it.dart';
 import 'package:supermedia/layers/domain/entities/bookmark_list_item.dart';
 import 'package:supermedia/layers/domain/entities/media_metadata.dart';
 import 'package:supermedia/layers/presentation/auth/signup/screens/signup_screen.dart';
+import 'package:supermedia/layers/presentation/bookmark/editlist/edit_bookmark_list_item_screen.dart';
 import 'package:supermedia/layers/presentation/bookmark/listitems/screens/bookmark_list_items_screen.dart';
 import 'package:supermedia/layers/presentation/bookmark/lists/screens/bookmark_lists_screen.dart';
 import 'package:supermedia/layers/presentation/home/screens/home_screen.dart';
@@ -90,6 +91,14 @@ class AppRouter {
           },
         );
 
+        case BookmarkListsScreen.route:
+          var itemId = routeSettings.arguments as String?;
+
+          return MaterialPageRoute(
+            builder: (_) {
+              return BookmarkListsScreen(itemIdToBookmark: itemId);
+            },
+        );
 
       case BookmarkListItemsScreen.route:
         var bookmarkListItem = routeSettings.arguments as BookmarkListItem;

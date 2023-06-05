@@ -4,8 +4,8 @@ import 'package:supermedia/common/utils/app_localization.dart';
 import 'package:supermedia/di/app_module.dart';
 import 'package:supermedia/gen/assets.gen.dart';
 import 'package:supermedia/layers/presentation/auth/signup/bloc/signup_bloc.dart';
+import 'package:supermedia/layers/presentation/shared/multi_screen_bottom_navigation.dart';
 import 'package:supermedia/layers/presentation/shared/widgets/app_secondary_button.dart';
-import 'package:supermedia/layers/presentation/home/screens/home_screen.dart';
 import 'package:supermedia/layers/presentation/shared/widgets/app_primary_button.dart';
 import 'package:supermedia/layers/presentation/shared/widgets/app_text_field.dart';
 
@@ -199,7 +199,7 @@ class _SignupFormState extends State<_SignupForm> {
           if (state is SignupSuccess) {
             var userModel = state.userModel;
             Future.delayed(const Duration(milliseconds: 200), () {
-              Navigator.pushReplacementNamed(context, HomeScreen.route, arguments: userModel);
+              Navigator.pushReplacementNamed(context, MultiScreenBottomNavigation.route, arguments: userModel);
             });
           }
           return const AppSecondaryButton.loading();
