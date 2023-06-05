@@ -70,4 +70,9 @@ class MediaRepositoryImp implements MediaRepository {
   Future<bool> isQuestionnaireFilled(MediaType mediaType) {
     return _remoteDataSource.isQuestionnaireFilled(mediaType);
   }
+
+  @override
+  Future<int> like(String mediaId) async {
+    return _remoteDataSource.like(mediaId);
+  }
 }

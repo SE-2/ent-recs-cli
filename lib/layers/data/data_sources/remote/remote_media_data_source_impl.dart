@@ -215,6 +215,27 @@ class RemoteMediaDataSourceImpl implements RemoteMediaDataSource {
       throw SearchException('Check your internet connection.');
     }
   }
+
+  @override
+  Future<int> like(String mediaId) async {
+    final request = HttpRequest(
+      '/like/$mediaId',
+    );
+
+    try {
+      final response = await _httpClient.patch(request);
+
+      if (response.statusCode == 200) {
+        var result = response.body;
+        return result;
+      } else {
+        throw SearchException(
+            AppLocalization.instance.errorCode(response.statusCode));
+      }
+    } on Exception {
+      throw SearchException('Check your internet connection.');
+    }
+  }
 }
 
 List<MediaFilter> mediaFilterList = [

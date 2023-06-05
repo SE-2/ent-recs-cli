@@ -1,7 +1,8 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:share_plus/share_plus.dart';
 import 'package:supermedia/di/app_module.dart';
+import 'package:supermedia/layers/domain/entities/media_metadata.dart';
 import 'package:supermedia/layers/domain/entities/media_metadata_detail.dart';
 import 'package:supermedia/layers/presentation/media/bloc/media_bloc.dart';
 import 'package:supermedia/layers/presentation/media/bloc/media_event.dart';
@@ -35,6 +36,7 @@ class _ShowMediaScreenState extends State<ShowMediaScreen> {
 
 class MediaForm extends StatefulWidget {
   final String id;
+
   const MediaForm({super.key, required this.id});
 
   @override
@@ -43,17 +45,19 @@ class MediaForm extends StatefulWidget {
 
 class _MediaFormState extends State<MediaForm> {
   bool _isLiked = false;
+  late MediaMetadata metadata;
 
-  int _likes = 50;
+  int _likes = 0;
 
-  void _onLikePressed() {
+  void _onLikePressed(String mediaId) {
     setState(() {
-      _isLiked = !_isLiked;
       if (_isLiked) {
-        _likes++;
-      } else {
         _likes--;
+      } else {
+        // context.read<MediaBloc>().add(LikeButtonPressed(mediaId));
+        _likes++;
       }
+      _isLiked = !_isLiked;
     });
   }
 
@@ -62,30 +66,41 @@ class _MediaFormState extends State<MediaForm> {
   }
 
   void _onSharePressed() {
-    // TODO: Implement share button logic
+    Share.share(metadata.toText());
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    context.read<MediaBloc>().add(LoadMedia(widget.id));
   }
 
   @override
   Widget build(BuildContext context) {
-    context.read<MediaBloc>().add(LoadMedia(widget.id));
-
-    return BlocBuilder<MediaBloc, MediaState>(builder: (context, state) {
+    return BlocListener<MediaBloc, MediaState>(listener: (context, state) {
+      if (state is MediaLiked) {
+        setState(() {
+          _likes = state.likes;
+        });
+      }
+    }, child: BlocBuilder<MediaBloc, MediaState>(builder: (context, state) {
       if (state is MediaLoading) {
         return const Center(child: CircularProgressIndicator());
       } else if (state is MediaSuccess) {
-        return showContent(context, state.result);
+        metadata = state.result.data;
+        return showContent(state.result);
       } else {
         return const CircularProgressIndicator();
       }
-    });
+    }));
   }
 
-  SafeArea showContent(BuildContext context, MediaMetadataDetail media) {
+  SafeArea showContent(MediaMetadataDetail media) {
     return SafeArea(
       child: Scaffold(
         backgroundColor: Theme.of(context).colorScheme.background,
         appBar: const CustomAppBar(
-          title: 'Movie Detail',
+          title: 'Media Detail',
           showBackButton: true,
         ),
         body: Center(
@@ -104,15 +119,17 @@ class _MediaFormState extends State<MediaForm> {
                 ),
                 MediaBottomBar(
                   likes: _likes,
-                  isLiked: media.isLiked,
+                  isLiked: _isLiked,
                   onBookmarkPressed: _onBookmarkPressed,
-                  onLikePressed: _onLikePressed,
+                  onLikePressed: () {
+                    _onLikePressed(media.data.mediaId);
+                  },
                   onSharePressed: _onSharePressed,
                 ),
                 Column(
                   children: [
                     Padding(
-                      padding: const EdgeInsets.fromLTRB(0, 24, 0, 16),
+                      padding: const EdgeInsets.fromLTRB(32, 24, 32, 16),
                       child: Text(
                         media.data.title,
                         style: Theme.of(context).textTheme.titleLarge?.copyWith(
@@ -127,82 +144,10 @@ class _MediaFormState extends State<MediaForm> {
                         width: 292,
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Row(
-                              children: const [
-                                Icon(
-                                  Icons.calendar_month_rounded,
-                                  color: Color(0xff434E58),
-                                  size: 16,
-                                ),
-                                SizedBox(
-                                  width: 4,
-                                ),
-                                Text(
-                                  '17 Sep 2021',
-                                  style: TextStyle(
-                                      color: Color(0xff78828A), fontSize: 12),
-                                  textAlign: TextAlign.center,
-                                )
-                              ],
-                            ),
-                            Row(
-                              children: const [
-                                Icon(
-                                  CupertinoIcons.time_solid,
-                                  color: Color(0xff434E58),
-                                  size: 16,
-                                ),
-                                SizedBox(
-                                  width: 4,
-                                ),
-                                Text(
-                                  '148 Minutes',
-                                  style: TextStyle(
-                                      color: Color(0xff78828A), fontSize: 12),
-                                  textAlign: TextAlign.center,
-                                )
-                              ],
-                            ),
-                            Row(
-                              children: const [
-                                Icon(
-                                  Icons.local_movies,
-                                  color: Color(0xff434E58),
-                                  size: 16,
-                                ),
-                                SizedBox(
-                                  width: 4,
-                                ),
-                                Text('Action',
-                                    style: TextStyle(
-                                        color: Color(0xff78828A), fontSize: 12),
-                                    textAlign: TextAlign.center)
-                              ],
-                            )
-                          ],
+                          children: [..._buildMediaProperties()],
                         ),
                       ),
                     ),
-                    // SizedBox(
-                    //   height: 16,
-                    //   width: 104,
-                    //   child: Row(
-                    //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    //     children: const [
-                    //       Icon(CupertinoIcons.star_fill,
-                    //           size: 16, color: Color(0xffFACC15)),
-                    //       Icon(CupertinoIcons.star_fill,
-                    //           size: 16, color: Color(0xffFACC15)),
-                    //       Icon(CupertinoIcons.star_fill,
-                    //           size: 16, color: Color(0xffFACC15)),
-                    //       Icon(CupertinoIcons.star_fill,
-                    //           size: 16, color: Color(0xffFACC15)),
-                    //       Icon(CupertinoIcons.star_fill,
-                    //           size: 16, color: Color(0xff78828A)),
-                    //     ],
-                    //   ),
-                    // ),
                     Padding(
                       padding: const EdgeInsets.fromLTRB(24, 24, 24, 0),
                       child: Column(
@@ -222,7 +167,7 @@ class _MediaFormState extends State<MediaForm> {
                           ),
                           ShowMoreText(
                             text: media.decoration,
-                            maxLength: 100,
+                            maxLength: 99,
                           )
                         ],
                       ),
@@ -235,5 +180,56 @@ class _MediaFormState extends State<MediaForm> {
         ),
       ),
     );
+  }
+
+  List<Widget> _buildMediaProperties() {
+    return List.generate(
+      metadata.properties.entries.length,
+      (index) {
+        final entry = metadata.properties.entries.elementAt(index);
+        return Row(
+          children: [
+            Icon(
+              _getIconForProperty(entry.key),
+              size: 16,
+            ),
+            const SizedBox(width: 8),
+            SizedBox(
+              width: 50,
+              child: Text(
+                entry.value,
+                overflow: TextOverflow.ellipsis,
+                style: Theme.of(context).textTheme.labelMedium,
+              ),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  static IconData _getIconForProperty(MediaProperty property) {
+    switch (property) {
+      case MediaProperty.pages:
+        return Icons.menu_book;
+      case MediaProperty.publishDate:
+        return Icons.calendar_today;
+      case MediaProperty.genre:
+        return Icons.category;
+      case MediaProperty.director:
+        return Icons.movie_filter;
+      case MediaProperty.productionYear:
+        return Icons.date_range;
+      case MediaProperty.writer:
+        return Icons.create;
+      case MediaProperty.duration:
+        return Icons.timer;
+      case MediaProperty.style:
+        return Icons.music_note;
+      case MediaProperty.singer:
+        return Icons.mic;
+      case MediaProperty.producer:
+        return Icons.mic_none;
+    }
   }
 }

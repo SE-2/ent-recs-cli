@@ -59,10 +59,69 @@ class MediaMetadata {
       Map<String, String> properties) {
     Map<MediaProperty, String> result = {};
     for (String key in properties.keys) {
-      MediaProperty property = _parseMediaProperty(key);
-      result[property] = properties[key]!;
+      if(key.toLowerCase() != 'director') {
+        MediaProperty property = _parseMediaProperty(key);
+        result[property] = properties[key]!;
+      }
     }
     return result;
+  }
+
+  String toText() {
+    List<String> lines = [];
+
+    lines.add('Title: $title');
+    lines.add('Type: ${_mediaTypeToString(type)}');
+    lines.add('Image URL: $imageUrl');
+
+    for (MediaProperty property in properties.keys) {
+      lines.add('${_mediaPropertyToString(property)}: ${properties[property]}');
+    }
+
+    return lines.join('\n');
+  }
+
+  // Helper methods to convert MediaType and MediaProperty to string
+  String _mediaTypeToString(MediaType type) {
+    switch (type) {
+      case MediaType.movie:
+        return 'Movie';
+      case MediaType.music:
+        return 'Music';
+      case MediaType.book:
+        return 'Book';
+      case MediaType.podcast:
+        return 'Podcast';
+      default:
+        throw ArgumentError('Unsupported media type: $type');
+    }
+  }
+
+  String _mediaPropertyToString(MediaProperty property) {
+    switch (property) {
+      case MediaProperty.pages:
+        return 'Pages';
+      case MediaProperty.publishDate:
+        return 'Publish Date';
+      case MediaProperty.genre:
+        return 'Genre';
+      case MediaProperty.director:
+        return 'Director';
+      case MediaProperty.productionYear:
+        return 'Production Year';
+      case MediaProperty.writer:
+        return 'Writer';
+      case MediaProperty.duration:
+        return 'Duration';
+      case MediaProperty.style:
+        return 'Style';
+      case MediaProperty.singer:
+        return 'Singer';
+      case MediaProperty.producer:
+        return 'Producer';
+      default:
+        throw ArgumentError('Invalid media property: $property');
+    }
   }
 }
 

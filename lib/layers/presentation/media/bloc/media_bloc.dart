@@ -19,6 +19,9 @@ class MediaBloc extends Bloc<MediaEvent, MediaState> {
           } catch (e) {
             emit(MediaFailure(error: e.toString()));
           }
+        } else if (event is LikeButtonPressed) {
+          var likes = await _mediaUseCase.like(event.mediaId);
+          emit(MediaLiked(likes));
         }
       },
     );

@@ -12,7 +12,6 @@ class PostList extends StatelessWidget {
       padding: const EdgeInsets.fromLTRB(24, 0, 24, 0),
       child: ListView.builder(
         shrinkWrap: true,
-        itemExtent: 140,
         itemCount: items.length,
         itemBuilder: (BuildContext context, int index) {
           final item = items[index];

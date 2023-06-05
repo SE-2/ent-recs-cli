@@ -32,7 +32,7 @@ class PostItem extends StatelessWidget {
                           fontWeight: FontWeight.bold,
                         ),
                   ),
-                  const SizedBox(height: 14),
+                  const SizedBox(height: 12),
                   ..._buildMediaProperties(),
                 ],
               ),
@@ -70,7 +70,7 @@ class PostItem extends StatelessWidget {
               value: entry.value,
             ),
             if (index != mediaMetadata.properties.entries.length - 1)
-              const SizedBox(height: 8),
+              const SizedBox(height: 6),
           ],
         );
       },

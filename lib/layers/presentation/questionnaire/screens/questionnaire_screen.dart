@@ -187,7 +187,7 @@ class _QuestionnaireFormState extends State<_QuestionnaireForm> {
             ),
             isEnabled: selectedCategories.length >= 5),
       ),
-      const SizedBox(height: 24),
+      const SizedBox(height: 32),
     ]);
   }
 
