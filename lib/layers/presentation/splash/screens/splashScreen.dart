@@ -5,6 +5,7 @@ import 'package:supermedia/di/app_module.dart';
 import 'package:supermedia/gen/assets.gen.dart';
 import 'package:supermedia/layers/presentation/auth/signup/screens/signup_screen.dart';
 import 'package:supermedia/layers/presentation/home/screens/home_screen.dart';
+import 'package:supermedia/layers/presentation/shared/multi_screen_bottom_navigation.dart';
 import 'package:supermedia/layers/presentation/splash/bloc/splash_bloc.dart';
 import 'package:supermedia/layers/presentation/splash/bloc/splash_event.dart';
 import 'package:supermedia/layers/presentation/splash/bloc/splash_state.dart';
@@ -44,7 +45,7 @@ class _SplashFormState extends State<_SplashForm> {
       listener: (context, state) {
         if (state is SplashSuccess) {
           if (state.isLoggedIn) {
-            Navigator.pushReplacementNamed(context, HomeScreen.route);
+            Navigator.pushReplacementNamed(context, MultiScreenBottomNavigation.route);
           }
           else {
             Navigator.pushReplacementNamed(context, SignupScreen.route);

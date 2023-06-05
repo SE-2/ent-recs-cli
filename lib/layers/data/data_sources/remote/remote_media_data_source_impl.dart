@@ -181,7 +181,6 @@ class RemoteMediaDataSourceImpl implements RemoteMediaDataSource {
         'mediaType': mediaType.toJson(),
         'genres': categories
       },
-      token: '1',
     );
 
     try {
@@ -200,7 +199,6 @@ class RemoteMediaDataSourceImpl implements RemoteMediaDataSource {
   Future<bool> isQuestionnaireFilled(MediaType mediaType) async {
     final request = HttpRequest(
       '/interests/submitted/${mediaType.toJson()}',
-      token: '1',
     );
 
     try {
