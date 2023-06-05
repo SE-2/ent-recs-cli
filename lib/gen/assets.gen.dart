@@ -105,11 +105,15 @@ class $AssetsImagesGen {
   $AssetsImagesIconsGen get icons => const $AssetsImagesIconsGen();
   $AssetsImagesItemGen get item => const $AssetsImagesItemGen();
   $AssetsImagesItemsGen get items => const $AssetsImagesItemsGen();
+
+  /// File path: assets/images/logo.png
+  AssetGenImage get logo => const AssetGenImage('assets/images/logo.png');
+
   $AssetsImagesPostsGen get posts => const $AssetsImagesPostsGen();
   $AssetsImagesStoriesGen get stories => const $AssetsImagesStoriesGen();
 
   /// List of all assets
-  List<AssetGenImage> get values => [appIcon, defaultCategory];
+  List<AssetGenImage> get values => [appIcon, defaultCategory, logo];
 }
 
 class $AssetsImagesCategoriesGen {
