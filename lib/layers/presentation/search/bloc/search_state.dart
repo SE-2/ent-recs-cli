@@ -20,8 +20,7 @@ class SearchSuccess extends SearchState {
   List<Object> get props => [result];
 }
 
-class SearchNoResult extends SearchState {
-}
+class SearchNoResult extends SearchState {}
 
 class SearchFailure extends SearchState {
   final String error;
@@ -32,16 +31,10 @@ class SearchFailure extends SearchState {
   List<Object> get props => [error];
 }
 
-class FilterOptionLoading extends SearchState {}
+class MediaFiltersLoading extends SearchState {}
 
-class FilterOptionsLoaded extends SearchState {
-  final Map<MediaType, List<String>> categories;
-
-  const FilterOptionsLoaded({required this.categories});
-}
-
-class DefaultCategoriesFetched extends SearchState {
+class MediaFiltersFetched extends SearchState {
   final List<MediaFilter> result;
 
-  const DefaultCategoriesFetched({required this.result});
+  const MediaFiltersFetched({required this.result});
 }

@@ -9,6 +9,7 @@ import 'package:supermedia/layers/data/data_sources/abstractions/remote_media_da
 import 'package:supermedia/layers/data/data_sources/abstractions/remote_user_data_source.dart';
 import 'package:supermedia/layers/data/data_sources/local/local_data_source.dart';
 import 'package:supermedia/layers/data/data_sources/remote/remote_bookmark_data_source_Impl.dart';
+import 'package:supermedia/layers/data/data_sources/remote/remote_user_data_source_impl.dart';
 import 'package:supermedia/layers/data/http_client/dio_http_client.dart';
 import 'package:supermedia/layers/data/http_client/http_client.dart';
 import 'package:supermedia/layers/data/data_sources/remote/remote_media_data_source_impl.dart';
@@ -25,6 +26,7 @@ import 'package:supermedia/layers/domain/use_cases/abstractoins/bookmark_lists_u
 import 'package:supermedia/layers/domain/use_cases/abstractoins/abstract_profile_use_case.dart';
 import 'package:supermedia/layers/domain/use_cases/abstractoins/edit_bookmark_list_item_use_case.dart';
 import 'package:supermedia/layers/domain/use_cases/abstractoins/media_use_case.dart';
+import 'package:supermedia/layers/domain/use_cases/abstractoins/questionnaire_use_case.dart';
 import 'package:supermedia/layers/domain/use_cases/abstractoins/recent_items_use_case.dart';
 import 'package:supermedia/layers/domain/use_cases/abstractoins/search_use_case.dart';
 import 'package:supermedia/layers/domain/use_cases/abstractoins/signup_use_case.dart';
@@ -35,6 +37,7 @@ import 'package:supermedia/layers/domain/use_cases/implementations/bookmark_list
 import 'package:supermedia/layers/domain/use_cases/implementations/abstract_profile_use_case_impl.dart';
 import 'package:supermedia/layers/domain/use_cases/implementations/edit_bookmark_list_item_use_case_impl.dart';
 import 'package:supermedia/layers/domain/use_cases/implementations/media_use_case_impl.dart';
+import 'package:supermedia/layers/domain/use_cases/implementations/questionnaire_use_case_impl.dart';
 import 'package:supermedia/layers/domain/use_cases/implementations/recent_items_use_case_impl.dart';
 import 'package:supermedia/layers/domain/use_cases/abstractoins/recommend_use_case.dart';
 import 'package:supermedia/layers/domain/use_cases/implementations/recommend_use_case_impl.dart';
@@ -49,6 +52,8 @@ import 'package:supermedia/layers/presentation/bookmark/listitems/screens/bookma
 import 'package:supermedia/layers/presentation/bookmark/lists/bloc/bookmark_lists_bloc.dart';
 import 'package:supermedia/layers/presentation/bookmark/lists/screens/bookmark_lists_screen.dart';
 import 'package:supermedia/layers/presentation/home/bloc/profile/abstract_profile_bloc.dart';
+import 'package:supermedia/layers/presentation/home/bloc/explore/explore_bloc.dart';
+import 'package:supermedia/layers/presentation/questionnaire/bloc/questionnaire_bloc.dart';
 import 'package:supermedia/layers/presentation/media/bloc/media_bloc.dart';
 import 'package:supermedia/layers/presentation/media/screens/show_media_screen.dart';
 import 'package:supermedia/layers/presentation/auth/signup/bloc/signup_bloc.dart';
@@ -119,6 +124,7 @@ void _setupUseCases() {
   locator.registerLazySingleton<AbstractProfileUseCase>(() => AbstractProfileUseCaseImpl());
   locator.registerLazySingleton<SplashUseCase>(() => SplashUseCaseImpl());
   locator.registerLazySingleton<EditBookmarkListItemUseCase>(() => EditBookmarkListItemUseCaseImpl());
+  locator.registerLazySingleton<QuestionnaireUseCase>(() => QuestionnaireUseCaseImpl());
 }
 
 void _setupScreens() {
@@ -148,6 +154,8 @@ void _setupBlocs() {
   locator.registerFactory<BookmarkListItemsBloc>(() => BookmarkListItemsBloc());
   locator.registerFactory<EditBookmarkListItemBloc>(() => EditBookmarkListItemBloc());
   locator.registerFactory<MediaBloc>(() => MediaBloc());
+  locator.registerFactory<QuestionnaireBloc>(() => QuestionnaireBloc());
+  locator.registerFactory<ExploreBloc>(() => ExploreBloc());
   locator.registerFactory<AbstractProfileBloc>(() => AbstractProfileBloc());
   locator.registerFactory<SplashBloc>(() => SplashBloc());
 }

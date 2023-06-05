@@ -1,8 +1,12 @@
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:supermedia/layers/domain/entities/media_metadata.dart';
-import 'package:supermedia/layers/presentation/category/category_selection.dart';
+import 'package:supermedia/layers/presentation/home/bloc/explore/explore_bloc.dart';
+import 'package:supermedia/layers/presentation/home/bloc/explore/explore_event.dart';
+import 'package:supermedia/layers/presentation/questionnaire/screens/questionnaire_screen.dart';
+
 import 'carousel/carousel_slider.dart';
 import 'category_item.dart';
 import 'data.dart';
@@ -24,37 +28,38 @@ class _CategoryListState extends State<CategoryList> {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        GestureDetector(
-          onTap: () {
-            Navigator.of(context).pushNamed(SelectionScreen.route, arguments: MediaType.values[currentIndex]);
+        CarouselSlider.builder(
+          itemCount: categories.length,
+          itemBuilder: (context, index, realIndex) {
+            return AspectRatio(
+              aspectRatio: 221.94 / 250,
+              child: CategoryItem(
+                category: categories[realIndex],
+                realIndex: realIndex,
+                currentIndex: currentIndex,
+                onItemTapped: () {
+                  final mediaType = getMediaType(index);
+                  context
+                      .read<ExploreBloc>()
+                      .add(CheckQuestionnaireRequired(mediaType: mediaType));
+                },
+              ),
+            );
           },
-          child: CarouselSlider.builder(
-            itemCount: categories.length,
-            itemBuilder: (context, index, realIndex) {
-              return AspectRatio(
-                aspectRatio: 221.94 / 250,
-                child: CategoryItem(
-                  category: categories[realIndex],
-                  realIndex: realIndex,
-                  currentIndex: currentIndex,
-                ),
-              );
+          options: CarouselOptions(
+            scrollDirection: Axis.horizontal,
+            viewportFraction: 0.45,
+            initialPage: 1,
+            disableCenter: false,
+            enableInfiniteScroll: false,
+            enlargeCenterPage: true,
+            enlargeStrategy: CenterPageEnlargeStrategy.height,
+            scrollPhysics: const BouncingScrollPhysics(),
+            onPageChanged: (index, reason) {
+              setState(() {
+                currentIndex = index;
+              });
             },
-            options: CarouselOptions(
-              scrollDirection: Axis.horizontal,
-              viewportFraction: 0.45,
-              initialPage: 1,
-              disableCenter: false,
-              enableInfiniteScroll: false,
-              enlargeCenterPage: true,
-              enlargeStrategy: CenterPageEnlargeStrategy.height,
-              scrollPhysics: const BouncingScrollPhysics(),
-              onPageChanged: (index, reason) {
-                setState(() {
-                  currentIndex = index;
-                });
-              },
-            ),
           ),
         ),
         const SizedBox(
@@ -76,5 +81,9 @@ class _CategoryListState extends State<CategoryList> {
         ),
       ],
     );
+  }
+
+  MediaType getMediaType(int index) {
+    return MediaType.values[index];
   }
 }

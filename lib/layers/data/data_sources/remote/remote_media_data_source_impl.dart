@@ -8,6 +8,7 @@ import 'package:supermedia/layers/data/models/media_metadata_model_details.dart'
 import 'package:supermedia/layers/domain/entities/media_filter.dart';
 import 'package:supermedia/layers/domain/entities/media_metadata.dart';
 import 'package:supermedia/layers/domain/entities/search_query.dart';
+import 'package:supermedia/layers/presentation/questionnaire/screens/questionnaire_screen.dart';
 
 class RemoteMediaDataSourceImpl implements RemoteMediaDataSource {
   final IHttpClient _httpClient = locator<IHttpClient>();
@@ -161,12 +162,86 @@ class RemoteMediaDataSourceImpl implements RemoteMediaDataSource {
   Future<List<MediaFilter>> getMediaFilters() async {
     return mediaFilterList;
   }
+
+  @override
+  Future<List<MediaCategory>> getMediaCategories(MediaType mediaType) async {
+    return mediaFilterList
+        .where((element) => element.mediaType == mediaType)
+        .single
+        .categories
+        .map((e) => MediaCategory(e, 'https://i.pinimg.com/400x/41/2d/b6/412db620d4fb0354df7ad175b132ff38.jpg'))
+        .toList();
+  }
+
+  @override
+  Future<void> submitUserInterests(MediaType mediaType, List<String> categories) async {
+    final request = HttpRequest(
+      '/interests',
+      body: {
+        'mediaType': mediaType.toJson(),
+        'genres': categories
+      },
+    );
+
+    try {
+      final response = await _httpClient.post(request);
+
+      if (response.statusCode != 200) {
+        throw SearchException(
+            AppLocalization.instance.errorCode(response.statusCode));
+      }
+    } on Exception {
+      throw SearchException('Check your internet connection.');
+    }
+  }
+
+  @override
+  Future<bool> isQuestionnaireFilled(MediaType mediaType) async {
+    final request = HttpRequest(
+      '/interests/submitted/${mediaType.toJson()}',
+    );
+
+    try {
+      final response = await _httpClient.get(request);
+
+      if (response.statusCode == 200) {
+        var result = response.body;
+        return result;
+      } else {
+        throw SearchException(
+            AppLocalization.instance.errorCode(response.statusCode));
+      }
+    } on Exception {
+      throw SearchException('Check your internet connection.');
+    }
+  }
+
+  @override
+  Future<int> like(String mediaId) async {
+    final request = HttpRequest(
+      '/like/$mediaId',
+    );
+
+    try {
+      final response = await _httpClient.patch(request);
+
+      if (response.statusCode == 200) {
+        var result = response.body;
+        return result;
+      } else {
+        throw SearchException(
+            AppLocalization.instance.errorCode(response.statusCode));
+      }
+    } on Exception {
+      throw SearchException('Check your internet connection.');
+    }
+  }
 }
 
 List<MediaFilter> mediaFilterList = [
   MediaFilter(
       mediaType: MediaType.music,
-      categories: ['Rock', 'Hip Hop', 'Jazz', 'Pop', 'Classical']),
+      categories: ['Rock', 'Hip Hop', 'Jazz', 'Pop', 'Classical', 'Electronic', 'Folk', 'R&B', 'Country', 'Metal']),
   MediaFilter(
       mediaType: MediaType.movie,
       categories: ['Animation', 'History', 'War', 'Family', 'Mystery',
@@ -174,8 +249,8 @@ List<MediaFilter> mediaFilterList = [
         'Adventure', 'Fantasy', 'Horror', 'Drama', 'Comedy',  'Western']),
   MediaFilter(
       mediaType: MediaType.book,
-      categories: ['young-adult', 'poetry', 'children', 'romance',
-        'comics, graphic', 'fiction']),
+      categories: ['young-adult', 'poetry', 'non-fiction', 'children', 'romance',
+        'comics', 'history', 'graphic', 'fiction']),
   MediaFilter(
       mediaType: MediaType.podcast,
       categories: ['Sports', 'Business',

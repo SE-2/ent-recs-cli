@@ -6,6 +6,7 @@ class AppPrimaryButton extends StatelessWidget {
   final Widget? icon;
   final bool _isLoading;
   final double width;
+  final bool isEnabled;
 
   const AppPrimaryButton({
     Key? key,
@@ -13,6 +14,7 @@ class AppPrimaryButton extends StatelessWidget {
     required this.onPressed,
     this.icon,
     this.width = double.infinity,
+    this.isEnabled = true,
   })  : _isLoading = false,
         super(key: key);
 
@@ -23,6 +25,7 @@ class AppPrimaryButton extends StatelessWidget {
         icon = null,
         onPressed = null,
         _isLoading = true,
+        isEnabled = true,
         super(key: key);
 
   @override
@@ -31,7 +34,7 @@ class AppPrimaryButton extends StatelessWidget {
       width: width,
       height: 56,
       child: ElevatedButton(
-        onPressed: onPressed,
+        onPressed: isEnabled ? onPressed : null,
         style: _buttonStyle(context),
           child: _isLoading
           ? CircularProgressIndicator(color: Theme.of(context).colorScheme.onPrimary)
@@ -51,10 +54,15 @@ class AppPrimaryButton extends StatelessWidget {
   }
 
   ButtonStyle _buttonStyle(BuildContext context) {
+    Color backgroundColor = Theme.of(context).colorScheme.primary;
+    Color? foregroundColor = Theme.of(context).colorScheme.onPrimary;
+    if (!isEnabled) {
+      backgroundColor = Theme.of(context).colorScheme.primary.withOpacity(0.5);
+      foregroundColor = Theme.of(context).colorScheme.onPrimary.withOpacity(0.5);
+    }
     return ButtonStyle(
-      backgroundColor: MaterialStateProperty.all<Color>(
-        Theme.of(context).colorScheme.primary,
-      ),
+      backgroundColor: MaterialStateProperty.all<Color>(backgroundColor),
+      foregroundColor: MaterialStateProperty.all<Color?>(foregroundColor),
       shape: MaterialStateProperty.all<RoundedRectangleBorder>(
         RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(24),
@@ -64,9 +72,10 @@ class AppPrimaryButton extends StatelessWidget {
   }
 
   TextStyle _textStyle(BuildContext context) {
+    var color = Theme.of(context).colorScheme.onPrimary;
     return Theme.of(context).textTheme.titleMedium!.copyWith(
       fontWeight: FontWeight.w600,
-      color: Theme.of(context).colorScheme.onPrimary,
+      color: isEnabled ? color : color.withOpacity(0.5),
     );
   }
 }

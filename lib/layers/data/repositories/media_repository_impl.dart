@@ -7,6 +7,7 @@ import 'package:supermedia/layers/domain/entities/media_metadata.dart';
 import 'package:supermedia/layers/domain/entities/media_metadata_detail.dart';
 import 'package:supermedia/layers/domain/entities/search_query.dart';
 import 'package:supermedia/layers/domain/repositories/media_repository.dart';
+import 'package:supermedia/layers/presentation/questionnaire/screens/questionnaire_screen.dart';
 
 class MediaRepositoryImp implements MediaRepository {
   final RemoteMediaDataSource _remoteDataSource =
@@ -52,5 +53,26 @@ class MediaRepositoryImp implements MediaRepository {
   Future<List<MediaFilter>> getMediaFilters() async {
     List<MediaFilter> mediaFilters = await _remoteDataSource.getMediaFilters();
     return mediaFilters;
+  }
+
+  @override
+  Future<List<MediaCategory>> getMediaCategories(MediaType mediaType) async {
+    return _remoteDataSource.getMediaCategories(mediaType);
+  }
+
+  @override
+  Future<void> submitUserInterests(MediaType mediaType, List<String> categories) async {
+    return _remoteDataSource.submitUserInterests(mediaType, categories);
+  }
+
+  @override
+
+  Future<bool> isQuestionnaireFilled(MediaType mediaType) {
+    return _remoteDataSource.isQuestionnaireFilled(mediaType);
+  }
+
+  @override
+  Future<int> like(String mediaId) async {
+    return _remoteDataSource.like(mediaId);
   }
 }

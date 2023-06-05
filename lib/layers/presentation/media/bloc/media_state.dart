@@ -27,3 +27,9 @@ class MediaFailure extends MediaState {
   @override
   List<Object> get props => [error];
 }
+
+class MediaLiked extends MediaState {
+  final int likes;
+
+  MediaLiked(this.likes);
+}
