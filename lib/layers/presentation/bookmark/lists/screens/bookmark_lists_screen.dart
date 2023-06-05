@@ -40,6 +40,9 @@ class _BookmarkListsForm extends StatefulWidget {
 }
 
 class _BookmarkListsFormState extends State<_BookmarkListsForm> {
+  final GlobalKey<ScaffoldMessengerState> globalScaffoldMessengerKey =
+  GlobalKey<ScaffoldMessengerState>();
+
   @override
   void initState() {
     context.read<BookmarkListsBloc>().add(const FetchBookmarkLists());
@@ -75,6 +78,12 @@ class _BookmarkListsFormState extends State<_BookmarkListsForm> {
           } else if (state is BookmarkListsSuccess) {
             return BookmarkListItems(items: state.result,
               onItemClick: (bookmarkListItem) { handleItemClicked(context, bookmarkListItem); },
+              onItemEditClick: (bookmarkListItem) {
+                Navigator.pushNamed(context, EditBookmarkListItemScreen.route, arguments: bookmarkListItem)
+                    .then((result) => {
+                  context.read<BookmarkListsBloc>().add(const FetchBookmarkLists())
+                });
+              }
             );
           } else if (state is BookmarkListsEmpty) {
             return _showEmptyState();
@@ -83,9 +92,8 @@ class _BookmarkListsFormState extends State<_BookmarkListsForm> {
               Navigator.of(context).pop();
             });
             if (state is BookmarkListsFailure) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text(state.error)),
-              );
+              var snackBar = SnackBar(content: Text(state.error));
+              globalScaffoldMessengerKey.currentState?.showSnackBar(snackBar);
             }
             else if (state is AddItemSuccess) {
               ScaffoldMessenger.of(context).showSnackBar(
@@ -132,8 +140,11 @@ class _BookmarkListsFormState extends State<_BookmarkListsForm> {
       padding: const EdgeInsets.fromLTRB(24, 8, 24, 24),
       child: AppPrimaryButton(
         text: AppLocalization.of(context)!.createNewList,
-        onPressed: () {
-          Navigator.pushNamed(context, EditBookmarkListItemScreen.route);
+        onPressed: ()  {
+          Navigator.pushNamed(context, EditBookmarkListItemScreen.route).then((result) => {
+            context.read<BookmarkListsBloc>().add(const FetchBookmarkLists())
+          }
+          );
         },
       ),
     );

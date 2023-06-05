@@ -39,7 +39,6 @@ class BookmarkListItemsBloc extends Bloc<BookmarkListItemsEvent, BookmarkListIte
 
   Future<void> _fetchBookmarkListItems(Emitter<BookmarkListItemsState> emit, int bookmarkListId) async {
     emit(BookmarkListItemsLoading());
-    await Future.delayed(const Duration(seconds: 1));
     try {
       final result = await _bookmarkListItemsUseCase.getBookmarkListItems(bookmarkListId);
       _bookmarkListItems = result;

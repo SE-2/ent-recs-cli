@@ -3,11 +3,13 @@ import 'package:flutter/material.dart';
 class AppTextField extends StatefulWidget {
   final String label;
   final String hint;
+  final String initialText;
 
   const AppTextField({
     Key? key,
     required this.label,
     required this.hint,
+    this.initialText = "",
   }) : super(key: key);
 
   @override
@@ -19,6 +21,12 @@ class AppTextFieldState extends State<AppTextField> {
   final TextEditingController _textController = TextEditingController();
 
   String get text => _textController.text;
+
+  @override
+  void initState() {
+    _textController.text = widget.initialText;
+    super.initState();
+  }
 
   @override
   void dispose() {

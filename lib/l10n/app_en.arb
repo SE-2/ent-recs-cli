@@ -63,8 +63,7 @@
   "enterListName": "Enter List Name",
   "listCreated": "List Created",
   "listEdited": "List Edited",
-  "listDeleted": "List Deleted"
-  "applyFiltersButton": "Apply Filters",
+  "listDeleted": "List Deleted",
   "trySearchSomething": "Try search something...",
   "checkInternetConnection": "Check you internet connection.",
   "unableToLoadRecommendations": "Unable to load recommendations.",

@@ -8,19 +8,19 @@ abstract class EditBookmarkListItemEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class ApplyButtonClicked extends EditBookmarkListItemEvent {
+class EditBookmarkApplyButtonClicked extends EditBookmarkListItemEvent {
   final BookmarkListItem bookmarkListItem;
 
-  const ApplyButtonClicked({ required this.bookmarkListItem });
+  const EditBookmarkApplyButtonClicked({ required this.bookmarkListItem });
 
   @override
   String toString() => 'ApplyButtonClicked { }';
 }
 
-class DeleteButtonClicked extends EditBookmarkListItemEvent {
+class EditBookmarkDeleteButtonClicked extends EditBookmarkListItemEvent {
   final int bookmarkListId;
 
-  const DeleteButtonClicked({ required this.bookmarkListId });
+  const EditBookmarkDeleteButtonClicked({ required this.bookmarkListId });
 
   @override
   String toString() => 'DeleteButtonClicked { }';

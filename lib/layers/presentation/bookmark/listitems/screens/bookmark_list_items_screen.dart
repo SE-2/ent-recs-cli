@@ -5,6 +5,7 @@ import 'package:supermedia/di/app_module.dart';
 import 'package:supermedia/gen/assets.gen.dart';
 import 'package:supermedia/layers/domain/entities/bookmark_list_item.dart';
 import 'package:supermedia/layers/domain/entities/media_metadata.dart';
+import 'package:supermedia/layers/presentation/bookmark/editlist/edit_bookmark_list_item_screen.dart';
 import 'package:supermedia/layers/presentation/bookmark/listitems/bloc/bookmark_list_items_bloc.dart';
 import 'package:supermedia/layers/presentation/bookmark/listitems/bloc/bookmark_list_items_event.dart';
 import 'package:supermedia/layers/presentation/bookmark/listitems/bloc/bookmark_list_items_state.dart';
@@ -26,7 +27,7 @@ class BookmarkListItemsScreen extends StatelessWidget {
       create: (_) => locator<BookmarkListItemsBloc>(),
       child: Scaffold(
         body: _BookmarkListItemsForm(
-          bookmarkListItem: BookmarkListItem(id: 0, title: "Happiness", types: ["[MediaType.movie, MediaType.music, MediaType.book, MediaType.podcast]"]),
+          bookmarkListItem: bookmarkListItem,
         ),
       ),
     );
@@ -131,13 +132,15 @@ class _BookmarkListItemsFormState extends State<_BookmarkListItemsForm> {
       action: IconButton(
         splashRadius: 24,
         icon: Assets.icons.editSquare.svg(width: 24, height: 24),
-        onPressed: () {},
+        onPressed: () {
+          Navigator.pushNamed(context, EditBookmarkListItemScreen.route, arguments: widget.bookmarkListItem);
+          },
       ),
     );
   }
 
   Widget _buildTypeOptions() {
-    List<MediaType?> types = [null];
+    List<MediaType?> types = [null, ...?stringsToMediaTypes(widget.bookmarkListItem?.types)];
 
     return SizedBox(
       height: 48,
@@ -174,6 +177,23 @@ class _BookmarkListItemsFormState extends State<_BookmarkListItemsForm> {
         return AppLocalization.of(context)!.ebookType;
     }
   }
+
+  List<MediaType>? stringsToMediaTypes(List<String>? strings) {
+  return strings?.map((str) {
+    switch (str) {
+      case 'music':
+        return MediaType.music;
+      case 'movie':
+        return MediaType.movie;
+      case 'book':
+        return MediaType.book;
+      case 'podcast':
+        return MediaType.podcast;
+      default:
+        throw ArgumentError('Invalid media type string: $str');
+    }
+  }).toList();
+}
 
   @override
   void dispose() {

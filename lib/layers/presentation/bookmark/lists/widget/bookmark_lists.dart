@@ -5,9 +5,10 @@ import 'package:supermedia/layers/domain/entities/bookmark_list_item.dart';
 class BookmarkListItems extends StatelessWidget {
   final List<BookmarkListItem> items;
   final Function(BookmarkListItem) onItemClick;
+  final Function(BookmarkListItem) onItemEditClick;
 
   const BookmarkListItems(
-      {Key? key, required this.items, required this.onItemClick})
+      {Key? key, required this.items, required this.onItemClick, required this.onItemEditClick})
       : super(key: key);
 
   @override
@@ -41,7 +42,7 @@ class BookmarkListItems extends StatelessWidget {
                                 BlendMode.srcIn),
                             width: 20,
                             height: 20),
-                        onPressed: () {},
+                        onPressed: () {onItemEditClick(items[index]);},
                       ),
                     ],
                   ),

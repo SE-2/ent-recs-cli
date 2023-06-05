@@ -24,9 +24,9 @@ class EditBookmarkListItemScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider<EditBookmarkListItemBloc>(
       create: (_) => locator<EditBookmarkListItemBloc>(),
-      child: const Scaffold(
+      child: Scaffold(
         body: _EditBookmarkListItemForm(
-          bookmarkListItem: null,
+          bookmarkListItem: bookmarkListItem,
         ),
       ),
     );
@@ -43,17 +43,31 @@ class _EditBookmarkListItemForm extends StatefulWidget {
 }
 
 class _EditBookmarkListItemFormState extends State<_EditBookmarkListItemForm> {
+  final GlobalKey<ScaffoldMessengerState> globalScaffoldMessengerKey =
+  GlobalKey<ScaffoldMessengerState>();
+
   final List<String> _selectedCategories = [];
   final GlobalKey<AppTextFieldState> _appTextFieldKey = GlobalKey();
+
+  @override
+  void initState() {
+    if (widget.bookmarkListItem != null) {
+      _selectedCategories.addAll(
+        widget.bookmarkListItem!.types
+            .map((category) => category[0].toUpperCase() + category.substring(1))
+            .toList()
+      );
+    }
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return BlocListener<EditBookmarkListItemBloc, EditBookmarkListItemState>(
       listener: (context, state) {
         if (state is EditBookmarkListItemFailure) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text(state.error)),
-          );
+            var snackBar = SnackBar(content: Text(state.error));
+            globalScaffoldMessengerKey.currentState?.showSnackBar(snackBar);
         }
         else if (state is EditBookmarkListItemSuccess) {
           ScaffoldMessenger.of(context).showSnackBar(
@@ -82,9 +96,10 @@ class _EditBookmarkListItemFormState extends State<_EditBookmarkListItemForm> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           AppTextField(
-              key: const Key('listNameTextFiled'),
-              label: AppLocalization.of(context)!.listName,
-              hint: AppLocalization.of(context)!.enterYourEmail
+            key: _appTextFieldKey,
+            label: AppLocalization.of(context)!.listName,
+            hint: AppLocalization.of(context)!.enterYourEmail,
+            initialText: widget.bookmarkListItem?.title ?? "",
           ),
           const SizedBox(height: 24,),
           Text(
@@ -117,11 +132,11 @@ class _EditBookmarkListItemFormState extends State<_EditBookmarkListItemForm> {
   void _onApplyButtonPressed(BuildContext context) {
     context
         .read<EditBookmarkListItemBloc>()
-        .add(ApplyButtonClicked(
+        .add(EditBookmarkApplyButtonClicked(
       bookmarkListItem: BookmarkListItem(
         id: widget.bookmarkListItem?.id,
-        title: (_appTextFieldKey.currentState as AppTextFieldState).text,
-        types: _selectedCategories
+          title: (_appTextFieldKey.currentState as AppTextFieldState).text,
+        types: _selectedCategories.map((category) => category.toLowerCase()).toList()
       )
     ));
   }
@@ -132,11 +147,15 @@ class _EditBookmarkListItemFormState extends State<_EditBookmarkListItemForm> {
       AppLocalization.of(context)!.addNewList :
       AppLocalization.of(context)!.editList(widget.bookmarkListItem!.title),
       showBackButton: true,
-        action: IconButton(
+        action: widget.bookmarkListItem?.id != null? IconButton(
           icon: const Icon(CupertinoIcons.trash_fill),
           color: Colors.red,
-          onPressed: () {  },
-        ),
+          onPressed: () {
+            context
+                .read<EditBookmarkListItemBloc>()
+                .add(EditBookmarkDeleteButtonClicked(bookmarkListId: widget.bookmarkListItem!.id!));
+          },
+        ) : null,
     );
   }
 

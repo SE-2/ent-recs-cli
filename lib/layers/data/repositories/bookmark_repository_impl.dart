@@ -15,9 +15,15 @@ class BookmarkRepositoryImpl implements BookmarkRepository {
 
   @override
   Future<void> addNewList(BookmarkListItem bookmarkListItemModel) async {
-     return _remoteDataSource.addList(
-       AddBookmarkListModel(title: bookmarkListItemModel.title, types: bookmarkListItemModel.types)
-     );
+    if (bookmarkListItemModel.id == null) {
+      return _remoteDataSource.addList(
+          AddBookmarkListModel(title: bookmarkListItemModel.title,
+              types: bookmarkListItemModel.types)
+      );
+    }
+    else {
+      return _remoteDataSource.editList(bookmarkListItemModel);
+    }
   }
 
   @override

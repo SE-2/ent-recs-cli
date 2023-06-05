@@ -11,7 +11,6 @@ class BookmarkListsBloc extends Bloc<BookmarkListsEvent, BookmarkListsState> {
     on<BookmarkListsEvent>((event, emit) async {
       if (event is FetchBookmarkLists) {
         emit(BookmarkListsLoading());
-        await Future.delayed(const Duration(seconds: 1));
         try {
           final result = await _bookmarkListsUseCase.getBookmarkLists();
           if (result.isEmpty) {

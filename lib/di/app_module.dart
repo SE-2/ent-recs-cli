@@ -9,7 +9,6 @@ import 'package:supermedia/layers/data/data_sources/abstractions/remote_media_da
 import 'package:supermedia/layers/data/data_sources/abstractions/remote_user_data_source.dart';
 import 'package:supermedia/layers/data/data_sources/local/local_data_source.dart';
 import 'package:supermedia/layers/data/data_sources/remote/remote_bookmark_data_source_Impl.dart';
-import 'package:supermedia/layers/data/data_sources/remote/remote_user_data_source.dart';
 import 'package:supermedia/layers/data/http_client/dio_http_client.dart';
 import 'package:supermedia/layers/data/http_client/http_client.dart';
 import 'package:supermedia/layers/data/data_sources/remote/remote_media_data_source_impl.dart';
@@ -24,6 +23,7 @@ import 'package:supermedia/layers/domain/repositories/user_repository.dart';
 import 'package:supermedia/layers/domain/use_cases/abstractoins/bookmark_list_items_use_case.dart';
 import 'package:supermedia/layers/domain/use_cases/abstractoins/bookmark_lists_use_case.dart';
 import 'package:supermedia/layers/domain/use_cases/abstractoins/abstract_profile_use_case.dart';
+import 'package:supermedia/layers/domain/use_cases/abstractoins/edit_bookmark_list_item_use_case.dart';
 import 'package:supermedia/layers/domain/use_cases/abstractoins/media_use_case.dart';
 import 'package:supermedia/layers/domain/use_cases/abstractoins/recent_items_use_case.dart';
 import 'package:supermedia/layers/domain/use_cases/abstractoins/search_use_case.dart';
@@ -33,6 +33,7 @@ import 'package:supermedia/layers/domain/use_cases/abstractoins/trend_items_use_
 import 'package:supermedia/layers/domain/use_cases/implementations/bookmark_list_items_use_case_impl.dart';
 import 'package:supermedia/layers/domain/use_cases/implementations/bookmark_lists_use_case_impl.dart';
 import 'package:supermedia/layers/domain/use_cases/implementations/abstract_profile_use_case_impl.dart';
+import 'package:supermedia/layers/domain/use_cases/implementations/edit_bookmark_list_item_use_case_impl.dart';
 import 'package:supermedia/layers/domain/use_cases/implementations/media_use_case_impl.dart';
 import 'package:supermedia/layers/domain/use_cases/implementations/recent_items_use_case_impl.dart';
 import 'package:supermedia/layers/domain/use_cases/abstractoins/recommend_use_case.dart';
@@ -117,6 +118,7 @@ void _setupUseCases() {
   locator.registerLazySingleton<MediaUseCase>(() => MediaUseCaseImpl());
   locator.registerLazySingleton<AbstractProfileUseCase>(() => AbstractProfileUseCaseImpl());
   locator.registerLazySingleton<SplashUseCase>(() => SplashUseCaseImpl());
+  locator.registerLazySingleton<EditBookmarkListItemUseCase>(() => EditBookmarkListItemUseCaseImpl());
 }
 
 void _setupScreens() {

@@ -10,16 +10,23 @@ class EditBookmarkListItemBloc extends Bloc<EditBookmarkListItemEvent, EditBookm
 
   EditBookmarkListItemBloc() : super(EditBookmarkListItemInitial()) {
     on<EditBookmarkListItemEvent>((event, emit) async {
-      if (event is ApplyButtonClicked) {
+      if (event is EditBookmarkApplyButtonClicked) {
         emit(EditBookmarkListItemLoading());
         await _editBookmarkListItemUseCase.addList(event.bookmarkListItem);
         try {
-          emit(EditBookmarkListItemSuccess(message: AppLocalization.instance.listCreated));
+          if (event.bookmarkListItem.id  == null) {
+            emit(EditBookmarkListItemSuccess(
+                message: AppLocalization.instance.listCreated));
+          }
+          else {
+            emit(EditBookmarkListItemSuccess(
+                message: AppLocalization.instance.listEdited));
+          }
         } catch (e) {
           emit(EditBookmarkListItemFailure(error: e.toString()));
         }
       }
-      else if (event is DeleteButtonClicked) {
+      else if (event is EditBookmarkDeleteButtonClicked) {
         emit(EditBookmarkListItemLoading());
         await _editBookmarkListItemUseCase.deleteList(event.bookmarkListId);
         try {
