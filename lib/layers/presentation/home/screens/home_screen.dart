@@ -3,9 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:supermedia/di/app_module.dart';
 import 'package:supermedia/layers/data/models/user_model.dart';
-import 'package:supermedia/layers/domain/entities/media_metadata.dart';
 import 'package:supermedia/layers/presentation/home/bloc/explore/explore_bloc.dart';
-import 'package:supermedia/layers/presentation/home/bloc/explore/explore_event.dart';
 import 'package:supermedia/layers/presentation/home/bloc/explore/explore_state.dart';
 import 'package:supermedia/layers/presentation/home/bloc/profile/abstract_profile_bloc.dart';
 import 'package:supermedia/layers/presentation/home/bloc/profile/abstract_profile_event.dart';
@@ -69,23 +67,37 @@ class _HomeFormState extends State<_HomeForm> {
   TextStyle selected = const TextStyle(color: Colors.white, fontSize: 10);
   final stories = AppDatabase.stories;
 
+  bool _onNotification(ScrollNotification notification) {
+    if (notification is ScrollUpdateNotification &&
+        notification.metrics.pixels == 0) {
+      context.read<RecentItemsBloc>().add(LoadRecentItems());
+    }
+    return true;
+  }
+
   @override
-  Widget build(BuildContext context) {
+  void initState() {
     context.read<AbstractProfileBloc>().add(LoadAbstractProfile());
     context.read<RecentItemsBloc>().add(LoadRecentItems());
+    super.initState();
+  }
 
+  @override
+  Widget build(BuildContext context) {
     return BlocListener<ExploreBloc, ExploreState>(
-        listener: (context, state) {
-          if (state is QuestionnaireChecked) {
-            if (state.result) {
-              Navigator.of(context)
-                  .pushNamed(RecommendScreen.route, arguments: state.mediaType);
-            } else {
-              Navigator.of(context).pushNamed(QuestionnaireScreen.route,
-                  arguments: state.mediaType);
-            }
+      listener: (context, state) {
+        if (state is QuestionnaireChecked) {
+          if (state.result) {
+            Navigator.of(context)
+                .pushNamed(RecommendScreen.route, arguments: state.mediaType);
+          } else {
+            Navigator.of(context).pushNamed(QuestionnaireScreen.route,
+                arguments: state.mediaType);
           }
-        },
+        }
+      },
+      child: NotificationListener<ScrollNotification>(
+        onNotification: _onNotification,
         child: SingleChildScrollView(
           physics: const BouncingScrollPhysics(),
           child: Column(
@@ -95,12 +107,11 @@ class _HomeFormState extends State<_HomeForm> {
               Row(
                 children: [
                   BlocBuilder<AbstractProfileBloc, AbstractProfileState>(
-                        builder: (context, state) {
-                            if (state is AbstractProfileFetched) {
-                            return _buildAbstractProfile(state.result);
-                              } else {
-                            return _buildAbstractProfile(UserModel(name: ""
-                        ));
+                    builder: (context, state) {
+                      if (state is AbstractProfileFetched) {
+                        return _buildAbstractProfile(state.result);
+                      } else {
+                        return _buildAbstractProfile(UserModel(name: ""));
                       }
                     },
                   ),
@@ -177,20 +188,19 @@ class _HomeFormState extends State<_HomeForm> {
               ),
               BlocBuilder<RecentItemsBloc, RecentItemsState>(
                 builder: (context, state) {
-                  if (state is RecentItemsInitial) {
-                    // todo center vertically
+                  if (state is RecentItemsEmptyResult) {
                     return const SizedBox(
                       height: 64,
                       child: Center(
-                        child: Text('Empty List.'),
+                        child: Text('No recent watched media.'),
                       ),
                     );
                   } else if (state is RecentItemsLoading) {
                     return const Flexible(
                         fit: FlexFit.loose,
-                        child: Center(
-                          child: CircularProgressIndicator(),
-                        ));
+                        child: SizedBox(
+                          height: 60,
+                            child: Center(child: CircularProgressIndicator())));
                   } else if (state is RecentItemsFetched) {
                     var result = state.result;
                     return PostList(
@@ -203,7 +213,9 @@ class _HomeFormState extends State<_HomeForm> {
               ),
             ],
           ),
-        ));
+        ),
+      ),
+    );
   }
 
   Row _buildAbstractProfile(UserModel userModel) {

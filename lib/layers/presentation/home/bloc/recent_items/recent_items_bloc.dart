@@ -17,7 +17,7 @@ class RecentItemsBloc extends Bloc<RecentItemsEvent, RecentItemsState> {
             final result = await _recentItemsUseCase.getRecentWatchedMedia();
 
             if (result.isEmpty) {
-              emit(RecentItemsInitial());
+              emit(RecentItemsEmptyResult());
             } else {
               emit(RecentItemsFetched(result: result));
             }
