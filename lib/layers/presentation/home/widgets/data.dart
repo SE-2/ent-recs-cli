@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:supermedia/layers/domain/entities/media_metadata.dart';
 
 class Story {
   final String id;
   final String name;
-  final String imageFileName;
+  final String imageUrl;
   final String iconFileName;
   final bool isViewed;
   final Category category;
@@ -11,11 +12,22 @@ class Story {
   Story({
     required this.id,
     required this.name,
-    required this.imageFileName,
+    required this.imageUrl,
     required this.iconFileName,
     required this.isViewed,
     required this.category,
   });
+
+  factory Story.fromMetadata(MediaMetadata metadata) {
+    return Story(
+      id: metadata.mediaId,
+      name: metadata.title,
+      imageUrl: metadata.imageUrl,
+      iconFileName: getIconFileName(metadata.type),
+      isViewed: false,
+      category: categories[MediaType.values.indexOf(metadata.type)],
+    );
+  }
 }
 
 enum Category {
@@ -59,41 +71,52 @@ class AppDatabase {
           id: "1001",
           category: Category.book,
           name: 'Sharp objects',
-          imageFileName: 'story_1.jpg',
+          imageUrl: 'story_1.jpg',
           iconFileName: 'book_icon.png',
           isViewed: false),
       Story(
           id: "1002",
           category: Category.movie,
           name: 'John wick',
-          imageFileName: 'story_2.jpg',
+          imageUrl: 'story_2.jpg',
           iconFileName: 'movie_icon.png',
           isViewed: false),
       Story(
           id: "1003",
           category: Category.podcast,
           name: 'Mindful Businesses',
-          imageFileName: 'story_3.jpg',
+          imageUrl: 'story_3.jpg',
           iconFileName: 'podcast_icon.png',
           isViewed: true),
       Story(
           id: "1004",
           category: Category.music,
           name: 'All of the girls you lo...',
-          imageFileName: 'story_4.jpg',
+          imageUrl: 'story_4.jpg',
           iconFileName: 'music_icon.png',
           isViewed: false),
       Story(
           id: "1005",
           category: Category.book,
           name: 'The Eye of the World',
-          imageFileName: 'story_5.jpg',
+          imageUrl: 'story_5.jpg',
           iconFileName: 'book_icon.png',
           isViewed: false),
     ];
   }
 
-  static List<Category> get categories {
-    return [Category.music, Category.movie, Category.book, Category.podcast];
+  static List<Category> get allCategories => categories;
+}
+
+String getIconFileName(MediaType mediaType) {
+  switch(mediaType) {
+    case MediaType.music: return 'music_icon.png';
+    case MediaType.movie: return 'movie_icon.png';
+    case MediaType.podcast: return 'podcast_icon.png';
+    case MediaType.book: return 'book_icon.png';
   }
+}
+
+List<Category> get categories {
+  return [Category.music, Category.movie, Category.book, Category.podcast];
 }

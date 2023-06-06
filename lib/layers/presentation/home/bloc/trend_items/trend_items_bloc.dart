@@ -5,6 +5,7 @@ import 'package:supermedia/layers/domain/use_cases/abstractoins/trend_items_use_
 import 'package:supermedia/layers/presentation/home/screens/home_screen.dart';
 import 'package:supermedia/layers/presentation/home/bloc/trend_items/trend_items_event.dart';
 import 'package:supermedia/layers/presentation/home/bloc/trend_items/trend_items_state.dart';
+import 'package:supermedia/layers/presentation/home/widgets/data.dart';
 
 class TrendItemsBloc extends Bloc<TrendItemsEvent, TrendItemsState> {
   final TrendItemsUseCase _trendItemsUseCase = locator<TrendItemsUseCase>();
@@ -23,7 +24,17 @@ class TrendItemsBloc extends Bloc<TrendItemsEvent, TrendItemsState> {
             } else {
               throw UnimplementedError('dateFilter $DateFilter is not implemented.');
             }
-            emit(TrendItemsSuccess(trendItems: result));
+
+            List<Story> stories = [];
+            for(var metadata in result) {
+              stories.add(Story.fromMetadata(metadata));
+            }
+
+            if (stories.isEmpty) {
+              emit(TrendItemsEmptyResult());
+            } else {
+              emit(TrendItemsFetched(result: stories));
+            }
           } catch (e) {
             emit(TrendItemsFailure(error: e.toString()));
           }

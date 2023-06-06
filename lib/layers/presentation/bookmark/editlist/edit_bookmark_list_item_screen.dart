@@ -98,7 +98,7 @@ class _EditBookmarkListItemFormState extends State<_EditBookmarkListItemForm> {
           AppTextField(
             key: _appTextFieldKey,
             label: AppLocalization.of(context)!.listName,
-            hint: AppLocalization.of(context)!.enterYourEmail,
+            hint: AppLocalization.of(context)!.enterListName,
             initialText: widget.bookmarkListItem?.title ?? "",
           ),
           const SizedBox(height: 24,),

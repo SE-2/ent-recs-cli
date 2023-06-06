@@ -23,7 +23,7 @@ class _CategoryListState extends State<CategoryList> {
 
   @override
   Widget build(BuildContext context) {
-    final categories = AppDatabase.categories;
+    final categories = AppDatabase.allCategories;
 
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,

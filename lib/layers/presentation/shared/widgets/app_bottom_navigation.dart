@@ -105,6 +105,7 @@ class AppBottomNavigationState extends State<AppBottomNavigation> {
           unselectedItemColor: Colors.grey,
           showSelectedLabels: false,
           showUnselectedLabels: false,
+          type: BottomNavigationBarType.fixed,
         ),
       ),
     );

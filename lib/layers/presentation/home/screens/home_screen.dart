@@ -13,8 +13,8 @@ import 'package:supermedia/layers/presentation/home/bloc/recent_items/recent_ite
 import 'package:supermedia/layers/presentation/home/bloc/recent_items/recent_items_state.dart';
 import 'package:supermedia/layers/presentation/home/bloc/trend_items/trend_items_bloc.dart';
 import 'package:supermedia/layers/presentation/home/bloc/trend_items/trend_items_event.dart';
+import 'package:supermedia/layers/presentation/home/bloc/trend_items/trend_items_state.dart';
 import 'package:supermedia/layers/presentation/home/widgets/category_list.dart';
-import 'package:supermedia/layers/presentation/home/widgets/data.dart';
 import 'package:supermedia/layers/presentation/home/widgets/post_list.dart';
 import 'package:supermedia/layers/presentation/home/widgets/story_list.dart';
 import 'package:supermedia/layers/presentation/questionnaire/screens/questionnaire_screen.dart';
@@ -46,7 +46,8 @@ class _HomeScreenState extends State<HomeScreen>
             create: (_) => locator<AbstractProfileBloc>()),
         BlocProvider<RecentItemsBloc>(
             create: (_) => locator<RecentItemsBloc>()),
-        BlocProvider<ExploreBloc>(create: (_) => locator<ExploreBloc>())
+        BlocProvider<ExploreBloc>(create: (_) => locator<ExploreBloc>()),
+        BlocProvider<TrendItemsBloc>(create: (_) => locator<TrendItemsBloc>()),
       ],
       child: Scaffold(
         backgroundColor: Theme.of(context).colorScheme.background,
@@ -65,7 +66,6 @@ class _HomeFormState extends State<_HomeForm> {
   DateFilter _selectedSegment = DateFilter.all;
   TextStyle defaultStyle = const TextStyle(color: Colors.black, fontSize: 8);
   TextStyle selected = const TextStyle(color: Colors.white, fontSize: 10);
-  final stories = AppDatabase.stories;
 
   bool _onNotification(ScrollNotification notification) {
     if (notification is ScrollUpdateNotification &&
@@ -79,6 +79,7 @@ class _HomeFormState extends State<_HomeForm> {
   void initState() {
     context.read<AbstractProfileBloc>().add(LoadAbstractProfile());
     context.read<RecentItemsBloc>().add(LoadRecentItems());
+    context.read<TrendItemsBloc>().add(LoadTrendItems(dateFilter: DateFilter.all));
     super.initState();
   }
 
@@ -160,8 +161,30 @@ class _HomeFormState extends State<_HomeForm> {
                   )
                 ],
               ),
-              StoryList(
-                stories: stories,
+              BlocBuilder<TrendItemsBloc, TrendItemsState>(
+                builder: (context, state) {
+                  if (state is TrendItemsEmptyResult) {
+                    return const SizedBox(
+                      height: 64,
+                      child: Center(
+                        child: Text('No trend media.'),
+                      ),
+                    );
+                  } else if (state is TrendItemsLoading) {
+                    return const Flexible(
+                        fit: FlexFit.loose,
+                        child: SizedBox(
+                            height: 60,
+                            child: Center(child: CircularProgressIndicator())));
+                  } else if (state is TrendItemsFetched) {
+                    var result = state.result;
+                    return StoryList(
+                      stories: result,
+                    );
+                  } else {
+                    return Container();
+                  }
+                },
               ),
               Padding(
                 padding: const EdgeInsets.fromLTRB(0, 0, 0, 20),
@@ -199,7 +222,7 @@ class _HomeFormState extends State<_HomeForm> {
                     return const Flexible(
                         fit: FlexFit.loose,
                         child: SizedBox(
-                          height: 60,
+                            height: 60,
                             child: Center(child: CircularProgressIndicator())));
                   } else if (state is RecentItemsFetched) {
                     var result = state.result;
@@ -245,7 +268,8 @@ class _HomeFormState extends State<_HomeForm> {
               const Text(
                 'Explore today items',
                 style: TextStyle(
-                    fontSize: 12, color: Color.fromARGB(255, 156, 164, 171)),
+                    fontSize: 12,
+                    color: Color.fromARGB(255, 156, 164, 171)),
               )
             ],
           ),

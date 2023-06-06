@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:supermedia/layers/domain/entities/media_metadata.dart';
+import 'package:supermedia/layers/presentation/home/widgets/data.dart';
 
 abstract class TrendItemsState extends Equatable {
   @override
@@ -10,13 +11,17 @@ class TrendItemsInitial extends TrendItemsState {}
 
 class TrendItemsLoading extends TrendItemsState {}
 
-class TrendItemsSuccess extends TrendItemsState {
-  final List<MediaMetadata> trendItems;
+class TrendItemsFetched extends TrendItemsState {
+  final List<Story> result;
 
-  TrendItemsSuccess({required this.trendItems});
+  TrendItemsFetched({required this.result});
 
   @override
-  List<Object?> get props => [trendItems];
+  List<Object?> get props => [result];
+}
+
+class TrendItemsEmptyResult extends TrendItemsState {
+
 }
 
 class TrendItemsFailure extends TrendItemsState {

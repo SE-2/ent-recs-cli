@@ -94,8 +94,8 @@ class StoryItem extends StatelessWidget {
   Widget _storyImage() {
     return ClipRRect(
       borderRadius: BorderRadius.circular(17),
-      child: Image.asset(
-        'assets/images/stories/${story.imageFileName}',
+      child: Image.network(
+        story.imageUrl,
         width: 54,
         height: 54,
       ),
