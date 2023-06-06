@@ -19,6 +19,10 @@ class RecentItemsFetched extends RecentItemsState {
   List<Object> get props => [result];
 }
 
+class RecentItemsEmptyResult extends RecentItemsState {
+
+}
+
 class RecentItemsFailure extends RecentItemsState {
   final String error;
 

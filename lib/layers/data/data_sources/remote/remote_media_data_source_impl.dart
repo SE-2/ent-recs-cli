@@ -80,7 +80,7 @@ class RemoteMediaDataSourceImpl implements RemoteMediaDataSource {
   @override
   Future<List<MediaMetadataModel>> getRecentWatchedMedia() async {
     final request = HttpRequest(
-      '/trends/today',
+      '/recent',
       body: '',
     );
 
@@ -89,7 +89,7 @@ class RemoteMediaDataSourceImpl implements RemoteMediaDataSource {
 
       if (response.statusCode == 200) {
         var result = MediaMetadataModel.fromJsonList(response.body);
-        return result.isEmpty ? mediaList : result;
+        return result;
       } else {
         throw SearchException(
             AppLocalization.instance.errorCode(response.statusCode));
