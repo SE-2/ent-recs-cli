@@ -4,20 +4,27 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:supermedia/common/locale/app_locale_bloc.dart';
 import 'package:supermedia/common/theme/app_theme_bloc.dart';
 import 'package:supermedia/layers/data/data_sources/abstractions/local_data_source.dart';
+import 'package:supermedia/layers/data/data_sources/abstractions/remote_bookmarek_data_source.dart';
 import 'package:supermedia/layers/data/data_sources/abstractions/remote_media_data_source.dart';
 import 'package:supermedia/layers/data/data_sources/abstractions/remote_user_data_source.dart';
 import 'package:supermedia/layers/data/data_sources/local/local_data_source.dart';
+import 'package:supermedia/layers/data/data_sources/remote/remote_bookmark_data_source_Impl.dart';
 import 'package:supermedia/layers/data/data_sources/remote/remote_user_data_source_impl.dart';
 import 'package:supermedia/layers/data/http_client/dio_http_client.dart';
 import 'package:supermedia/layers/data/http_client/http_client.dart';
 import 'package:supermedia/layers/data/data_sources/remote/remote_media_data_source_impl.dart';
+import 'package:supermedia/layers/data/repositories/bookmark_repository_impl.dart';
 import 'package:supermedia/layers/data/http_client/token_provide_impl.dart';
 import 'package:supermedia/layers/data/http_client/token_provider.dart';
 import 'package:supermedia/layers/data/repositories/media_repository_impl.dart';
 import 'package:supermedia/layers/data/repositories/user_repository_impl.dart';
+import 'package:supermedia/layers/domain/repositories/bookmark_repository.dart';
 import 'package:supermedia/layers/domain/repositories/media_repository.dart';
 import 'package:supermedia/layers/domain/repositories/user_repository.dart';
+import 'package:supermedia/layers/domain/use_cases/abstractoins/bookmark_list_items_use_case.dart';
+import 'package:supermedia/layers/domain/use_cases/abstractoins/bookmark_lists_use_case.dart';
 import 'package:supermedia/layers/domain/use_cases/abstractoins/abstract_profile_use_case.dart';
+import 'package:supermedia/layers/domain/use_cases/abstractoins/edit_bookmark_list_item_use_case.dart';
 import 'package:supermedia/layers/domain/use_cases/abstractoins/media_use_case.dart';
 import 'package:supermedia/layers/domain/use_cases/abstractoins/questionnaire_use_case.dart';
 import 'package:supermedia/layers/domain/use_cases/abstractoins/recent_items_use_case.dart';
@@ -25,7 +32,10 @@ import 'package:supermedia/layers/domain/use_cases/abstractoins/search_use_case.
 import 'package:supermedia/layers/domain/use_cases/abstractoins/signup_use_case.dart';
 import 'package:supermedia/layers/domain/use_cases/abstractoins/splash_use_case.dart';
 import 'package:supermedia/layers/domain/use_cases/abstractoins/trend_items_use_case.dart';
+import 'package:supermedia/layers/domain/use_cases/implementations/bookmark_list_items_use_case_impl.dart';
+import 'package:supermedia/layers/domain/use_cases/implementations/bookmark_lists_use_case_impl.dart';
 import 'package:supermedia/layers/domain/use_cases/implementations/abstract_profile_use_case_impl.dart';
+import 'package:supermedia/layers/domain/use_cases/implementations/edit_bookmark_list_item_use_case_impl.dart';
 import 'package:supermedia/layers/domain/use_cases/implementations/media_use_case_impl.dart';
 import 'package:supermedia/layers/domain/use_cases/implementations/questionnaire_use_case_impl.dart';
 import 'package:supermedia/layers/domain/use_cases/implementations/recent_items_use_case_impl.dart';
@@ -35,6 +45,12 @@ import 'package:supermedia/layers/domain/use_cases/implementations/search_use_ca
 import 'package:supermedia/layers/domain/use_cases/implementations/splash_use_case_impl.dart';
 import 'package:supermedia/layers/domain/use_cases/implementations/trend_items_use_case_impl.dart';
 import 'package:supermedia/layers/domain/use_cases/signup_use_case.dart';
+import 'package:supermedia/layers/presentation/bookmark/editlist/bloc/edit_bookmark_list_item_bloc.dart';
+import 'package:supermedia/layers/presentation/bookmark/editlist/edit_bookmark_list_item_screen.dart';
+import 'package:supermedia/layers/presentation/bookmark/listitems/bloc/bookmark_list_items_bloc.dart';
+import 'package:supermedia/layers/presentation/bookmark/listitems/screens/bookmark_list_items_screen.dart';
+import 'package:supermedia/layers/presentation/bookmark/lists/bloc/bookmark_lists_bloc.dart';
+import 'package:supermedia/layers/presentation/bookmark/lists/screens/bookmark_lists_screen.dart';
 import 'package:supermedia/layers/presentation/home/bloc/profile/abstract_profile_bloc.dart';
 import 'package:supermedia/layers/presentation/home/bloc/explore/explore_bloc.dart';
 import 'package:supermedia/layers/presentation/questionnaire/bloc/questionnaire_bloc.dart';
@@ -74,6 +90,8 @@ void _setupRemoteDataSources() {
       () => RemoteUserDataSourceImpl());
   locator.registerLazySingleton<RemoteMediaDataSource>(
       () => RemoteMediaDataSourceImpl());
+  locator.registerLazySingleton<RemoteBookmarkDataSource>(
+      () => RemoteBookmarkDataSourceImpl());
 }
 
 void _setupThirdPartyLibraries() {
@@ -89,6 +107,7 @@ void _setupThirdPartyLibraries() {
 void _setupRepositories() {
   locator.registerLazySingleton<UserRepository>(() => UserRepositoryImpl());
   locator.registerLazySingleton<MediaRepository>(() => MediaRepositoryImp());
+  locator.registerLazySingleton<BookmarkRepository>(() => BookmarkRepositoryImpl());
 }
 
 void _setupUseCases() {
@@ -99,9 +118,12 @@ void _setupUseCases() {
   locator
       .registerLazySingleton<TrendItemsUseCase>(() => TrendItemsUseCaseImpl());
   locator.registerLazySingleton<RecommendUseCase>(() => RecommendUseCaseImpl());
+  locator.registerLazySingleton<BookmarkListsUseCase>(() => BookmarkListsUseCaseImpl());
+  locator.registerLazySingleton<BookmarkListItemsUseCase>(() => BookmarkListItemsUseCaseImpl());
   locator.registerLazySingleton<MediaUseCase>(() => MediaUseCaseImpl());
   locator.registerLazySingleton<AbstractProfileUseCase>(() => AbstractProfileUseCaseImpl());
   locator.registerLazySingleton<SplashUseCase>(() => SplashUseCaseImpl());
+  locator.registerLazySingleton<EditBookmarkListItemUseCase>(() => EditBookmarkListItemUseCaseImpl());
   locator.registerLazySingleton<QuestionnaireUseCase>(() => QuestionnaireUseCaseImpl());
 }
 
@@ -114,6 +136,9 @@ void _setupScreens() {
   locator.registerLazySingleton<HomeScreen>(() => const HomeScreen());
   locator.registerLazySingleton<SearchScreen>(() => const SearchScreen());
   locator.registerLazySingleton<RecommendScreen>(() => const RecommendScreen());
+  locator.registerLazySingleton<BookmarkListsScreen>(() => const BookmarkListsScreen());
+  locator.registerLazySingleton<BookmarkListItemsScreen>(() => const BookmarkListItemsScreen());
+  locator.registerLazySingleton<EditBookmarkListItemScreen>(() => const EditBookmarkListItemScreen());
   locator.registerLazySingleton<SplashScreen>(() => const SplashScreen());
 }
 
@@ -125,6 +150,9 @@ void _setupBlocs() {
   locator.registerFactory<TrendItemsBloc>(() => TrendItemsBloc());
   locator.registerFactory<RecentItemsBloc>(() => RecentItemsBloc());
   locator.registerFactory<RecommendBloc>(() => RecommendBloc());
+  locator.registerFactory<BookmarkListsBloc>(() => BookmarkListsBloc());
+  locator.registerFactory<BookmarkListItemsBloc>(() => BookmarkListItemsBloc());
+  locator.registerFactory<EditBookmarkListItemBloc>(() => EditBookmarkListItemBloc());
   locator.registerFactory<MediaBloc>(() => MediaBloc());
   locator.registerFactory<QuestionnaireBloc>(() => QuestionnaireBloc());
   locator.registerFactory<ExploreBloc>(() => ExploreBloc());

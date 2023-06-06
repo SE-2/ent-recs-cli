@@ -89,8 +89,8 @@ class AppTheme {
     colorScheme: const ColorScheme.dark(
       primary: Color(0xFF514EB6),
       onPrimary: Colors.white,
-      secondary: Color(0xFF171725),
-      onSecondary: Color(0xFF282837),
+      secondary: Color(0xFF282837),
+      onSecondary: Color(0xFF9CA4AB),
       tertiary: Colors.white,
       onTertiary: Colors.white,
       tertiaryContainer: Colors.white70,

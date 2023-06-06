@@ -33,6 +33,14 @@ class $AssetsIconsGen {
   /// File path: assets/icons/calendar.svg
   SvgGenImage get calendar => const SvgGenImage('assets/icons/calendar.svg');
 
+  /// File path: assets/icons/categories_four.svg
+  SvgGenImage get categoriesFour =>
+      const SvgGenImage('assets/icons/categories_four.svg');
+
+  /// File path: assets/icons/edit_square.svg
+  SvgGenImage get editSquare =>
+      const SvgGenImage('assets/icons/edit_square.svg');
+
   /// File path: assets/icons/facebook.svg
   SvgGenImage get facebook => const SvgGenImage('assets/icons/facebook.svg');
 
@@ -74,6 +82,8 @@ class $AssetsIconsGen {
         themeMode,
         unlock,
         calendar,
+        categoriesFour,
+        editSquare,
         facebook,
         film,
         globe,

@@ -19,6 +19,16 @@ class MediaMetadataModel {
     );
   }
 
+  Map<String, dynamic> toJson() {
+    return {
+      'mediaId': mediaId,
+      'type': type,
+      'title': title,
+      'imageUrl': imageUrl,
+      'properties': properties,
+    };
+  }
+
   static List<MediaMetadataModel> fromJsonList(List<dynamic> jsonList) {
     return jsonList.map((json) => MediaMetadataModel.fromJson(json)).toList();
   }
