@@ -23,7 +23,7 @@ class AppRouter {
       case SplashScreen.route:
         return MaterialPageRoute(
           builder: (context) {
-            return const MultiScreenBottomNavigation();
+            return const SplashScreen();
           },
         );
 
