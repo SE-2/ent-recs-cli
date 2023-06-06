@@ -39,7 +39,10 @@ class _BookmarkListsForm extends StatefulWidget {
   _BookmarkListsFormState createState() => _BookmarkListsFormState();
 }
 
-class _BookmarkListsFormState extends State<_BookmarkListsForm> {
+class _BookmarkListsFormState extends State<_BookmarkListsForm> with AutomaticKeepAliveClientMixin {
+  @override
+  bool get wantKeepAlive => true;
+
   final GlobalKey<ScaffoldMessengerState> globalScaffoldMessengerKey =
   GlobalKey<ScaffoldMessengerState>();
 
@@ -51,12 +54,15 @@ class _BookmarkListsFormState extends State<_BookmarkListsForm> {
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return BlocListener<BookmarkListsBloc, BookmarkListsState>(
       listener: (context, state) {
         if (state is BookmarkListsFailure) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text(state.error)),
-          );
+          var snackBar = SnackBar(content: Text(state.error));
+          globalScaffoldMessengerKey.currentState?.showSnackBar(snackBar);
+          Future.delayed(const Duration(milliseconds: 1000), () {
+            Navigator.of(context).pop();
+          });
         }
       },
       child: Scaffold(
@@ -88,18 +94,17 @@ class _BookmarkListsFormState extends State<_BookmarkListsForm> {
           } else if (state is BookmarkListsEmpty) {
             return _showEmptyState();
           } else if (state is BookmarkListsFailure || state is AddItemSuccess) {
-            Future.delayed(const Duration(milliseconds: 500), () {
-              Navigator.of(context).pop();
-            });
             if (state is BookmarkListsFailure) {
               var snackBar = SnackBar(content: Text(state.error));
               globalScaffoldMessengerKey.currentState?.showSnackBar(snackBar);
             }
             else if (state is AddItemSuccess) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text(AppLocalization.of(context)!.itemAddedSuccessfully)),
-              );
+              var snackBar = SnackBar(content: Text(AppLocalization.of(context)!.itemAddedSuccessfully));
+              globalScaffoldMessengerKey.currentState?.showSnackBar(snackBar);
             }
+            Future.delayed(const Duration(milliseconds: 1000), () {
+              Navigator.of(context).pop();
+            });
             return Container();
           } else {
             return Container();

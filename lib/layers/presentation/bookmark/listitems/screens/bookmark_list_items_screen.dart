@@ -185,7 +185,7 @@ class _BookmarkListItemsFormState extends State<_BookmarkListItemsForm> {
         return MediaType.music;
       case 'movie':
         return MediaType.movie;
-      case 'book':
+      case 'e-book':
         return MediaType.book;
       case 'podcast':
         return MediaType.podcast;

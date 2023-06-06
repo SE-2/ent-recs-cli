@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:supermedia/layers/presentation/bookmark/lists/screens/bookmark_lists_screen.dart';
 import 'package:supermedia/layers/presentation/home/screens/home_screen.dart';
 import 'package:supermedia/layers/presentation/search/screens/search_screen.dart';
 import 'package:supermedia/layers/presentation/setting/screens/settings_screen.dart';
@@ -22,6 +23,7 @@ class MultiScreenBottomNavigationState
   final List<Widget> _screens = [
     const HomeScreen(),
     const SearchScreen(),
+    const BookmarkListsScreen(),
     const SettingsScreen(),
   ];
 

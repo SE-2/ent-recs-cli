@@ -33,7 +33,7 @@ class AppBottomNavigationState extends State<AppBottomNavigation> {
             color: Theme.of(context).colorScheme.background,
             blurRadius: 50,
             spreadRadius: 0,
-            offset: const Offset(0, -20),
+            offset: const Offset(0, -4),
           ),
         ],
       ),
@@ -76,6 +76,20 @@ class AppBottomNavigationState extends State<AppBottomNavigation> {
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   color: _currentIndex == 2
+                      ? Theme.of(context).colorScheme.primary
+                      : null,
+                ),
+                child: const Icon(CupertinoIcons.square_list),
+              ),
+              label: 'Bookmark',
+            ),
+            BottomNavigationBarItem(
+              icon: Container(
+                width: 48,
+                height: 48,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: _currentIndex == 3
                       ? Theme.of(context).colorScheme.primary
                       : null,
                 ),
